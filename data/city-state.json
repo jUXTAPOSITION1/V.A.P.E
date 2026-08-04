@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-04T03:42:58Z",
+  "generated_at": "2026-08-04T09:13:20Z",
   "district_stats": {
     "overall_threat_level": "HIGH",
-    "lanes_passing": 9,
+    "lanes_passing": 7,
     "lanes_total": 10,
     "buildings_total": 19
   },
@@ -15,20 +15,20 @@
       "tier": 3,
       "stat_primary": {
         "label": "tracked",
-        "value": 713
+        "value": 719
       },
       "stat_secondary": [
         {
           "label": "reject",
-          "value": 386
+          "value": 388
         },
         {
           "label": "caution",
-          "value": 198
+          "value": 200
         },
         {
           "label": "proceed",
-          "value": 129
+          "value": 131
         }
       ],
       "link": "investigations.html",
@@ -75,7 +75,7 @@
       "tier": 2,
       "stat_primary": {
         "label": "published",
-        "value": 59
+        "value": 60
       },
       "stat_secondary": [],
       "link": "news.html",
@@ -159,12 +159,12 @@
       "tier": 3,
       "stat_primary": {
         "label": "findings sealed",
-        "value": 1505
+        "value": 1521
       },
       "stat_secondary": [
         {
           "label": "unsealed lines",
-          "value": 6
+          "value": 2
         }
       ],
       "link": "index.html#security-dashboard",
@@ -207,7 +207,7 @@
       "tier": 4,
       "stat_primary": {
         "label": "data calls logged",
-        "value": 1679
+        "value": 1712
       },
       "stat_secondary": [],
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/memory",
@@ -222,7 +222,7 @@
       "id": "lane-codeql",
       "kind": "checkpoint",
       "title": "Static Analysis (CodeQL)",
-      "status": "ok",
+      "status": "alert",
       "tier": 1,
       "gridX": 8,
       "gridY": 4,
@@ -237,7 +237,7 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-03T20:50:57Z"
+          "value": "2026-08-04T08:44:30Z"
         },
         {
           "label": "open alerts",
@@ -248,7 +248,7 @@
           "value": 0
         }
       ],
-      "last_run_at": "2026-08-03T20:50:57Z",
+      "last_run_at": "2026-08-04T08:44:30Z",
       "source_workflow": "codeql.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/codeql.yml"
     },
@@ -282,7 +282,7 @@
       "id": "lane-vape-reviewer",
       "kind": "checkpoint",
       "title": "Code Review (VAPE Reviewer)",
-      "status": "ok",
+      "status": "alert",
       "tier": 1,
       "gridX": 14,
       "gridY": 4,
@@ -292,15 +292,15 @@
       ],
       "stat_primary": {
         "label": "last run",
-        "value": "success"
+        "value": "action_required"
       },
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-03T20:50:57Z"
+          "value": "2026-08-04T08:44:30Z"
         }
       ],
-      "last_run_at": "2026-08-03T20:50:57Z",
+      "last_run_at": "2026-08-04T08:44:30Z",
       "source_workflow": "vape-reviewer.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/vape-reviewer.yml"
     },
@@ -435,14 +435,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-04T01:56:21Z"
+          "value": "2026-08-04T08:27:10Z"
         },
         {
           "label": "ledger chain intact",
           "value": "yes"
         }
       ],
-      "last_run_at": "2026-08-04T01:56:21Z",
+      "last_run_at": "2026-08-04T08:27:10Z",
       "source_workflow": "findings-seal.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/findings-seal.yml"
     },
@@ -495,14 +495,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-04T02:37:28Z"
+          "value": "2026-08-04T08:38:27Z"
         },
         {
           "label": "attack-pattern coverage",
           "value": "23%"
         }
       ],
-      "last_run_at": "2026-08-04T02:37:28Z",
+      "last_run_at": "2026-08-04T08:38:27Z",
       "source_workflow": "intel-sweeps.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/intel-sweeps.yml"
     }
@@ -582,6 +582,60 @@
     ]
   ],
   "recent_events": [
+    {
+      "id": "news:MSP Supply Chain Threat Escalates as CISA Flags Actively Exploited N-able RMM Vulnerability",
+      "type": "news",
+      "timestamp": "2026-08-04T08:37:59Z",
+      "label": "MSP Supply Chain Threat Escalates as CISA Flags Actively Exploited N-able RMM Vulnerability"
+    },
+    {
+      "id": "investigation:0x7a7C5a2dBff5e916c570c8Ef61e2DC253242e5F7",
+      "type": "investigation",
+      "timestamp": "2026-08-04T06:39:29Z",
+      "label": "Polaris Shiba",
+      "verdict": "PROCEED"
+    },
+    {
+      "id": "investigation:0x867c3370Ca238E38Bf8f59E7817d8872FFc49d94",
+      "type": "investigation",
+      "timestamp": "2026-08-04T06:23:28Z",
+      "label": "SpaceX",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xCAAE2A2F939F51d97CdFa9A86e79e3F085b799f3",
+      "type": "investigation",
+      "timestamp": "2026-08-04T06:07:54Z",
+      "label": "Tutorial",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "news:Solana's Fee Overhaul Proposal Would Multiply Daily Burns Fourteenfold",
+      "type": "news",
+      "timestamp": "2026-08-04T05:48:25Z",
+      "label": "Solana's Fee Overhaul Proposal Would Multiply Daily Burns Fourteenfold"
+    },
+    {
+      "id": "investigation:0x1fEb4AeC0d592eC55b137f12cBC57229ee899602",
+      "type": "investigation",
+      "timestamp": "2026-08-04T05:21:58Z",
+      "label": "Alien Relics",
+      "verdict": "PROCEED"
+    },
+    {
+      "id": "investigation:0x8F294a99a0609822C233b24867F331c292cE2DA9",
+      "type": "investigation",
+      "timestamp": "2026-08-04T05:06:22Z",
+      "label": "Relics",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xEDEe1555B1E1Ebd9D758BA8091A7D3Dc2A70a89C",
+      "type": "investigation",
+      "timestamp": "2026-08-04T04:35:44Z",
+      "label": "Catecoin",
+      "verdict": "CAUTION"
+    },
     {
       "id": "investigation:0xD0B74d81b5507edF2e93026701aA7fB2D9f82B07",
       "type": "investigation",
@@ -687,61 +741,6 @@
       "type": "bounty",
       "timestamp": "2026-08-03T18:20:50.179858Z",
       "label": "THORChain DEX (exploit $10,000,000)"
-    },
-    {
-      "id": "investigation:0xfD181Ca5EC0B355fc448403cc560D0423382e044",
-      "type": "investigation",
-      "timestamp": "2026-08-03T18:13:57Z",
-      "label": "DogPunk",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x515e72aF68A374C8f375534B59752277Ee9b4a51",
-      "type": "investigation",
-      "timestamp": "2026-08-03T17:58:33Z",
-      "label": "Aliens",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0x02c1d787521C20586b4aB070b1838D91FF85D656",
-      "type": "investigation",
-      "timestamp": "2026-08-03T17:28:01Z",
-      "label": "Forlz",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "news:OpenAI\u2019s Next-Gen \u2018Astra\u2019 Model Cracks Decade-Old Mathematical Mysteries for $2,000",
-      "type": "news",
-      "timestamp": "2026-08-03T17:10:45Z",
-      "label": "OpenAI\u2019s Next-Gen \u2018Astra\u2019 Model Cracks Decade-Old Mathematical Mysteries for $2,000"
-    },
-    {
-      "id": "investigation:0xb4f4A58Ff2398ab9025f842B6035c39b1d63F585",
-      "type": "investigation",
-      "timestamp": "2026-08-03T16:42:25Z",
-      "label": "Catecoin",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x37b90664C3846107939E89d886051b208f866bF1",
-      "type": "investigation",
-      "timestamp": "2026-08-03T13:57:26Z",
-      "label": "Safumoon",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xE0Cd4cAcDdcBF4f36e845407CE53E87717b6601d",
-      "type": "investigation",
-      "timestamp": "2026-08-03T13:42:02Z",
-      "label": "Impossible Cloud Network Token",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xc3bcd37061bde710293D0272Bb2924D308D5314D",
-      "type": "investigation",
-      "timestamp": "2026-08-03T12:57:02Z",
-      "label": "Safu Fund",
-      "verdict": "REJECT"
     }
   ]
 }
