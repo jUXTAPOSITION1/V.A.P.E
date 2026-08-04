@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T12:11:59Z",
+  "generated": "2026-08-04T12:26:59Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 425,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 148,
-    "investigations": 722,
+    "investigations": 723,
     "news": 62,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260804-121150-0x58Ed924B.md",
+      "file": "investigation-20260804-122659-0xE82b78d3.md",
       "title": "Investigation \u2014 UAI",
       "symbol": "UAI",
-      "name": "UnifAI",
-      "date": "2026-08-04T12:11:50Z",
-      "target": "0x58Ed924B2bF65be4594BFF2A5aa37C44e0488C01",
+      "name": "UNEMPLOYED AI",
+      "date": "2026-08-04T12:26:59Z",
+      "target": "0xE82b78d3590135a7EF1464Ab601eaE74E5F87777",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 83% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity $0; [-15] Contract source UNVERIFIED. Positive evidence: 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 272+ days without a known inciden",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-121150-0x58Ed924B.md"
+      "score": "0",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Owner not renounced (0xe2ce6ab80874fa9fa2aae65d277dd6b8e65c9de0) \u2014 can still act on the contract; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipula",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-122659-0xE82b78d3.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260804-122659-0xE82b78d3.md",
+      "title": "Investigation \u2014 UAI",
+      "symbol": "UAI",
+      "name": "UNEMPLOYED AI",
+      "date": "2026-08-04T12:26:59Z",
+      "target": "0xE82b78d3590135a7EF1464Ab601eaE74E5F87777",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Owner not renounced (0xe2ce6ab80874fa9fa2aae65d277dd6b8e65c9de0) \u2014 can still act on the contract; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipula",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-122659-0xE82b78d3.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260804-121150-0x58Ed924B.md",

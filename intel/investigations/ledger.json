@@ -7569,6 +7569,25 @@
     "symbol": "EV",
     "times_investigated": 1
   },
+  "56:0xe82b78d3590135a7ef1464ab601eae74e5f87777": {
+    "address": "0xE82b78d3590135a7EF1464Ab601eaE74E5F87777",
+    "chain": "56",
+    "creator_address": "0xaf4847bcc580730d346c911408ea87921ef94b94",
+    "first_investigated": "2026-08-04T12:26:59Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260804-122659-0xE82b78d3.md",
+        "score": 0,
+        "ts": "2026-08-04T12:26:59Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-04T12:26:59Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "UAI",
+    "times_investigated": 1
+  },
   "56:0xea4d009dd99cb83ff4e27c533e279e6120364444": {
     "address": "0xeA4D009DD99cb83FF4e27C533e279e6120364444",
     "chain": "56",
