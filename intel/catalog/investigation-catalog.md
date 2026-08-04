@@ -1251,3 +1251,5 @@
 | 2026-08-04 | auto | 0x477DF393C9FC7bA6d04Cc0a9Cd092B5D84079a26 (jlefk) | deep_investigation | REJECT (12/100) | Low holder count (62) | +7d |
 
 | 2026-08-04 | auto | 0x0C69199C1562233640e0Db5Ce2c399A88eB507C7 (CYS) | deep_investigation | REJECT (0/100) | Owner can change balances (rug surface) | +7d |
+
+| 2026-08-04 | auto | 0x16E3dcDD5d0e004A3AB62b5Ef5B34618cA9156c1 (RELICSTR) | deep_investigation | REJECT (5/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |

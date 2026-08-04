@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T13:04:31Z",
+  "generated": "2026-08-04T13:12:35Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 426,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 148,
-    "investigations": 725,
+    "investigations": 726,
     "news": 62,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260804-125715-0x0C69199C.md",
-      "title": "Investigation \u2014 CYS",
-      "symbol": "CYS",
-      "name": "Cysic Token",
-      "date": "2026-08-04T12:57:15Z",
-      "target": "0x0C69199C1562233640e0Db5Ce2c399A88eB507C7",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260804-131228-0x16E3dcDD.md",
+      "title": "Investigation \u2014 RELICSTR",
+      "symbol": "RELICSTR",
+      "name": "Relics Strategy",
+      "date": "2026-08-04T13:12:28Z",
+      "target": "0x16E3dcDD5d0e004A3AB62b5Ef5B34618cA9156c1",
+      "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0xb7f3217874de34047cd0494ac5b9f70e1932e879) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 86% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-125715-0x0C69199C.md"
+      "score": "5",
+      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $6,089 (rug/illiquid); [-10] Low liquidity $6,089; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No know",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-131228-0x16E3dcDD.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260804-131228-0x16E3dcDD.md",
+      "title": "Investigation \u2014 RELICSTR",
+      "symbol": "RELICSTR",
+      "name": "Relics Strategy",
+      "date": "2026-08-04T13:12:28Z",
+      "target": "0x16E3dcDD5d0e004A3AB62b5Ef5B34618cA9156c1",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "5",
+      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $6,089 (rug/illiquid); [-10] Low liquidity $6,089; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No know",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-131228-0x16E3dcDD.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260804-125715-0x0C69199C.md",

@@ -163,3 +163,4 @@
 {"ts": "2026-08-04T08:55:42.543164Z", "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "chain": "8453", "symbol": "USDC", "name": "USDC", "source": "base_trending", "offering": "token_chart"}
 {"ts": "2026-08-04T09:25:48.149119Z", "address": "0xcb585250f852c6c6bf90434ab21a00f02833a4af", "chain": "8453", "symbol": "cbXRP", "name": "Coinbase Wrapped XRP", "source": "base_trending", "offering": "token_safety_check"}
 {"ts": "2026-08-04T09:55:40.625257Z", "address": "0x8F294a99a0609822C233b24867F331c292cE2DA9", "chain": "1", "symbol": "RELICS", "name": "RELICS", "source": "evm", "offering": "liquidity_check"}
+{"ts": "2026-08-04T13:12:35.250745Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "exploit_check"}
