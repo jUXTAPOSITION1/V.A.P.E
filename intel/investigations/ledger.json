@@ -7001,6 +7001,25 @@
     "symbol": "BAY",
     "times_investigated": 1
   },
+  "56:0xa8d6737e035d4b5986a650198ce1cf5adb06f4be": {
+    "address": "0xa8D6737e035D4b5986a650198CE1CF5AdB06F4BE",
+    "chain": "56",
+    "creator_address": "0x961ca523e7e0cdea57d2d93dbbabd8c1e3d64a4c",
+    "first_investigated": "2026-08-04T17:01:30Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260804-170130-0xa8D6737e.md",
+        "score": 18,
+        "ts": "2026-08-04T17:01:30Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-04T17:01:30Z",
+    "last_score": 18,
+    "last_verdict": "REJECT",
+    "symbol": "$FREN",
+    "times_investigated": 1
+  },
   "56:0xaa036928c9c0df07d525b55ea8ee690bb5a628c1": {
     "address": "0xaa036928c9c0Df07d525B55ea8EE690Bb5a628C1",
     "chain": "56",
