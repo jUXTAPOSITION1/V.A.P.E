@@ -1,6 +1,6 @@
 {
   "schema": "vape.skillforge.tools.v1",
-  "updated": "2026-08-04T18:49:27Z",
+  "updated": "2026-08-04T20:41:34Z",
   "note": "Canonical tool registry. toolcheck workflow verifies + version-pins these against real upstream. status: verified|stale|broken|untested.",
   "tiers": {
     "static": [
@@ -106,7 +106,7 @@
         "status": "verified",
         "last_verified": "2026-08-04T18:17:11Z",
         "version": "garak LLM vulnerability scanner v0.15.1 ( https://github.com/NVIDIA/garak ) at 2",
-        "latest_release": "v0.15.1"
+        "latest_release": "v0.16.0"
       },
       {
         "name": "promptfoo",
