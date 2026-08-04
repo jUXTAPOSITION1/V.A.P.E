@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T19:33:05Z",
+  "generated": "2026-08-04T19:39:22Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 431,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 149,
     "investigations": 732,
-    "news": 65,
+    "news": 66,
     "tools": 16,
     "tools_verified": 16,
     "skills": 25
@@ -10986,6 +10986,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-04-greatness-phaas-quietly-rolls-out-device-code-phishing-to-hi.md",
+      "title": "Greatness PhaaS Quietly Rolls Out Device Code Phishing to Hijack OAuth Tokens",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-04T19:39:21Z",
+      "published_et": "August 4, 2026 \u00b7 3:39 PM EDT",
+      "topic": "Cybersecurity",
+      "dek": "The limited public reporting on this update leaves open whether the change has already driven measurable token theft campaigns or remains a capability in testing.",
+      "image": "assets/news-images/greatness-phaas-quietly-rolls-out-device-code-phishing-to-hi.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-04-greatness-phaas-quietly-rolls-out-device-code-phishing-to-hi.md"
+    },
+    {
       "file": "news-2026-08-04-signed-sealed-delivered-how-attackers-weaponize-legitimate-r.md",
       "title": "Signed, Sealed, Delivered: How Attackers Weaponize Legitimate RMM Tools via Fake Software Updates",
       "byline": "VAPE Reporter",
@@ -11692,18 +11704,6 @@
       "image": "assets/news-images/hong-kong-s-tokenization-drive-exposes-banks-to-quantum-risk.jpg",
       "image_source": "Source photo \u2014 VAPE Wire branded",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-hong-kong-s-tokenization-drive-exposes-banks-to-quantum-risk.md"
-    },
-    {
-      "file": "news-2026-07-28-nansen-flags-elusive-bitcoin-demand-warns-of-possible-slide-.md",
-      "title": "Nansen Flags Elusive Bitcoin Demand, Warns of Possible Slide to $52,000",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-28 02:31 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "Thin sourcing leaves open whether the warning reflects fresh on-chain data or broader market caution.",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image or source photo available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-nansen-flags-elusive-bitcoin-demand-warns-of-possible-slide-.md"
     }
   ],
   "tools": [
