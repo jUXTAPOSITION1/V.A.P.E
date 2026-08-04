@@ -6545,6 +6545,25 @@
     "symbol": "QLM",
     "times_investigated": 1
   },
+  "56:0x867c3370ca238e38bf8f59e7817d8872ffc49d94": {
+    "address": "0x867c3370Ca238E38Bf8f59E7817d8872FFc49d94",
+    "chain": "56",
+    "creator_address": "0x0b1cd6c28958cc14bbd31b8a618eddf350bc39c8",
+    "first_investigated": "2026-08-04T06:23:28Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260804-062328-0x867c3370.md",
+        "score": 0,
+        "ts": "2026-08-04T06:23:28Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-04T06:23:28Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "SPCXB",
+    "times_investigated": 1
+  },
   "56:0x8682bace40610eefcf14b1af9ccd92b77bf88471": {
     "address": "0x8682BaCE40610Eefcf14b1Af9CCd92b77bf88471",
     "chain": "56",

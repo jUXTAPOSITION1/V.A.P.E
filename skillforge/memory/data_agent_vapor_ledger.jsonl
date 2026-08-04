@@ -451,3 +451,4 @@
 {"ts": "2026-08-04T04:50:50.506294Z", "target": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-08-04T05:22:02.904791Z", "target": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "hired": ["stablecoins"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-08-04T05:52:03.728577Z", "target": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-08-04T06:23:34.140619Z", "target": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "hired": ["market_intel"], "paid": 1, "cost_usd": 0.07}

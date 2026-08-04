@@ -157,3 +157,4 @@
 {"ts": "2026-08-04T02:17:33.337574Z", "address": "0xfD181Ca5EC0B355fc448403cc560D0423382e044", "chain": "1", "symbol": "DPUNK", "name": "DPUNK", "source": "evm", "offering": "token_safety_check"}
 {"ts": "2026-08-04T03:49:55.800317Z", "address": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832", "chain": "8453", "symbol": "PROS", "name": "PROS", "source": "base", "offering": "liquidity_check"}
 {"ts": "2026-08-04T05:22:06.026688Z", "address": "0xbf8e8f0e8866a7052f948c16508644347c57aba3", "chain": "8453", "symbol": "aeon", "name": "aeon", "source": "base_trending", "offering": "exploit_check"}
+{"ts": "2026-08-04T06:23:37.311221Z", "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7", "chain": "43114", "symbol": "WAVAX", "name": "WAVAX", "source": "evm", "offering": "token_intel"}
