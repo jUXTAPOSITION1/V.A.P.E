@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T19:48:07Z",
+  "generated": "2026-08-04T20:03:39Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 431,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 149,
-    "investigations": 733,
+    "investigations": 734,
     "news": 66,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260804-194801-0x9F178347.md",
-      "title": "Investigation \u2014 UNI",
-      "symbol": "UNI",
-      "name": "UNICORN",
-      "date": "2026-08-04T19:48:01Z",
-      "target": "0x9F178347e7F2975bC4C942d292AE69295dAd3b7d",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260804-200333-0x64f170A9.md",
+      "title": "Investigation \u2014 UB402",
+      "symbol": "UB402",
+      "name": "UB402",
+      "date": "2026-08-04T20:03:33Z",
+      "target": "0x64f170A94CC75C406BA1398fD353841ba63a631D",
+      "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: UNI (0xf1Bf52E00bF5601EAA7d5F4b490273721E6cBD11) \u2014 REJECT 24/100 \u2014 likely the same serial campaign; [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, e",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-194801-0x9F178347.md"
+      "score": "35",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 83% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $4,601 (rug/illiquid); [-10] Low liquidity $4,601. Positive evidence: Trading 281+ days without a known inc",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-200333-0x64f170A9.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260804-200333-0x64f170A9.md",
+      "title": "Investigation \u2014 UB402",
+      "symbol": "UB402",
+      "name": "UB402",
+      "date": "2026-08-04T20:03:33Z",
+      "target": "0x64f170A94CC75C406BA1398fD353841ba63a631D",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "35",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 83% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $4,601 (rug/illiquid); [-10] Low liquidity $4,601. Positive evidence: Trading 281+ days without a known inc",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-200333-0x64f170A9.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260804-194801-0x9F178347.md",
