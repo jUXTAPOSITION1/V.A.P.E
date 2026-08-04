@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T16:47:39Z",
+  "generated": "2026-08-04T16:53:39Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 430,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 149,
     "investigations": 729,
-    "news": 64,
+    "news": 65,
     "tools": 16,
     "tools_verified": 16,
     "skills": 25
@@ -10944,6 +10944,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-04-signed-sealed-delivered-how-attackers-weaponize-legitimate-r.md",
+      "title": "Signed, Sealed, Delivered: How Attackers Weaponize Legitimate RMM Tools via Fake Software Updates",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-04T16:53:38Z",
+      "published_et": "August 4, 2026 \u00b7 12:53 PM EDT",
+      "topic": "Cybersecurity",
+      "dek": "A newly uncovered campaign impersonates Zoom and Adobe to drop ConnectWise ScreenConnect, bypassing endpoint defenses by abusing trusted remote management software.",
+      "image": "assets/news-images/signed-sealed-delivered-how-attackers-weaponize-legitimate-r.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-04-signed-sealed-delivered-how-attackers-weaponize-legitimate-r.md"
+    },
+    {
       "file": "news-2026-08-04-the-developer-is-the-vector-how-a-compromised-npm-legend-tur.md",
       "title": "The Developer is the Vector: How a Compromised npm Legend Turned Into a Self-Spreading Claude Code Worm",
       "byline": "VAPE Reporter",
@@ -11650,18 +11662,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image or source photo available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-nansen-flags-elusive-bitcoin-demand-warns-of-possible-slide-.md"
-    },
-    {
-      "file": "news-2026-07-28-bitcoin-holds-position-ahead-of-federal-reserve-policy-signa.md",
-      "title": "Bitcoin Holds Position Ahead of Federal Reserve Policy Signals",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-28 01:26 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "The sole available data point shows Bitcoin stabilizing without elaboration on drivers or market breadth.",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image or source photo available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-bitcoin-holds-position-ahead-of-federal-reserve-policy-signa.md"
     }
   ],
   "tools": [

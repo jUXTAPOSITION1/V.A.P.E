@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T14:10:48Z",
+  "generated": "2026-08-04T16:51:53Z",
   "count": 60,
   "headlines": [
     {
@@ -59,11 +59,59 @@
       "crypto": true
     },
     {
+      "title": "Black Hat USA 2026 \u2013 Summary of Vendor Announcements (Part 2)",
+      "url": "https://www.securityweek.com/black-hat-usa-2026-summary-of-vendor-announcements-part-2/",
+      "source": "SecurityWeek",
+      "published": "Tue, 04 Aug 2026 16:49:39 +0000",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
       "title": "Google Deletes 3 ADK AI Workflows After Malicious GitHub Issue Could Trigger Privileged Agent",
       "url": "https://thehackernews.com/2026/08/google-deletes-3-adk-ai-workflows-after.html",
       "source": "The Hacker News",
       "published": "Tue, 04 Aug 2026 16:46:23 +0530",
       "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Hashdex to Shut Down Bitcoin ETF After Struggling to Gain Assets",
+      "url": "https://decrypt.co/374903/hashdex-shut-down-bitcoin-etf",
+      "source": "Decrypt",
+      "published": "Tue, 04 Aug 2026 16:43:46 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin coils at $64K as Hormuz reopening timeline sends S&P 500 to $70T record",
+      "url": "https://cointelegraph.com/markets/bitcoin-coils-as-hormuz-reopening-time-line-sends-sp-500-to-new-record-high?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Tue, 04 Aug 2026 16:38:54 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Clarity Act sits idle over Trump ethics question as Warren asks SEC to investigate him",
+      "url": "https://www.coindesk.com/policy/2026/08/04/clarity-act-sits-idle-over-trump-ethics-question-as-warren-asks-sec-to-investigate-him",
+      "source": "CoinDesk",
+      "published": "Tue, 04 Aug 2026 16:21:59 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Rethinking AI Security: Why CASB and DLP Need an Interaction-Aware Layer",
+      "url": "https://www.securityweek.com/rethinking-ai-security-why-casb-and-dlp-need-an-interaction-aware-layer/",
+      "source": "SecurityWeek",
+      "published": "Tue, 04 Aug 2026 16:15:00 +0000",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Washington gave crypto every legal win it begged for then lost the market anyway",
+      "url": "https://cryptoslate.com/wall-street-etfs-were-hailed-as-cryptos-ultimate-savior-but-making-bitcoin-easy-to-buy-just-made-it-easy-to-dump/",
+      "source": "CryptoSlate",
+      "published": "Tue, 04 Aug 2026 16:10:23 +0000",
+      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -75,11 +123,139 @@
       "crypto": true
     },
     {
+      "title": "Bitdeer expands AI infrastructure with long-term $4.7B data center lease",
+      "url": "https://cointelegraph.com/news/bitdeer-ai-data-center-lease-norway?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Tue, 04 Aug 2026 15:50:20 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Spotify expands AI remix and covers project with Merlin partnership",
+      "url": "https://techcrunch.com/2026/08/04/spotify-adds-merlin-to-its-ai-music-remix-and-covers-effort/",
+      "source": "TechCrunch AI",
+      "published": "Tue, 04 Aug 2026 15:50:06 +0000",
+      "topic": "AI",
+      "crypto": true
+    },
+    {
+      "title": "Wells Fargo joins JPMorgan and Citi in the race to tokenize Wall Street\u2019s settlement rails",
+      "url": "https://www.coindesk.com/business/2026/08/04/wells-fargo-to-offer-tokenized-deposits-for-24-7-corporate-payments",
+      "source": "CoinDesk",
+      "published": "Tue, 04 Aug 2026 15:47:05 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "A New Ethereum Proposal Could Halve Staking Rewards: Who Feels It First?",
+      "url": "https://beincrypto.com/justin-drake-ethereum-staking-rewards-burn/",
+      "source": "BeInCrypto",
+      "published": "Tue, 04 Aug 2026 15:44:47 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Texas halts new data centers as governor calls for audits",
+      "url": "https://techcrunch.com/2026/08/04/texas-halts-new-data-centers-as-governor-calls-for-audits/",
+      "source": "TechCrunch AI",
+      "published": "Tue, 04 Aug 2026 15:42:35 +0000",
+      "topic": "AI",
+      "crypto": true
+    },
+    {
+      "title": "Nearly $32 Million in \u2018Dormant\u2019 Bitcoin Moves After Coldcard Hack Reaches Estimated $130M",
+      "url": "https://bitcoinmagazine.com/news/32-million-in-dormant-bitcoin-moves",
+      "source": "Bitcoin Magazine",
+      "published": "Tue, 04 Aug 2026 15:22:53 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Elon Musk spends half his time talking robots and AI on Tesla earnings calls",
+      "url": "https://techcrunch.com/2026/08/04/elon-musk-spends-half-his-time-talking-robots-and-ai-on-tesla-earnings-calls/",
+      "source": "TechCrunch AI",
+      "published": "Tue, 04 Aug 2026 15:20:06 +0000",
+      "topic": "AI",
+      "crypto": true
+    },
+    {
+      "title": "Oligo Raises $60 Million for Runtime Security",
+      "url": "https://www.securityweek.com/oligo-raises-60-million-for-runtime-security/",
+      "source": "SecurityWeek",
+      "published": "Tue, 04 Aug 2026 15:00:00 +0000",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Why Bitcoiners should care that Washington joined a $96B yen rescue to shield over $1 trillion in US Treasuries",
+      "url": "https://cryptoslate.com/why-bitcoiners-should-care-that-washington-has-joined-a-96-billion-yen-rescue-to-shield-1-14-trillion-in-us-treasuries-from-a-forced-selloff/",
+      "source": "CryptoSlate",
+      "published": "Tue, 04 Aug 2026 14:50:22 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin\u2019s $63,000 zone emerges as key battleground for buyers: Glassnode",
+      "url": "https://www.coindesk.com/markets/2026/08/04/bitcoin-s-usd63-000-zone-emerges-as-key-battleground-for-buyers-glassnode",
+      "source": "CoinDesk",
+      "published": "Tue, 04 Aug 2026 14:49:33 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin\u2019s Most Active Day Since 2024. What Happened On-Chain During the Coldcard Panic",
+      "url": "https://beincrypto.com/bitcoin-on-chain-coldcard-panic/",
+      "source": "BeInCrypto",
+      "published": "Tue, 04 Aug 2026 14:45:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "At least 15 attackers exploited Coldcard vulnerability: Galaxy",
+      "url": "https://cointelegraph.com/news/15-attackers-exploited-coldcard-vulnerability-galaxy?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Tue, 04 Aug 2026 14:38:49 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Polymarket targets $20 billion valuation as competition heats up in prediction market sector",
+      "url": "https://www.coindesk.com/markets/2026/08/04/polymarket-targets-usd20-billion-valuation-as-competition-heats-up-in-prediction-markets",
+      "source": "CoinDesk",
+      "published": "Tue, 04 Aug 2026 14:38:23 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bank of Korea Just Bought Gold After 13 Years: Is a New Rally Coming?",
+      "url": "https://beincrypto.com/korea-gold-purchases-resume-13-years/",
+      "source": "BeInCrypto",
+      "published": "Tue, 04 Aug 2026 14:35:57 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
       "title": "DOUBLECUP Uses ClickFix and Cached PNGs to Deliver CountLoader and DeviceManager RAT",
       "url": "https://thehackernews.com/2026/08/doublecup-uses-clickfix-and-cached-pngs.html",
       "source": "The Hacker News",
       "published": "Tue, 04 Aug 2026 14:33:23 +0530",
       "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "CISO Conversations: Russ Kirby \u2013 Passion Is the Antidote to Burnout",
+      "url": "https://www.securityweek.com/ciso-conversation-russ-kirby-passion-is-the-antidote-to-burnout/",
+      "source": "SecurityWeek",
+      "published": "Tue, 04 Aug 2026 14:30:00 +0000",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Intesa Sanpaolo slashed IBIT stake by 94% in 2Q, tripled ether ETF holding as crypto prices slumped",
+      "url": "https://www.coindesk.com/business/2026/08/04/intesa-sanpaolo-slashed-ibit-stake-by-94-in-2q-tripled-ether-etf-holding-as-crypto-prices-slumped",
+      "source": "CoinDesk",
+      "published": "Tue, 04 Aug 2026 14:25:50 +0000",
+      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -179,43 +355,11 @@
       "crypto": true
     },
     {
-      "title": "As Clarity Act teeters, mystery group hammers away at crypto in Washington ads",
-      "url": "https://www.coindesk.com/policy/2026/08/03/as-clarity-act-teeters-mystery-group-hammers-away-at-crypto-in-washington-ads",
-      "source": "CoinDesk",
-      "published": "Tue, 04 Aug 2026 13:00:00 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "BitGo\u2019s WBTC move pushes LayerZero-to-Chainlink tally near $15 billion",
-      "url": "https://www.coindesk.com/business/2026/08/04/bitgo-s-wbtc-move-pushes-layerzero-to-chainlink-tally-near-usd15-billion",
-      "source": "CoinDesk",
-      "published": "Tue, 04 Aug 2026 13:00:00 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Tokenized Equities Surge 140% in 2026 as New DeFiLlama Research Maps the Market",
-      "url": "https://beincrypto.com/tokenized-equities-surge-140-in-2026-as-new-defillama-research-maps-the-market/",
-      "source": "BeInCrypto",
-      "published": "Tue, 04 Aug 2026 13:00:00 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Is the future of data centers portable? Runware builds a pod to find out",
       "url": "https://techcrunch.com/2026/08/04/is-the-future-of-data-centers-portable-runware-builds-a-pod-to-find-out/",
       "source": "TechCrunch AI",
       "published": "Tue, 04 Aug 2026 13:00:00 +0000",
       "topic": "AI",
-      "crypto": true
-    },
-    {
-      "title": "Italy\u2019s Largest Bank Cuts BlackRock Bitcoin ETF Stake 94%: Rotation to Ethereum?",
-      "url": "https://beincrypto.com/intesa-sanpaolo-btc-etf-ethereum-rotation/",
-      "source": "BeInCrypto",
-      "published": "Tue, 04 Aug 2026 12:49:50 +0000",
-      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -243,67 +387,11 @@
       "crypto": true
     },
     {
-      "title": "Tether Gold reserves rise 9.5% as gold posts worst quarter in 13 years",
-      "url": "https://cointelegraph.com/news/tether-gold-rise-q2-sharpest-quarterly-gold-correction?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Tue, 04 Aug 2026 12:30:07 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "BNY to add crypto staking to digital asset custody platform",
-      "url": "https://www.coindesk.com/business/2026/08/04/bny-to-add-crypto-staking-to-digital-asset-custody-platform",
-      "source": "CoinDesk",
-      "published": "Tue, 04 Aug 2026 12:30:00 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "78 Days Without US Buyers, But Citadel Still Says the Bull Market Is Alive",
-      "url": "https://beincrypto.com/citadel-bull-market-us-bitcoin-demand/",
-      "source": "BeInCrypto",
-      "published": "Tue, 04 Aug 2026 12:01:42 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Coldcard urges users to move bitcoin as exploit is still in progress",
-      "url": "https://www.coindesk.com/tech/2026/08/04/coldcard-urges-users-to-move-bitcoin-as-active-wallet-exploit-continues",
-      "source": "CoinDesk",
-      "published": "Tue, 04 Aug 2026 12:00:25 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "TP-Link Omada ZTP Vulnerabilities Chain Into Full Network Takeover",
-      "url": "https://www.securityweek.com/tp-link-omada-ztp-vulnerabilities-chain-into-full-network-takeover/",
-      "source": "SecurityWeek",
-      "published": "Tue, 04 Aug 2026 12:00:00 +0000",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "Obsidian Security Raises $85 Million at $1.1 Billion Valuation",
-      "url": "https://www.securityweek.com/obsidian-security-raises-85-million-at-1-1-billion-valuation/",
-      "source": "SecurityWeek",
-      "published": "Tue, 04 Aug 2026 12:00:00 +0000",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
       "title": "EON wants to move the data superhighway from ocean fiber to space lasers",
       "url": "https://techcrunch.com/2026/08/04/eon-wants-to-move-the-data-superhighway-from-ocean-fiber-to-space-lasers/",
       "source": "TechCrunch AI",
       "published": "Tue, 04 Aug 2026 12:00:00 +0000",
       "topic": "AI",
-      "crypto": true
-    },
-    {
-      "title": "Italy\u2019s biggest bank triples staked Ether ETF holdings while cutting IBIT shares",
-      "url": "https://cointelegraph.com/news/intesa-sanpaolo-bank-staked-ether-etf-ibit-shares?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Tue, 04 Aug 2026 11:55:19 +0000",
-      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -315,26 +403,34 @@
       "crypto": true
     },
     {
-      "title": "The bitcoin market has plenty of reasons to freak out, yet calm pervades",
-      "url": "https://www.coindesk.com/daybook-us/2026/08/04/the-bitcoin-market-has-plenty-of-reasons-to-freak-out-yet-calm-pervades",
-      "source": "CoinDesk",
-      "published": "Tue, 04 Aug 2026 11:23:33 +0000",
+      "title": "Dinari launches tokenized S&P 500 stocks for US self-custody wallets using USDC",
+      "url": "https://www.theblock.co/post/410588/dinari-tokenized-sp-500-stocks-self-custody-wallets-using-usdc?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Tue, 04 Aug 2026 11:27:00 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
     {
-      "title": "Gemini Agent-to-Agent Attack Method Exposed Secrets, Enabled Pull Request Tampering",
-      "url": "https://www.securityweek.com/gemini-agent-to-agent-attack-exposed-secrets-enabled-pull-request-tampering/",
-      "source": "SecurityWeek",
-      "published": "Tue, 04 Aug 2026 10:54:30 +0000",
+      "title": "Massive ChainDrop npm supply-chain attack infects hundreds of packages",
+      "url": "https://www.bleepingcomputer.com/news/security/massive-chaindrop-npm-supply-chain-attack-infects-hundreds-of-packages/",
+      "source": "BleepingComputer",
+      "published": "Tue, 04 Aug 2026 11:24:35 -0400",
       "topic": "Cybersecurity",
       "crypto": true
     },
     {
-      "title": "Jim Cramer plans to sell his Bitcoin over quantum fears as BTC rises 1.6%",
-      "url": "https://cointelegraph.com/markets/jim-cramer-sell-bitcoin-quantum-fears-btc-rises?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Tue, 04 Aug 2026 10:53:00 +0000",
+      "title": "BitGo moves $7.4 billion Wrapped Bitcoins to Chainlink CCIP in latest LayerZero exodus",
+      "url": "https://www.theblock.co/post/410594/bitgo-moves-7-4-billion-wrapped-bitcoins-to-chainlink-ccip-in-latest-layerzero-exodus?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Tue, 04 Aug 2026 11:24:31 -0400",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Hut 8 shares slip after mild Q2 revenue miss as AI data center pipeline grows",
+      "url": "https://www.theblock.co/post/410581/hut-8-shares-slip-mild-q2-revenue-miss-ai-data-center-pipeline-grows?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Tue, 04 Aug 2026 11:00:35 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -355,27 +451,19 @@
       "crypto": true
     },
     {
+      "title": "Bitdeer stock pops and drops on $4.7 billion AI data center lease in Norway",
+      "url": "https://www.theblock.co/post/410578/bitdeer-stock-pops-drops-4-7-billion-ai-data-center-lease-norway?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Tue, 04 Aug 2026 10:24:52 -0400",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
       "title": "Varonis Agent IBAC keeps AI agents within their intended boundaries",
       "url": "https://www.bleepingcomputer.com/news/security/varonis-agent-ibac-keeps-ai-agents-within-their-intended-boundaries/",
       "source": "BleepingComputer",
       "published": "Tue, 04 Aug 2026 10:00:10 -0400",
       "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "Decades-Old BMC Vulnerability Exposes Thousands of Data Centers to Attacks",
-      "url": "https://www.securityweek.com/decades-old-bmc-vulnerability-exposes-thousands-of-data-centers-to-attacks/",
-      "source": "SecurityWeek",
-      "published": "Tue, 04 Aug 2026 09:56:06 +0000",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "Coldcard crisis hits $130 million \u2013 proving \u2018not your keys\u2019 is meaningless if you trust a single device to generate them",
-      "url": "https://cryptoslate.com/coldcard-crisis-hits-130-million-proving-not-your-keys-is-meaningless-if-you-trust-a-single-device-to-generate-them/",
-      "source": "CryptoSlate",
-      "published": "Tue, 04 Aug 2026 09:50:20 +0000",
-      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -387,99 +475,11 @@
       "crypto": true
     },
     {
-      "title": "Bitcoin must clear $65,000 before Friday, or jobs data could turn $62,000 into a trapdoor to $60,000",
-      "url": "https://cryptoslate.com/bitcoin-must-clear-65000-before-friday-or-jobs-data-could-turn-62000-into-a-trapdoor-to-60000/",
-      "source": "CryptoSlate",
-      "published": "Tue, 04 Aug 2026 08:50:42 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "OKX says Coldcard exploit triggers \u2018record\u2019 inflows to centralized exchanges",
       "url": "https://www.theblock.co/post/410515/okx-says-coldcard-exploit-record-inflows-centralized-exchanges?utm_source=rss&utm_medium=rss",
       "source": "The Block",
       "published": "Tue, 04 Aug 2026 08:05:02 -0400",
       "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "DCG\u2019s Fortitude acquires 12.5 MW Nebraska facility for net $4.7 million, expanding Zcash mining portfolio",
-      "url": "https://www.theblock.co/post/410565/dcgs-fortitude-acquires-nebraska-facility-zcash-mining?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Tue, 04 Aug 2026 07:32:23 -0400",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Cathie Wood\u2019s Ark Invest snaps up nearly $10 million in Coinbase and Circle stock",
-      "url": "https://www.theblock.co/post/410558/cathie-woods-ark-invest-snaps-up-nearly-10-million-in-coinbase-and-circle-stock?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Tue, 04 Aug 2026 07:02:55 -0400",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "BlackRock debuts tokenized share classes for select European money market funds with $311 billion in assets",
-      "url": "https://www.theblock.co/post/410554/blackrock-debuts-tokenized-share-classes-for-select-european-money-market-funds-with-311-billion-in-assets?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Tue, 04 Aug 2026 05:31:22 -0400",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Binance launches bitcoin-backed \u2018Lite Loan\u2019 with $1,000 borrowing limit",
-      "url": "https://www.theblock.co/post/410544/binance-lite-loan-bitcoin?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Tue, 04 Aug 2026 05:30:03 -0400",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Bernstein says Texas data center audit could boost value of existing bitcoin mining and AI sites",
-      "url": "https://www.theblock.co/post/410545/bernstein-texas-data-center-audit?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Tue, 04 Aug 2026 04:57:13 -0400",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Read This Before You Buy That TV Streaming Stick",
-      "url": "https://krebsonsecurity.com/2026/07/read-this-before-you-buy-that-tv-streaming-stick/",
-      "source": "Krebs on Security",
-      "published": "Thu, 30 Jul 2026 16:49:00 +0000",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "SEC Announces Continuation of Small Business Advisory Committee Meeting",
-      "url": "https://www.sec.gov/newsroom/press-releases/2026-71-sec-announces-continuation-small-business-advisory-committee-meeting",
-      "source": "SEC Press Releases",
-      "published": "Thu, 30 Jul 2026 09:53:38 -0400",
-      "topic": "Regulation",
-      "crypto": true
-    },
-    {
-      "title": "SEC Announces Roundtable on Preparations for 24-Hour Trading",
-      "url": "https://www.sec.gov/newsroom/press-releases/2026-69-sec-announces-roundtable-preparations-24-hour-trading",
-      "source": "SEC Press Releases",
-      "published": "Thu, 23 Jul 2026 11:04:00 -0400",
-      "topic": "Regulation",
-      "crypto": true
-    },
-    {
-      "title": "SEC Proposes New E-Delivery Approach to Make Information More Readily Accessible and Useful for Investors",
-      "url": "https://www.sec.gov/newsroom/press-releases/2026-67-sec-proposes-new-e-delivery-approach-make-information-more-readily-accessible-useful-investors",
-      "source": "SEC Press Releases",
-      "published": "Thu, 16 Jul 2026 08:57:00 -0400",
-      "topic": "Regulation",
-      "crypto": true
-    },
-    {
-      "title": "FBI Seizes NetNut Proxy Platform, Popa Botnet",
-      "url": "https://krebsonsecurity.com/2026/07/fbi-seizes-netnut-proxy-platform-popa-botnet/",
-      "source": "Krebs on Security",
-      "published": "Thu, 02 Jul 2026 19:27:33 +0000",
-      "topic": "Cybersecurity",
       "crypto": true
     }
   ]
