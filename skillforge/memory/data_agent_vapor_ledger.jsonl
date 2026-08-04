@@ -440,3 +440,4 @@
 {"ts": "2026-08-03T22:30:05.534606Z", "target": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832", "hired": ["market_intel"], "paid": 1, "cost_usd": 0.07}
 {"ts": "2026-08-03T23:01:24.940149Z", "target": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-08-03T23:31:45.551380Z", "target": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832", "hired": ["market_intel"], "paid": 1, "cost_usd": 0.07}
+{"ts": "2026-08-04T00:02:33.834541Z", "target": "0x99D0652ed57b49373B9BB720434BAe76C3649b07", "hired": ["dossier_check"], "paid": 1, "cost_usd": 0.1}

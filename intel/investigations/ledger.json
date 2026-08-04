@@ -9652,6 +9652,24 @@
     "symbol": "AI",
     "times_investigated": 1
   },
+  "8453:0x99d0652ed57b49373b9bb720434bae76c3649b07": {
+    "address": "0x99D0652ed57b49373B9BB720434BAe76C3649b07",
+    "chain": "8453",
+    "first_investigated": "2026-08-04T00:02:41Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260804-000241-0x99D0652e.md",
+        "score": 25,
+        "ts": "2026-08-04T00:02:41Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-04T00:02:41Z",
+    "last_score": 25,
+    "last_verdict": "REJECT",
+    "symbol": "VELVET",
+    "times_investigated": 1
+  },
   "8453:0x9b88500c69cea66c329abd1c494319b197fb8453": {
     "address": "0x9b88500C69CEa66c329Abd1C494319B197fb8453",
     "chain": "8453",
