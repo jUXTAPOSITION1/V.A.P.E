@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T05:06:22Z",
+  "generated": "2026-08-04T05:22:06Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 419,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 147,
-    "investigations": 715,
+    "investigations": 716,
     "news": 59,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260804-050622-0x8F294a99.md",
+      "file": "investigation-20260804-052158-0x1fEb4AeC.md",
       "title": "Investigation \u2014 RELICS",
       "symbol": "RELICS",
-      "name": "Relics",
-      "date": "2026-08-04T05:06:22Z",
-      "target": "0x8F294a99a0609822C233b24867F331c292cE2DA9",
+      "name": "Alien Relics",
+      "date": "2026-08-04T05:21:58Z",
+      "target": "0x1fEb4AeC0d592eC55b137f12cBC57229ee899602",
       "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-15] Transfers can be paused by owner; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $39,702; [-10] Violent 24h move +1703% (volatility/manipulation); [-15] Pair only 0.1 days old (extreme fresh-launch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-050622-0x8F294a99.md"
+      "verdict": "PROCEED",
+      "score": "80",
+      "summary": "Risk factors: [-10] Owner not renounced (0x7fd1a796d7c6f73c95f5e3ea9590c8d17cdaf762) \u2014 can still act on the contract; [-10] Low liquidity $12,190. Positive evidence: 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 907+ days without a known incident in this scan; Custom verified source (not a mass-produced ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-052158-0x1fEb4AeC.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260804-052158-0x1fEb4AeC.md",
+      "title": "Investigation \u2014 RELICS",
+      "symbol": "RELICS",
+      "name": "Alien Relics",
+      "date": "2026-08-04T05:21:58Z",
+      "target": "0x1fEb4AeC0d592eC55b137f12cBC57229ee899602",
+      "chain": "1 (Ethereum)",
+      "verdict": "PROCEED",
+      "score": "80",
+      "summary": "Risk factors: [-10] Owner not renounced (0x7fd1a796d7c6f73c95f5e3ea9590c8d17cdaf762) \u2014 can still act on the contract; [-10] Low liquidity $12,190. Positive evidence: 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 907+ days without a known incident in this scan; Custom verified source (not a mass-produced ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-052158-0x1fEb4AeC.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260804-050622-0x8F294a99.md",

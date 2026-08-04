@@ -1,9 +1,10 @@
 # VAPE Pass List (PROCEED)
 
-_Regenerated 2026-08-04T05:06:22Z — 77 address(es) currently on record with a last verdict of PROCEED._
+_Regenerated 2026-08-04T05:21:58Z — 78 address(es) currently on record with a last verdict of PROCEED._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| RELICS | Ethereum | `0x1fEb4AeC0d592eC55b137f12cBC57229ee899602` | 80/100 | 1 | 2026-08-04T05:21:58Z |
 | SAFU | BNB Chain | `0x3433a5748Bda2F7338BDC600Be7BC716d5882B0C` | 82/100 | 1 | 2026-08-03T11:25:20Z |
 | SAFU | BNB Chain | `0x3f2B10F3327ea2337C524eEf23F4cd61bC364444` | 82/100 | 1 | 2026-08-03T10:55:22Z |
 | ANON | Ethereum | `0x86bcD9b1C2B8F99cA2737f136ed02e3Af971E8b5` | 82/100 | 1 | 2026-08-03T04:19:00Z |

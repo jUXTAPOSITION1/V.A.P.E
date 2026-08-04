@@ -1231,3 +1231,5 @@
 | 2026-08-04 | auto | 0xEDEe1555B1E1Ebd9D758BA8091A7D3Dc2A70a89C (CATE) | deep_investigation | CAUTION (55/100) | Low liquidity $17,750 | +7d |
 
 | 2026-08-04 | auto | 0x8F294a99a0609822C233b24867F331c292cE2DA9 (RELICS) | deep_investigation | REJECT (0/100) | Owner can change balances (rug surface) | +7d |
+
+| 2026-08-04 | auto | 0x1fEb4AeC0d592eC55b137f12cBC57229ee899602 (RELICS) | deep_investigation | PROCEED (80/100) | Owner not renounced (0x7fd1a796d7c6f73c95f5e3ea9590c8d17cdaf762) — can still act | +7d |

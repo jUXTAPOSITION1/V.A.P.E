@@ -1461,6 +1461,25 @@
     "symbol": "UNI",
     "times_investigated": 1
   },
+  "1:0x1feb4aec0d592ec55b137f12cbc57229ee899602": {
+    "address": "0x1fEb4AeC0d592eC55b137f12cBC57229ee899602",
+    "chain": "1",
+    "creator_address": "0x7fd1a796d7c6f73c95f5e3ea9590c8d17cdaf762",
+    "first_investigated": "2026-08-04T05:21:58Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260804-052158-0x1fEb4AeC.md",
+        "score": 80,
+        "ts": "2026-08-04T05:21:58Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-08-04T05:21:58Z",
+    "last_score": 80,
+    "last_verdict": "PROCEED",
+    "symbol": "RELICS",
+    "times_investigated": 1
+  },
   "1:0x20b688f40b8e6a55e76131d5e3b84afc89a30c93": {
     "address": "0x20b688F40b8E6a55e76131D5E3b84AFC89a30c93",
     "chain": "1",
