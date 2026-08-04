@@ -1269,3 +1269,5 @@
 | 2026-08-04 | auto | 0x9F178347e7F2975bC4C942d292AE69295dAd3b7d (UNI) | deep_investigation | REJECT (0/100) | Same deployer has a prior CAUTION/REJECT verdict on record: UNI (0xf1Bf52E00bF56 | +7d |
 
 | 2026-08-04 | auto | 0x64f170A94CC75C406BA1398fD353841ba63a631D (UB402) | deep_investigation | REJECT (35/100) | Top 10 non-LP/burn holders control 83% of supply — concentrated, easily manipula | +7d |
+
+| 2026-08-04 | auto | 0x708383ae0e80E75377d664E4D6344404dede119A (EMT) | deep_investigation | CAUTION (65/100) | Very low liquidity $8,315 (rug/illiquid) | +7d |
