@@ -1233,3 +1233,5 @@
 | 2026-08-04 | auto | 0x8F294a99a0609822C233b24867F331c292cE2DA9 (RELICS) | deep_investigation | REJECT (0/100) | Owner can change balances (rug surface) | +7d |
 
 | 2026-08-04 | auto | 0x1fEb4AeC0d592eC55b137f12cBC57229ee899602 (RELICS) | deep_investigation | PROCEED (80/100) | Owner not renounced (0x7fd1a796d7c6f73c95f5e3ea9590c8d17cdaf762) — can still act | +7d |
+
+| 2026-08-04 | auto | 0xCAAE2A2F939F51d97CdFa9A86e79e3F085b799f3 (TUT) | deep_investigation | CAUTION (70/100) | Top 9 non-LP/burn holders control 75% of supply — concentrated, easily manipulat | +7d |

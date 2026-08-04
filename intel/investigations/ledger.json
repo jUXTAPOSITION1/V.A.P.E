@@ -7171,6 +7171,25 @@
     "symbol": "ON",
     "times_investigated": 1
   },
+  "56:0xcaae2a2f939f51d97cdfa9a86e79e3f085b799f3": {
+    "address": "0xCAAE2A2F939F51d97CdFa9A86e79e3F085b799f3",
+    "chain": "56",
+    "creator_address": "0x853db6381533d9cb63663e1587f925dd17a523cc",
+    "first_investigated": "2026-08-04T06:07:54Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260804-060754-0xCAAE2A2F.md",
+        "score": 70,
+        "ts": "2026-08-04T06:07:54Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-04T06:07:54Z",
+    "last_score": 70,
+    "last_verdict": "CAUTION",
+    "symbol": "TUT",
+    "times_investigated": 1
+  },
   "56:0xcb362b3701ef6f811dcdcd702482812d0cf34444": {
     "address": "0xcB362b3701eF6F811DCdCd702482812D0Cf34444",
     "chain": "56",
