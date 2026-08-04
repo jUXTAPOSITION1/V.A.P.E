@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T13:55:43Z",
+  "generated": "2026-08-04T14:10:48Z",
   "count": 60,
   "headlines": [
     {
@@ -31,6 +31,22 @@
       "url": "https://krebsonsecurity.com/2026/07/microsoft-patches-a-record-570-security-flaws/",
       "source": "Krebs on Security",
       "published": "Tue, 14 Jul 2026 19:22:42 +0000",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Keyv-Linked npm Worm Poisons Hundreds of Packages, Plants Claude Code and VS Code Hooks",
+      "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html",
+      "source": "The Hacker News",
+      "published": "Tue, 04 Aug 2026 19:00:23 +0530",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Fake Adobe and Zoom Updates Install ScreenConnect for Persistent Remote Access",
+      "url": "https://thehackernews.com/2026/08/fake-adobe-and-zoom-updates-install.html",
+      "source": "The Hacker News",
+      "published": "Tue, 04 Aug 2026 18:41:22 +0530",
       "topic": "Cybersecurity",
       "crypto": true
     },
@@ -67,6 +83,30 @@
       "crypto": true
     },
     {
+      "title": "Apple says more ex-employees may have taken confidential data to OpenAI",
+      "url": "https://techcrunch.com/2026/08/04/apple-says-more-ex-employees-may-have-taken-confidential-data-to-openai/",
+      "source": "TechCrunch AI",
+      "published": "Tue, 04 Aug 2026 14:03:01 +0000",
+      "topic": "AI",
+      "crypto": true
+    },
+    {
+      "title": "Dinari brings tokenized U.S. stocks to American investors as equity race heats up",
+      "url": "https://www.coindesk.com/business/2026/08/04/dinari-brings-tokenized-u-s-stocks-to-american-investors-as-equity-race-heats-up",
+      "source": "CoinDesk",
+      "published": "Tue, 04 Aug 2026 14:00:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Hyperscale Trims Bitcoin Holdings, Still Sits on $61M Stack",
+      "url": "https://bitcoinmagazine.com/news/hyperscale-sells-some-bitcoin",
+      "source": "Bitcoin Magazine",
+      "published": "Tue, 04 Aug 2026 13:58:28 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
       "title": "Weaponized Email AI Assistants Could Help Attackers Hijack Accounts",
       "url": "https://www.securityweek.com/weaponized-email-ai-assistants-could-help-attackers-hijack-accounts/",
       "source": "SecurityWeek",
@@ -96,6 +136,14 @@
       "source": "SecurityWeek",
       "published": "Tue, 04 Aug 2026 13:40:42 +0000",
       "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "SpaceX Earnings Call Today: Top 3 Scenarios Investors Are Watching",
+      "url": "https://beincrypto.com/spacex-earnings-call-top-3-scenarios/",
+      "source": "BeInCrypto",
+      "published": "Tue, 04 Aug 2026 13:38:37 +0000",
+      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -195,14 +243,6 @@
       "crypto": true
     },
     {
-      "title": "CISA Adds Exploited N-able N-central Flaw to KEV After Customer Compromises",
-      "url": "https://thehackernews.com/2026/08/cisa-adds-exploited-n-able-n-central.html",
-      "source": "The Hacker News",
-      "published": "Tue, 04 Aug 2026 12:30:13 +0530",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
       "title": "Tether Gold reserves rise 9.5% as gold posts worst quarter in 13 years",
       "url": "https://cointelegraph.com/news/tether-gold-rise-q2-sharpest-quarterly-gold-correction?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
       "source": "Cointelegraph",
@@ -267,22 +307,6 @@
       "crypto": true
     },
     {
-      "title": "Odds of CLARITY crypto legislation passing sink to 27% as Treasury, White House, SEC, and Senate leads quit",
-      "url": "https://cryptoslate.com/us-crypto-regulation-loses-key-washington-allies/",
-      "source": "CryptoSlate",
-      "published": "Tue, 04 Aug 2026 11:50:42 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Top 3 Altcoins to Watch for the First Week of August 2026",
-      "url": "https://beincrypto.com/top-3-altcoins-august-2026/",
-      "source": "BeInCrypto",
-      "published": "Tue, 04 Aug 2026 11:44:41 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "BlackRock Tokenizes $311B of European Money Market Funds With JP Morgan's Kinexys",
       "url": "https://decrypt.co/374894/blackrock-tokenizes-311b-of-european-money-market-funds-with-jp-morgans-kinexys",
       "source": "Decrypt",
@@ -299,19 +323,19 @@
       "crypto": true
     },
     {
-      "title": "South African lawmakers propose draft rules on cross-border crypto transactions",
-      "url": "https://www.coindesk.com/policy/2026/08/04/south-african-lawmakers-propose-draft-rules-on-cross-border-crypto-transactions",
-      "source": "CoinDesk",
-      "published": "Tue, 04 Aug 2026 10:59:41 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Gemini Agent-to-Agent Attack Method Exposed Secrets, Enabled Pull Request Tampering",
       "url": "https://www.securityweek.com/gemini-agent-to-agent-attack-exposed-secrets-enabled-pull-request-tampering/",
       "source": "SecurityWeek",
       "published": "Tue, 04 Aug 2026 10:54:30 +0000",
       "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Jim Cramer plans to sell his Bitcoin over quantum fears as BTC rises 1.6%",
+      "url": "https://cointelegraph.com/markets/jim-cramer-sell-bitcoin-quantum-fears-btc-rises?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Tue, 04 Aug 2026 10:53:00 +0000",
+      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -331,11 +355,11 @@
       "crypto": true
     },
     {
-      "title": "Jim Cramer plans to sell his Bitcoin over quantum fears as BTC rises 1.6%",
-      "url": "https://cointelegraph.com/markets/jim-cramer-sell-bitcoin-quantum-fears-btc-rises?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Tue, 04 Aug 2026 10:47:39 +0000",
-      "topic": "Crypto Markets",
+      "title": "Varonis Agent IBAC keeps AI agents within their intended boundaries",
+      "url": "https://www.bleepingcomputer.com/news/security/varonis-agent-ibac-keeps-ai-agents-within-their-intended-boundaries/",
+      "source": "BleepingComputer",
+      "published": "Tue, 04 Aug 2026 10:00:10 -0400",
+      "topic": "Cybersecurity",
       "crypto": true
     },
     {
@@ -419,14 +443,6 @@
       "crypto": true
     },
     {
-      "title": "18 Malicious npm Packages Deliver Cross-Platform RAT to Alibaba Tool Users",
-      "url": "https://thehackernews.com/2026/08/18-malicious-npm-packages-deliver-cross.html",
-      "source": "The Hacker News",
-      "published": "Tue, 04 Aug 2026 00:13:53 +0530",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
       "title": "Read This Before You Buy That TV Streaming Stick",
       "url": "https://krebsonsecurity.com/2026/07/read-this-before-you-buy-that-tv-streaming-stick/",
       "source": "Krebs on Security",
@@ -463,22 +479,6 @@
       "url": "https://krebsonsecurity.com/2026/07/fbi-seizes-netnut-proxy-platform-popa-botnet/",
       "source": "Krebs on Security",
       "published": "Thu, 02 Jul 2026 19:27:33 +0000",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "Small Business Forum\u2019s Report to Congress Highlights Recommendations to Improve Capital-Raising Policy",
-      "url": "https://www.sec.gov/newsroom/press-releases/2026-70-small-business-forums-report-congress-highlights-recommendations-improve-capital-raising-policy",
-      "source": "SEC Press Releases",
-      "published": "Mon, 27 Jul 2026 15:59:17 -0400",
-      "topic": "Regulation",
-      "crypto": true
-    },
-    {
-      "title": "Lessons Learned from CISA\u2019s Recent GitHub Leak",
-      "url": "https://krebsonsecurity.com/2026/07/lessons-learned-from-cisas-recent-github-leak/",
-      "source": "Krebs on Security",
-      "published": "Mon, 13 Jul 2026 15:03:28 +0000",
       "topic": "Cybersecurity",
       "crypto": true
     }

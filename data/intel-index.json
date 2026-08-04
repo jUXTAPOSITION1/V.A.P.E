@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T13:58:49Z",
+  "generated": "2026-08-04T14:12:13Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 426,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 148,
     "investigations": 728,
-    "news": 63,
+    "news": 64,
     "tools": 16,
     "tools_verified": 16,
     "skills": 24
@@ -10930,6 +10930,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-04-the-developer-is-the-vector-how-a-compromised-npm-legend-tur.md",
+      "title": "The Developer is the Vector: How a Compromised npm Legend Turned Into a Self-Spreading Claude Code Worm",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-04T14:12:13Z",
+      "published_et": "August 4, 2026 \u00b7 10:12 AM EDT",
+      "topic": "Cybersecurity",
+      "dek": "A hijacked update to the widely used 'keyv' package hijacked developer machines, stealing npm credentials to infect more libraries and planting persistent backdoors in AI terminal tools.",
+      "image": "assets/news-images/the-developer-is-the-vector-how-a-compromised-npm-legend-tur.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-04-the-developer-is-the-vector-how-a-compromised-npm-legend-tur.md"
+    },
+    {
       "file": "news-2026-08-04-soft-spoken-exploits-how-vibe-hacking-bypasses-ai-guardrails.md",
       "title": "Soft-Spoken Exploits: How 'Vibe Hacking' Bypasses AI Guardrails to Mint Junior Threat Actors",
       "byline": "VAPE Reporter",
@@ -11636,18 +11648,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image or source photo available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-bitcoin-holds-position-ahead-of-federal-reserve-policy-signa.md"
-    },
-    {
-      "file": "news-2026-07-28-bitcoin-foundation-headline-alleges-xrp-lags-broader-market-.md",
-      "title": "Bitcoin Foundation Headline Alleges XRP Lags Broader Market but Supplies No Evidence or Data",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-28 00:05 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "An unverified claim of three unspecified reasons for Ripple's underperformance appears in a July 2026 post whose body and supporting metrics remain unavailable.",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no source photo available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-bitcoin-foundation-headline-alleges-xrp-lags-broader-market-.md"
     }
   ],
   "tools": [
