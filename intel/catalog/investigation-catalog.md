@@ -1249,3 +1249,5 @@
 | 2026-08-04 | auto | 0xE82b78d3590135a7EF1464Ab601eaE74E5F87777 (UAI) | deep_investigation | REJECT (0/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-04 | auto | 0x477DF393C9FC7bA6d04Cc0a9Cd092B5D84079a26 (jlefk) | deep_investigation | REJECT (12/100) | Low holder count (62) | +7d |
+
+| 2026-08-04 | auto | 0x0C69199C1562233640e0Db5Ce2c399A88eB507C7 (CYS) | deep_investigation | REJECT (0/100) | Owner can change balances (rug surface) | +7d |

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T12:42:09Z",
+  "generated": "2026-08-04T12:57:16Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 425,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 148,
-    "investigations": 724,
+    "investigations": 725,
     "news": 62,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260804-124201-0x477DF393.md",
-      "title": "Investigation \u2014 jlefk",
-      "symbol": "jlefk",
-      "name": "john lefk",
-      "date": "2026-08-04T12:42:01Z",
-      "target": "0x477DF393C9FC7bA6d04Cc0a9Cd092B5D84079a26",
+      "file": "investigation-20260804-125715-0x0C69199C.md",
+      "title": "Investigation \u2014 CYS",
+      "symbol": "CYS",
+      "name": "Cysic Token",
+      "date": "2026-08-04T12:57:15Z",
+      "target": "0x0C69199C1562233640e0Db5Ce2c399A88eB507C7",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "12",
-      "summary": "Risk factors: [-8] Low holder count (62); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $23 (rug/illiquid); [-10] Low liquidity $23; [-5] Pair 17.6 days old \u2014 under a",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-124201-0x477DF393.md"
+      "score": "0",
+      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0xb7f3217874de34047cd0494ac5b9f70e1932e879) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 86% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-125715-0x0C69199C.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260804-125715-0x0C69199C.md",
+      "title": "Investigation \u2014 CYS",
+      "symbol": "CYS",
+      "name": "Cysic Token",
+      "date": "2026-08-04T12:57:15Z",
+      "target": "0x0C69199C1562233640e0Db5Ce2c399A88eB507C7",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0xb7f3217874de34047cd0494ac5b9f70e1932e879) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 86% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-125715-0x0C69199C.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260804-124201-0x477DF393.md",
