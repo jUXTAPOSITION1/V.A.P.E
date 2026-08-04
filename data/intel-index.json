@@ -1,14 +1,14 @@
 {
-  "generated": "2026-08-04T16:16:00Z",
+  "generated": "2026-08-04T16:17:29Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 428,
+    "reports": 429,
     "reports_by_type": {
       "bounty": 113,
+      "macro": 23,
       "security": 75,
       "base": 85,
       "sentiment": 45,
-      "macro": 22,
       "bug": 5,
       "mainnet": 5,
       "virtuals": 74,
@@ -10082,6 +10082,17 @@
     },
     {
       "kind": "intel",
+      "type": "macro",
+      "file": "macro-2026-08-04-16.md",
+      "title": "Macro & Micro News Sweep Report",
+      "date": "2026-08-04T16:00Z",
+      "threat": null,
+      "summary": "Computed deterministically from real Fear & Greed (25, prior day 28) and global market cap 24h change (0.31%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-08-04-16.md",
+      "bytes": 2088
+    },
+    {
+      "kind": "intel",
       "type": "security",
       "file": "security-2026-08-04-14.md",
       "title": "VAPE Security Sweep Report",
@@ -10717,17 +10728,6 @@
       "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260801_201023.md",
       "bytes": 16449
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-08-01-19.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-08-01T19:00Z",
-      "threat": null,
-      "summary": "The real incident feed shows 7 incidents in the last 7 days, all under $50M, with the largest being a $24.15M private key compromise on AFX Bridge (Arbitrum) and a $9.7M hot wallet compromise on Triple-A (Ethereum, Tron, Arbitrum). Other events include a $8.2M loss on Crypto DAO (BSC), a $7.53M bridge verification bypass on Verus-Ethereum",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-01-19.md",
-      "bytes": 7061
     }
   ],
   "broadcasts": [
