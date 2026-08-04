@@ -2559,6 +2559,25 @@
     "symbol": "Anon",
     "times_investigated": 1
   },
+  "1:0x7a7c5a2dbff5e916c570c8ef61e2dc253242e5f7": {
+    "address": "0x7a7C5a2dBff5e916c570c8Ef61e2DC253242e5F7",
+    "chain": "1",
+    "creator_address": "0x47c035a2212c5c187bb2ba9e5e46a31d32b0e38b",
+    "first_investigated": "2026-08-04T06:39:29Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260804-063929-0x7a7C5a2d.md",
+        "score": 82,
+        "ts": "2026-08-04T06:39:29Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-08-04T06:39:29Z",
+    "last_score": 82,
+    "last_verdict": "PROCEED",
+    "symbol": "Asteroid",
+    "times_investigated": 1
+  },
   "1:0x7c6aa5126da2691f62ebb2d2f082f908513983d0": {
     "address": "0x7c6aa5126dA2691f62EBb2D2f082F908513983d0",
     "chain": "1",

@@ -1237,3 +1237,5 @@
 | 2026-08-04 | auto | 0xCAAE2A2F939F51d97CdFa9A86e79e3F085b799f3 (TUT) | deep_investigation | CAUTION (70/100) | Top 9 non-LP/burn holders control 75% of supply — concentrated, easily manipulat | +7d |
 
 | 2026-08-04 | auto | 0x867c3370Ca238E38Bf8f59E7817d8872FFc49d94 (SPCXB) | deep_investigation | REJECT (0/100) | Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x143E73837FD47c | +7d |
+
+| 2026-08-04 | auto | 0x7a7C5a2dBff5e916c570c8Ef61e2DC253242e5F7 (Asteroid) | deep_investigation | PROCEED (82/100) | Top 10 non-LP/burn holders control 53% of supply — meaningful concentration | +7d |
