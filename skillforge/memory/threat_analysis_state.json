@@ -378,5 +378,15 @@
     "report": "intel/threat-analysis/2026-07-31-coldcard.md",
     "provider": "xai_1",
     "written_at": "2026-08-03T20:59:32Z"
+  },
+  "2026-08-03:RISEx": {
+    "report": "intel/threat-analysis/2026-08-03-risex.md",
+    "provider": "xai_1",
+    "written_at": "2026-08-04T16:09:21Z"
+  },
+  "2026-07-30:Swan Treasury": {
+    "report": "intel/threat-analysis/2026-07-30-swan-treasury.md",
+    "provider": "xai_1",
+    "written_at": "2026-08-04T16:10:28Z"
   }
 }
