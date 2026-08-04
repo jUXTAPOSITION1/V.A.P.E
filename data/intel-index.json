@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T23:40:58Z",
+  "generated": "2026-08-04T23:56:15Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 435,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 150,
-    "investigations": 740,
+    "investigations": 741,
     "news": 67,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260804-225532-0x147636F4.md",
-      "title": "Investigation \u2014 NVDAB",
-      "symbol": "NVDAB",
-      "name": "NVDAB",
-      "date": "2026-08-04T22:55:32Z",
-      "target": "0x147636F42a5CA2debF8f60f5f026521BB1767777",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260804-235612-0x8602b3BE.md",
+      "title": "Investigation \u2014 ELSA",
+      "symbol": "ELSA",
+      "name": "Elsa",
+      "date": "2026-08-04T23:56:12Z",
+      "target": "0x8602b3BE38924Ac5330347BB3d41A48EcdD63d5b",
+      "chain": "8453 (Base)",
       "verdict": "REJECT",
       "score": "0",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Owner not renounced (0xe2ce6ab80874fa9fa2aae65d277dd6b8e65c9de0) \u2014 can still act on the contract; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipula",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-225532-0x147636F4.md"
+      "summary": "Risk factors: [-20] Very few holders (14) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-235612-0x8602b3BE.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260804-235612-0x8602b3BE.md",
+      "title": "Investigation \u2014 ELSA",
+      "symbol": "ELSA",
+      "name": "Elsa",
+      "date": "2026-08-04T23:56:12Z",
+      "target": "0x8602b3BE38924Ac5330347BB3d41A48EcdD63d5b",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Very few holders (14) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-235612-0x8602b3BE.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260804-225532-0x147636F4.md",

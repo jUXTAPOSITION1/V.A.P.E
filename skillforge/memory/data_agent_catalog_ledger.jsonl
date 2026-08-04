@@ -630,3 +630,4 @@
 {"ts": "2026-08-04T23:10:51.652899Z", "target": "ethereum", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
 {"ts": "2026-08-04T23:25:51.187226Z", "target": "Optimism", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
 {"ts": "2026-08-04T23:40:57.931899Z", "target": "uniswap-v2", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 61}
+{"ts": "2026-08-04T23:56:15.350670Z", "target": "0x40b8129B786D766267A7a118cF8C07E31CDB6Fde", "hired": ["rug_pull_alert"], "paid": 1, "cost_usd": 0.03, "daily_target": 61}

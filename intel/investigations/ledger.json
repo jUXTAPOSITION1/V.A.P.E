@@ -9943,6 +9943,25 @@
     "symbol": "PLAY",
     "times_investigated": 2
   },
+  "8453:0x8602b3be38924ac5330347bb3d41a48ecdd63d5b": {
+    "address": "0x8602b3BE38924Ac5330347BB3d41A48EcdD63d5b",
+    "chain": "8453",
+    "creator_address": "0x6584782924552dfd60ea3693da37c9127067c7d5",
+    "first_investigated": "2026-08-04T23:56:12Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260804-235612-0x8602b3BE.md",
+        "score": 0,
+        "ts": "2026-08-04T23:56:12Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-04T23:56:12Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "ELSA",
+    "times_investigated": 1
+  },
   "8453:0x87c6c398f811a462d623d24cafecaf0f0e553b08": {
     "address": "0x87c6c398F811A462d623D24cAfEcaf0F0E553b08",
     "chain": "8453",

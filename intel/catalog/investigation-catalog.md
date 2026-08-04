@@ -1281,3 +1281,5 @@
 | 2026-08-04 | auto | 0x02Fca66C1D1aFB4E2A7884261eB00F63598a7436 (NVDAB) | deep_investigation | REJECT (12/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-04 | auto | 0x147636F42a5CA2debF8f60f5f026521BB1767777 (NVDAB) | deep_investigation | REJECT (0/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-04 | auto | 0x8602b3BE38924Ac5330347BB3d41A48EcdD63d5b (ELSA) | deep_investigation | REJECT (0/100) | Very few holders (14) — thin, easily manipulated distribution | +7d |
