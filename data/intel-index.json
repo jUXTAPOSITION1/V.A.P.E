@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T14:15:41Z",
+  "generated": "2026-08-04T14:29:22Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 427,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 148,
-    "investigations": 728,
+    "investigations": 729,
     "news": 64,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260804-134338-0xAc1166e5.md",
-      "title": "Investigation \u2014 Jesus",
-      "symbol": "Jesus",
-      "name": "Jesus bless you.",
-      "date": "2026-08-04T13:43:38Z",
-      "target": "0xAc1166e5DBE8E22BA964AD7B5e97B5c9F7FA4444",
+      "file": "investigation-20260804-142922-0xfc313C32.md",
+      "title": "Investigation \u2014 lefk",
+      "symbol": "lefk",
+      "name": "lefkcoin",
+      "date": "2026-08-04T14:29:22Z",
+      "target": "0xfc313C329dAf55b488d0A0EeeE5727e3cbC4D062",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "45",
-      "summary": "Risk factors: [-10] Owner not renounced (0x5c952063c7fc8610ffdb798152d69f0b9550762b) \u2014 can still act on the contract; [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-134338-0xAc1166e5.md"
+      "score": "35",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 90% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $88 (rug/illiquid); [-10] Low liquidity $88. Positive evidence: Ownership renounced; Trading 131+ days with",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-142922-0xfc313C32.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260804-142922-0xfc313C32.md",
+      "title": "Investigation \u2014 lefk",
+      "symbol": "lefk",
+      "name": "lefkcoin",
+      "date": "2026-08-04T14:29:22Z",
+      "target": "0xfc313C329dAf55b488d0A0EeeE5727e3cbC4D062",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "35",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 90% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $88 (rug/illiquid); [-10] Low liquidity $88. Positive evidence: Ownership renounced; Trading 131+ days with",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-142922-0xfc313C32.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260804-134338-0xAc1166e5.md",

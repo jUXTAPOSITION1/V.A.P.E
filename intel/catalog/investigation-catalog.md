@@ -1257,3 +1257,5 @@
 | 2026-08-04 | auto | 0x1a44233FAe8D50F1AeB3a5d58dd426ff4814Cb53 (QUID) | deep_investigation | REJECT (15/100) | Very few holders (35) — thin, easily manipulated distribution | +7d |
 
 | 2026-08-04 | auto | 0xAc1166e5DBE8E22BA964AD7B5e97B5c9F7FA4444 (Jesus) | deep_investigation | REJECT (45/100) | Owner not renounced (0x5c952063c7fc8610ffdb798152d69f0b9550762b) — can still act | +7d |
+
+| 2026-08-04 | auto | 0xfc313C329dAf55b488d0A0EeeE5727e3cbC4D062 (lefk) | deep_investigation | REJECT (35/100) | Top 10 non-LP/burn holders control 90% of supply — concentrated, easily manipula | +7d |
