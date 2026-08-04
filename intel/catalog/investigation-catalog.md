@@ -1241,3 +1241,5 @@
 | 2026-08-04 | auto | 0x7a7C5a2dBff5e916c570c8Ef61e2DC253242e5F7 (Asteroid) | deep_investigation | PROCEED (82/100) | Top 10 non-LP/burn holders control 53% of supply — meaningful concentration | +7d |
 
 | 2026-08-04 | auto | 0xf5Cf97fE106c4C43b8823dc0Df201AC737834444 (失业) | deep_investigation | CAUTION (67/100) | Low holder count (80) | +7d |
+
+| 2026-08-04 | auto | 0xEAe6F7e171e0A681004CcEd3c74dC351cd8F6b07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
