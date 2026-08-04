@@ -625,3 +625,4 @@
 {"ts": "2026-08-04T21:37:42.912410Z", "target": "Optimism", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
 {"ts": "2026-08-04T21:53:54.210369Z", "target": "0x3E5d4f8aee0D9B3082d5f6DA5D6e225D17ba9ea0", "hired": ["token_safety_check"], "paid": 1, "cost_usd": 0.02, "daily_target": 61}
 {"ts": "2026-08-04T22:25:02.220881Z", "target": "arbitrum-bridge", "hired": ["protocol"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
+{"ts": "2026-08-04T22:40:17.406475Z", "target": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "hired": ["dossier_check"], "paid": 1, "cost_usd": 0.1, "daily_target": 61}
