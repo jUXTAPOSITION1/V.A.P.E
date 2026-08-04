@@ -481,3 +481,4 @@
 {"ts": "2026-08-04T21:06:36.075990Z", "target": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c", "hired": ["yields"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-08-04T21:37:41.320811Z", "target": "0x624e2e7fDc8903165F64891672267AB0FCB98831", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-08-04T22:24:52.757386Z", "target": "0x624e2e7fDc8903165F64891672267AB0FCB98831", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-08-04T22:55:41.858298Z", "target": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c", "hired": ["market_intel"], "paid": 1, "cost_usd": 0.07}

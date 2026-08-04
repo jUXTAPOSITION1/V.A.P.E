@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T22:40:17Z",
+  "generated": "2026-08-04T22:55:48Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 435,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 150,
-    "investigations": 739,
+    "investigations": 740,
     "news": 67,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260804-215349-0x02Fca66C.md",
+      "file": "investigation-20260804-225532-0x147636F4.md",
       "title": "Investigation \u2014 NVDAB",
       "symbol": "NVDAB",
-      "name": "NVIDIA Corp",
-      "date": "2026-08-04T21:53:49Z",
-      "target": "0x02Fca66C1D1aFB4E2A7884261eB00F63598a7436",
+      "name": "NVDAB",
+      "date": "2026-08-04T22:55:32Z",
+      "target": "0x147636F42a5CA2debF8f60f5f026521BB1767777",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "12",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: QQQB (0x205812CdBed920aFf76C6580abD681a46D11efc7) \u2014 REJECT 47/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 76% of supply \u2014 concentrated, easily manipulated; ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-215349-0x02Fca66C.md"
+      "score": "0",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Owner not renounced (0xe2ce6ab80874fa9fa2aae65d277dd6b8e65c9de0) \u2014 can still act on the contract; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipula",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-225532-0x147636F4.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260804-225532-0x147636F4.md",
+      "title": "Investigation \u2014 NVDAB",
+      "symbol": "NVDAB",
+      "name": "NVDAB",
+      "date": "2026-08-04T22:55:32Z",
+      "target": "0x147636F42a5CA2debF8f60f5f026521BB1767777",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Owner not renounced (0xe2ce6ab80874fa9fa2aae65d277dd6b8e65c9de0) \u2014 can still act on the contract; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipula",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-225532-0x147636F4.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260804-215349-0x02Fca66C.md",
