@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T20:50:45Z",
+  "generated": "2026-08-04T21:06:38Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 432,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 150,
-    "investigations": 736,
+    "investigations": 737,
     "news": 66,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260804-205038-0x500A02a2.md",
-      "title": "Investigation \u2014 O",
-      "symbol": "O",
-      "name": "o1.exchange",
-      "date": "2026-08-04T20:50:38Z",
-      "target": "0x500A02a20B0B0A3F3efCCFc0559543F5743bd1C4",
+      "file": "investigation-20260804-210630-0x965BA6FD.md",
+      "title": "Investigation \u2014 BEAT",
+      "symbol": "BEAT",
+      "name": "Audiera AI (beataii.xyz)",
+      "date": "2026-08-04T21:06:30Z",
+      "target": "0x965BA6FDe178cAe91b8868E2f82b84095c82e9e3",
       "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "60",
-      "summary": "Risk factors: [-10] Owner not renounced (0x470540b07ea33fa96f5bf716b1ae6d6a1639756e) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 97% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 34648 hol",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-205038-0x500A02a2.md"
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-60] HONEYPOT detected; [-12] Mintable supply (dilution risk); [-20] Very few holders (17) \u2014 thin, easily manipulated distribution; [-15] Top 9 non-LP/burn holders control 11579208923731620727573696716028624256438916371759126288531456% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidit",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-210630-0x965BA6FD.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260804-210630-0x965BA6FD.md",
+      "title": "Investigation \u2014 BEAT",
+      "symbol": "BEAT",
+      "name": "Audiera AI (beataii.xyz)",
+      "date": "2026-08-04T21:06:30Z",
+      "target": "0x965BA6FDe178cAe91b8868E2f82b84095c82e9e3",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-60] HONEYPOT detected; [-12] Mintable supply (dilution risk); [-20] Very few holders (17) \u2014 thin, easily manipulated distribution; [-15] Top 9 non-LP/burn holders control 11579208923731620727573696716028624256438916371759126288531456% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidit",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-210630-0x965BA6FD.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260804-205038-0x500A02a2.md",

@@ -1273,3 +1273,5 @@
 | 2026-08-04 | auto | 0x708383ae0e80E75377d664E4D6344404dede119A (EMT) | deep_investigation | CAUTION (65/100) | Very low liquidity $8,315 (rug/illiquid) | +7d |
 
 | 2026-08-04 | auto | 0x500A02a20B0B0A3F3efCCFc0559543F5743bd1C4 (O) | deep_investigation | CAUTION (60/100) | Owner not renounced (0x470540b07ea33fa96f5bf716b1ae6d6a1639756e) — can still act | +7d |
+
+| 2026-08-04 | auto | 0x965BA6FDe178cAe91b8868E2f82b84095c82e9e3 (BEAT) | deep_investigation | REJECT (0/100) | HONEYPOT detected | +7d |
