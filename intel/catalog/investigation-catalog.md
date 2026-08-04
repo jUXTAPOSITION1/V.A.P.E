@@ -1227,3 +1227,5 @@
 | 2026-08-04 | auto | 0x847247787D3D9aedc69bF2Af30e0215f1f1b4444 (Jobless) | deep_investigation | CAUTION (75/100) | Top 10 non-LP/burn holders control 74% of supply — concentrated, easily manipula | +7d |
 
 | 2026-08-04 | auto | 0xD0B74d81b5507edF2e93026701aA7fB2D9f82B07 (ANON) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
+
+| 2026-08-04 | auto | 0xEDEe1555B1E1Ebd9D758BA8091A7D3Dc2A70a89C (CATE) | deep_investigation | CAUTION (55/100) | Low liquidity $17,750 | +7d |

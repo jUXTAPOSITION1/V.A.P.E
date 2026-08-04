@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T04:20:02Z",
+  "generated": "2026-08-04T04:35:45Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 419,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 147,
-    "investigations": 713,
+    "investigations": 714,
     "news": 59,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260804-031942-0xD0B74d81.md",
-      "title": "Investigation \u2014 ANON",
-      "symbol": "ANON",
-      "name": "ANON",
-      "date": "2026-08-04T03:19:42Z",
-      "target": "0xD0B74d81b5507edF2e93026701aA7fB2D9f82B07",
+      "file": "investigation-20260804-043544-0xEDEe1555.md",
+      "title": "Investigation \u2014 CATE",
+      "symbol": "CATE",
+      "name": "Catecoin",
+      "date": "2026-08-04T04:35:44Z",
+      "target": "0xEDEe1555B1E1Ebd9D758BA8091A7D3Dc2A70a89C",
       "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 4 non-LP/burn holders control 100% of supply \u2014 concentrat",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-031942-0xD0B74d81.md"
+      "verdict": "CAUTION",
+      "score": "55",
+      "summary": "Risk factors: [-10] Low liquidity $17,750; [-10] Violent 24h move +2049% (volatility/manipulation); [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 99% of liq",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-043544-0xEDEe1555.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260804-043544-0xEDEe1555.md",
+      "title": "Investigation \u2014 CATE",
+      "symbol": "CATE",
+      "name": "Catecoin",
+      "date": "2026-08-04T04:35:44Z",
+      "target": "0xEDEe1555B1E1Ebd9D758BA8091A7D3Dc2A70a89C",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "55",
+      "summary": "Risk factors: [-10] Low liquidity $17,750; [-10] Violent 24h move +2049% (volatility/manipulation); [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 99% of liq",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-043544-0xEDEe1555.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260804-031942-0xD0B74d81.md",
