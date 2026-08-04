@@ -160,3 +160,4 @@
 {"ts": "2026-08-04T06:23:37.311221Z", "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7", "chain": "43114", "symbol": "WAVAX", "name": "WAVAX", "source": "evm", "offering": "token_intel"}
 {"ts": "2026-08-04T06:54:40.875211Z", "address": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "chain": "8453", "symbol": "HOME", "name": "HOME", "source": "base", "offering": "dossier_check"}
 {"ts": "2026-08-04T08:25:27.476959Z", "address": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "chain": "8453", "symbol": "VELVET", "name": "VELVET", "source": "base", "offering": "token_safety_check"}
+{"ts": "2026-08-04T08:55:42.543164Z", "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "chain": "8453", "symbol": "USDC", "name": "USDC", "source": "base_trending", "offering": "token_chart"}
