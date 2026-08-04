@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T11:24:53Z",
+  "generated": "2026-08-04T11:41:38Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 425,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 148,
-    "investigations": 719,
+    "investigations": 720,
     "news": 62,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260804-063929-0x7a7C5a2d.md",
-      "title": "Investigation \u2014 Asteroid",
-      "symbol": "Asteroid",
-      "name": "Polaris Shiba",
-      "date": "2026-08-04T06:39:29Z",
-      "target": "0x7a7C5a2dBff5e916c570c8Ef61e2DC253242e5F7",
-      "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "82",
-      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 53% of supply \u2014 meaningful concentration; [-10] Low liquidity $28,617. Positive evidence: Ownership renounced; 1422 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 693+ days without a known incident in this scan; Custom",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-063929-0x7a7C5a2d.md"
+      "file": "investigation-20260804-114129-0xf5Cf97fE.md",
+      "title": "Investigation \u2014 \u5931\u4e1a",
+      "symbol": "\u5931\u4e1a",
+      "name": "Jobless",
+      "date": "2026-08-04T11:41:29Z",
+      "target": "0xf5Cf97fE106c4C43b8823dc0Df201AC737834444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "67",
+      "summary": "Risk factors: [-8] Low holder count (80); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; Trading 137+ days without a known ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-114129-0xf5Cf97fE.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260804-114129-0xf5Cf97fE.md",
+      "title": "Investigation \u2014 \u5931\u4e1a",
+      "symbol": "\u5931\u4e1a",
+      "name": "Jobless",
+      "date": "2026-08-04T11:41:29Z",
+      "target": "0xf5Cf97fE106c4C43b8823dc0Df201AC737834444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "67",
+      "summary": "Risk factors: [-8] Low holder count (80); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; Trading 137+ days without a known ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-114129-0xf5Cf97fE.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260804-063929-0x7a7C5a2d.md",

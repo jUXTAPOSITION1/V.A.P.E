@@ -1239,3 +1239,5 @@
 | 2026-08-04 | auto | 0x867c3370Ca238E38Bf8f59E7817d8872FFc49d94 (SPCXB) | deep_investigation | REJECT (0/100) | Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x143E73837FD47c | +7d |
 
 | 2026-08-04 | auto | 0x7a7C5a2dBff5e916c570c8Ef61e2DC253242e5F7 (Asteroid) | deep_investigation | PROCEED (82/100) | Top 10 non-LP/burn holders control 53% of supply — meaningful concentration | +7d |
+
+| 2026-08-04 | auto | 0xf5Cf97fE106c4C43b8823dc0Df201AC737834444 (失业) | deep_investigation | CAUTION (67/100) | Low holder count (80) | +7d |
