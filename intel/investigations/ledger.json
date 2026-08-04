@@ -8296,6 +8296,25 @@
     "symbol": "$COBIE",
     "times_investigated": 1
   },
+  "8453:0x1a44233fae8d50f1aeb3a5d58dd426ff4814cb53": {
+    "address": "0x1a44233FAe8D50F1AeB3a5d58dd426ff4814Cb53",
+    "chain": "8453",
+    "creator_address": "0x2d43434479d217405d47a81bf9311508e32259e9",
+    "first_investigated": "2026-08-04T13:28:05Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260804-132805-0x1a44233F.md",
+        "score": 15,
+        "ts": "2026-08-04T13:28:05Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-04T13:28:05Z",
+    "last_score": 15,
+    "last_verdict": "REJECT",
+    "symbol": "QUID",
+    "times_investigated": 1
+  },
   "8453:0x1de2a8dcbe56abf971e9f2a9fec21082901ef0e5": {
     "address": "0x1DE2a8dCBe56Abf971E9F2a9feC21082901ef0e5",
     "chain": "8453",

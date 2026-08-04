@@ -1253,3 +1253,5 @@
 | 2026-08-04 | auto | 0x0C69199C1562233640e0Db5Ce2c399A88eB507C7 (CYS) | deep_investigation | REJECT (0/100) | Owner can change balances (rug surface) | +7d |
 
 | 2026-08-04 | auto | 0x16E3dcDD5d0e004A3AB62b5Ef5B34618cA9156c1 (RELICSTR) | deep_investigation | REJECT (5/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
+
+| 2026-08-04 | auto | 0x1a44233FAe8D50F1AeB3a5d58dd426ff4814Cb53 (QUID) | deep_investigation | REJECT (15/100) | Very few holders (35) — thin, easily manipulated distribution | +7d |
