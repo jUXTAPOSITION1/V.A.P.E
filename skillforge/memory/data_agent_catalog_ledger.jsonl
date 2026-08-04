@@ -621,3 +621,4 @@
 {"ts": "2026-08-04T20:35:07.204418Z", "target": "okx", "hired": ["treasury"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
 {"ts": "2026-08-04T20:50:45.294372Z", "target": "bitget", "hired": ["protocol_fees"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
 {"ts": "2026-08-04T21:06:38.086878Z", "target": "blackrock-buidl", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 61}
+{"ts": "2026-08-04T21:21:52.498142Z", "target": "aera-v3", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 61}
