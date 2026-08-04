@@ -1243,3 +1243,5 @@
 | 2026-08-04 | auto | 0xf5Cf97fE106c4C43b8823dc0Df201AC737834444 (失业) | deep_investigation | CAUTION (67/100) | Low holder count (80) | +7d |
 
 | 2026-08-04 | auto | 0xEAe6F7e171e0A681004CcEd3c74dC351cd8F6b07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
+
+| 2026-08-04 | auto | 0x58Ed924B2bF65be4594BFF2A5aa37C44e0488C01 (UAI) | deep_investigation | REJECT (35/100) | Top 10 non-LP/burn holders control 83% of supply — concentrated, easily manipula | +7d |

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T11:56:39Z",
+  "generated": "2026-08-04T12:11:59Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 425,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 148,
-    "investigations": 721,
+    "investigations": 722,
     "news": 62,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260804-115638-0xEAe6F7e1.md",
-      "title": "Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-08-04T11:56:38Z",
-      "target": "0xEAe6F7e171e0A681004CcEd3c74dC351cd8F6b07",
-      "chain": "8453 (Base)",
+      "file": "investigation-20260804-121150-0x58Ed924B.md",
+      "title": "Investigation \u2014 UAI",
+      "symbol": "UAI",
+      "name": "UnifAI",
+      "date": "2026-08-04T12:11:50Z",
+      "target": "0x58Ed924B2bF65be4594BFF2A5aa37C44e0488C01",
+      "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-115638-0xEAe6F7e1.md"
+      "score": "35",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 83% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity $0; [-15] Contract source UNVERIFIED. Positive evidence: 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 272+ days without a known inciden",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-121150-0x58Ed924B.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260804-121150-0x58Ed924B.md",
+      "title": "Investigation \u2014 UAI",
+      "symbol": "UAI",
+      "name": "UnifAI",
+      "date": "2026-08-04T12:11:50Z",
+      "target": "0x58Ed924B2bF65be4594BFF2A5aa37C44e0488C01",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "35",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 83% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity $0; [-15] Contract source UNVERIFIED. Positive evidence: 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 272+ days without a known inciden",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-121150-0x58Ed924B.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260804-115638-0xEAe6F7e1.md",
