@@ -1,4 +1,4 @@
-# VAPE Engagement Status — 2026-08-04T12:28:04Z
+# VAPE Engagement Status — 2026-08-04T15:06:20Z
 
 Real record of what VAPE's automated pipeline has actually done about each tracked lead with fit>=50. Never a fabricated account signup or an email nobody sent — see agents/engagements.py's module docstring.
 
@@ -20,6 +20,7 @@ Real record of what VAPE's automated pipeline has actually done about each track
 - Grinex (exploit $15,000,000) ($15,000,000, fit 85) — checked 2026-07-13T05:05:26Z, honestly unresolved.
 - Resolv USR (exploit $24,500,000) ($24,500,000, fit 85) — checked 2026-07-13T05:05:28Z, honestly unresolved.
 - 42DAO (exploit $912,000) ($912,000, fit 85) — checked 2026-07-22T18:44:26Z, honestly unresolved.
+- Swan Treasury (exploit $625,000) ($625,000, fit 83) — checked 2026-08-04T14:15:40Z, honestly unresolved.
 - Edel (exploit $403,000) ($403,000, fit 81) — checked 2026-07-13T05:05:15Z, honestly unresolved.
 - Truebit (exploit $26,400,000) ($26,400,000, fit 80) — checked 2026-07-13T05:05:32Z, honestly unresolved.
 - MOKE (exploit $907,000) ($907,000, fit 80) — checked 2026-08-03T18:21:09Z, honestly unresolved.
@@ -85,6 +86,7 @@ Real record of what VAPE's automated pipeline has actually done about each track
 - WEMIX.FI Lend (exploit $730,000) ($730,000, fit 74, defillama-hack)
 - Namada Shielded Pools (exploit $600,000) ($600,000, fit 73, defillama-hack)
 - Rari Capital (exploit $2,000,000) ($2,000,000, fit 73, defillama-hack)
+- RISEx (exploit $673,000) ($673,000, fit 73, defillama-hack)
 - Token of Power (exploit $1,580,000) ($1,580,000, fit 72, defillama-hack)
 - Syndicate (exploit $380,000) ($380,000, fit 72, defillama-hack)
 - Taiko Bridge (exploit $1,700,000) ($1,700,000, fit 72, defillama-hack)

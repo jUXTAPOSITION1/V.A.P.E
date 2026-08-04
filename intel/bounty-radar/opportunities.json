@@ -10000,7 +10000,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785241409.895388,
+      "checkedAt": 1785855961.2510142,
       "ok": true
     }
   },
@@ -10028,7 +10028,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785241409.895388,
+      "checkedAt": 1785855961.2510142,
       "ok": true
     }
   },
@@ -10056,7 +10056,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785241409.895388,
+      "checkedAt": 1785855961.2510142,
       "ok": true
     }
   },
@@ -10084,7 +10084,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785241409.895388,
+      "checkedAt": 1785855961.2510142,
       "ok": true
     }
   },
@@ -10112,7 +10112,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785241409.895388,
+      "checkedAt": 1785855961.2510142,
       "ok": true
     }
   },
@@ -10140,7 +10140,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785241409.895388,
+      "checkedAt": 1785855961.2510142,
       "ok": true
     }
   },
@@ -10170,7 +10170,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785241409.895388,
+      "checkedAt": 1785855961.2510142,
       "ok": true
     }
   },
@@ -10206,7 +10206,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785241409.895388,
+      "checkedAt": 1785855961.2510142,
       "ok": true
     }
   },
@@ -10234,7 +10234,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785241409.895388,
+      "checkedAt": 1785855961.2510142,
       "ok": true
     }
   },
@@ -10262,7 +10262,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785241409.895388,
+      "checkedAt": 1785855961.2510142,
       "ok": true
     }
   },
@@ -10290,7 +10290,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785241409.895388,
+      "checkedAt": 1785855961.2510142,
       "ok": true
     }
   },
@@ -10318,7 +10318,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785241409.895388,
+      "checkedAt": 1785855961.2510142,
       "ok": true
     }
   },
@@ -10346,7 +10346,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785241409.895388,
+      "checkedAt": 1785855961.2510142,
       "ok": true
     }
   },
@@ -10374,7 +10374,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785241409.895388,
+      "checkedAt": 1785855961.2510142,
       "ok": true
     }
   },
@@ -10402,7 +10402,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785241409.895388,
+      "checkedAt": 1785855961.2510142,
       "ok": true
     }
   },
@@ -26956,5 +26956,45 @@
     "fitScore": 95,
     "isNew": true,
     "firstSeen": "2026-08-03T18:20:50.179858Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:RISEx-1785715200",
+    "name": "RISEx (exploit $673,000)",
+    "prizeUsd": 673000,
+    "currency": "USD",
+    "status": "incident",
+    "track": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "rise"
+    ],
+    "desc": "Access Control Exploit on RISE. Lead for incident response + forensics.",
+    "fitScore": 73,
+    "isNew": true,
+    "firstSeen": "2026-08-04T15:06:01.250850Z"
+  },
+  {
+    "platform": "defillama-hack",
+    "id": "defillama-hack:Swan Treasury-1785369600",
+    "name": "Swan Treasury (exploit $625,000)",
+    "prizeUsd": 625000,
+    "currency": "USD",
+    "status": "incident",
+    "track": "incident",
+    "url": "https://defillama.com/hacks",
+    "deadline": null,
+    "tags": [
+      "incident-lead",
+      "forensics",
+      "bsc"
+    ],
+    "desc": "Private Key Compromised on BSC. Lead for incident response + forensics.",
+    "fitScore": 83,
+    "isNew": true,
+    "firstSeen": "2026-08-04T15:06:01.250850Z"
   }
 ]

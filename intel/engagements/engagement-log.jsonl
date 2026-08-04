@@ -212,3 +212,5 @@
 {"ts": "2026-08-03T18:21:22Z", "lead": "MOKE (exploit $907,000)", "platform": "defillama-hack", "prizeUsd": 907000, "fitScore": 80, "engagement": {"status": "no_target_found", "checked_at": "2026-08-03T18:21:09Z"}}
 {"ts": "2026-08-03T18:21:22Z", "lead": "COLDCARD (exploit $115,000,000)", "platform": "defillama-hack", "prizeUsd": 115000000, "fitScore": 80, "engagement": {"status": "not_yet_attempted"}}
 {"ts": "2026-08-03T18:21:22Z", "lead": "LOOPSDAO (exploit $696,000)", "platform": "defillama-hack", "prizeUsd": 696000, "fitScore": 78, "engagement": {"status": "no_target_found", "checked_at": "2026-08-03T18:21:04Z"}}
+{"ts": "2026-08-04T15:06:20Z", "lead": "Swan Treasury (exploit $625,000)", "platform": "defillama-hack", "prizeUsd": 625000, "fitScore": 83, "engagement": {"status": "no_target_found", "checked_at": "2026-08-04T14:15:40Z"}}
+{"ts": "2026-08-04T15:06:20Z", "lead": "RISEx (exploit $673,000)", "platform": "defillama-hack", "prizeUsd": 673000, "fitScore": 73, "engagement": {"status": "not_yet_attempted"}}
