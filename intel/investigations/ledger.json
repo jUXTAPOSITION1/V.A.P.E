@@ -321,6 +321,25 @@
     "symbol": "ROND",
     "times_investigated": 1
   },
+  "137:0x2285bb5307ba5a229303959f677cf5e56c8f8276": {
+    "address": "0x2285BB5307BA5A229303959f677Cf5e56C8f8276",
+    "chain": "137",
+    "creator_address": "0xeccb4e0ee3aea1de7108fa108d49cc0f9eed50cf",
+    "first_investigated": "2026-08-04T18:47:17Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260804-184717-0x2285BB53.md",
+        "score": 27,
+        "ts": "2026-08-04T18:47:17Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-04T18:47:17Z",
+    "last_score": 27,
+    "last_verdict": "REJECT",
+    "symbol": "LGNS",
+    "times_investigated": 1
+  },
   "137:0x2c72d25530191ebd244eb6325e1892480b0e6e28": {
     "address": "0x2c72D25530191EBD244Eb6325E1892480b0e6E28",
     "chain": "137",

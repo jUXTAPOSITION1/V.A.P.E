@@ -1261,3 +1261,5 @@
 | 2026-08-04 | auto | 0xfc313C329dAf55b488d0A0EeeE5727e3cbC4D062 (lefk) | deep_investigation | REJECT (35/100) | Top 10 non-LP/burn holders control 90% of supply — concentrated, easily manipula | +7d |
 
 | 2026-08-04 | auto | 0xa8D6737e035D4b5986a650198CE1CF5AdB06F4BE ($FREN) | deep_investigation | REJECT (18/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-08-04 | auto | 0x2285BB5307BA5A229303959f677Cf5e56C8f8276 (LGNS) | deep_investigation | REJECT (27/100) | Upgradeable proxy (verify implementation) | +7d |

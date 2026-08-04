@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T18:31:55Z",
+  "generated": "2026-08-04T18:47:27Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 431,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 149,
-    "investigations": 730,
+    "investigations": 731,
     "news": 65,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260804-170130-0xa8D6737e.md",
-      "title": "Investigation \u2014 $FREN",
-      "symbol": "$FREN",
-      "name": "BNBFREN",
-      "date": "2026-08-04T17:01:30Z",
-      "target": "0xa8D6737e035D4b5986a650198CE1CF5AdB06F4BE",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260804-184717-0x2285BB53.md",
+      "title": "Investigation \u2014 LGNS",
+      "symbol": "LGNS",
+      "name": "Lord GENADES",
+      "date": "2026-08-04T18:47:17Z",
+      "target": "0x2285BB5307BA5A229303959f677Cf5e56C8f8276",
+      "chain": "137 (Polygon)",
       "verdict": "REJECT",
-      "score": "18",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-25] Owner can change balances (rug surface); [-10] Owner not renounced (0x000000000000000000000000000000000000dead) \u2014 can still act on the contract; [-25] Very low liquidity $2,032 (rug/illiquid); [-10] Low liquidity $2,032. Positive evidence: 11072 holders \u2014 reaso",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-170130-0xa8D6737e.md"
+      "score": "27",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $8,482 (rug/illiquid); [-10] Low liquidity $8,482. Positiv",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-184717-0x2285BB53.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260804-184717-0x2285BB53.md",
+      "title": "Investigation \u2014 LGNS",
+      "symbol": "LGNS",
+      "name": "Lord GENADES",
+      "date": "2026-08-04T18:47:17Z",
+      "target": "0x2285BB5307BA5A229303959f677Cf5e56C8f8276",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "27",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $8,482 (rug/illiquid); [-10] Low liquidity $8,482. Positiv",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-184717-0x2285BB53.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260804-170130-0xa8D6737e.md",
