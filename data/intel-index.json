@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T13:28:06Z",
+  "generated": "2026-08-04T13:43:48Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 426,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 148,
-    "investigations": 727,
+    "investigations": 728,
     "news": 62,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260804-132805-0x1a44233F.md",
-      "title": "Investigation \u2014 QUID",
-      "symbol": "QUID",
-      "name": "Squid",
-      "date": "2026-08-04T13:28:05Z",
-      "target": "0x1a44233FAe8D50F1AeB3a5d58dd426ff4814Cb53",
-      "chain": "8453 (Base)",
+      "file": "investigation-20260804-134338-0xAc1166e5.md",
+      "title": "Investigation \u2014 Jesus",
+      "symbol": "Jesus",
+      "name": "Jesus bless you.",
+      "date": "2026-08-04T13:43:38Z",
+      "target": "0xAc1166e5DBE8E22BA964AD7B5e97B5c9F7FA4444",
+      "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "15",
-      "summary": "Risk factors: [-20] Very few holders (35) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +205% (volatility/manipulation); [-15] P",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-132805-0x1a44233F.md"
+      "score": "45",
+      "summary": "Risk factors: [-10] Owner not renounced (0x5c952063c7fc8610ffdb798152d69f0b9550762b) \u2014 can still act on the contract; [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-134338-0xAc1166e5.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260804-134338-0xAc1166e5.md",
+      "title": "Investigation \u2014 Jesus",
+      "symbol": "Jesus",
+      "name": "Jesus bless you.",
+      "date": "2026-08-04T13:43:38Z",
+      "target": "0xAc1166e5DBE8E22BA964AD7B5e97B5c9F7FA4444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "45",
+      "summary": "Risk factors: [-10] Owner not renounced (0x5c952063c7fc8610ffdb798152d69f0b9550762b) \u2014 can still act on the contract; [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-134338-0xAc1166e5.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260804-132805-0x1a44233F.md",

@@ -597,3 +597,4 @@
 {"ts": "2026-08-04T12:11:59.409894Z", "target": "base", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
 {"ts": "2026-08-04T12:42:08.879038Z", "target": "BNB Chain", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
 {"ts": "2026-08-04T13:12:35.251093Z", "target": "0x4200000000000000000000000000000000000006", "hired": ["exploit_check"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
+{"ts": "2026-08-04T13:43:47.891057Z", "target": "none", "hired": ["market_intel"], "paid": 1, "cost_usd": 0.07, "daily_target": 61}

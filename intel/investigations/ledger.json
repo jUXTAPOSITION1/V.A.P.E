@@ -7077,6 +7077,24 @@
     "symbol": "XPULS",
     "times_investigated": 1
   },
+  "56:0xac1166e5dbe8e22ba964ad7b5e97b5c9f7fa4444": {
+    "address": "0xAc1166e5DBE8E22BA964AD7B5e97B5c9F7FA4444",
+    "chain": "56",
+    "first_investigated": "2026-08-04T13:43:38Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260804-134338-0xAc1166e5.md",
+        "score": 45,
+        "ts": "2026-08-04T13:43:38Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-04T13:43:38Z",
+    "last_score": 45,
+    "last_verdict": "REJECT",
+    "symbol": "Jesus",
+    "times_investigated": 1
+  },
   "56:0xaf412164e9af710d3868a088d759478a5a004444": {
     "address": "0xaf412164E9af710d3868A088d759478a5A004444",
     "chain": "56",
