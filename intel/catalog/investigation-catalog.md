@@ -1247,3 +1247,5 @@
 | 2026-08-04 | auto | 0x58Ed924B2bF65be4594BFF2A5aa37C44e0488C01 (UAI) | deep_investigation | REJECT (35/100) | Top 10 non-LP/burn holders control 83% of supply — concentrated, easily manipula | +7d |
 
 | 2026-08-04 | auto | 0xE82b78d3590135a7EF1464Ab601eaE74E5F87777 (UAI) | deep_investigation | REJECT (0/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-04 | auto | 0x477DF393C9FC7bA6d04Cc0a9Cd092B5D84079a26 (jlefk) | deep_investigation | REJECT (12/100) | Low holder count (62) | +7d |

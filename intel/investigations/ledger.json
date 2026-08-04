@@ -5956,6 +5956,25 @@
     "symbol": "GRVT",
     "times_investigated": 1
   },
+  "56:0x477df393c9fc7ba6d04cc0a9cd092b5d84079a26": {
+    "address": "0x477DF393C9FC7bA6d04Cc0a9Cd092B5D84079a26",
+    "chain": "56",
+    "creator_address": "0x1abaae0e443aaf061e19c719af3a3412e753bc84",
+    "first_investigated": "2026-08-04T12:42:01Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260804-124201-0x477DF393.md",
+        "score": 12,
+        "ts": "2026-08-04T12:42:01Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-04T12:42:01Z",
+    "last_score": 12,
+    "last_verdict": "REJECT",
+    "symbol": "jlefk",
+    "times_investigated": 1
+  },
   "56:0x4879d5c0d925a6cf3a76633e6c0f7b15aa4c5628": {
     "address": "0x4879d5c0D925a6Cf3A76633e6C0f7b15aa4c5628",
     "chain": "56",
