@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T11:16:57Z",
+  "generated": "2026-08-04T11:24:53Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 425,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 148,
     "investigations": 719,
-    "news": 61,
+    "news": 62,
     "tools": 16,
     "tools_verified": 16,
     "skills": 24
@@ -10804,6 +10804,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-04-shared-hosting-isolation-shattered-critical-cpanel-bug-grant.md",
+      "title": "Shared Hosting Isolation Shattered: Critical cPanel Bug Grants Tenants Database Root Power",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-04T11:24:53Z",
+      "published_et": "August 4, 2026 \u00b7 7:24 AM EDT",
+      "topic": "Cybersecurity",
+      "dek": "A newly disclosed vulnerability in the ubiquitous web hosting control panel allows low-privilege users to bypass database restrictions and hijack entire multi-tenant servers.",
+      "image": "assets/news-images/shared-hosting-isolation-shattered-critical-cpanel-bug-grant.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-04-shared-hosting-isolation-shattered-critical-cpanel-bug-grant.md"
+    },
+    {
       "file": "news-2026-08-04-msp-supply-chain-threat-escalates-as-cisa-flags-actively-exp.md",
       "title": "MSP Supply Chain Threat Escalates as CISA Flags Actively Exploited N-able RMM Vulnerability",
       "byline": "VAPE Reporter",
@@ -11510,18 +11522,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no source photo available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-thin-sourcing-leaves-usdc-usdt-split-claim-unverifiable.md"
-    },
-    {
-      "file": "news-2026-07-28-sparse-data-limits-insight-into-macro-expert-s-alleged-crypt.md",
-      "title": "Sparse Data Limits Insight Into Macro Expert's Alleged Crypto Rotation Call",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-28 00:00 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "A Benzinga headline flags a possible macro-driven shift from AI assets into Bitcoin and Ethereum, yet supplies no supporting details, expert identity, or market context for verification.",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no source photo available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-sparse-data-limits-insight-into-macro-expert-s-alleged-crypt.md"
     }
   ],
   "tools": [
