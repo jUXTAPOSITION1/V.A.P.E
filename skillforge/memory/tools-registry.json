@@ -1,6 +1,6 @@
 {
   "schema": "vape.skillforge.tools.v1",
-  "updated": "2026-08-04T18:18:29Z",
+  "updated": "2026-08-04T18:49:27Z",
   "note": "Canonical tool registry. toolcheck workflow verifies + version-pins these against real upstream. status: verified|stale|broken|untested.",
   "tiers": {
     "static": [
@@ -120,7 +120,7 @@
         "status": "verified",
         "last_verified": "2026-08-04T18:18:20Z",
         "version": "0.121.20",
-        "latest_release": "0.121.20"
+        "latest_release": "0.122.0"
       },
       {
         "name": "deepteam",
