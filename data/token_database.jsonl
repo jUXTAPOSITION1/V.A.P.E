@@ -161,3 +161,4 @@
 {"ts": "2026-08-04T06:54:40.875211Z", "address": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "chain": "8453", "symbol": "HOME", "name": "HOME", "source": "base", "offering": "dossier_check"}
 {"ts": "2026-08-04T08:25:27.476959Z", "address": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "chain": "8453", "symbol": "VELVET", "name": "VELVET", "source": "base", "offering": "token_safety_check"}
 {"ts": "2026-08-04T08:55:42.543164Z", "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "chain": "8453", "symbol": "USDC", "name": "USDC", "source": "base_trending", "offering": "token_chart"}
+{"ts": "2026-08-04T09:25:48.149119Z", "address": "0xcb585250f852c6c6bf90434ab21a00f02833a4af", "chain": "8453", "symbol": "cbXRP", "name": "Coinbase Wrapped XRP", "source": "base_trending", "offering": "token_safety_check"}
