@@ -5216,6 +5216,25 @@
     "symbol": "ELK",
     "times_investigated": 1
   },
+  "56:0x000008d2175f9aeaddb2430c26f8a6f73c5a0000": {
+    "address": "0x000008D2175F9AEAdDb2430c26f8A6f73c5A0000",
+    "chain": "56",
+    "creator_address": "0x0c5401dff49665829ba0151a62b7ae3321f50b36",
+    "first_investigated": "2026-08-04T21:37:33Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260804-213733-0x000008D2.md",
+        "score": 60,
+        "ts": "2026-08-04T21:37:33Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-04T21:37:33Z",
+    "last_score": 60,
+    "last_verdict": "CAUTION",
+    "symbol": "UP",
+    "times_investigated": 1
+  },
   "56:0x012ea6a89cf28fa1c5cc6e6f7363702aa4ccb9a2": {
     "address": "0x012ea6A89cf28Fa1C5Cc6e6f7363702AA4CCB9a2",
     "chain": "56",

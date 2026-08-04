@@ -1275,3 +1275,5 @@
 | 2026-08-04 | auto | 0x500A02a20B0B0A3F3efCCFc0559543F5743bd1C4 (O) | deep_investigation | CAUTION (60/100) | Owner not renounced (0x470540b07ea33fa96f5bf716b1ae6d6a1639756e) — can still act | +7d |
 
 | 2026-08-04 | auto | 0x965BA6FDe178cAe91b8868E2f82b84095c82e9e3 (BEAT) | deep_investigation | REJECT (0/100) | HONEYPOT detected | +7d |
+
+| 2026-08-04 | auto | 0x000008D2175F9AEAdDb2430c26f8A6f73c5A0000 (UP) | deep_investigation | CAUTION (60/100) | Owner not renounced (0x0958d8ab8bd86ce7451156dff0783152bea21514) — can still act | +7d |
