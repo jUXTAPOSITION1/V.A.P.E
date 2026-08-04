@@ -166,3 +166,4 @@
 {"ts": "2026-08-04T13:12:35.250745Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "exploit_check"}
 {"ts": "2026-08-04T14:44:38.148674Z", "address": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf", "chain": "8453", "symbol": "cbBTC", "name": "CBBTC Coinbase Wrapped BTC", "source": "base_trending", "offering": "dossier_check"}
 {"ts": "2026-08-04T16:00:55.843093Z", "address": "0x940181a94a35a4569e4529a3cdfb74e38fd98631", "chain": "8453", "symbol": "AERO", "name": "Aerodrome", "source": "base_trending", "offering": "dossier_check"}
+{"ts": "2026-08-04T16:46:08.349311Z", "address": "0x1a44233fae8d50f1aeb3a5d58dd426ff4814cb53", "chain": "8453", "symbol": "QUID", "name": "Squid", "source": "base_trending", "offering": "token_chart"}
