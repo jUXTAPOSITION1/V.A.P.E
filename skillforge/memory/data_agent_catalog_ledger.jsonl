@@ -618,3 +618,4 @@
 {"ts": "2026-08-04T19:33:04.919363Z", "target": "none", "hired": ["market_intel"], "paid": 1, "cost_usd": 0.07, "daily_target": 61}
 {"ts": "2026-08-04T19:48:06.819322Z", "target": "0xbf8e8f0e8866a7052f948c16508644347c57aba3", "hired": ["rug_pull_alert"], "paid": 1, "cost_usd": 0.03, "daily_target": 61}
 {"ts": "2026-08-04T20:03:39.244910Z", "target": "none", "hired": ["stablecoins"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
+{"ts": "2026-08-04T20:35:07.204418Z", "target": "okx", "hired": ["treasury"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
