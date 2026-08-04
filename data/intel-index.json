@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-04T16:00:56Z",
+  "generated": "2026-08-04T16:13:19Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 427,
+    "reports": 428,
     "reports_by_type": {
+      "bounty": 113,
       "security": 75,
-      "bounty": 112,
       "base": 85,
       "sentiment": 45,
       "macro": 22,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-142922-0xfc313C32.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-08-04-14.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-08-04T14:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260804_161240.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-04T16:12:40Z",
       "threat": null,
-      "summary": "The real incident feed shows 8 incidents in the last 7 days and 1 incident exceeding $50M in the last 14 days. The sole large loss is the COLDCARD event at $115M from non-random private key generation on Bitcoin. The remaining incidents are all below $10M and cluster around price manipulation attacks (LOOPSDAO, MOKE, LULA on BSC), access ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-04-14.md",
-      "bytes": 7320
+      "summary": "RECENT EXPLOIT: RISEx $0.673M on ['RISE'] (Access Control Exploit) \u00b7 RECENT EXPLOIT: LOOPSDAO $0.696M on ['BSC'] (Price Manipulation Attack) \u00b7 RECENT EXPLOIT: MOKE $0.907M on ['BSC'] (Price Manipulation Attack) \u00b7 Base mover: HOME / WETH 0.3% +45% 24h (liq $86669.5618) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260804_161240.md",
+      "bytes": 18199
     }
   },
   "investigations": [
@@ -10070,6 +10070,17 @@
   ],
   "reports": [
     {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260804_161240.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-04T16:12:40Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: RISEx $0.673M on ['RISE'] (Access Control Exploit) \u00b7 RECENT EXPLOIT: LOOPSDAO $0.696M on ['BSC'] (Price Manipulation Attack) \u00b7 RECENT EXPLOIT: MOKE $0.907M on ['BSC'] (Price Manipulation Attack) \u00b7 Base mover: HOME / WETH 0.3% +45% 24h (liq $86669.5618) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260804_161240.md",
+      "bytes": 18199
+    },
+    {
       "kind": "intel",
       "type": "security",
       "file": "security-2026-08-04-14.md",
@@ -10717,17 +10728,6 @@
       "summary": "The real incident feed shows 7 incidents in the last 7 days, all under $50M, with the largest being a $24.15M private key compromise on AFX Bridge (Arbitrum) and a $9.7M hot wallet compromise on Triple-A (Ethereum, Tron, Arbitrum). Other events include a $8.2M loss on Crypto DAO (BSC), a $7.53M bridge verification bypass on Verus-Ethereum",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-01-19.md",
       "bytes": 7061
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260801_180208.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-01T18:02:08Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: Set Protocol $0.01M on ['Ethereum'] (Malicious SetToken & Manager Contract) \u00b7 Base mover: Claude / USDC +62% 24h (liq $1052095.8427) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260801_180208.md",
-      "bytes": 17175
     }
   ],
   "broadcasts": [
