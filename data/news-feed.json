@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T19:37:44Z",
+  "generated": "2026-08-04T22:11:49Z",
   "count": 60,
   "headlines": [
     {
@@ -43,11 +43,163 @@
       "crypto": true
     },
     {
+      "title": "OpenAI Dumps Apple Employees' Text Messages to Fight Trade Secret Suit",
+      "url": "https://decrypt.co/374928/openai-emails-text-messages-apple-trade-secrets-lawsuit",
+      "source": "Decrypt",
+      "published": "Tue, 04 Aug 2026 21:46:03 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Self Custody Is Dead. Long Live Self Custody",
+      "url": "https://bitcoinmagazine.com/culture/self-custody-is-dead-long-live-self-custody",
+      "source": "Bitcoin Magazine",
+      "published": "Tue, 04 Aug 2026 21:25:26 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Tomorrow sees a massive liquidity trap for Bitcoin as the US Treasury is quietly draining $77 billion from bank reserves",
+      "url": "https://cryptoslate.com/tomorrow-sees-a-massive-liquidity-trap-for-bitcoin-as-the-us-treasury-is-quietly-draining-77-billion-from-bank-reserves/",
+      "source": "CryptoSlate",
+      "published": "Tue, 04 Aug 2026 21:20:58 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Ledger Says Coldcard Exploit Shows Bitcoin Wallet Security Must Adapt to AI",
+      "url": "https://decrypt.co/374914/ledger-coldcard-exploit-bitcoin-wallet-security-ai",
+      "source": "Decrypt",
+      "published": "Tue, 04 Aug 2026 21:16:03 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "SpaceX has bought $329M worth of Tesla Megapacks so far this year",
+      "url": "https://techcrunch.com/2026/08/04/spacex-has-bought-329m-worth-of-tesla-megapacks-so-far-this-year/",
+      "source": "TechCrunch AI",
+      "published": "Tue, 04 Aug 2026 21:07:26 +0000",
+      "topic": "AI",
+      "crypto": true
+    },
+    {
+      "title": "AMD Earnings Beat Estimates and Stock Falls 8%: Was the Bar Too High?",
+      "url": "https://beincrypto.com/amd-q2-2026-earnings-beat-selloff/",
+      "source": "BeInCrypto",
+      "published": "Tue, 04 Aug 2026 20:57:10 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "SEC Commissioner Hester \u2018Crypto Mom\u2019 Peirce Optimistic About Clarity Act",
+      "url": "https://bitcoinmagazine.com/news/hester-peirce-hopeful-about-clarity-act",
+      "source": "Bitcoin Magazine",
+      "published": "Tue, 04 Aug 2026 20:53:22 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Asset Manager 3iQ to Manage Bhutan\u2019s Bitcoin Reserves",
+      "url": "https://bitcoinmagazine.com/news/3iq-to-manage-bhutan-bitcoin-reserves",
+      "source": "Bitcoin Magazine",
+      "published": "Tue, 04 Aug 2026 20:47:38 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Jim Cramer Is Selling His Bitcoin Over Quantum Threat\u2014Crypto Twitter Is Thrilled",
+      "url": "https://decrypt.co/374923/jim-cramer-selling-bitcoin-quantum-computing-threat",
+      "source": "Decrypt",
+      "published": "Tue, 04 Aug 2026 20:45:18 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Corporation\u2019s Approach to the BIP-110 Soft Fork",
+      "url": "https://bitcoinmagazine.com/bitcoin-for-corporations/corp-bip-110-soft-fork",
+      "source": "Bitcoin Magazine",
+      "published": "Tue, 04 Aug 2026 20:41:18 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Police Have Arrested 37 Americans Over AI Data Center Protests This Year",
+      "url": "https://decrypt.co/374921/ai-data-center-protest-arrests",
+      "source": "Decrypt",
+      "published": "Tue, 04 Aug 2026 20:30:52 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "SpaceX tops Wall Street revenue forecast, posts $540 million loss on bitcoin holdings",
+      "url": "https://www.coindesk.com/business/2026/08/04/spacex-tops-wall-street-revenue-forecast-posts-usd540-million-decline-on-bitcoin-holding-value",
+      "source": "CoinDesk",
+      "published": "Tue, 04 Aug 2026 20:26:21 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "SpaceX Crypto Holdings Drop $539 Million as Debut Earnings Beat Wall Street",
+      "url": "https://beincrypto.com/spacex-wall-street-blowout-first-earnings/",
+      "source": "BeInCrypto",
+      "published": "Tue, 04 Aug 2026 20:12:33 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Open-weight AI models are catching up to the frontier. The safety gap remains.",
+      "url": "https://techcrunch.com/2026/08/04/open-weight-ai-models-are-catching-up-to-the-frontier-the-safety-gap-remains/",
+      "source": "TechCrunch AI",
+      "published": "Tue, 04 Aug 2026 20:05:26 +0000",
+      "topic": "AI",
+      "crypto": true
+    },
+    {
+      "title": "Here\u2019s what happened in crypto today",
+      "url": "https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Tue, 04 Aug 2026 19:59:26 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "US, UK reaffirm support for stablecoins, tokenization in joint financial regulation talks",
+      "url": "https://cointelegraph.com/news/us-uk-deepen-crypto-regulatory-cooperation-genius-act-stablecoins?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Tue, 04 Aug 2026 19:58:48 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Anthropic signs $10B deal with AI cloud startup Volta",
+      "url": "https://techcrunch.com/2026/08/04/anthropic-signs-10-billion-deal-with-ai-cloud-startup-volta/",
+      "source": "TechCrunch AI",
+      "published": "Tue, 04 Aug 2026 19:48:40 +0000",
+      "topic": "AI",
+      "crypto": true
+    },
+    {
+      "title": "SpaceX Joins a Club It Was Missing From In New Nvidia Deal: How Will Stocks React?",
+      "url": "https://beincrypto.com/nvidia-spacex-ai-satellites-stocks-react/",
+      "source": "BeInCrypto",
+      "published": "Tue, 04 Aug 2026 19:40:56 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
       "title": "Why AI is now a more immediate threat to Bitcoin than quantum computers",
       "url": "https://cryptoslate.com/why-ai-is-now-a-bigger-threat-to-bitcoin-than-quantum-computers-in-the-short-term/",
       "source": "CryptoSlate",
       "published": "Tue, 04 Aug 2026 19:35:58 +0000",
       "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Meet Wrinkles, an app that uncovers the hidden stories of the places around you",
+      "url": "https://techcrunch.com/2026/08/04/meet-wrinkles-an-ai-app-that-uncovers-the-hidden-stories-of-the-places-around-you/",
+      "source": "TechCrunch AI",
+      "published": "Tue, 04 Aug 2026 19:34:34 +0000",
+      "topic": "AI",
       "crypto": true
     },
     {
@@ -131,18 +283,26 @@
       "crypto": true
     },
     {
-      "title": "Poolin owes wallet users $163.7M, and its $52M Texas sale can still unravel next week",
-      "url": "https://cryptoslate.com/poolin-owes-wallet-users-163-7m-and-its-52m-texas-sale-can-still-unravel-next-week/",
-      "source": "CryptoSlate",
-      "published": "Tue, 04 Aug 2026 17:30:48 +0000",
+      "title": "Phishing service spoofs RingCentral to steal Microsoft 365 accounts",
+      "url": "https://www.bleepingcomputer.com/news/security/phishing-service-spoofs-ringcentral-to-steal-microsoft-365-accounts/",
+      "source": "BleepingComputer",
+      "published": "Tue, 04 Aug 2026 17:45:36 -0400",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "BlackRock\u2019s spot Ethereum ETF to undergo 1-for-3 reverse share split in October",
+      "url": "https://www.theblock.co/post/410663/blackrocks-spot-ethereum-etf-to-undergo-1-for-3-reverse-share-split-in-october?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Tue, 04 Aug 2026 17:34:47 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
     {
-      "title": "Alibaba Just Gave Away Its Best AI Model For Free, Almost Matching Claude and ChatGPT",
-      "url": "https://decrypt.co/374906/alibaba-best-ai-model-qwen-free-claude-chatgpt",
-      "source": "Decrypt",
-      "published": "Tue, 04 Aug 2026 17:16:49 +0000",
+      "title": "Poolin owes wallet users $163.7M, and its $52M Texas sale can still unravel next week",
+      "url": "https://cryptoslate.com/poolin-owes-wallet-users-163-7m-and-its-52m-texas-sale-can-still-unravel-next-week/",
+      "source": "CryptoSlate",
+      "published": "Tue, 04 Aug 2026 17:30:48 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -203,14 +363,6 @@
       "crypto": true
     },
     {
-      "title": "Hashdex to Shut Down Bitcoin ETF After Struggling to Gain Assets",
-      "url": "https://decrypt.co/374903/hashdex-shut-down-bitcoin-etf",
-      "source": "Decrypt",
-      "published": "Tue, 04 Aug 2026 16:43:46 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Bitcoin coils at $64K as Hormuz reopening timeline sends S&P 500 to $70T record",
       "url": "https://cointelegraph.com/markets/bitcoin-coils-as-hormuz-reopening-time-line-sends-sp-500-to-new-record-high?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
       "source": "Cointelegraph",
@@ -267,6 +419,14 @@
       "crypto": true
     },
     {
+      "title": "Ethereum researchers propose burning validator rewards to cap staking at 50%",
+      "url": "https://www.theblock.co/post/410643/ethereum-researchers-propose-burning-validator-rewards-cap-staking-50?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Tue, 04 Aug 2026 15:49:58 -0400",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
       "title": "Wells Fargo joins JPMorgan and Citi in the race to tokenize Wall Street\u2019s settlement rails",
       "url": "https://www.coindesk.com/business/2026/08/04/wells-fargo-to-offer-tokenized-deposits-for-24-7-corporate-payments",
       "source": "CoinDesk",
@@ -275,43 +435,11 @@
       "crypto": true
     },
     {
-      "title": "A New Ethereum Proposal Could Halve Staking Rewards: Who Feels It First?",
-      "url": "https://beincrypto.com/justin-drake-ethereum-staking-rewards-burn/",
-      "source": "BeInCrypto",
-      "published": "Tue, 04 Aug 2026 15:44:47 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Texas halts new data centers as governor calls for audits",
-      "url": "https://techcrunch.com/2026/08/04/texas-halts-new-data-centers-as-governor-calls-for-audits/",
-      "source": "TechCrunch AI",
-      "published": "Tue, 04 Aug 2026 15:42:35 +0000",
-      "topic": "AI",
-      "crypto": true
-    },
-    {
       "title": "Cloudflare kicks off stablecoin wallet rollout for AI agents to pay for APIs and online content",
       "url": "https://www.theblock.co/post/410629/cloudflare-kicks-off-stablecoin-wallet-rollout-ai-agents-pay-apis-online-content?utm_source=rss&utm_medium=rss",
       "source": "The Block",
       "published": "Tue, 04 Aug 2026 15:33:11 -0400",
       "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Nearly $32 Million in \u2018Dormant\u2019 Bitcoin Moves After Coldcard Hack Reaches Estimated $130M",
-      "url": "https://bitcoinmagazine.com/news/32-million-in-dormant-bitcoin-moves",
-      "source": "Bitcoin Magazine",
-      "published": "Tue, 04 Aug 2026 15:22:53 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Elon Musk spends half his time talking robots and AI on Tesla earnings calls",
-      "url": "https://techcrunch.com/2026/08/04/elon-musk-spends-half-his-time-talking-robots-and-ai-on-tesla-earnings-calls/",
-      "source": "TechCrunch AI",
-      "published": "Tue, 04 Aug 2026 15:20:06 +0000",
-      "topic": "AI",
       "crypto": true
     },
     {
@@ -351,134 +479,6 @@
       "url": "https://www.coindesk.com/markets/2026/08/04/bitcoin-s-usd63-000-zone-emerges-as-key-battleground-for-buyers-glassnode",
       "source": "CoinDesk",
       "published": "Tue, 04 Aug 2026 14:49:33 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Bitcoin\u2019s Most Active Day Since 2024. What Happened On-Chain During the Coldcard Panic",
-      "url": "https://beincrypto.com/bitcoin-on-chain-coldcard-panic/",
-      "source": "BeInCrypto",
-      "published": "Tue, 04 Aug 2026 14:45:00 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "At least 15 attackers exploited Coldcard vulnerability: Galaxy",
-      "url": "https://cointelegraph.com/news/15-attackers-exploited-coldcard-vulnerability-galaxy?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Tue, 04 Aug 2026 14:38:49 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Polymarket targets $20 billion valuation as competition heats up in prediction market sector",
-      "url": "https://www.coindesk.com/markets/2026/08/04/polymarket-targets-usd20-billion-valuation-as-competition-heats-up-in-prediction-markets",
-      "source": "CoinDesk",
-      "published": "Tue, 04 Aug 2026 14:38:23 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Bank of Korea Just Bought Gold After 13 Years: Is a New Rally Coming?",
-      "url": "https://beincrypto.com/korea-gold-purchases-resume-13-years/",
-      "source": "BeInCrypto",
-      "published": "Tue, 04 Aug 2026 14:35:57 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "CISO Conversations: Russ Kirby \u2013 Passion Is the Antidote to Burnout",
-      "url": "https://www.securityweek.com/ciso-conversation-russ-kirby-passion-is-the-antidote-to-burnout/",
-      "source": "SecurityWeek",
-      "published": "Tue, 04 Aug 2026 14:30:00 +0000",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "Apple says more ex-employees may have taken confidential data to OpenAI",
-      "url": "https://techcrunch.com/2026/08/04/apple-says-more-ex-employees-may-have-taken-confidential-data-to-openai/",
-      "source": "TechCrunch AI",
-      "published": "Tue, 04 Aug 2026 14:03:01 +0000",
-      "topic": "AI",
-      "crypto": true
-    },
-    {
-      "title": "Hyperscale Trims Bitcoin Holdings, Still Sits on $61M Stack",
-      "url": "https://bitcoinmagazine.com/news/hyperscale-sells-some-bitcoin",
-      "source": "Bitcoin Magazine",
-      "published": "Tue, 04 Aug 2026 13:58:28 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Weaponized Email AI Assistants Could Help Attackers Hijack Accounts",
-      "url": "https://www.securityweek.com/weaponized-email-ai-assistants-could-help-attackers-hijack-accounts/",
-      "source": "SecurityWeek",
-      "published": "Tue, 04 Aug 2026 13:54:13 +0000",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "CME freezes Nasdaq\u2019s major Bitcoin launch, warning a legal loophole could upend the entire commodities market",
-      "url": "https://cryptoslate.com/cme-challenge-keeps-nasdaq-bitcoin-options-frozen-as-sec-reopens-the-jurisdiction-fight/",
-      "source": "CryptoSlate",
-      "published": "Tue, 04 Aug 2026 13:45:27 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Here\u2019s what happened in crypto today",
-      "url": "https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Tue, 04 Aug 2026 13:45:02 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Zenity Raises $125 Million in Series C Funding",
-      "url": "https://www.securityweek.com/zenity-raises-125-million-in-series-c-funding/",
-      "source": "SecurityWeek",
-      "published": "Tue, 04 Aug 2026 13:40:42 +0000",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "Apple's AI Slop Problem Left a $200K macOS Exploit Unreported",
-      "url": "https://decrypt.co/374900/apples-ai-slop-problem-left-a-200k-macos-exploit-unreported",
-      "source": "Decrypt",
-      "published": "Tue, 04 Aug 2026 13:36:06 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Sorry everyone, Bitcoin is headed down to $43,500: Michael Terpin",
-      "url": "https://cointelegraph.com/magazine/bitcoin-to-go-down-into-the-40s-before-next-bull-run-michael-terpin?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Tue, 04 Aug 2026 13:30:00 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Senators seek SEC probe of President Trump\u2019s memecoin as crypto bill enters into a pivotal week",
-      "url": "https://www.theblock.co/post/410624/senators-seek-sec-probe-president-trump-memecoin-crypto-bill-enters-pivotal-week?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Tue, 04 Aug 2026 13:11:17 -0400",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Is the future of data centers portable? Runware builds a pod to find out",
-      "url": "https://techcrunch.com/2026/08/04/is-the-future-of-data-centers-portable-runware-builds-a-pod-to-find-out/",
-      "source": "TechCrunch AI",
-      "published": "Tue, 04 Aug 2026 13:00:00 +0000",
-      "topic": "AI",
-      "crypto": true
-    },
-    {
-      "title": "Robinhood shrugs off crypto slump as Coinbase activity remains tied to trading cycle",
-      "url": "https://www.theblock.co/post/410478/robinhood-shrugs-off-crypto-slump-coinbase-activity-remains-tied-trading-cycle?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Tue, 04 Aug 2026 12:56:41 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     }
