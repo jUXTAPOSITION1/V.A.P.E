@@ -616,3 +616,4 @@
 {"ts": "2026-08-04T19:02:45.736805Z", "target": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
 {"ts": "2026-08-04T19:18:00.283995Z", "target": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "hired": ["rug_pull_alert"], "paid": 1, "cost_usd": 0.03, "daily_target": 61}
 {"ts": "2026-08-04T19:33:04.919363Z", "target": "none", "hired": ["market_intel"], "paid": 1, "cost_usd": 0.07, "daily_target": 61}
+{"ts": "2026-08-04T19:48:06.819322Z", "target": "0xbf8e8f0e8866a7052f948c16508644347c57aba3", "hired": ["rug_pull_alert"], "paid": 1, "cost_usd": 0.03, "daily_target": 61}

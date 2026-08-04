@@ -1265,3 +1265,5 @@
 | 2026-08-04 | auto | 0x2285BB5307BA5A229303959f677Cf5e56C8f8276 (LGNS) | deep_investigation | REJECT (27/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-04 | auto | 0xf1Bf52E00bF5601EAA7d5F4b490273721E6cBD11 (UNI) | deep_investigation | REJECT (24/100) | Low holder count (124) | +7d |
+
+| 2026-08-04 | auto | 0x9F178347e7F2975bC4C942d292AE69295dAd3b7d (UNI) | deep_investigation | REJECT (0/100) | Same deployer has a prior CAUTION/REJECT verdict on record: UNI (0xf1Bf52E00bF56 | +7d |
