@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T04:50:53Z",
+  "generated": "2026-08-04T05:06:22Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 419,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 147,
-    "investigations": 714,
+    "investigations": 715,
     "news": 59,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260804-043544-0xEDEe1555.md",
-      "title": "Investigation \u2014 CATE",
-      "symbol": "CATE",
-      "name": "Catecoin",
-      "date": "2026-08-04T04:35:44Z",
-      "target": "0xEDEe1555B1E1Ebd9D758BA8091A7D3Dc2A70a89C",
+      "file": "investigation-20260804-050622-0x8F294a99.md",
+      "title": "Investigation \u2014 RELICS",
+      "symbol": "RELICS",
+      "name": "Relics",
+      "date": "2026-08-04T05:06:22Z",
+      "target": "0x8F294a99a0609822C233b24867F331c292cE2DA9",
       "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "55",
-      "summary": "Risk factors: [-10] Low liquidity $17,750; [-10] Violent 24h move +2049% (volatility/manipulation); [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 99% of liq",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-043544-0xEDEe1555.md"
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-15] Transfers can be paused by owner; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $39,702; [-10] Violent 24h move +1703% (volatility/manipulation); [-15] Pair only 0.1 days old (extreme fresh-launch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-050622-0x8F294a99.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260804-050622-0x8F294a99.md",
+      "title": "Investigation \u2014 RELICS",
+      "symbol": "RELICS",
+      "name": "Relics",
+      "date": "2026-08-04T05:06:22Z",
+      "target": "0x8F294a99a0609822C233b24867F331c292cE2DA9",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-15] Transfers can be paused by owner; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $39,702; [-10] Violent 24h move +1703% (volatility/manipulation); [-15] Pair only 0.1 days old (extreme fresh-launch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-050622-0x8F294a99.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260804-043544-0xEDEe1555.md",

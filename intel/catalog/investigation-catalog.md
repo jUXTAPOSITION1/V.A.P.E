@@ -1229,3 +1229,5 @@
 | 2026-08-04 | auto | 0xD0B74d81b5507edF2e93026701aA7fB2D9f82B07 (ANON) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
 
 | 2026-08-04 | auto | 0xEDEe1555B1E1Ebd9D758BA8091A7D3Dc2A70a89C (CATE) | deep_investigation | CAUTION (55/100) | Low liquidity $17,750 | +7d |
+
+| 2026-08-04 | auto | 0x8F294a99a0609822C233b24867F331c292cE2DA9 (RELICS) | deep_investigation | REJECT (0/100) | Owner can change balances (rug surface) | +7d |
