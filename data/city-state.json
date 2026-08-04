@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-04T09:13:20Z",
+  "generated_at": "2026-08-04T14:43:21Z",
   "district_stats": {
     "overall_threat_level": "HIGH",
     "lanes_passing": 7,
@@ -15,16 +15,16 @@
       "tier": 3,
       "stat_primary": {
         "label": "tracked",
-        "value": 719
+        "value": 729
       },
       "stat_secondary": [
         {
           "label": "reject",
-          "value": 388
+          "value": 397
         },
         {
           "label": "caution",
-          "value": 200
+          "value": 201
         },
         {
           "label": "proceed",
@@ -94,7 +94,7 @@
       "tier": 2,
       "stat_primary": {
         "label": "incidents (56d)",
-        "value": 54
+        "value": 56
       },
       "stat_secondary": [
         {
@@ -159,12 +159,12 @@
       "tier": 3,
       "stat_primary": {
         "label": "findings sealed",
-        "value": 1521
+        "value": 1542
       },
       "stat_secondary": [
         {
           "label": "unsealed lines",
-          "value": 2
+          "value": 6
         }
       ],
       "link": "index.html#security-dashboard",
@@ -207,7 +207,7 @@
       "tier": 4,
       "stat_primary": {
         "label": "data calls logged",
-        "value": 1712
+        "value": 1741
       },
       "stat_secondary": [],
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/memory",
@@ -237,7 +237,7 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-04T08:44:30Z"
+          "value": "2026-08-04T11:10:22Z"
         },
         {
           "label": "open alerts",
@@ -248,7 +248,7 @@
           "value": 0
         }
       ],
-      "last_run_at": "2026-08-04T08:44:30Z",
+      "last_run_at": "2026-08-04T11:10:22Z",
       "source_workflow": "codeql.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/codeql.yml"
     },
@@ -297,10 +297,10 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-04T08:44:30Z"
+          "value": "2026-08-04T11:10:22Z"
         }
       ],
-      "last_run_at": "2026-08-04T08:44:30Z",
+      "last_run_at": "2026-08-04T11:10:22Z",
       "source_workflow": "vape-reviewer.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/vape-reviewer.yml"
     },
@@ -370,7 +370,7 @@
       ],
       "stat_primary": {
         "label": "last run",
-        "value": "24 finding(s), 30d"
+        "value": "23 finding(s), 30d"
       },
       "stat_secondary": [
         {
@@ -379,7 +379,7 @@
         },
         {
           "label": "critical/high findings",
-          "value": 5
+          "value": 4
         }
       ],
       "last_run_at": "2026-08-03T15:22:52Z",
@@ -400,7 +400,7 @@
       ],
       "stat_primary": {
         "label": "last run",
-        "value": "24 finding(s), 30d"
+        "value": "23 finding(s), 30d"
       },
       "stat_secondary": [
         {
@@ -409,7 +409,7 @@
         },
         {
           "label": "critical/high findings",
-          "value": 5
+          "value": 4
         }
       ],
       "last_run_at": "2026-08-03T15:39:39Z",
@@ -435,14 +435,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-04T08:27:10Z"
+          "value": "2026-08-04T13:55:18Z"
         },
         {
           "label": "ledger chain intact",
           "value": "yes"
         }
       ],
-      "last_run_at": "2026-08-04T08:27:10Z",
+      "last_run_at": "2026-08-04T13:55:18Z",
       "source_workflow": "findings-seal.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/findings-seal.yml"
     },
@@ -495,14 +495,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-04T08:38:27Z"
+          "value": "2026-08-04T14:14:58Z"
         },
         {
           "label": "attack-pattern coverage",
           "value": "23%"
         }
       ],
-      "last_run_at": "2026-08-04T08:38:27Z",
+      "last_run_at": "2026-08-04T14:14:58Z",
       "source_workflow": "intel-sweeps.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/intel-sweeps.yml"
     }
@@ -583,6 +583,94 @@
   ],
   "recent_events": [
     {
+      "id": "investigation:0xfc313C329dAf55b488d0A0EeeE5727e3cbC4D062",
+      "type": "investigation",
+      "timestamp": "2026-08-04T14:29:22Z",
+      "label": "lefkcoin",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "news:The Developer is the Vector: How a Compromised npm Legend Turned Into a Self-Spreading Claude Code Worm",
+      "type": "news",
+      "timestamp": "2026-08-04T14:12:13Z",
+      "label": "The Developer is the Vector: How a Compromised npm Legend Turned Into a Self-Spreading Claude Code Worm"
+    },
+    {
+      "id": "news:Soft-Spoken Exploits: How 'Vibe Hacking' Bypasses AI Guardrails to Mint Junior Threat Actors",
+      "type": "news",
+      "timestamp": "2026-08-04T13:57:01Z",
+      "label": "Soft-Spoken Exploits: How 'Vibe Hacking' Bypasses AI Guardrails to Mint Junior Threat Actors"
+    },
+    {
+      "id": "investigation:0xAc1166e5DBE8E22BA964AD7B5e97B5c9F7FA4444",
+      "type": "investigation",
+      "timestamp": "2026-08-04T13:43:38Z",
+      "label": "Jesus bless you.",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x1a44233FAe8D50F1AeB3a5d58dd426ff4814Cb53",
+      "type": "investigation",
+      "timestamp": "2026-08-04T13:28:05Z",
+      "label": "Squid",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x16E3dcDD5d0e004A3AB62b5Ef5B34618cA9156c1",
+      "type": "investigation",
+      "timestamp": "2026-08-04T13:12:28Z",
+      "label": "Relics Strategy",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x0C69199C1562233640e0Db5Ce2c399A88eB507C7",
+      "type": "investigation",
+      "timestamp": "2026-08-04T12:57:15Z",
+      "label": "Cysic Token",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x477DF393C9FC7bA6d04Cc0a9Cd092B5D84079a26",
+      "type": "investigation",
+      "timestamp": "2026-08-04T12:42:01Z",
+      "label": "john lefk",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xE82b78d3590135a7EF1464Ab601eaE74E5F87777",
+      "type": "investigation",
+      "timestamp": "2026-08-04T12:26:59Z",
+      "label": "UNEMPLOYED AI",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x58Ed924B2bF65be4594BFF2A5aa37C44e0488C01",
+      "type": "investigation",
+      "timestamp": "2026-08-04T12:11:50Z",
+      "label": "UnifAI",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xEAe6F7e171e0A681004CcEd3c74dC351cd8F6b07",
+      "type": "investigation",
+      "timestamp": "2026-08-04T11:56:38Z",
+      "label": "OpenAI",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xf5Cf97fE106c4C43b8823dc0Df201AC737834444",
+      "type": "investigation",
+      "timestamp": "2026-08-04T11:41:29Z",
+      "label": "Jobless",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "news:Shared Hosting Isolation Shattered: Critical cPanel Bug Grants Tenants Database Root Power",
+      "type": "news",
+      "timestamp": "2026-08-04T11:24:53Z",
+      "label": "Shared Hosting Isolation Shattered: Critical cPanel Bug Grants Tenants Database Root Power"
+    },
+    {
       "id": "news:MSP Supply Chain Threat Escalates as CISA Flags Actively Exploited N-able RMM Vulnerability",
       "type": "news",
       "timestamp": "2026-08-04T08:37:59Z",
@@ -656,91 +744,6 @@
       "timestamp": "2026-08-04T02:47:26Z",
       "label": "ETHGas",
       "verdict": "REJECT"
-    },
-    {
-      "id": "news:Dating Apps Turned Financial Traps: Hong Kong Romance Scams Net $9M in a Single Week",
-      "type": "news",
-      "timestamp": "2026-08-04T02:30:35Z",
-      "label": "Dating Apps Turned Financial Traps: Hong Kong Romance Scams Net $9M in a Single Week"
-    },
-    {
-      "id": "investigation:0x69426A34E2D0AC95536B0a0B02050b18b4074444",
-      "type": "investigation",
-      "timestamp": "2026-08-04T02:02:37Z",
-      "label": "SAFU",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x99D0652ed57b49373B9BB720434BAe76C3649b07",
-      "type": "investigation",
-      "timestamp": "2026-08-04T00:02:41Z",
-      "label": "Velvet",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xf81c54264E8dE4f4cFD37106f33f95E51AdF4444",
-      "type": "investigation",
-      "timestamp": "2026-08-03T23:16:38Z",
-      "label": "SAFU",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x80dc112e8620923453845607C6256677Ba3a4444",
-      "type": "investigation",
-      "timestamp": "2026-08-03T22:46:05Z",
-      "label": "SAFU",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x1F7B4051b39905bA61b7c8E946C32E9123b8B4CB",
-      "type": "investigation",
-      "timestamp": "2026-08-03T22:29:59Z",
-      "label": "Fake World Ass",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "news:npm Supply Chain Breach Slips Cross-Platform RAT into Alibaba Developer Workflows",
-      "type": "news",
-      "timestamp": "2026-08-03T19:38:13Z",
-      "label": "npm Supply Chain Breach Slips Cross-Platform RAT into Alibaba Developer Workflows"
-    },
-    {
-      "id": "investigation:0x82fe329f4A9c4BcEDc8a33F004337d51921d55E4",
-      "type": "investigation",
-      "timestamp": "2026-08-03T18:44:49Z",
-      "label": "Peapods Interest Bearing USDC - 54",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x5D5D0a239A1eE830C5cb0E9C3E521E11Cf3e641F",
-      "type": "investigation",
-      "timestamp": "2026-08-03T18:29:24Z",
-      "label": "DogPunk",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "bounty:defillama-hack:LOOPSDAO-1785628800",
-      "type": "bounty",
-      "timestamp": "2026-08-03T18:20:50.179858Z",
-      "label": "LOOPSDAO (exploit $696,000)"
-    },
-    {
-      "id": "bounty:defillama-hack:MOKE-1785628800",
-      "type": "bounty",
-      "timestamp": "2026-08-03T18:20:50.179858Z",
-      "label": "MOKE (exploit $907,000)"
-    },
-    {
-      "id": "bounty:defillama-hack:COLDCARD-1785456000",
-      "type": "bounty",
-      "timestamp": "2026-08-03T18:20:50.179858Z",
-      "label": "COLDCARD (exploit $115,000,000)"
-    },
-    {
-      "id": "bounty:defillama-hack:THORChain DEX-1778803200",
-      "type": "bounty",
-      "timestamp": "2026-08-03T18:20:50.179858Z",
-      "label": "THORChain DEX (exploit $10,000,000)"
     }
   ]
 }
