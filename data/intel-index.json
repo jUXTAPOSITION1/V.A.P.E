@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T22:14:33Z",
+  "generated": "2026-08-04T22:25:02Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 435,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 150,
     "investigations": 739,
-    "news": 66,
+    "news": 67,
     "tools": 16,
     "tools_verified": 16,
     "skills": 25
@@ -11084,6 +11084,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-04-bitcoin-magazine-s-self-custody-headline-lands-with-zero-ext.md",
+      "title": "Bitcoin Magazine's Self-Custody Headline Lands With Zero Extractable Arguments",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-04T22:13:17Z",
+      "published_et": "August 4, 2026 \u00b7 6:13 PM EDT",
+      "topic": "Crypto Markets",
+      "dek": "The August 2026 post's page scrape returned only navigation menus and links, offering no primary claims or data to evaluate the custody debate.",
+      "image": "assets/news-images/bitcoin-magazine-s-self-custody-headline-lands-with-zero-ext.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-04-bitcoin-magazine-s-self-custody-headline-lands-with-zero-ext.md"
+    },
+    {
       "file": "news-2026-08-04-greatness-phaas-quietly-rolls-out-device-code-phishing-to-hi.md",
       "title": "Greatness PhaaS Quietly Rolls Out Device Code Phishing to Hijack OAuth Tokens",
       "byline": "VAPE Reporter",
@@ -11790,18 +11802,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image or source photo available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-coinbase-flags-100m-ai-payments-on-base-but-provides-no-supp.md"
-    },
-    {
-      "file": "news-2026-07-28-hong-kong-s-tokenization-drive-exposes-banks-to-quantum-risk.md",
-      "title": "Hong Kong's Tokenization Drive Exposes Banks to Quantum Risks With Sector at Just 2.3/10 Readiness",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-28 02:34 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "The HKMA is forcing banks to confront quantum decryption threats to current cryptography exactly as tokenized deposits and bonds move onto ledgers, with half the sector lacking any post-quantum plans.",
-      "image": "assets/news-images/hong-kong-s-tokenization-drive-exposes-banks-to-quantum-risk.jpg",
-      "image_source": "Source photo \u2014 VAPE Wire branded",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-hong-kong-s-tokenization-drive-exposes-banks-to-quantum-risk.md"
     }
   ],
   "tools": [
