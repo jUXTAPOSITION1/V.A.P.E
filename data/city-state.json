@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-04T14:43:21Z",
+  "generated_at": "2026-08-04T20:02:13Z",
   "district_stats": {
     "overall_threat_level": "HIGH",
-    "lanes_passing": 7,
+    "lanes_passing": 8,
     "lanes_total": 10,
     "buildings_total": 19
   },
@@ -15,12 +15,12 @@
       "tier": 3,
       "stat_primary": {
         "label": "tracked",
-        "value": 729
+        "value": 733
       },
       "stat_secondary": [
         {
           "label": "reject",
-          "value": 397
+          "value": 401
         },
         {
           "label": "caution",
@@ -47,7 +47,7 @@
       "tier": 3,
       "stat_primary": {
         "label": "tracked",
-        "value": 995
+        "value": 997
       },
       "stat_secondary": [
         {
@@ -159,12 +159,12 @@
       "tier": 3,
       "stat_primary": {
         "label": "findings sealed",
-        "value": 1542
+        "value": 1554
       },
       "stat_secondary": [
         {
           "label": "unsealed lines",
-          "value": 6
+          "value": 2
         }
       ],
       "link": "index.html#security-dashboard",
@@ -183,7 +183,7 @@
       "tier": 1,
       "stat_primary": {
         "label": "skills codified",
-        "value": 24
+        "value": 25
       },
       "stat_secondary": [
         {
@@ -207,7 +207,7 @@
       "tier": 4,
       "stat_primary": {
         "label": "data calls logged",
-        "value": 1741
+        "value": 1785
       },
       "stat_secondary": [],
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/memory",
@@ -222,7 +222,7 @@
       "id": "lane-codeql",
       "kind": "checkpoint",
       "title": "Static Analysis (CodeQL)",
-      "status": "alert",
+      "status": "ok",
       "tier": 1,
       "gridX": 8,
       "gridY": 4,
@@ -237,7 +237,7 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-04T11:10:22Z"
+          "value": "2026-08-04T18:28:44Z"
         },
         {
           "label": "open alerts",
@@ -248,7 +248,7 @@
           "value": 0
         }
       ],
-      "last_run_at": "2026-08-04T11:10:22Z",
+      "last_run_at": "2026-08-04T18:28:44Z",
       "source_workflow": "codeql.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/codeql.yml"
     },
@@ -282,7 +282,7 @@
       "id": "lane-vape-reviewer",
       "kind": "checkpoint",
       "title": "Code Review (VAPE Reviewer)",
-      "status": "alert",
+      "status": "ok",
       "tier": 1,
       "gridX": 14,
       "gridY": 4,
@@ -292,15 +292,15 @@
       ],
       "stat_primary": {
         "label": "last run",
-        "value": "action_required"
+        "value": "success"
       },
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-04T11:10:22Z"
+          "value": "2026-08-04T18:28:45Z"
         }
       ],
-      "last_run_at": "2026-08-04T11:10:22Z",
+      "last_run_at": "2026-08-04T18:28:45Z",
       "source_workflow": "vape-reviewer.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/vape-reviewer.yml"
     },
@@ -323,10 +323,10 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-03T10:03:52Z"
+          "value": "2026-08-04T18:28:45Z"
         }
       ],
-      "last_run_at": "2026-08-03T10:03:52Z",
+      "last_run_at": "2026-08-04T18:28:45Z",
       "source_workflow": "dependency-audit.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/dependency-audit.yml"
     },
@@ -375,14 +375,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-03T15:22:52Z"
+          "value": "2026-08-04T14:57:05Z"
         },
         {
           "label": "critical/high findings",
           "value": 4
         }
       ],
-      "last_run_at": "2026-08-03T15:22:52Z",
+      "last_run_at": "2026-08-04T14:57:05Z",
       "source_workflow": "redteam.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/redteam.yml"
     },
@@ -405,14 +405,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-03T15:39:39Z"
+          "value": "2026-08-04T15:21:30Z"
         },
         {
           "label": "critical/high findings",
           "value": 4
         }
       ],
-      "last_run_at": "2026-08-03T15:39:39Z",
+      "last_run_at": "2026-08-04T15:21:30Z",
       "source_workflow": "redteam-deep.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/redteam-deep.yml"
     },
@@ -435,14 +435,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-04T13:55:18Z"
+          "value": "2026-08-04T19:22:11Z"
         },
         {
           "label": "ledger chain intact",
           "value": "yes"
         }
       ],
-      "last_run_at": "2026-08-04T13:55:18Z",
+      "last_run_at": "2026-08-04T19:22:11Z",
       "source_workflow": "findings-seal.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/findings-seal.yml"
     },
@@ -480,7 +480,7 @@
       "id": "lane-intel-sweeps",
       "kind": "checkpoint",
       "title": "On-Chain Attack Intelligence",
-      "status": "ok",
+      "status": "alert",
       "tier": 1,
       "gridX": 5,
       "gridY": 6,
@@ -495,14 +495,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-04T14:14:58Z"
+          "value": "2026-08-04T19:38:37Z"
         },
         {
           "label": "attack-pattern coverage",
           "value": "23%"
         }
       ],
-      "last_run_at": "2026-08-04T14:14:58Z",
+      "last_run_at": "2026-08-04T19:38:37Z",
       "source_workflow": "intel-sweeps.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/intel-sweeps.yml"
     }
@@ -582,6 +582,58 @@
     ]
   ],
   "recent_events": [
+    {
+      "id": "investigation:0x9F178347e7F2975bC4C942d292AE69295dAd3b7d",
+      "type": "investigation",
+      "timestamp": "2026-08-04T19:48:01Z",
+      "label": "UNICORN",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "news:Greatness PhaaS Quietly Rolls Out Device Code Phishing to Hijack OAuth Tokens",
+      "type": "news",
+      "timestamp": "2026-08-04T19:39:21Z",
+      "label": "Greatness PhaaS Quietly Rolls Out Device Code Phishing to Hijack OAuth Tokens"
+    },
+    {
+      "id": "investigation:0xf1Bf52E00bF5601EAA7d5F4b490273721E6cBD11",
+      "type": "investigation",
+      "timestamp": "2026-08-04T19:17:55Z",
+      "label": "UNICORN",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x2285BB5307BA5A229303959f677Cf5e56C8f8276",
+      "type": "investigation",
+      "timestamp": "2026-08-04T18:47:17Z",
+      "label": "Lord GENADES",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xa8D6737e035D4b5986a650198CE1CF5AdB06F4BE",
+      "type": "investigation",
+      "timestamp": "2026-08-04T17:01:30Z",
+      "label": "BNBFREN",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "news:Signed, Sealed, Delivered: How Attackers Weaponize Legitimate RMM Tools via Fake Software Updates",
+      "type": "news",
+      "timestamp": "2026-08-04T16:53:38Z",
+      "label": "Signed, Sealed, Delivered: How Attackers Weaponize Legitimate RMM Tools via Fake Software Updates"
+    },
+    {
+      "id": "bounty:defillama-hack:RISEx-1785715200",
+      "type": "bounty",
+      "timestamp": "2026-08-04T15:06:01.250850Z",
+      "label": "RISEx (exploit $673,000)"
+    },
+    {
+      "id": "bounty:defillama-hack:Swan Treasury-1785369600",
+      "type": "bounty",
+      "timestamp": "2026-08-04T15:06:01.250850Z",
+      "label": "Swan Treasury (exploit $625,000)"
+    },
     {
       "id": "investigation:0xfc313C329dAf55b488d0A0EeeE5727e3cbC4D062",
       "type": "investigation",
@@ -688,61 +740,6 @@
       "type": "investigation",
       "timestamp": "2026-08-04T06:23:28Z",
       "label": "SpaceX",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xCAAE2A2F939F51d97CdFa9A86e79e3F085b799f3",
-      "type": "investigation",
-      "timestamp": "2026-08-04T06:07:54Z",
-      "label": "Tutorial",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "news:Solana's Fee Overhaul Proposal Would Multiply Daily Burns Fourteenfold",
-      "type": "news",
-      "timestamp": "2026-08-04T05:48:25Z",
-      "label": "Solana's Fee Overhaul Proposal Would Multiply Daily Burns Fourteenfold"
-    },
-    {
-      "id": "investigation:0x1fEb4AeC0d592eC55b137f12cBC57229ee899602",
-      "type": "investigation",
-      "timestamp": "2026-08-04T05:21:58Z",
-      "label": "Alien Relics",
-      "verdict": "PROCEED"
-    },
-    {
-      "id": "investigation:0x8F294a99a0609822C233b24867F331c292cE2DA9",
-      "type": "investigation",
-      "timestamp": "2026-08-04T05:06:22Z",
-      "label": "Relics",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xEDEe1555B1E1Ebd9D758BA8091A7D3Dc2A70a89C",
-      "type": "investigation",
-      "timestamp": "2026-08-04T04:35:44Z",
-      "label": "Catecoin",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0xD0B74d81b5507edF2e93026701aA7fB2D9f82B07",
-      "type": "investigation",
-      "timestamp": "2026-08-04T03:19:42Z",
-      "label": "ANON",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x847247787D3D9aedc69bF2Af30e0215f1f1b4444",
-      "type": "investigation",
-      "timestamp": "2026-08-04T03:04:02Z",
-      "label": "Jobless",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0x30117E4bC17d7B044194b76A38365C53b72F7D49",
-      "type": "investigation",
-      "timestamp": "2026-08-04T02:47:26Z",
-      "label": "ETHGas",
       "verdict": "REJECT"
     }
   ]
