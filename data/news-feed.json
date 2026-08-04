@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T05:47:20Z",
+  "generated": "2026-08-04T08:36:36Z",
   "count": 60,
   "headlines": [
     {
@@ -35,7 +35,135 @@
       "crypto": true
     },
     {
-      "title": "A new Solana proposal would take daily SOL burns from $47,000 to $650,000",
+      "title": "CISA Adds Exploited N-able N-central Flaw to KEV After Customer Compromises",
+      "url": "https://thehackernews.com/2026/08/cisa-adds-exploited-n-able-n-central.html",
+      "source": "The Hacker News",
+      "published": "Tue, 04 Aug 2026 12:30:13 +0530",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "150,000 Impacted by Madera Community Hospital Data Breach",
+      "url": "https://www.securityweek.com/150000-impacted-by-madera-community-hospital-data-breach/",
+      "source": "SecurityWeek",
+      "published": "Tue, 04 Aug 2026 08:33:45 +0000",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Apple briefly removes Telegram from App Store, Gram rebounds",
+      "url": "https://cointelegraph.com/news/apple-telegram-app-store-gram-rebounds?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Tue, 04 Aug 2026 08:03:03 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Why CZ Says Self-Custody Is Riskier Than Centralized Exchanges?",
+      "url": "https://beincrypto.com/cz-exchanges-safer-self-custody/",
+      "source": "BeInCrypto",
+      "published": "Tue, 04 Aug 2026 08:00:38 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bhutan's GMC puts part of its bitcoin treasury to work after 10,000 BTC pledge",
+      "url": "https://www.coindesk.com/markets/2026/08/04/bhutan-s-gmc-puts-part-of-its-bitcoin-treasury-to-work-after-10-000-btc-pledge",
+      "source": "CoinDesk",
+      "published": "Tue, 04 Aug 2026 07:56:11 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Why Jim Cramer\u2019s quantum panic isn\u2019t rattling bitcoin as price holds steady around $64,000",
+      "url": "https://www.coindesk.com/markets/2026/08/04/why-jim-cramer-s-quantum-panic-isn-t-rattling-bitcoin-as-price-holds-steady-around-usd64-000",
+      "source": "CoinDesk",
+      "published": "Tue, 04 Aug 2026 07:53:18 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "NY judge denies CFTC motion to halt enforcement action against Kalshi",
+      "url": "https://cointelegraph.com/news/ny-judge-denies-cftc-motion-enforcement-kalshi?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Tue, 04 Aug 2026 07:49:22 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Why China Fears Anthropic\u2019s Mythos \u2014 and Why It Can\u2019t Do Much About It",
+      "url": "https://beincrypto.com/why-beijing-fears-anthropics-mythos/",
+      "source": "BeInCrypto",
+      "published": "Tue, 04 Aug 2026 07:42:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Zoomex Announces Gold Sponsorship At Coinfest Asia And August Summer Airdrop",
+      "url": "https://beincrypto.com/zoomex-announces-gold-sponsorship-at-coinfest-asia-and-august-summer-airdrop/",
+      "source": "BeInCrypto",
+      "published": "Tue, 04 Aug 2026 07:28:52 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Nigeria sets crypto tax collection rules for digital asset platforms",
+      "url": "https://cointelegraph.com/news/nigeria-crypto-tax-rules-digital-asset-platforms?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Tue, 04 Aug 2026 07:25:32 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Why Is The Crypto Market Up Today?",
+      "url": "https://beincrypto.com/why-is-the-crypto-market-up-today/",
+      "source": "BeInCrypto",
+      "published": "Tue, 04 Aug 2026 06:52:46 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Here\u2019s what happened in crypto today",
+      "url": "https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Tue, 04 Aug 2026 06:18:03 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "XRP holders can now borrow RLUSD on Ethereum through $280 million lending pool",
+      "url": "https://www.coindesk.com/markets/2026/08/04/flare-s-wrapped-xrp-wins-approval-in-a-usd280-million-rlusd-lending-vault",
+      "source": "CoinDesk",
+      "published": "Tue, 04 Aug 2026 06:12:20 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "AI Chip Costs Force Xbox to Raise Prices After PlayStation as GTA VI Release Looms",
+      "url": "https://beincrypto.com/xbox-price-hike-gta-6-launch/",
+      "source": "BeInCrypto",
+      "published": "Tue, 04 Aug 2026 06:11:25 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "FBI Agent Charged With $1 Million Crypto Theft \u2014 The Crime His Own Bureau Polices",
+      "url": "https://beincrypto.com/fbi-agent-crypto-theft-yaroch-charged/",
+      "source": "BeInCrypto",
+      "published": "Tue, 04 Aug 2026 06:01:39 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Crypto firms still seeking frontier AI access; only select few have it",
+      "url": "https://cointelegraph.com/news/few-crypto-firms-have-access-to-frontier-ai-as-cyber-threats-escalate?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Tue, 04 Aug 2026 06:00:23 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "A new Solana proposal aims to ramp up daily SOL Burns from $47,000 to $650,000",
       "url": "https://www.coindesk.com/tech/2026/08/04/a-new-solana-proposal-would-take-daily-sol-burns-from-usd47-000-to-usd650-000",
       "source": "CoinDesk",
       "published": "Tue, 04 Aug 2026 05:39:18 +0000",
@@ -43,7 +171,7 @@
       "crypto": true
     },
     {
-      "title": "Bitcoin nears $64,000 as traders look past the fourth Coldcard sweep",
+      "title": "Bitcoin nears $64,000 as traders look past Strategy's BTC sales and Coldcard sweeps",
       "url": "https://www.coindesk.com/markets/2026/08/04/bitcoin-nears-usd64-000-as-traders-look-past-the-fourth-coldcard-sweep",
       "source": "CoinDesk",
       "published": "Tue, 04 Aug 2026 05:21:13 +0000",
@@ -75,62 +203,6 @@
       "crypto": true
     },
     {
-      "title": "BitMine Stakes 87% of Its Ethereum Holdings in Fresh Conviction Bet",
-      "url": "https://beincrypto.com/bitmine-eth-staking-tom-lee-conviction/",
-      "source": "BeInCrypto",
-      "published": "Tue, 04 Aug 2026 04:27:07 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Bitmine adds $19.6M in ETH, repurchases 4.5M shares",
-      "url": "https://cointelegraph.com/news/bitmine-buys-10399-eth-repurchases-4-5-million-shares?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Tue, 04 Aug 2026 03:52:56 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Mastercard completes $1.8B BVNK acquisition in stablecoin push",
-      "url": "https://cointelegraph.com/news/mastercard-completes-bvnk-acquisition-stablecoin-push?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Tue, 04 Aug 2026 02:58:51 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Japan Stocks Shrug Off Yen Shock, But Kioxia Signals More Pain Ahead",
-      "url": "https://beincrypto.com/kioxia-yen-intervention-nikkei-risk/",
-      "source": "BeInCrypto",
-      "published": "Tue, 04 Aug 2026 02:50:22 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Solana Memecoin OnlyMarms is Outraising OnlyFans Subscriptions for a Marmot Study",
-      "url": "https://beincrypto.com/onlymarms-meme-coin-outraises-onlyfans/",
-      "source": "BeInCrypto",
-      "published": "Tue, 04 Aug 2026 02:41:43 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "NYU Professor Says Watch Smaller AI Stocks When The Shakeout Hits",
-      "url": "https://beincrypto.com/damodaran-warns-ai-stocks-shakeout/",
-      "source": "BeInCrypto",
-      "published": "Tue, 04 Aug 2026 02:13:56 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Malaysia Blockchain Week\u2019s OnlyFans scandal, lonely heart scammed for $3.3M: Asia Express",
-      "url": "https://cointelegraph.com/magazine/hong-kong-lonely-heart-scammed-out-of-33m-in-crypto-asia-express?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Tue, 04 Aug 2026 02:03:26 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "New York Awards $9 Million to Strengthen Cybersecurity at 153 Water Systems",
       "url": "https://www.securityweek.com/new-york-awards-9-million-to-strengthen-cybersecurity-at-153-water-systems/",
       "source": "SecurityWeek",
@@ -139,10 +211,10 @@
       "crypto": true
     },
     {
-      "title": "Caleb & Brown expands to UK, betting on untapped crypto demand",
-      "url": "https://cointelegraph.com/news/caleb-brown-expands-to-uk-betting-on-untapped-crypto-demand?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Tue, 04 Aug 2026 00:51:32 +0000",
+      "title": "Bitcoin losses from Coldcard hack could swell to $130 million, Galaxy Research says",
+      "url": "https://www.theblock.co/post/410533/coldcard-hack-130-million-galaxy-research?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Tue, 04 Aug 2026 01:46:06 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -160,14 +232,6 @@
       "source": "The Hacker News",
       "published": "Tue, 04 Aug 2026 00:13:53 +0530",
       "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "Boltz pauses service after wave of AI-assisted hacking attempts",
-      "url": "https://cointelegraph.com/news/boltz-pauses-service-after-wave-of-ai-assisted-hacking-attempts?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Tue, 04 Aug 2026 00:03:47 +0000",
-      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -243,22 +307,6 @@
       "crypto": true
     },
     {
-      "title": "Hugging Face CEO Says China Now Winning the AI Race After OpenAI Hack",
-      "url": "https://beincrypto.com/hugging-face-china-ai-race-hack/",
-      "source": "BeInCrypto",
-      "published": "Mon, 03 Aug 2026 22:58:58 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Trump Calls Out Exxon, Chevron for Profiting From a War He Started",
-      "url": "https://beincrypto.com/trump-exxon-chevron-oil-profits/",
-      "source": "BeInCrypto",
-      "published": "Mon, 03 Aug 2026 22:53:27 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Marmot Researchers Turn to OnlyFans for Funding\u2014And There Are Meme Coins Too",
       "url": "https://decrypt.co/374874/marmot-researchers-onlyfans-memecoins-solana-onlymarms",
       "source": "Decrypt",
@@ -271,14 +319,6 @@
       "url": "https://cryptoslate.com/strategy-sells-395-million-in-bitcoin-and-mstr-stock-to-buyback-81-million-in-strc-and-build-cash-reserve-to-4-billion/",
       "source": "CryptoSlate",
       "published": "Mon, 03 Aug 2026 22:20:24 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "U.S. FBI intelligence agent arrested in connection with theft of $1 million in crypto",
-      "url": "https://www.coindesk.com/policy/2026/08/03/u-s-fbi-intelligence-agent-arrested-in-connection-with-theft-of-usd1-million-in-crypto",
-      "source": "CoinDesk",
-      "published": "Mon, 03 Aug 2026 22:17:59 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -439,46 +479,6 @@
       "url": "https://cryptoslate.com/researchers-just-uncovered-4200-malicious-smart-contracts-that-successfully-tricked-5700-victims-into-signing-away-their-crypto/",
       "source": "CryptoSlate",
       "published": "Mon, 03 Aug 2026 17:35:44 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Crypto Privacy Tools Serve \u2018Essential Protective Functions\u2019: Report by ChangeNOW, CoinRabbit",
-      "url": "https://decrypt.co/374838/crypto-privacy-tools-serve-essential-protective-functions-report-by-changenow-coinrabbit",
-      "source": "Decrypt",
-      "published": "Mon, 03 Aug 2026 17:31:03 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Crypto Clarity Act Risks More Delay As Recess Looms",
-      "url": "https://bitcoinmagazine.com/news/crypto-clarity-act-risks-more-delay",
-      "source": "Bitcoin Magazine",
-      "published": "Mon, 03 Aug 2026 17:21:38 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Blockchain Association counters National Sheriffs\u2019 group claims as pivotal week for Clarity Act unfolds",
-      "url": "https://www.theblock.co/post/410507/blockchain-association-counters-sheriffs-associations-claims-pivotal-week-clarity-act?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Mon, 03 Aug 2026 17:13:10 -0400",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "FOMO in the SOC: Where AI Platforms like Claude Actually Fit",
-      "url": "https://thehackernews.com/2026/08/fomo-in-soc-where-ai-platforms-like.html",
-      "source": "The Hacker News",
-      "published": "Mon, 03 Aug 2026 17:00:00 +0530",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "DEXs capture record 24% of spot crypto trading as CEX volumes sink",
-      "url": "https://www.theblock.co/post/410476/dexs-capture-record-spot-crypto-trading-as-cex-volumes-sink?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Mon, 03 Aug 2026 16:46:31 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     }

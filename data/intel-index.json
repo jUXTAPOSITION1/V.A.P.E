@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T08:25:28Z",
+  "generated": "2026-08-04T08:37:59Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 421,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 147,
     "investigations": 719,
-    "news": 60,
+    "news": 61,
     "tools": 16,
     "tools_verified": 16,
     "skills": 24
@@ -10804,6 +10804,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-04-msp-supply-chain-threat-escalates-as-cisa-flags-actively-exp.md",
+      "title": "MSP Supply Chain Threat Escalates as CISA Flags Actively Exploited N-able RMM Vulnerability",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-04T08:37:59Z",
+      "published_et": "August 4, 2026 \u00b7 4:37 AM EDT",
+      "topic": "Cybersecurity",
+      "dek": "Federal cyber defenders order urgent patching of N-central remote management software following confirmed intrusions against downstream enterprise networks.",
+      "image": "assets/news-images/msp-supply-chain-threat-escalates-as-cisa-flags-actively-exp.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-04-msp-supply-chain-threat-escalates-as-cisa-flags-actively-exp.md"
+    },
+    {
       "file": "news-2026-08-04-solana-s-fee-overhaul-proposal-would-multiply-daily-burns-fo.md",
       "title": "Solana's Fee Overhaul Proposal Would Multiply Daily Burns Fourteenfold",
       "byline": "VAPE Reporter",
@@ -11510,18 +11522,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no source photo available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-sparse-data-limits-insight-into-macro-expert-s-alleged-crypt.md"
-    },
-    {
-      "file": "news-2026-07-27-thin-data-limits-insight-into-bitcoin-s-stability-ahead-of-f.md",
-      "title": "Thin Data Limits Insight Into Bitcoin's Stability Ahead of Fed Meeting",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-27 23:58 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "A single headline offers no figures or context on why Bitcoin steadied before the Federal Reserve decision, leaving market implications unclear.",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no source photo available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-27-thin-data-limits-insight-into-bitcoin-s-stability-ahead-of-f.md"
     }
   ],
   "tools": [
