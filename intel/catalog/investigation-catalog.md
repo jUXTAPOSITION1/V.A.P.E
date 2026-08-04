@@ -1219,3 +1219,5 @@
 | 2026-08-03 | auto | 0xf81c54264E8dE4f4cFD37106f33f95E51AdF4444 (SAFU) | deep_investigation | REJECT (47/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
 
 | 2026-08-04 | auto | 0x99D0652ed57b49373B9BB720434BAe76C3649b07 (VELVET) | deep_investigation | REJECT (25/100) | Owner not renounced (0xb3accf0d065c41d9993d5c09af4a221b8e51683f) — can still act | +7d |
+
+| 2026-08-04 | auto | 0x69426A34E2D0AC95536B0a0B02050b18b4074444 (SAFU) | deep_investigation | REJECT (30/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
