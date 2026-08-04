@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-08-04T02:47:26Z — 152 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-08-04T03:04:02Z — 153 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| Jobless | BNB Chain | `0x847247787D3D9aedc69bF2Af30e0215f1f1b4444` | 75/100 | 1 | 2026-08-04T03:04:02Z |
 | FWA | Ethereum | `0x1F7B4051b39905bA61b7c8E946C32E9123b8B4CB` | 70/100 | 1 | 2026-08-03T22:29:59Z |
 | A51 | Base | `0x515e72aF68A374C8f375534B59752277Ee9b4a51` | 72/100 | 1 | 2026-08-03T17:58:33Z |
 | FRLZ | Base | `0x02c1d787521C20586b4aB070b1838D91FF85D656` | 65/100 | 1 | 2026-08-03T17:28:01Z |
