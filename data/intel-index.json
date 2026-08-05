@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-05T07:28:18Z",
+  "generated": "2026-08-05T07:40:51Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 439,
+    "reports": 440,
     "reports_by_type": {
+      "bounty": 119,
       "base": 88,
-      "bounty": 118,
       "security": 76,
       "sentiment": 46,
       "macro": 23,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-064337-0x73ADFA3A.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-08-05-05.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-08-05T05:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260805_074003.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-05T07:40:03Z",
       "threat": null,
-      "summary": "Date: 2026-08-05 05:37 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-05-05.md",
-      "bytes": 8107
+      "summary": "RECENT EXPLOIT: RISEx $0.673M on ['RISE'] (Access Control Exploit) \u00b7 Base mover: OpenAI / USDC +5296% 24h (liq $8974166.8576) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260805_074003.md",
+      "bytes": 15929
     }
   },
   "investigations": [
@@ -10350,6 +10350,17 @@
   ],
   "reports": [
     {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260805_074003.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-05T07:40:03Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: RISEx $0.673M on ['RISE'] (Access Control Exploit) \u00b7 Base mover: OpenAI / USDC +5296% 24h (liq $8974166.8576) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260805_074003.md",
+      "bytes": 15929
+    },
+    {
       "kind": "intel",
       "type": "base",
       "file": "base-2026-08-05-05.md",
@@ -10997,17 +11008,6 @@
       "summary": "Cycle: 20260802095813 \u00b7 Data timestamp (UTC): 2026-08-02T09:58:15Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_095813.md",
       "bytes": 16263
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-08-02-08.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-08-02T08:00Z",
-      "threat": null,
-      "summary": "The feed shows 6 incidents in the last 7 days across multiple chains, with realized losses ranging from $0.01M (Set Protocol malicious SetToken contract on Ethereum) to $24.15M (AFX Bridge private-key compromise on Arbitrum). Other confirmed events include an $8.2M Crypto DAO incident on BSC, $9.7M Triple-A hot-wallet compromise spanning ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-02-08.md",
-      "bytes": 6422
     }
   ],
   "broadcasts": [
