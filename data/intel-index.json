@@ -1,10 +1,10 @@
 {
-  "generated": "2026-08-05T21:10:53Z",
+  "generated": "2026-08-05T21:11:23Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 451,
+    "reports": 452,
     "reports_by_type": {
-      "bounty": 124,
+      "bounty": 125,
       "security": 79,
       "base": 89,
       "macro": 24,
@@ -39,13 +39,13 @@
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260805_193612.md",
+      "file": "bounty_report_20260805_211029.md",
       "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-05T19:36:12Z",
+      "date": "2026-08-05T21:10:29Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: RISEx $0.673M on ['RISE'] (Access Control Exploit)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260805_193612.md",
-      "bytes": 16237
+      "summary": "RECENT EXPLOIT: RISEx $0.673M on ['RISE'] (Access Control Exploit) \u00b7 Base mover: OpenAI / USDC +9947% 24h (liq $9442530.9733) \u2014 volatility/rug watch \u00b7 Base mover: OpenAI / USDC -28% 24h (liq $0.004055609983) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260805_211029.md",
+      "bytes": 16276
     }
   },
   "investigations": [
@@ -10660,6 +10660,17 @@
     {
       "kind": "bounty",
       "type": "bounty",
+      "file": "bounty_report_20260805_211029.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-05T21:10:29Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: RISEx $0.673M on ['RISE'] (Access Control Exploit) \u00b7 Base mover: OpenAI / USDC +9947% 24h (liq $9442530.9733) \u2014 volatility/rug watch \u00b7 Base mover: OpenAI / USDC -28% 24h (liq $0.004055609983) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260805_211029.md",
+      "bytes": 16276
+    },
+    {
+      "kind": "bounty",
+      "type": "bounty",
       "file": "bounty_report_20260805_193612.md",
       "title": "V.A.P.E. Intelligence Report",
       "date": "2026-08-05T19:36:12Z",
@@ -11305,17 +11316,6 @@
       "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-08-02-21.md",
       "bytes": 1582
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260802_205633.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-02T20:56:33Z",
-      "threat": null,
-      "summary": "Cycle: 20260802205633 \u00b7 Data timestamp (UTC): 2026-08-02T20:56:35Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_205633.md",
-      "bytes": 15921
     }
   ],
   "broadcasts": [
