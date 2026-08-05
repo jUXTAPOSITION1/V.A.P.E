@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T22:10:44Z",
+  "generated": "2026-08-05T22:14:01Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 454,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 154,
     "investigations": 771,
-    "news": 72,
+    "news": 73,
     "tools": 16,
     "tools_verified": 16,
     "skills": 25
@@ -11532,6 +11532,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-05-us-crypto-holders-face-three-day-race-to-rescue-funds-as-bit.md",
+      "title": "US Crypto Holders Face Three-Day Race to Rescue Funds as BitMart Tightens Noose Ahead of Global Shutdown",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-05T22:14:01Z",
+      "published_et": "August 5, 2026 \u00b7 6:14 PM EDT",
+      "topic": "Crypto Markets",
+      "dek": "As the exchange prepares to wind down operations by 2027, American users are being hit with sudden source-of-funds checks and wallet verification demands that threaten to trap remaining assets.",
+      "image": "assets/news-images/us-crypto-holders-face-three-day-race-to-rescue-funds-as-bit.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-05-us-crypto-holders-face-three-day-race-to-rescue-funds-as-bit.md"
+    },
+    {
       "file": "news-2026-08-05-the-executable-agent-trap-how-paperclip-s-rce-flaws-turn-ai-.md",
       "title": "The Executable Agent Trap: How Paperclip's RCE Flaws Turn AI Configurations Into Network Weapons",
       "byline": "VAPE Reporter",
@@ -12238,18 +12250,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-decrypt-headline-claims-ai-cracked-post-quantum-crypto-but-a.md"
-    },
-    {
-      "file": "news-2026-07-28-ai-firms-are-shredding-physical-books-because-copyright-law-.md",
-      "title": "AI firms are shredding physical books because copyright law is quietly rewarding them",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-28 19:24 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "Agency: VAPE Wire Byline: VAPE Reporter Date: 2026-07-28 19:24 UTC Topic: Crypto Markets Dek: Image: assets/logo-v-256.png Image source: VAPE brand mark (no AI image available this cycle) Fact-checked",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-ai-firms-are-shredding-physical-books-because-copyright-law-.md"
     }
   ],
   "tools": [
