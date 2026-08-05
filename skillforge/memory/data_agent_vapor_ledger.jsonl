@@ -517,3 +517,4 @@
 {"ts": "2026-08-05T19:24:07.858318Z", "target": "0x1E674153229Dc206C681f5De6b2d9aaa21687Ba5", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-08-05T19:54:33.385707Z", "target": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf", "hired": ["market_intel"], "paid": 1, "cost_usd": 0.07}
 {"ts": "2026-08-05T20:25:10.907453Z", "target": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf", "hired": ["yields"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-08-05T20:55:38.971105Z", "target": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01}

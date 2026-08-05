@@ -750,3 +750,4 @@
 {"ts": "2026-08-05T20:09:51.265301Z", "target": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf", "hired": ["dossier_check"], "paid": 1, "cost_usd": 0.1, "daily_target": 62}
 {"ts": "2026-08-05T20:25:08.799377Z", "target": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf", "hired": ["yields"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
 {"ts": "2026-08-05T20:40:30.364041Z", "target": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf", "hired": ["market_intel"], "paid": 1, "cost_usd": 0.07, "daily_target": 62}
+{"ts": "2026-08-05T20:55:36.764809Z", "target": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
