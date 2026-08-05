@@ -1,9 +1,10 @@
 # VAPE Pass List (PROCEED)
 
-_Regenerated 2026-08-05T06:43:37Z — 79 address(es) currently on record with a last verdict of PROCEED._
+_Regenerated 2026-08-05T10:42:41Z — 80 address(es) currently on record with a last verdict of PROCEED._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| MarsCoin | BNB Chain | `0x444416A582466fDAE0f2Fcdf0A859675f8fF6e9f` | 85/100 | 1 | 2026-08-05T10:42:41Z |
 | Asteroid | Ethereum | `0x7a7C5a2dBff5e916c570c8Ef61e2DC253242e5F7` | 82/100 | 1 | 2026-08-04T06:39:29Z |
 | RELICS | Ethereum | `0x1fEb4AeC0d592eC55b137f12cBC57229ee899602` | 80/100 | 1 | 2026-08-04T05:21:58Z |
 | SAFU | BNB Chain | `0x3433a5748Bda2F7338BDC600Be7BC716d5882B0C` | 82/100 | 1 | 2026-08-03T11:25:20Z |

@@ -6165,6 +6165,25 @@
     "symbol": "ASTEROID",
     "times_investigated": 1
   },
+  "56:0x444416a582466fdae0f2fcdf0a859675f8ff6e9f": {
+    "address": "0x444416A582466fDAE0f2Fcdf0A859675f8fF6e9f",
+    "chain": "56",
+    "creator_address": "0x17a9b8f4a0b7bdda542dff53c359a546123e5e48",
+    "first_investigated": "2026-08-05T10:42:41Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260805-104241-0x444416A5.md",
+        "score": 85,
+        "ts": "2026-08-05T10:42:41Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-08-05T10:42:41Z",
+    "last_score": 85,
+    "last_verdict": "PROCEED",
+    "symbol": "MarsCoin",
+    "times_investigated": 1
+  },
   "56:0x46ddcc662a045770ce1e264819542c9617547777": {
     "address": "0x46dDcc662A045770CE1e264819542C9617547777",
     "chain": "56",

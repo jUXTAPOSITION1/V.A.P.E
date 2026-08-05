@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T10:37:20Z",
+  "generated": "2026-08-05T10:42:45Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 442,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 152,
-    "investigations": 749,
+    "investigations": 750,
     "news": 68,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260805-064337-0x73ADFA3A.md",
-      "title": "Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-08-05T06:43:37Z",
-      "target": "0x73ADFA3A448D63025D52E39f921369386E4fCB07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-064337-0x73ADFA3A.md"
+      "file": "investigation-20260805-104241-0x444416A5.md",
+      "title": "Investigation \u2014 MarsCoin",
+      "symbol": "MarsCoin",
+      "name": "MarsCoin",
+      "date": "2026-08-05T10:42:41Z",
+      "target": "0x444416A582466fDAE0f2Fcdf0A859675f8fF6e9f",
+      "chain": "56 (BNB Chain)",
+      "verdict": "PROCEED",
+      "score": "85",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 84% of supply \u2014 concentrated, easily manipulated. Positive evidence: Ownership renounced; 4560 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 300+ days without a known incident in this scan; Custom verified source (no",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-104241-0x444416A5.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260805-104241-0x444416A5.md",
+      "title": "Investigation \u2014 MarsCoin",
+      "symbol": "MarsCoin",
+      "name": "MarsCoin",
+      "date": "2026-08-05T10:42:41Z",
+      "target": "0x444416A582466fDAE0f2Fcdf0A859675f8fF6e9f",
+      "chain": "56 (BNB Chain)",
+      "verdict": "PROCEED",
+      "score": "85",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 84% of supply \u2014 concentrated, easily manipulated. Positive evidence: Ownership renounced; 4560 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 300+ days without a known incident in this scan; Custom verified source (no",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-104241-0x444416A5.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260805-064337-0x73ADFA3A.md",
