@@ -513,3 +513,4 @@
 {"ts": "2026-08-05T16:52:38.213976Z", "target": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-08-05T17:37:34.452766Z", "target": "0x068018326d8ABCF258fdce5e28856c5109503Ae3", "hired": ["market_intel"], "paid": 1, "cost_usd": 0.07}
 {"ts": "2026-08-05T18:08:43.728241Z", "target": "0x9126236476eFBA9Ad8aB77855c60eB5BF37586Eb", "hired": ["rug_pull_alert"], "paid": 1, "cost_usd": 0.03}
+{"ts": "2026-08-05T18:53:33.220115Z", "target": "0x311935Cd80B76769bF2ecC9D8Ab7635b2139cf82", "hired": ["market_intel"], "paid": 1, "cost_usd": 0.07}
