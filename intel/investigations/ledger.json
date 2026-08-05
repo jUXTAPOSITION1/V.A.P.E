@@ -11186,6 +11186,25 @@
     "symbol": "AERO",
     "times_investigated": 1
   },
+  "8453:0xcac44c05e1224ef9b1a5e2dd56a59d45527b42e6": {
+    "address": "0xCAc44C05e1224ef9B1A5E2Dd56a59d45527b42e6",
+    "chain": "8453",
+    "creator_address": "0xaf2bfb6b69dfe6efd257fe8cd694175156a23812",
+    "first_investigated": "2026-08-05T11:57:23Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260805-115723-0xCAc44C05.md",
+        "score": 20,
+        "ts": "2026-08-05T11:57:23Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-05T11:57:23Z",
+    "last_score": 20,
+    "last_verdict": "REJECT",
+    "symbol": "WE NEED MORE RUGGED INDIVIDUALIS",
+    "times_investigated": 1
+  },
   "8453:0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf": {
     "address": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
     "chain": "8453",

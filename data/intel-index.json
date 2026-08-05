@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T11:42:28Z",
+  "generated": "2026-08-05T11:57:24Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 443,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 152,
-    "investigations": 751,
+    "investigations": 752,
     "news": 69,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260805-112725-0x7649080D.md",
-      "title": "Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-08-05T11:27:25Z",
-      "target": "0x7649080D56b9a6062378fb26a01A04c840ce7B07",
+      "file": "investigation-20260805-115723-0xCAc44C05.md",
+      "title": "Investigation \u2014 WE NEED MORE RUGGED INDIVIDUALIS",
+      "symbol": "WE NEED MORE RUGGED INDIVIDUALIS",
+      "name": "WE NEED MORE RUGGED INDIVIDUALIS",
+      "date": "2026-08-05T11:57:23Z",
+      "target": "0xCAc44C05e1224ef9B1A5E2Dd56a59d45527b42e6",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-112725-0x7649080D.md"
+      "score": "20",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802DE01E60C1393Ee974d896138aD56) \u2014 REJECT 35/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $1,062 (rug/illiquid);",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-115723-0xCAc44C05.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260805-115723-0xCAc44C05.md",
+      "title": "Investigation \u2014 WE NEED MORE RUGGED INDIVIDUALIS",
+      "symbol": "WE NEED MORE RUGGED INDIVIDUALIS",
+      "name": "WE NEED MORE RUGGED INDIVIDUALIS",
+      "date": "2026-08-05T11:57:23Z",
+      "target": "0xCAc44C05e1224ef9B1A5E2Dd56a59d45527b42e6",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "20",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802DE01E60C1393Ee974d896138aD56) \u2014 REJECT 35/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $1,062 (rug/illiquid);",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-115723-0xCAc44C05.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260805-112725-0x7649080D.md",
