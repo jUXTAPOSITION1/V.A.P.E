@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T18:53:35Z",
+  "generated": "2026-08-05T19:08:51Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 449,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 153,
-    "investigations": 767,
+    "investigations": 768,
     "news": 71,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260805-175326-0xe85A3fdd.md",
+      "file": "investigation-20260805-190845-0x84EDc02B.md",
       "title": "Investigation \u2014 GRVT",
       "symbol": "GRVT",
       "name": "GRVT",
-      "date": "2026-08-05T17:53:26Z",
-      "target": "0xe85A3fdd5eff4B1f8264ebAa91DD8cf8c7D07777",
+      "date": "2026-08-05T19:08:45Z",
+      "target": "0x84EDc02Ba3c3388C437f02dfA2FE7707F5097777",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
       "score": "0",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $7,291 (rug/illiquid); [-10] Low liquidity $7,291; [-15] Pair only 0.7 day",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-175326-0xe85A3fdd.md"
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: GRVT (0xe85A3fdd5eff4B1f8264ebAa91DD8cf8c7D07777) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-190845-0x84EDc02B.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260805-190845-0x84EDc02B.md",
+      "title": "Investigation \u2014 GRVT",
+      "symbol": "GRVT",
+      "name": "GRVT",
+      "date": "2026-08-05T19:08:45Z",
+      "target": "0x84EDc02Ba3c3388C437f02dfA2FE7707F5097777",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: GRVT (0xe85A3fdd5eff4B1f8264ebAa91DD8cf8c7D07777) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-190845-0x84EDc02B.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260805-175326-0xe85A3fdd.md",

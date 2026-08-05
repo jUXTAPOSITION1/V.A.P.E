@@ -7058,6 +7058,25 @@
     "symbol": "Jobless",
     "times_investigated": 1
   },
+  "56:0x84edc02ba3c3388c437f02dfa2fe7707f5097777": {
+    "address": "0x84EDc02Ba3c3388C437f02dfA2FE7707F5097777",
+    "chain": "56",
+    "creator_address": "0x5c87e99f1905b8ca5b9d8b5c89a6b7b1a272d490",
+    "first_investigated": "2026-08-05T19:08:45Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260805-190845-0x84EDc02B.md",
+        "score": 0,
+        "ts": "2026-08-05T19:08:45Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-05T19:08:45Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "GRVT",
+    "times_investigated": 1
+  },
   "56:0x8554d38b95e4f7ca11d391008627df30b2b07777": {
     "address": "0x8554D38b95E4F7Ca11D391008627Df30B2b07777",
     "chain": "56",
