@@ -1,13 +1,13 @@
 {
-  "generated": "2026-08-05T19:37:08Z",
+  "generated": "2026-08-05T19:39:38Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 450,
+    "reports": 451,
     "reports_by_type": {
       "bounty": 124,
+      "security": 79,
       "base": 89,
       "macro": 24,
-      "security": 78,
       "sentiment": 47,
       "bug": 5,
       "mainnet": 5,
@@ -10641,6 +10641,17 @@
       "bytes": 16237
     },
     {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-05-19.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-05T19:00Z",
+      "threat": null,
+      "summary": "The current threat landscape indicates a HIGH threat level, with 6 incidents reported in the last 7 days and 1 incident exceeding $50M in the last 14 days. The incidents involve various exploit types, including Access Control Exploit, Price Manipulation Attack, Non-Random Private Key Generation, Private Key Compromised, and Malicious SetT",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-05-19.md",
+      "bytes": 6956
+    },
+    {
       "kind": "bounty",
       "type": "bounty",
       "file": "bounty_report_20260805_173908.md",
@@ -11277,17 +11288,6 @@
       "summary": "Cycle: 20260802205633 \u00b7 Data timestamp (UTC): 2026-08-02T20:56:35Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_205633.md",
       "bytes": 15921
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260802_191136.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-02T19:11:36Z",
-      "threat": null,
-      "summary": "Base mover: HOME / WETH 0.3% +34% 24h (liq $57011.9467) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_191136.md",
-      "bytes": 16466
     }
   ],
   "broadcasts": [
