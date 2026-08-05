@@ -1307,3 +1307,5 @@
 | 2026-08-05 | auto | 0xCAc44C05e1224ef9B1A5E2Dd56a59d45527b42e6 (WE NEED MORE RUGGED INDIVIDUALIS) | deep_investigation | REJECT (20/100) | Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802 | +7d |
 
 | 2026-08-05 | auto | 0x4444512F8995D1e7AaFBe13c8F11a4483f892C4f (MarsCoin) | deep_investigation | CAUTION (75/100) | Top 10 non-LP/burn holders control 101% of supply — concentrated, easily manipul | +7d |
+
+| 2026-08-05 | auto | 0xFE1F5ce0A21dD8494a29053A48dda4Eb2Be94444 (MarsCoin) | deep_investigation | CAUTION (52/100) | Low holder count (123) | +7d |

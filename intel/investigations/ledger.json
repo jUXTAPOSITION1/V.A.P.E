@@ -8347,6 +8347,25 @@
     "symbol": "MarsCoin",
     "times_investigated": 1
   },
+  "56:0xfe1f5ce0a21dd8494a29053a48dda4eb2be94444": {
+    "address": "0xFE1F5ce0A21dD8494a29053A48dda4Eb2Be94444",
+    "chain": "56",
+    "creator_address": "0x625efb056fde6e391c8a490382df4421bee7c03b",
+    "first_investigated": "2026-08-05T12:27:19Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260805-122719-0xFE1F5ce0.md",
+        "score": 52,
+        "ts": "2026-08-05T12:27:19Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-05T12:27:19Z",
+    "last_score": 52,
+    "last_verdict": "CAUTION",
+    "symbol": "MarsCoin",
+    "times_investigated": 1
+  },
   "8453:0x0027da8d030dc3092e7ddb6488c52e1ee65580bc": {
     "address": "0x0027dA8d030dC3092e7Ddb6488c52e1EE65580bc",
     "chain": "8453",
