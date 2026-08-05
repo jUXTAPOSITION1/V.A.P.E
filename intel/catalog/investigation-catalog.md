@@ -1323,3 +1323,5 @@
 | 2026-08-05 | auto | 0x6aF0b0294B5c8b791c500490DAbf17832E0a7931 (SYN) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-08-05 | auto | 0x189140FAb49FA6ae98095C22674448E7BaF33B45 (STACK) | deep_investigation | REJECT (0/100) | Same deployer has a prior CAUTION/REJECT verdict on record: UNISTREET (0x08b82Ed | +7d |
+
+| 2026-08-05 | auto | 0x1f17582e4c96DfEF934aeEA23a9B2DFB47ffC215 (SYN) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
