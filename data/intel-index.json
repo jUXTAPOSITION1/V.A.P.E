@@ -1,12 +1,12 @@
 {
-  "generated": "2026-08-05T14:09:45Z",
+  "generated": "2026-08-05T14:11:23Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 444,
+    "reports": 445,
     "reports_by_type": {
+      "security": 78,
       "bounty": 121,
       "sentiment": 47,
-      "security": 77,
       "base": 88,
       "macro": 23,
       "bug": 5,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-135931-0xB6bB7860.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260805_125338.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-05T12:53:38Z",
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-05-14.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-05T14:00Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: RISEx $0.673M on ['RISE'] (Access Control Exploit) \u00b7 Base mover: OpenAI / USDC +3821% 24h (liq $0.004055609983) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260805_125338.md",
-      "bytes": 17031
+      "summary": "The provided incident feed shows 6 incidents in the last 7 days and 1 incident exceeding $50M in the last 14 days, supporting a HIGH threat level. Confirmed events include COLDCARD ($115.0M, Non-Random Private Key Generation on Bitcoin), Crypto DAO ($8.2M on BSC), Triple-A ($9.7M, Hot Wallet Compromise across Ethereum/Tron/Arbitrum), and ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-05-14.md",
+      "bytes": 6773
     }
   },
   "investigations": [
@@ -10476,6 +10476,17 @@
   ],
   "reports": [
     {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-05-14.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-05T14:00Z",
+      "threat": null,
+      "summary": "The provided incident feed shows 6 incidents in the last 7 days and 1 incident exceeding $50M in the last 14 days, supporting a HIGH threat level. Confirmed events include COLDCARD ($115.0M, Non-Random Private Key Generation on Bitcoin), Crypto DAO ($8.2M on BSC), Triple-A ($9.7M, Hot Wallet Compromise across Ethereum/Tron/Arbitrum), and ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-05-14.md",
+      "bytes": 6773
+    },
+    {
       "kind": "bounty",
       "type": "bounty",
       "file": "bounty_report_20260805_125338.md",
@@ -11123,17 +11134,6 @@
       "summary": "Cycle: 20260802132331 \u00b7 Data timestamp (UTC): 2026-08-02T13:23:38Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_132331.md",
       "bytes": 15813
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-08-02-13.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-08-02T13:00Z",
-      "threat": null,
-      "summary": "The global DeFi threat level is currently HIGH, triggered by 6 security incidents recorded across the ecosystem in the last 7 days. While no ultra-high-value exploits (= $50M) occurred in the last fortnight, the sheer frequency of attacks remains elevated. Over the last week, the most prevalent attack vectors centered around credential th",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-02-13.md",
-      "bytes": 8887
     }
   ],
   "broadcasts": [
