@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T16:37:01Z",
+  "generated": "2026-08-05T16:44:04Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 448,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 153,
     "investigations": 763,
-    "news": 70,
+    "news": 71,
     "tools": 16,
     "tools_verified": 16,
     "skills": 25
@@ -11420,6 +11420,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-05-the-prompt-stealing-shadow-apis-undercutting-anthropic-and-o.md",
+      "title": "The Prompt-Stealing Shadow APIs Undercutting Anthropic and OpenAI",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-05T16:44:03Z",
+      "published_et": "August 5, 2026 \u00b7 12:44 PM EDT",
+      "topic": "Cybersecurity",
+      "dek": "Cybercriminals are abusing free cloud credits to sell heavily discounted AI access\u2014while silently logging every line of code and sensitive prompt developers send through their proxy networks.",
+      "image": "assets/news-images/the-prompt-stealing-shadow-apis-undercutting-anthropic-and-o.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-05-the-prompt-stealing-shadow-apis-undercutting-anthropic-and-o.md"
+    },
+    {
       "file": "news-2026-08-05-sparse-disclosure-leaves-linux-admins-in-the-dark-on-open-vs.md",
       "title": "Sparse Disclosure Leaves Linux Admins in the Dark on Open vSwitch Root Flaw",
       "byline": "VAPE Reporter",
@@ -12126,18 +12138,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-ai-payments-surge-past-100m-on-base-as-storj-bankruptcy-sign.md"
-    },
-    {
-      "file": "news-2026-07-28-double-blow-for-crypto-south-korean-market-rout-and-shelved-.md",
-      "title": "Double Blow for Crypto: South Korean Market Rout and Shelved Senate Bill Trigger Risk-Off Sell-Off",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-28 11:18 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "A massive 11% plunge in South Korea's benchmark stock index and the sudden shelving of the U.S. Senate's crypto Clarity Act have combined to wipe billions off digital asset valuations ahead of tomorrow's crucial Federal Reserve decision.",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-double-blow-for-crypto-south-korean-market-rout-and-shelved-.md"
     }
   ],
   "tools": [
