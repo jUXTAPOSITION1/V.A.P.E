@@ -653,3 +653,4 @@
 {"ts": "2026-08-05T10:12:23.289638Z", "target": "none", "hired": ["yields"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
 {"ts": "2026-08-05T10:42:45.289815Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
 {"ts": "2026-08-05T11:12:29.341048Z", "target": "none", "hired": ["yields"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
+{"ts": "2026-08-05T11:42:27.935085Z", "target": "aave-v3", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 61}
