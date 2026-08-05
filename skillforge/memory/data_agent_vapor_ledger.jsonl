@@ -500,3 +500,4 @@
 {"ts": "2026-08-05T08:12:43.379318Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-08-05T08:57:42.075643Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["yields"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-08-05T09:42:41.148630Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["dossier_check"], "paid": 1, "cost_usd": 0.1}
+{"ts": "2026-08-05T10:27:12.136652Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["bridges"], "paid": 1, "cost_usd": 0.01}
