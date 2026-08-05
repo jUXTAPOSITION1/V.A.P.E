@@ -8043,6 +8043,25 @@
     "symbol": "\u5e01\u6709",
     "times_investigated": 1
   },
+  "56:0xec5196c10b719abd317ff550006471c9dc2556a0": {
+    "address": "0xec5196C10b719abd317FF550006471c9dC2556a0",
+    "chain": "56",
+    "creator_address": "0x1c1759efa52a80d334ee0ca2d49365e6922348f7",
+    "first_investigated": "2026-08-05T12:43:07Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260805-124307-0xec5196C1.md",
+        "score": 42,
+        "ts": "2026-08-05T12:43:07Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-05T12:43:07Z",
+    "last_score": 42,
+    "last_verdict": "REJECT",
+    "symbol": "Mars",
+    "times_investigated": 1
+  },
   "56:0xece99d73444c99008f87d0ebe6211cf8eef27777": {
     "address": "0xECe99d73444c99008f87d0EbE6211CF8EEF27777",
     "chain": "56",

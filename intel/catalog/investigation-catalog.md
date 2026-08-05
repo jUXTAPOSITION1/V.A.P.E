@@ -1309,3 +1309,5 @@
 | 2026-08-05 | auto | 0x4444512F8995D1e7AaFBe13c8F11a4483f892C4f (MarsCoin) | deep_investigation | CAUTION (75/100) | Top 10 non-LP/burn holders control 101% of supply — concentrated, easily manipul | +7d |
 
 | 2026-08-05 | auto | 0xFE1F5ce0A21dD8494a29053A48dda4Eb2Be94444 (MarsCoin) | deep_investigation | CAUTION (52/100) | Low holder count (123) | +7d |
+
+| 2026-08-05 | auto | 0xec5196C10b719abd317FF550006471c9dC2556a0 (Mars) | deep_investigation | REJECT (42/100) | Upgradeable proxy (verify implementation) | +7d |

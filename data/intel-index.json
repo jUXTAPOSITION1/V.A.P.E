@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T12:27:27Z",
+  "generated": "2026-08-05T12:43:10Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 443,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 152,
-    "investigations": 754,
+    "investigations": 755,
     "news": 69,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260805-122719-0xFE1F5ce0.md",
-      "title": "Investigation \u2014 MarsCoin",
-      "symbol": "MarsCoin",
-      "name": "MarsCoin",
-      "date": "2026-08-05T12:27:19Z",
-      "target": "0xFE1F5ce0A21dD8494a29053A48dda4Eb2Be94444",
+      "file": "investigation-20260805-124307-0xec5196C1.md",
+      "title": "Investigation \u2014 Mars",
+      "symbol": "Mars",
+      "name": "Marscoin",
+      "date": "2026-08-05T12:43:07Z",
+      "target": "0xec5196C10b719abd317FF550006471c9dC2556a0",
       "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "52",
-      "summary": "Risk factors: [-8] Low holder count (123); [-15] Top 10 non-LP/burn holders control 101% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $17,720; [-5] Pair 27.6 days old \u2014 under a month, still unproven; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-122719-0xFE1F5ce0.md"
+      "verdict": "REJECT",
+      "score": "42",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $7,942 (rug/illiquid); [-10] Low liquidity $7,942. Positive evidence: Ownership renounced; 601 holders \u2014 reasonably distributed; 100% of liqui",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-124307-0xec5196C1.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260805-124307-0xec5196C1.md",
+      "title": "Investigation \u2014 Mars",
+      "symbol": "Mars",
+      "name": "Marscoin",
+      "date": "2026-08-05T12:43:07Z",
+      "target": "0xec5196C10b719abd317FF550006471c9dC2556a0",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "42",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $7,942 (rug/illiquid); [-10] Low liquidity $7,942. Positive evidence: Ownership renounced; 601 holders \u2014 reasonably distributed; 100% of liqui",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-124307-0xec5196C1.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260805-122719-0xFE1F5ce0.md",
