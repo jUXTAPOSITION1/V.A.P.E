@@ -1,12 +1,12 @@
 {
-  "generated": "2026-08-05T17:37:48Z",
+  "generated": "2026-08-05T17:40:07Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 448,
+    "reports": 449,
     "reports_by_type": {
+      "bounty": 123,
       "base": 89,
       "macro": 24,
-      "bounty": 122,
       "security": 78,
       "sentiment": 47,
       "bug": 5,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-173743-0x06801832.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-08-05-16.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-08-05T16:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260805_173908.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-05T17:39:08Z",
       "threat": null,
-      "summary": "Date: 2026-08-05 16:27 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-05-16.md",
-      "bytes": 7756
+      "summary": "RECENT EXPLOIT: RISEx $0.673M on ['RISE'] (Access Control Exploit)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260805_173908.md",
+      "bytes": 16240
     }
   },
   "investigations": [
@@ -10588,6 +10588,17 @@
   ],
   "reports": [
     {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260805_173908.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-05T17:39:08Z",
+      "threat": null,
+      "summary": "RECENT EXPLOIT: RISEx $0.673M on ['RISE'] (Access Control Exploit)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260805_173908.md",
+      "bytes": 16240
+    },
+    {
       "kind": "intel",
       "type": "base",
       "file": "base-2026-08-05-16.md",
@@ -11235,17 +11246,6 @@
       "summary": "Cycle: 20260802170036 \u00b7 Data timestamp (UTC): 2026-08-02T17:00:42Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_170036.md",
       "bytes": 16364
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260802_150330.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-02T15:03:30Z",
-      "threat": null,
-      "summary": "Base mover: HOME / WETH 0.3% +45% 24h (liq $57420.7939) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_150330.md",
-      "bytes": 16489
     }
   ],
   "broadcasts": [
