@@ -492,3 +492,4 @@
 {"ts": "2026-08-05T03:13:22.573998Z", "target": "0xEAe6F7e171e0A681004CcEd3c74dC351cd8F6b07", "hired": ["dossier_check"], "paid": 1, "cost_usd": 0.1}
 {"ts": "2026-08-05T03:43:32.368690Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-08-05T04:28:26.373594Z", "target": "0xEAe6F7e171e0A681004CcEd3c74dC351cd8F6b07", "hired": ["rug_pull_alert"], "paid": 1, "cost_usd": 0.03}
+{"ts": "2026-08-05T04:58:39.913841Z", "target": "0xEAe6F7e171e0A681004CcEd3c74dC351cd8F6b07", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01}
