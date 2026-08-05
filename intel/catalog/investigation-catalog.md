@@ -1337,3 +1337,5 @@
 | 2026-08-05 | auto | 0xe85A3fdd5eff4B1f8264ebAa91DD8cf8c7D07777 (GRVT) | deep_investigation | REJECT (0/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-05 | auto | 0x84EDc02Ba3c3388C437f02dfA2FE7707F5097777 (GRVT) | deep_investigation | REJECT (0/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-05 | auto | 0x1E674153229Dc206C681f5De6b2d9aaa21687Ba5 (CHECK) | deep_investigation | REJECT (12/100) | Upgradeable proxy (verify implementation) | +7d |
