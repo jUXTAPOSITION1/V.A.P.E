@@ -187,3 +187,4 @@
 {"ts": "2026-08-05T13:44:33.995877Z", "address": "0x624e2e7fDc8903165F64891672267AB0FCB98831", "chain": "8453", "symbol": "SOSO", "name": "SOSO", "source": "base", "offering": "token_intel"}
 {"ts": "2026-08-05T14:14:28.781964Z", "address": "0x3fe29f85bd9B11eE79Ce69374B5560d8F4488fB2", "chain": "1", "symbol": "STACK", "name": "STACK", "source": "evm", "offering": "token_chart"}
 {"ts": "2026-08-05T16:21:38.259835Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "liquidity_check"}
+{"ts": "2026-08-05T16:52:40.533398Z", "address": "0xf1Bf52E00bF5601EAA7d5F4b490273721E6cBD11", "chain": "1", "symbol": "UNI", "name": "UNI", "source": "evm", "offering": "liquidity_check"}

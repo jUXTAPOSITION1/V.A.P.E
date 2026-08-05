@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T16:44:04Z",
+  "generated": "2026-08-05T16:52:41Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 448,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 153,
-    "investigations": 763,
+    "investigations": 764,
     "news": 71,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260805-163655-0xA311c083.md",
-      "title": "Investigation \u2014 MV",
-      "symbol": "MV",
-      "name": "MV Token",
-      "date": "2026-08-05T16:36:55Z",
-      "target": "0xA311c0837BD9a38cac190bfFBd9f2CdC1Ad4FEAb",
-      "chain": "137 (Polygon)",
+      "file": "investigation-20260805-165231-0x6fe4ff48.md",
+      "title": "Investigation \u2014 CTS",
+      "symbol": "CTS",
+      "name": "CYS",
+      "date": "2026-08-05T16:52:31Z",
+      "target": "0x6fe4ff48F48Bc53120828eb7cbd1FA85F6E57EaA",
+      "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Very few holders (11) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $2 (rug/illiquid); [-10] Low liquidit",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-163655-0xA311c083.md"
+      "score": "25",
+      "summary": "Risk factors: [-20] Very few holders (23) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 80% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-10]",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-165231-0x6fe4ff48.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260805-165231-0x6fe4ff48.md",
+      "title": "Investigation \u2014 CTS",
+      "symbol": "CTS",
+      "name": "CYS",
+      "date": "2026-08-05T16:52:31Z",
+      "target": "0x6fe4ff48F48Bc53120828eb7cbd1FA85F6E57EaA",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "25",
+      "summary": "Risk factors: [-20] Very few holders (23) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 80% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Pair only 0.6 days old (extreme fresh-launch risk); [-10]",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-165231-0x6fe4ff48.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260805-163655-0xA311c083.md",

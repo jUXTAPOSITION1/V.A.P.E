@@ -1327,3 +1327,5 @@
 | 2026-08-05 | auto | 0x1f17582e4c96DfEF934aeEA23a9B2DFB47ffC215 (SYN) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-08-05 | auto | 0xA311c0837BD9a38cac190bfFBd9f2CdC1Ad4FEAb (MV) | deep_investigation | REJECT (0/100) | Very few holders (11) — thin, easily manipulated distribution | +7d |
+
+| 2026-08-05 | auto | 0x6fe4ff48F48Bc53120828eb7cbd1FA85F6E57EaA (CTS) | deep_investigation | REJECT (25/100) | Very few holders (23) — thin, easily manipulated distribution | +7d |
