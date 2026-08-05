@@ -736,3 +736,4 @@
 {"ts": "2026-08-05T16:36:58.244256Z", "target": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c", "hired": ["bridges"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
 {"ts": "2026-08-05T16:52:36.332038Z", "target": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
 {"ts": "2026-08-05T17:07:33.295710Z", "target": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
+{"ts": "2026-08-05T17:22:25.387430Z", "target": "0x801a4f9c2AC1bcb5173753acD377A23A9F0feE4e", "hired": ["yields"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}

@@ -10222,6 +10222,25 @@
     "symbol": "ClankerToken",
     "times_investigated": 2
   },
+  "8453:0x801a4f9c2ac1bcb5173753acd377a23a9f0fee4e": {
+    "address": "0x801a4f9c2AC1bcb5173753acD377A23A9F0feE4e",
+    "chain": "8453",
+    "creator_address": "0x048ef1062cbb39b338ac2685da72adf104b4cef5",
+    "first_investigated": "2026-08-05T17:22:33Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260805-172233-0x801a4f9c.md",
+        "score": 0,
+        "ts": "2026-08-05T17:22:33Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-05T17:22:33Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "CHECK",
+    "times_investigated": 1
+  },
   "8453:0x80f994e39286c2c624ee9f647365c7dc1f4e3fbf": {
     "address": "0x80F994E39286C2c624EE9f647365C7DC1f4e3FbF",
     "chain": "8453",
