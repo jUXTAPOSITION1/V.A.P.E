@@ -1,13 +1,13 @@
 {
-  "generated": "2026-08-05T19:36:54Z",
+  "generated": "2026-08-05T19:37:08Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 450,
     "reports_by_type": {
-      "security": 79,
-      "bounty": 123,
+      "bounty": 124,
       "base": 89,
       "macro": 24,
+      "security": 78,
       "sentiment": 47,
       "bug": 5,
       "mainnet": 5,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-192416-0x1E674153.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-08-05-19.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-08-05T19:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260805_193612.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-05T19:36:12Z",
       "threat": null,
-      "summary": "The current threat landscape indicates a HIGH threat level, with 6 incidents reported in the last 7 days and 1 incident exceeding $50M in the last 14 days. The incidents involve various exploit types, including Access Control Exploit, Price Manipulation Attack, Non-Random Private Key Generation, Private Key Compromised, and Malicious SetT",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-05-19.md",
-      "bytes": 6956
+      "summary": "RECENT EXPLOIT: RISEx $0.673M on ['RISE'] (Access Control Exploit)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260805_193612.md",
+      "bytes": 16237
     }
   },
   "investigations": [
@@ -10630,15 +10630,15 @@
   ],
   "reports": [
     {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-08-05-19.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-08-05T19:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260805_193612.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-05T19:36:12Z",
       "threat": null,
-      "summary": "The current threat landscape indicates a HIGH threat level, with 6 incidents reported in the last 7 days and 1 incident exceeding $50M in the last 14 days. The incidents involve various exploit types, including Access Control Exploit, Price Manipulation Attack, Non-Random Private Key Generation, Private Key Compromised, and Malicious SetT",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-05-19.md",
-      "bytes": 6956
+      "summary": "RECENT EXPLOIT: RISEx $0.673M on ['RISE'] (Access Control Exploit)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260805_193612.md",
+      "bytes": 16237
     },
     {
       "kind": "bounty",
