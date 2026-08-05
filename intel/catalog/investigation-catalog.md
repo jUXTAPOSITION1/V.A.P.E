@@ -1317,3 +1317,5 @@
 | 2026-08-05 | auto | 0x2B31D3eD065F1f834D5C85EFEd49089F4c4f6b07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
 
 | 2026-08-05 | auto | 0xB6bB786056c690e41b20a587573Fd77aade2eb07 (OpenAI) | deep_investigation | REJECT (0/100) | Owner not renounced (0x47be9db008d304546edde72a0f424ebdacdcbfa0) — can still act | +7d |
+
+| 2026-08-05 | auto | 0x0f2D719407FdBeFF09D87557AbB7232601FD9F29 (SYN) | deep_investigation | CAUTION (77/100) | Top 10 non-LP/burn holders control 68% of supply — meaningful concentration | +7d |

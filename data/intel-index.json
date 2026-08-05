@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T15:15:04Z",
+  "generated": "2026-08-05T15:17:29Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 446,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 153,
-    "investigations": 758,
+    "investigations": 759,
     "news": 70,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260805-135931-0xB6bB7860.md",
-      "title": "Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-08-05T13:59:31Z",
-      "target": "0xB6bB786056c690e41b20a587573Fd77aade2eb07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-10] Owner not renounced (0x47be9db008d304546edde72a0f424ebdacdcbfa0) \u2014 can still act on the contract; [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-135931-0xB6bB7860.md"
+      "file": "investigation-20260805-151711-0x0f2D7194.md",
+      "title": "Investigation \u2014 SYN",
+      "symbol": "SYN",
+      "name": "Synapse",
+      "date": "2026-08-05T15:17:11Z",
+      "target": "0x0f2D719407FdBeFF09D87557AbB7232601FD9F29",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "77",
+      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 68% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 10661 holders \u2014 reasonably distributed; Trading 1803+ days without a known incident in this scan; Custom verified source (",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-151711-0x0f2D7194.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260805-151711-0x0f2D7194.md",
+      "title": "Investigation \u2014 SYN",
+      "symbol": "SYN",
+      "name": "Synapse",
+      "date": "2026-08-05T15:17:11Z",
+      "target": "0x0f2D719407FdBeFF09D87557AbB7232601FD9F29",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "77",
+      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 68% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 10661 holders \u2014 reasonably distributed; Trading 1803+ days without a known incident in this scan; Custom verified source (",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-151711-0x0f2D7194.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260805-135931-0xB6bB7860.md",
