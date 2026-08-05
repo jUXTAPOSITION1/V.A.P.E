@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T17:22:36Z",
+  "generated": "2026-08-05T17:37:48Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 448,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 153,
-    "investigations": 765,
+    "investigations": 766,
     "news": 71,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260805-172233-0x801a4f9c.md",
+      "file": "investigation-20260805-173743-0x06801832.md",
       "title": "Investigation \u2014 CHECK",
       "symbol": "CHECK",
       "name": "CHECK",
-      "date": "2026-08-05T17:22:33Z",
-      "target": "0x801a4f9c2AC1bcb5173753acD377A23A9F0feE4e",
+      "date": "2026-08-05T17:37:43Z",
+      "target": "0x068018326d8ABCF258fdce5e28856c5109503Ae3",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
       "score": "0",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ContentCoin (0x31A626996E36a302b06b27283C561d5926db6b7c) \u2014 CAUTION 70/100 \u2014 likely the same serial campaign; [-20] Very few holders (16) \u2014 thin, easily manipulated distribution; [-15] Top 10 n",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-172233-0x801a4f9c.md"
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ContentCoin (0x31A626996E36a302b06b27283C561d5926db6b7c) \u2014 CAUTION 70/100 \u2014 likely the same serial campaign; [-20] Very few holders (13) \u2014 thin, easily manipulated distribution; [-15] Top 10 n",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-173743-0x06801832.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260805-173743-0x06801832.md",
+      "title": "Investigation \u2014 CHECK",
+      "symbol": "CHECK",
+      "name": "CHECK",
+      "date": "2026-08-05T17:37:43Z",
+      "target": "0x068018326d8ABCF258fdce5e28856c5109503Ae3",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ContentCoin (0x31A626996E36a302b06b27283C561d5926db6b7c) \u2014 CAUTION 70/100 \u2014 likely the same serial campaign; [-20] Very few holders (13) \u2014 thin, easily manipulated distribution; [-15] Top 10 n",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-173743-0x06801832.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260805-172233-0x801a4f9c.md",
