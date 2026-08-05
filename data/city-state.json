@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-04T20:02:13Z",
+  "generated_at": "2026-08-05T03:38:39Z",
   "district_stats": {
     "overall_threat_level": "HIGH",
-    "lanes_passing": 8,
+    "lanes_passing": 9,
     "lanes_total": 10,
     "buildings_total": 19
   },
@@ -15,16 +15,16 @@
       "tier": 3,
       "stat_primary": {
         "label": "tracked",
-        "value": 733
+        "value": 747
       },
       "stat_secondary": [
         {
           "label": "reject",
-          "value": 401
+          "value": 412
         },
         {
           "label": "caution",
-          "value": 201
+          "value": 204
         },
         {
           "label": "proceed",
@@ -94,7 +94,7 @@
       "tier": 2,
       "stat_primary": {
         "label": "incidents (56d)",
-        "value": 56
+        "value": 55
       },
       "stat_secondary": [
         {
@@ -159,7 +159,7 @@
       "tier": 3,
       "stat_primary": {
         "label": "findings sealed",
-        "value": 1554
+        "value": 1577
       },
       "stat_secondary": [
         {
@@ -207,7 +207,7 @@
       "tier": 4,
       "stat_primary": {
         "label": "data calls logged",
-        "value": 1785
+        "value": 1842
       },
       "stat_secondary": [],
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/memory",
@@ -435,14 +435,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-04T19:22:11Z"
+          "value": "2026-08-05T01:55:34Z"
         },
         {
           "label": "ledger chain intact",
           "value": "yes"
         }
       ],
-      "last_run_at": "2026-08-04T19:22:11Z",
+      "last_run_at": "2026-08-05T01:55:34Z",
       "source_workflow": "findings-seal.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/findings-seal.yml"
     },
@@ -480,7 +480,7 @@
       "id": "lane-intel-sweeps",
       "kind": "checkpoint",
       "title": "On-Chain Attack Intelligence",
-      "status": "alert",
+      "status": "ok",
       "tier": 1,
       "gridX": 5,
       "gridY": 6,
@@ -495,14 +495,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-04T19:38:37Z"
+          "value": "2026-08-05T02:35:56Z"
         },
         {
           "label": "attack-pattern coverage",
           "value": "23%"
         }
       ],
-      "last_run_at": "2026-08-04T19:38:37Z",
+      "last_run_at": "2026-08-05T02:35:56Z",
       "source_workflow": "intel-sweeps.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/intel-sweeps.yml"
     }
@@ -583,6 +583,110 @@
   ],
   "recent_events": [
     {
+      "id": "investigation:0x55aC7ac5316cDd2bb4219Ecd717171872C757777",
+      "type": "investigation",
+      "timestamp": "2026-08-05T02:13:28Z",
+      "label": "\u5e01\u6709",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x36bbf8bFe6921E137b621668Bda207A287c9442f",
+      "type": "investigation",
+      "timestamp": "2026-08-05T01:12:53Z",
+      "label": "Stack",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x8df8071168fD7a758A97398379eaa3199aF97346",
+      "type": "investigation",
+      "timestamp": "2026-08-05T00:57:43Z",
+      "label": "Stack",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x3fe29f85bd9B11eE79Ce69374B5560d8F4488fB2",
+      "type": "investigation",
+      "timestamp": "2026-08-05T00:42:36Z",
+      "label": "Stack",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xbd0B2307bDa31F2Ff88eDaf5c1e258cD1a55BA71",
+      "type": "investigation",
+      "timestamp": "2026-08-05T00:26:30Z",
+      "label": "Relics Strategy",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x84e51046a4298D436d7c927ccf21Ec0EF6c187Cb",
+      "type": "investigation",
+      "timestamp": "2026-08-05T00:11:29Z",
+      "label": "Elsa",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x8602b3BE38924Ac5330347BB3d41A48EcdD63d5b",
+      "type": "investigation",
+      "timestamp": "2026-08-04T23:56:12Z",
+      "label": "Elsa",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x147636F42a5CA2debF8f60f5f026521BB1767777",
+      "type": "investigation",
+      "timestamp": "2026-08-04T22:55:32Z",
+      "label": "NVDAB",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "news:Bitcoin Magazine's Self-Custody Headline Lands With Zero Extractable Arguments",
+      "type": "news",
+      "timestamp": "2026-08-04T22:13:17Z",
+      "label": "Bitcoin Magazine's Self-Custody Headline Lands With Zero Extractable Arguments"
+    },
+    {
+      "id": "investigation:0x02Fca66C1D1aFB4E2A7884261eB00F63598a7436",
+      "type": "investigation",
+      "timestamp": "2026-08-04T21:53:49Z",
+      "label": "NVIDIA Corp",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x000008D2175F9AEAdDb2430c26f8A6f73c5A0000",
+      "type": "investigation",
+      "timestamp": "2026-08-04T21:37:33Z",
+      "label": "Unitas",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "investigation:0x965BA6FDe178cAe91b8868E2f82b84095c82e9e3",
+      "type": "investigation",
+      "timestamp": "2026-08-04T21:06:30Z",
+      "label": "Audiera AI (beataii.xyz)",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x500A02a20B0B0A3F3efCCFc0559543F5743bd1C4",
+      "type": "investigation",
+      "timestamp": "2026-08-04T20:50:38Z",
+      "label": "o1.exchange",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "investigation:0x708383ae0e80E75377d664E4D6344404dede119A",
+      "type": "investigation",
+      "timestamp": "2026-08-04T20:19:52Z",
+      "label": "Earthmeta",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "investigation:0x64f170A94CC75C406BA1398fD353841ba63a631D",
+      "type": "investigation",
+      "timestamp": "2026-08-04T20:03:33Z",
+      "label": "UB402",
+      "verdict": "REJECT"
+    },
+    {
       "id": "investigation:0x9F178347e7F2975bC4C942d292AE69295dAd3b7d",
       "type": "investigation",
       "timestamp": "2026-08-04T19:48:01Z",
@@ -639,107 +743,6 @@
       "type": "investigation",
       "timestamp": "2026-08-04T14:29:22Z",
       "label": "lefkcoin",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "news:The Developer is the Vector: How a Compromised npm Legend Turned Into a Self-Spreading Claude Code Worm",
-      "type": "news",
-      "timestamp": "2026-08-04T14:12:13Z",
-      "label": "The Developer is the Vector: How a Compromised npm Legend Turned Into a Self-Spreading Claude Code Worm"
-    },
-    {
-      "id": "news:Soft-Spoken Exploits: How 'Vibe Hacking' Bypasses AI Guardrails to Mint Junior Threat Actors",
-      "type": "news",
-      "timestamp": "2026-08-04T13:57:01Z",
-      "label": "Soft-Spoken Exploits: How 'Vibe Hacking' Bypasses AI Guardrails to Mint Junior Threat Actors"
-    },
-    {
-      "id": "investigation:0xAc1166e5DBE8E22BA964AD7B5e97B5c9F7FA4444",
-      "type": "investigation",
-      "timestamp": "2026-08-04T13:43:38Z",
-      "label": "Jesus bless you.",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x1a44233FAe8D50F1AeB3a5d58dd426ff4814Cb53",
-      "type": "investigation",
-      "timestamp": "2026-08-04T13:28:05Z",
-      "label": "Squid",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x16E3dcDD5d0e004A3AB62b5Ef5B34618cA9156c1",
-      "type": "investigation",
-      "timestamp": "2026-08-04T13:12:28Z",
-      "label": "Relics Strategy",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x0C69199C1562233640e0Db5Ce2c399A88eB507C7",
-      "type": "investigation",
-      "timestamp": "2026-08-04T12:57:15Z",
-      "label": "Cysic Token",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x477DF393C9FC7bA6d04Cc0a9Cd092B5D84079a26",
-      "type": "investigation",
-      "timestamp": "2026-08-04T12:42:01Z",
-      "label": "john lefk",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xE82b78d3590135a7EF1464Ab601eaE74E5F87777",
-      "type": "investigation",
-      "timestamp": "2026-08-04T12:26:59Z",
-      "label": "UNEMPLOYED AI",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x58Ed924B2bF65be4594BFF2A5aa37C44e0488C01",
-      "type": "investigation",
-      "timestamp": "2026-08-04T12:11:50Z",
-      "label": "UnifAI",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xEAe6F7e171e0A681004CcEd3c74dC351cd8F6b07",
-      "type": "investigation",
-      "timestamp": "2026-08-04T11:56:38Z",
-      "label": "OpenAI",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xf5Cf97fE106c4C43b8823dc0Df201AC737834444",
-      "type": "investigation",
-      "timestamp": "2026-08-04T11:41:29Z",
-      "label": "Jobless",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "news:Shared Hosting Isolation Shattered: Critical cPanel Bug Grants Tenants Database Root Power",
-      "type": "news",
-      "timestamp": "2026-08-04T11:24:53Z",
-      "label": "Shared Hosting Isolation Shattered: Critical cPanel Bug Grants Tenants Database Root Power"
-    },
-    {
-      "id": "news:MSP Supply Chain Threat Escalates as CISA Flags Actively Exploited N-able RMM Vulnerability",
-      "type": "news",
-      "timestamp": "2026-08-04T08:37:59Z",
-      "label": "MSP Supply Chain Threat Escalates as CISA Flags Actively Exploited N-able RMM Vulnerability"
-    },
-    {
-      "id": "investigation:0x7a7C5a2dBff5e916c570c8Ef61e2DC253242e5F7",
-      "type": "investigation",
-      "timestamp": "2026-08-04T06:39:29Z",
-      "label": "Polaris Shiba",
-      "verdict": "PROCEED"
-    },
-    {
-      "id": "investigation:0x867c3370Ca238E38Bf8f59E7817d8872FFc49d94",
-      "type": "investigation",
-      "timestamp": "2026-08-04T06:23:28Z",
-      "label": "SpaceX",
       "verdict": "REJECT"
     }
   ]
