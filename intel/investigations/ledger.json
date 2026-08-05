@@ -11028,6 +11028,25 @@
     "symbol": "BRIAN",
     "times_investigated": 1
   },
+  "8453:0xb6bb786056c690e41b20a587573fd77aade2eb07": {
+    "address": "0xB6bB786056c690e41b20a587573Fd77aade2eb07",
+    "chain": "8453",
+    "creator_address": "0x47be9db008d304546edde72a0f424ebdacdcbfa0",
+    "first_investigated": "2026-08-05T13:59:31Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260805-135931-0xB6bB7860.md",
+        "score": 0,
+        "ts": "2026-08-05T13:59:31Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-05T13:59:31Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "OpenAI",
+    "times_investigated": 1
+  },
   "8453:0xb6fc4bc614bc3275c36d609b7a9e1f5017274ab1": {
     "address": "0xB6fc4bc614BC3275C36D609B7a9E1f5017274aB1",
     "chain": "8453",

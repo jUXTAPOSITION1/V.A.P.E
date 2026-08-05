@@ -728,3 +728,4 @@
 {"ts": "2026-08-05T12:27:25.508874Z", "target": "0x2B31D3eD065F1f834D5C85EFEd49089F4c4f6b07", "hired": ["dossier_check"], "paid": 1, "cost_usd": 0.1, "daily_target": 62}
 {"ts": "2026-08-05T12:59:04.403500Z", "target": "0x2B31D3eD065F1f834D5C85EFEd49089F4c4f6b07", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
 {"ts": "2026-08-05T13:29:38.872351Z", "target": "0x624e2e7fDc8903165F64891672267AB0FCB98831", "hired": ["dossier_check"], "paid": 1, "cost_usd": 0.1, "daily_target": 62}
+{"ts": "2026-08-05T13:59:25.205500Z", "target": "0xB6bB786056c690e41b20a587573Fd77aade2eb07", "hired": ["rug_pull_alert"], "paid": 1, "cost_usd": 0.03, "daily_target": 62}
