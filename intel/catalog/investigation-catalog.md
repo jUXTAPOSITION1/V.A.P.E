@@ -1301,3 +1301,5 @@
 | 2026-08-05 | auto | 0x73ADFA3A448D63025D52E39f921369386E4fCB07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
 
 | 2026-08-05 | auto | 0x444416A582466fDAE0f2Fcdf0A859675f8fF6e9f (MarsCoin) | deep_investigation | PROCEED (85/100) | Top 10 non-LP/burn holders control 84% of supply — concentrated, easily manipula | +7d |
+
+| 2026-08-05 | auto | 0x7649080D56b9a6062378fb26a01A04c840ce7B07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
