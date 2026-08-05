@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T16:27:40Z",
+  "generated": "2026-08-05T16:37:01Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 448,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 153,
-    "investigations": 762,
+    "investigations": 763,
     "news": 70,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260805-162119-0x1f17582e.md",
-      "title": "Investigation \u2014 SYN",
-      "symbol": "SYN",
-      "name": "Synergy",
-      "date": "2026-08-05T16:21:19Z",
-      "target": "0x1f17582e4c96DfEF934aeEA23a9B2DFB47ffC215",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260805-163655-0xA311c083.md",
+      "title": "Investigation \u2014 MV",
+      "symbol": "MV",
+      "name": "MV Token",
+      "date": "2026-08-05T16:36:55Z",
+      "target": "0xA311c0837BD9a38cac190bfFBd9f2CdC1Ad4FEAb",
+      "chain": "137 (Polygon)",
       "verdict": "REJECT",
       "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Very few holders (23) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 22% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidi",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-162119-0x1f17582e.md"
+      "summary": "Risk factors: [-20] Very few holders (11) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $2 (rug/illiquid); [-10] Low liquidit",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-163655-0xA311c083.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260805-163655-0xA311c083.md",
+      "title": "Investigation \u2014 MV",
+      "symbol": "MV",
+      "name": "MV Token",
+      "date": "2026-08-05T16:36:55Z",
+      "target": "0xA311c0837BD9a38cac190bfFBd9f2CdC1Ad4FEAb",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Very few holders (11) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $2 (rug/illiquid); [-10] Low liquidit",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-163655-0xA311c083.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260805-162119-0x1f17582e.md",
