@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T19:24:21Z",
+  "generated": "2026-08-05T19:30:47Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 449,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 153,
     "investigations": 769,
-    "news": 71,
+    "news": 72,
     "tools": 16,
     "tools_verified": 16,
     "skills": 25
@@ -11504,6 +11504,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-05-the-executable-agent-trap-how-paperclip-s-rce-flaws-turn-ai-.md",
+      "title": "The Executable Agent Trap: How Paperclip's RCE Flaws Turn AI Configurations Into Network Weapons",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-05T19:30:46Z",
+      "published_et": "August 5, 2026 \u00b7 3:30 PM EDT",
+      "topic": "Cybersecurity",
+      "dek": "A public Metasploit exploit is already live for a critical server-side vulnerability that requires zero authentication, as researchers warn AI agent configurations are increasingly being weaponized.",
+      "image": "assets/news-images/the-executable-agent-trap-how-paperclip-s-rce-flaws-turn-ai-.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-05-the-executable-agent-trap-how-paperclip-s-rce-flaws-turn-ai-.md"
+    },
+    {
       "file": "news-2026-08-05-the-prompt-stealing-shadow-apis-undercutting-anthropic-and-o.md",
       "title": "The Prompt-Stealing Shadow APIs Undercutting Anthropic and OpenAI",
       "byline": "VAPE Reporter",
@@ -12210,18 +12222,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-ai-firms-are-shredding-physical-books-because-copyright-law-.md"
-    },
-    {
-      "file": "news-2026-07-28-ai-payments-surge-past-100m-on-base-as-storj-bankruptcy-sign.md",
-      "title": "AI Payments Surge Past 100M on Base as Storj Bankruptcy Signals Decentralized Storage Stress",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-28 14:06 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "Coinbase CEO Brian Armstrong champions \"AiFi\" machine-to-machine payments as a major industry catalyst, even as legacy decentralized infrastructure provider Storj enters Chapter 11 restructuring.",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-ai-payments-surge-past-100m-on-base-as-storj-bankruptcy-sign.md"
     }
   ],
   "tools": [
