@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T05:43:27Z",
+  "generated": "2026-08-05T05:47:53Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 439,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 151,
     "investigations": 747,
-    "news": 67,
+    "news": 68,
     "tools": 16,
     "tools_verified": 16,
     "skills": 25
@@ -11196,6 +11196,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-05-stolen-36m-coldcard-bitcoin-haul-turned-into-on-chain-beggin.md",
+      "title": "Stolen $36M Coldcard Bitcoin Haul Turned Into On-Chain Begging Board",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-05T05:47:53Z",
+      "published_et": "August 5, 2026 \u00b7 1:47 AM EDT",
+      "topic": "Crypto Markets",
+      "dek": "Victims and hustlers are now paying fees to etch permanent messages directly onto the thief's address after the hardware-wallet exploit.",
+      "image": "assets/news-images/stolen-36m-coldcard-bitcoin-haul-turned-into-on-chain-beggin.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-05-stolen-36m-coldcard-bitcoin-haul-turned-into-on-chain-beggin.md"
+    },
+    {
       "file": "news-2026-08-04-bitcoin-magazine-s-self-custody-headline-lands-with-zero-ext.md",
       "title": "Bitcoin Magazine's Self-Custody Headline Lands With Zero Extractable Arguments",
       "byline": "VAPE Reporter",
@@ -11902,18 +11914,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-global-risk-off-wave-triggers-10-kospi-crash-and-bitcoin-sli.md"
-    },
-    {
-      "file": "news-2026-07-28-coinbase-flags-100m-ai-payments-on-base-but-provides-no-supp.md",
-      "title": "Coinbase Flags 100M AI Payments on Base but Provides No Supporting Data",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-28 02:35 UTC",
-      "published_et": null,
-      "topic": "Base",
-      "dek": "A headline-only claim from Coinbase's CEO leaves the scale and mechanics of agentic finance on Base unverified.",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image or source photo available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-coinbase-flags-100m-ai-payments-on-base-but-provides-no-supp.md"
     }
   ],
   "tools": [

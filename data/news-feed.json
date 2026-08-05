@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T22:11:49Z",
+  "generated": "2026-08-05T05:46:40Z",
   "count": 60,
   "headlines": [
     {
@@ -27,6 +27,86 @@
       "crypto": true
     },
     {
+      "title": "\"You stole, please return some.\" Coldcard hacker's wallet becomes a graffiti wall of pleas and hustles",
+      "url": "https://www.coindesk.com/markets/2026/08/05/you-stole-please-return-some-coldcard-hacker-s-wallet-becomes-a-graffiti-wall-of-pleas-and-hustles",
+      "source": "CoinDesk",
+      "published": "Wed, 05 Aug 2026 05:12:46 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Hut 8 Stock Slides 9.7% Despite 81% Revenue Surge in Q2",
+      "url": "https://beincrypto.com/hut-8-stock-q2-2026-earnings/",
+      "source": "BeInCrypto",
+      "published": "Wed, 05 Aug 2026 05:12:15 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Nikkei 225 Jumps 3% as Chip Stocks Rally on Iran Deal Hopes",
+      "url": "https://beincrypto.com/nikkei-225-chip-stocks-iran-deal/",
+      "source": "BeInCrypto",
+      "published": "Wed, 05 Aug 2026 04:58:36 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin flat at $64,000 as stocks print records and Hormuz deal nears",
+      "url": "https://www.coindesk.com/markets/2026/08/05/bitcoin-flat-at-usd64-000-as-stocks-print-records-and-hormuz-deal-nears",
+      "source": "CoinDesk",
+      "published": "Wed, 05 Aug 2026 04:32:16 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bybit\u2019s EU payments arm secures Austrian e-money license",
+      "url": "https://cointelegraph.com/news/bybit-austria-electronic-money-license-europe-payments?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Wed, 05 Aug 2026 04:03:16 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Palantir Short Sellers Lose $3 Billion After 30% Earnings Rally",
+      "url": "https://beincrypto.com/palantir-short-sellers-billion-loss/",
+      "source": "BeInCrypto",
+      "published": "Wed, 05 Aug 2026 02:38:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Ethereum researchers want to rein in staking; critics say it could backfire",
+      "url": "https://cointelegraph.com/news/ethereum-researchers-want-to-rein-in-staking-critics-say-it-could-backfire?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Wed, 05 Aug 2026 02:30:07 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Whale Rock\u2019s AI Bet Turns Volatile: July Losses Erase Half of 2026 Gains",
+      "url": "https://beincrypto.com/whale-rock-ai-selloff-hedge-fund/",
+      "source": "BeInCrypto",
+      "published": "Wed, 05 Aug 2026 02:22:44 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Dow and S&P 500 Hit Records on AI Earnings: When Will the Bubble Burst?",
+      "url": "https://beincrypto.com/dow-sp-500-record-ai-earnings/",
+      "source": "BeInCrypto",
+      "published": "Wed, 05 Aug 2026 02:00:20 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Institutions Now Drive 72% of Crypto\u2019s OTC Flow, Wintermute Data Shows",
+      "url": "https://beincrypto.com/institutions-drive-72-percent-otc-flow/",
+      "source": "BeInCrypto",
+      "published": "Wed, 05 Aug 2026 01:50:31 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
       "title": "Microsoft Patches a Record 570 Security Flaws",
       "url": "https://krebsonsecurity.com/2026/07/microsoft-patches-a-record-570-security-flaws/",
       "source": "Krebs on Security",
@@ -35,11 +115,59 @@
       "crypto": true
     },
     {
+      "title": "GameStop plans $1.4 billion stock swap as Bitcoin collateral risk emerges",
+      "url": "https://cryptoslate.com/gamestop-plans-1-4-billion-stock-swap-as-bitcoin-collateral-risk-emerges/",
+      "source": "CryptoSlate",
+      "published": "Tue, 04 Aug 2026 23:30:19 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
       "title": "Greatness PhaaS Adds Device Code Phishing to Bypass MFA and Steal Tokens",
       "url": "https://thehackernews.com/2026/08/greatness-phaas-adds-device-code.html",
       "source": "The Hacker News",
       "published": "Tue, 04 Aug 2026 22:57:39 +0530",
       "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Three Missouri men charged over alleged plot to steal bitcoin through home invasion",
+      "url": "https://www.theblock.co/post/410688/three-missouri-men-charged-bitcoin-home-invasion?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Tue, 04 Aug 2026 22:47:25 -0400",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "This Bitcoin Bridge Shut Itself Down Because AI Was Finding Bugs Too Fast",
+      "url": "https://decrypt.co/374933/bitcoin-bridge-shuts-down-ai-finding-bugs-too-fast",
+      "source": "Decrypt",
+      "published": "Tue, 04 Aug 2026 22:46:03 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Crypto \u2018will be fine\u2019 even if Clarity fails to pass this week, Bitwise CIO Matt Hougan says",
+      "url": "https://www.theblock.co/post/410676/crypto-will-be-fine-if-clarity-fails-matt-hougan?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Tue, 04 Aug 2026 22:31:03 -0400",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "AI Enthusiast Bugs His Toddler's Sleepover and Feeds It to Claude\u2014The Internet Bugs Back",
+      "url": "https://decrypt.co/374930/ai-enthusiast-bugged-toddler-sleepover-claude",
+      "source": "Decrypt",
+      "published": "Tue, 04 Aug 2026 22:16:03 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Hashdex is shutting down its Bitcoin ETF, leaving investors with just days to sell before a blind, unpredictable cash out",
+      "url": "https://cryptoslate.com/hashdex-is-shutting-down-its-bitcoin-etf-leaving-investors-with-just-days-to-sell-before-a-blind-unpredictable-cash-out/",
+      "source": "CryptoSlate",
+      "published": "Tue, 04 Aug 2026 22:15:54 +0000",
+      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -80,14 +208,6 @@
       "source": "TechCrunch AI",
       "published": "Tue, 04 Aug 2026 21:07:26 +0000",
       "topic": "AI",
-      "crypto": true
-    },
-    {
-      "title": "AMD Earnings Beat Estimates and Stock Falls 8%: Was the Bar Too High?",
-      "url": "https://beincrypto.com/amd-q2-2026-earnings-beat-selloff/",
-      "source": "BeInCrypto",
-      "published": "Tue, 04 Aug 2026 20:57:10 +0000",
-      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -139,14 +259,6 @@
       "crypto": true
     },
     {
-      "title": "SpaceX Crypto Holdings Drop $539 Million as Debut Earnings Beat Wall Street",
-      "url": "https://beincrypto.com/spacex-wall-street-blowout-first-earnings/",
-      "source": "BeInCrypto",
-      "published": "Tue, 04 Aug 2026 20:12:33 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Open-weight AI models are catching up to the frontier. The safety gap remains.",
       "url": "https://techcrunch.com/2026/08/04/open-weight-ai-models-are-catching-up-to-the-frontier-the-safety-gap-remains/",
       "source": "TechCrunch AI",
@@ -179,11 +291,11 @@
       "crypto": true
     },
     {
-      "title": "SpaceX Joins a Club It Was Missing From In New Nvidia Deal: How Will Stocks React?",
-      "url": "https://beincrypto.com/nvidia-spacex-ai-satellites-stocks-react/",
-      "source": "BeInCrypto",
-      "published": "Tue, 04 Aug 2026 19:40:56 +0000",
-      "topic": "Crypto Markets",
+      "title": "OpenAI, Anthropic AI agents targeted real people and systems in cyber tests",
+      "url": "https://www.bleepingcomputer.com/news/security/openai-anthropic-ai-agents-targeted-real-people-and-systems-in-cyber-tests/",
+      "source": "BleepingComputer",
+      "published": "Tue, 04 Aug 2026 19:39:59 -0400",
+      "topic": "Cybersecurity",
       "crypto": true
     },
     {
@@ -211,14 +323,6 @@
       "crypto": true
     },
     {
-      "title": "Coldcard Bitcoin Exploit Explained: Entropy, How Keys Are Generated, and Why Bits Matter",
-      "url": "https://decrypt.co/374916/coldcard-bitcoin-exploit-explained-entropy-keys-bits",
-      "source": "Decrypt",
-      "published": "Tue, 04 Aug 2026 19:11:36 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Keyv-Linked npm Worm Poisons Hundreds of Packages, Plants Claude Code and VS Code Hooks",
       "url": "https://thehackernews.com/2026/08/keyv-linked-npm-worm-poisons-hundreds.html",
       "source": "The Hacker News",
@@ -235,27 +339,11 @@
       "crypto": true
     },
     {
-      "title": "Solana Proposal Would Increase Daily SOL Burns More Than 10-Fold",
-      "url": "https://decrypt.co/374915/solana-proposal-increase-daily-sol-burns-10-fold",
-      "source": "Decrypt",
-      "published": "Tue, 04 Aug 2026 18:46:11 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Fake Adobe and Zoom Updates Install ScreenConnect for Persistent Remote Access",
       "url": "https://thehackernews.com/2026/08/fake-adobe-and-zoom-updates-install.html",
       "source": "The Hacker News",
       "published": "Tue, 04 Aug 2026 18:41:22 +0530",
       "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "SpaceX Stock Could 3x by Friday, a $20 Million Options Trade Shows",
-      "url": "https://beincrypto.com/spacex-stock-options-trade-triple/",
-      "source": "BeInCrypto",
-      "published": "Tue, 04 Aug 2026 18:34:47 +0000",
-      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -267,18 +355,26 @@
       "crypto": true
     },
     {
-      "title": "Open USD rattled Circle's stock, but its key backers still support USDC",
-      "url": "https://www.coindesk.com/business/2026/08/03/open-usd-rattled-circle-s-stock-but-its-key-backers-still-support-usdc",
-      "source": "CoinDesk",
-      "published": "Tue, 04 Aug 2026 17:55:23 +0000",
+      "title": "TP-Link patches Omada ZTP flaws allowing hackers to breach networks",
+      "url": "https://www.bleepingcomputer.com/news/security/tp-link-patches-omada-ztp-flaws-allowing-hackers-to-breach-networks/",
+      "source": "BleepingComputer",
+      "published": "Tue, 04 Aug 2026 18:18:20 -0400",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Tribal gaming regulators, senators make a renewed push to add prediction markets provision to Clarity Act",
+      "url": "https://www.theblock.co/post/410668/tribal-gaming-regulators-senators-make-renewed-push-add-prediction-markets-provision-clarity-act?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Tue, 04 Aug 2026 18:15:26 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
     {
-      "title": "Sam Bankman-Fried (SBF) Appeal Mandate Issued, Only One Strand of Hope Left",
-      "url": "https://beincrypto.com/sbf-appeal-mandate-one-strand-hope-left/",
-      "source": "BeInCrypto",
-      "published": "Tue, 04 Aug 2026 17:55:15 +0000",
+      "title": "Open USD rattled Circle's stock, but its key backers still support USDC",
+      "url": "https://www.coindesk.com/business/2026/08/03/open-usd-rattled-circle-s-stock-but-its-key-backers-still-support-usdc",
+      "source": "CoinDesk",
+      "published": "Tue, 04 Aug 2026 17:55:23 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -319,14 +415,6 @@
       "url": "https://cointelegraph.com/news/bny-galaxy-institutional-crypto-staking-custody?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
       "source": "Cointelegraph",
       "published": "Tue, 04 Aug 2026 17:10:04 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Amazon\u2019s $3 Trillion Record Lasts One Day as Stock Takes Big Hit",
-      "url": "https://beincrypto.com/bezos-amazon-stock-sale-filing/",
-      "source": "BeInCrypto",
-      "published": "Tue, 04 Aug 2026 17:06:08 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -387,99 +475,11 @@
       "crypto": true
     },
     {
-      "title": "Washington gave crypto every legal win it begged for then lost the market anyway",
-      "url": "https://cryptoslate.com/wall-street-etfs-were-hailed-as-cryptos-ultimate-savior-but-making-bitcoin-easy-to-buy-just-made-it-easy-to-dump/",
-      "source": "CryptoSlate",
-      "published": "Tue, 04 Aug 2026 16:10:23 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "New cPanel Critical Flaw Could Let Hosting Customers Run SQL as Database Root",
       "url": "https://thehackernews.com/2026/08/new-cpanel-critical-flaw-could-let.html",
       "source": "The Hacker News",
       "published": "Tue, 04 Aug 2026 16:06:27 +0530",
       "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "Bitdeer expands AI infrastructure with long-term $4.7B data center lease",
-      "url": "https://cointelegraph.com/news/bitdeer-ai-data-center-lease-norway?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Tue, 04 Aug 2026 15:50:20 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Spotify expands AI remix and covers project with Merlin partnership",
-      "url": "https://techcrunch.com/2026/08/04/spotify-adds-merlin-to-its-ai-music-remix-and-covers-effort/",
-      "source": "TechCrunch AI",
-      "published": "Tue, 04 Aug 2026 15:50:06 +0000",
-      "topic": "AI",
-      "crypto": true
-    },
-    {
-      "title": "Ethereum researchers propose burning validator rewards to cap staking at 50%",
-      "url": "https://www.theblock.co/post/410643/ethereum-researchers-propose-burning-validator-rewards-cap-staking-50?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Tue, 04 Aug 2026 15:49:58 -0400",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Wells Fargo joins JPMorgan and Citi in the race to tokenize Wall Street\u2019s settlement rails",
-      "url": "https://www.coindesk.com/business/2026/08/04/wells-fargo-to-offer-tokenized-deposits-for-24-7-corporate-payments",
-      "source": "CoinDesk",
-      "published": "Tue, 04 Aug 2026 15:47:05 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Cloudflare kicks off stablecoin wallet rollout for AI agents to pay for APIs and online content",
-      "url": "https://www.theblock.co/post/410629/cloudflare-kicks-off-stablecoin-wallet-rollout-ai-agents-pay-apis-online-content?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Tue, 04 Aug 2026 15:33:11 -0400",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "New XCSSET variant targets macOS devs via compromised Xcode projects",
-      "url": "https://www.bleepingcomputer.com/news/security/new-xcsset-variant-targets-macos-devs-via-compromised-xcode-projects/",
-      "source": "BleepingComputer",
-      "published": "Tue, 04 Aug 2026 15:03:09 -0400",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "Oligo Raises $60 Million for Runtime Security",
-      "url": "https://www.securityweek.com/oligo-raises-60-million-for-runtime-security/",
-      "source": "SecurityWeek",
-      "published": "Tue, 04 Aug 2026 15:00:00 +0000",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "77 Open VSX extensions found harvesting developer info",
-      "url": "https://www.bleepingcomputer.com/news/security/77-open-vsx-extensions-found-harvesting-developer-info/",
-      "source": "BleepingComputer",
-      "published": "Tue, 04 Aug 2026 14:50:55 -0400",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "Why Bitcoiners should care that Washington joined a $96B yen rescue to shield over $1 trillion in US Treasuries",
-      "url": "https://cryptoslate.com/why-bitcoiners-should-care-that-washington-has-joined-a-96-billion-yen-rescue-to-shield-1-14-trillion-in-us-treasuries-from-a-forced-selloff/",
-      "source": "CryptoSlate",
-      "published": "Tue, 04 Aug 2026 14:50:22 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Bitcoin\u2019s $63,000 zone emerges as key battleground for buyers: Glassnode",
-      "url": "https://www.coindesk.com/markets/2026/08/04/bitcoin-s-usd63-000-zone-emerges-as-key-battleground-for-buyers-glassnode",
-      "source": "CoinDesk",
-      "published": "Tue, 04 Aug 2026 14:49:33 +0000",
-      "topic": "Crypto Markets",
       "crypto": true
     }
   ]
