@@ -1313,3 +1313,5 @@
 | 2026-08-05 | auto | 0xec5196C10b719abd317FF550006471c9dC2556a0 (Mars) | deep_investigation | REJECT (42/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-05 | auto | 0x45cd1A07651edf0AabedefFA878b7fDA3DB3863B (MarsCoin) | deep_investigation | REJECT (15/100) | Top 10 non-LP/burn holders control 100% of supply — concentrated, easily manipul | +7d |
+
+| 2026-08-05 | auto | 0x2B31D3eD065F1f834D5C85EFEd49089F4c4f6b07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
