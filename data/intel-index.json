@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T00:26:42Z",
+  "generated": "2026-08-05T00:42:37Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 436,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 150,
-    "investigations": 743,
+    "investigations": 744,
     "news": 67,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260805-002630-0xbd0B2307.md",
-      "title": "Investigation \u2014 RELICSSTR",
-      "symbol": "RELICSSTR",
-      "name": "Relics Strategy",
-      "date": "2026-08-05T00:26:30Z",
-      "target": "0xbd0B2307bDa31F2Ff88eDaf5c1e258cD1a55BA71",
+      "file": "investigation-20260805-004236-0x3fe29f85.md",
+      "title": "Investigation \u2014 STACK",
+      "symbol": "STACK",
+      "name": "Stack",
+      "date": "2026-08-05T00:42:36Z",
+      "target": "0x3fe29f85bd9B11eE79Ce69374B5560d8F4488fB2",
       "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "5",
-      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $5,010 (rug/illiquid); [-10] Low liquidity $5,010; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No know",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-002630-0xbd0B2307.md"
+      "score": "20",
+      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $25,756; [-10] Violent 24h move +1862% (volatility/manipulation); [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-1",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-004236-0x3fe29f85.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260805-004236-0x3fe29f85.md",
+      "title": "Investigation \u2014 STACK",
+      "symbol": "STACK",
+      "name": "Stack",
+      "date": "2026-08-05T00:42:36Z",
+      "target": "0x3fe29f85bd9B11eE79Ce69374B5560d8F4488fB2",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "20",
+      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $25,756; [-10] Violent 24h move +1862% (volatility/manipulation); [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-1",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-004236-0x3fe29f85.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260805-002630-0xbd0B2307.md",

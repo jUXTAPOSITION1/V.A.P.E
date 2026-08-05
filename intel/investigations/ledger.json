@@ -1992,6 +1992,25 @@
     "symbol": "V4",
     "times_investigated": 1
   },
+  "1:0x3fe29f85bd9b11ee79ce69374b5560d8f4488fb2": {
+    "address": "0x3fe29f85bd9B11eE79Ce69374B5560d8F4488fB2",
+    "chain": "1",
+    "creator_address": "0xdab816b7cf3bf030d294c29222e431e968f82c71",
+    "first_investigated": "2026-08-05T00:42:36Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260805-004236-0x3fe29f85.md",
+        "score": 20,
+        "ts": "2026-08-05T00:42:36Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-05T00:42:36Z",
+    "last_score": 20,
+    "last_verdict": "REJECT",
+    "symbol": "STACK",
+    "times_investigated": 1
+  },
   "1:0x420658a1d8b8f5c36ddaf1bb828f347ba9011969": {
     "address": "0x420658A1d8B8F5C36DdAf1Bb828f347Ba9011969",
     "chain": "1",

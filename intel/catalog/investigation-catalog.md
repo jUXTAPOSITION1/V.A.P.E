@@ -1287,3 +1287,5 @@
 | 2026-08-05 | auto | 0x84e51046a4298D436d7c927ccf21Ec0EF6c187Cb (ELSA) | deep_investigation | REJECT (0/100) | Very few holders (14) — thin, easily manipulated distribution | +7d |
 
 | 2026-08-05 | auto | 0xbd0B2307bDa31F2Ff88eDaf5c1e258cD1a55BA71 (RELICSSTR) | deep_investigation | REJECT (5/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
+
+| 2026-08-05 | auto | 0x3fe29f85bd9B11eE79Ce69374B5560d8F4488fB2 (STACK) | deep_investigation | REJECT (20/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
