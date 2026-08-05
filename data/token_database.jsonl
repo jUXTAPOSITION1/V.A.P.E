@@ -179,3 +179,4 @@
 {"ts": "2026-08-05T02:58:22.038500Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "token_intel"}
 {"ts": "2026-08-05T05:28:37.507135Z", "address": "0xCFB287565201763743A77c556dcA44A673d0a777", "chain": "137", "symbol": "RISE", "name": "RISE", "source": "evm", "offering": "token_safety_check"}
 {"ts": "2026-08-05T05:58:32.779825Z", "address": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf", "chain": "8453", "symbol": "cbBTC", "name": "CBBTC Coinbase Wrapped BTC", "source": "base_trending", "offering": "dossier_check"}
+{"ts": "2026-08-05T08:27:40.027695Z", "address": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "chain": "8453", "symbol": "HOME", "name": "HOME", "source": "base", "offering": "dossier_check"}
