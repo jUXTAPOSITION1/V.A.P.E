@@ -1,23 +1,23 @@
-# skills/bsc_token_investigation.md
+# skills/bsc-token-investigation.md
 
 ## when-to-use
-Run when a BSC token address shows thin holder distribution, low liquidity, or unverified claims in news_reporter.py output; use before any market_data or wallet_trace follow-up to produce a numeric safety score and verdict.
+Run before interacting with any BSC (chain 56) token contract when recent findings show patterns of owner-not-renounced, unlocked liquidity, or concentrated holders (e.g., targets 0x500A02a2, 0x965BA6FD, 0x000008D2, 0x02Fca66C).
 
 ## step-by-step procedure
-1. Invoke `agents/investigate.py` with the target BSC address (e.g., `0x3C0541e68CE0F1F9073E4BA3Db81b730Eb614444` or `0x9a6Cb2C43A3454c8DB4e89e4e031FDcFC8769A02`).
-2. Capture the raw score, verdict, and penalty list directly from the agent output (example penalties: -20 for <25 holders, -15 for top-10 control >85%, -25 for liquidity <$10, -10 for unaudited).
-3. Cross-check the same address against `agents/news_reporter.py` intel-sweep tags for any matching "crypto markets" or "stablecoins" headlines; flag any headline-only claims lacking metrics.
-4. Record final verdict and report path (e.g., `intel/investigations/investigation-20260728-001613-0x3C0541e6.md`).
-5. If score <60, halt further tool calls; if 60-80, proceed only with `token_safety` and `market_data` wrappers.
+1. Invoke `agents/investigate.py` with target address and chain=56.
+2. Cross-check output against `token_safety` wrapper for honeypot/mint/liquidity signals.
+3. Run `contract_recon` on the same address to confirm owner status and proxy flags.
+4. Feed holder concentration and liquidity-lock data into `market_data` for liquidity age and distribution metrics.
+5. Record verdict (REJECT/CAUTION) and write report to `intel/investigations/investigation-YYYYMMDD-HHMMSS-<addr>.md`.
 
 ## quality gates
-- Score must be produced by `agents/investigate.py` with explicit penalty breakdown; no manual overrides.
-- Verdict matches observed thresholds: REJECT at 0/100, CAUTION at 55/100.
-- All cited news headlines must be tagged "thin-data" or "sparse-data" when body/metrics are absent.
+- All four wrappers (`agents/investigate.py`, `token_safety`, `contract_recon`, `market_data`) must return without error.
+- Score threshold: <30 triggers REJECT; 30-70 triggers CAUTION with explicit owner/liquidity notes.
+- Report must list at least the top three negative factors from real findings (owner, concentration, liquidity lock).
 
 ## limitations
-- Agent only evaluates on-chain distribution and liquidity at scan time; does not detect post-scan liquidity removal.
-- Findings limited to BSC chain (chain id 56) and addresses with <10k holders.
-- Expert review may disagree with agent verdict when holder count >9000 and trading history >100 days despite 100% top-holder concentration.
+- Only validated on BSC chain 56; no coverage for other chains.
+- Relies on public on-chain data at time of run; does not detect off-chain team actions.
+- `agents/investigate.py` confidence ranges 0.75-0.9; manual review required for borderline scores.
 
-_Distilled 2026-07-28T08:40:57Z from real SKILLFORGE memory._
+_Distilled 2026-08-05T08:42:01Z from real SKILLFORGE memory._
