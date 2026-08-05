@@ -704,3 +704,4 @@
 {"ts": "2026-08-05T00:26:33.767695Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["stablecoins"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
 {"ts": "2026-08-05T00:57:46.489888Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
 {"ts": "2026-08-05T01:27:52.587281Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["stablecoins"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
+{"ts": "2026-08-05T01:58:02.156835Z", "target": "0x3221BAEB0c2745e39A1dbA73CD413361b7f5Fe13", "hired": ["rug_pull_alert"], "paid": 1, "cost_usd": 0.03, "daily_target": 62}
