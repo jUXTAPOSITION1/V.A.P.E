@@ -185,3 +185,4 @@
 {"ts": "2026-08-05T12:12:22.298104Z", "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "chain": "8453", "symbol": "USDC", "name": "USDC", "source": "base_trending", "offering": "token_intel"}
 {"ts": "2026-08-05T13:14:42.395975Z", "address": "0x2B31D3eD065F1f834D5C85EFEd49089F4c4f6b07", "chain": "8453", "symbol": "OpenAI", "name": "OpenAI", "source": "base", "offering": "liquidity_check"}
 {"ts": "2026-08-05T13:44:33.995877Z", "address": "0x624e2e7fDc8903165F64891672267AB0FCB98831", "chain": "8453", "symbol": "SOSO", "name": "SOSO", "source": "base", "offering": "token_intel"}
+{"ts": "2026-08-05T14:14:28.781964Z", "address": "0x3fe29f85bd9B11eE79Ce69374B5560d8F4488fB2", "chain": "1", "symbol": "STACK", "name": "STACK", "source": "evm", "offering": "token_chart"}
