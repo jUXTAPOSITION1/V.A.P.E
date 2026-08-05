@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-05T14:37:49Z",
+  "generated_at": "2026-08-05T19:58:32Z",
   "district_stats": {
     "overall_threat_level": "HIGH",
     "lanes_passing": 7,
@@ -15,16 +15,16 @@
       "tier": 3,
       "stat_primary": {
         "label": "tracked",
-        "value": 758
+        "value": 769
       },
       "stat_secondary": [
         {
           "label": "reject",
-          "value": 420
+          "value": 430
         },
         {
           "label": "caution",
-          "value": 206
+          "value": 207
         },
         {
           "label": "proceed",
@@ -159,12 +159,12 @@
       "tier": 3,
       "stat_primary": {
         "label": "findings sealed",
-        "value": 1604
+        "value": 1624
       },
       "stat_secondary": [
         {
           "label": "unsealed lines",
-          "value": 3
+          "value": 4
         }
       ],
       "link": "index.html#security-dashboard",
@@ -207,7 +207,7 @@
       "tier": 4,
       "stat_primary": {
         "label": "data calls logged",
-        "value": 1902
+        "value": 1946
       },
       "stat_secondary": [],
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/memory",
@@ -370,19 +370,19 @@
       ],
       "stat_primary": {
         "label": "last run",
-        "value": "23 finding(s), 30d"
+        "value": "22 finding(s), 30d"
       },
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-04T14:57:05Z"
+          "value": "2026-08-05T14:43:02Z"
         },
         {
           "label": "critical/high findings",
-          "value": 4
+          "value": 3
         }
       ],
-      "last_run_at": "2026-08-04T14:57:05Z",
+      "last_run_at": "2026-08-05T14:43:02Z",
       "source_workflow": "redteam.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/redteam.yml"
     },
@@ -400,19 +400,19 @@
       ],
       "stat_primary": {
         "label": "last run",
-        "value": "23 finding(s), 30d"
+        "value": "22 finding(s), 30d"
       },
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-04T15:21:30Z"
+          "value": "2026-08-05T15:10:43Z"
         },
         {
           "label": "critical/high findings",
-          "value": 4
+          "value": 3
         }
       ],
-      "last_run_at": "2026-08-04T15:21:30Z",
+      "last_run_at": "2026-08-05T15:10:43Z",
       "source_workflow": "redteam-deep.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/redteam-deep.yml"
     },
@@ -435,14 +435,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-05T13:52:21Z"
+          "value": "2026-08-05T19:20:37Z"
         },
         {
           "label": "ledger chain intact",
           "value": "yes"
         }
       ],
-      "last_run_at": "2026-08-05T13:52:21Z",
+      "last_run_at": "2026-08-05T19:20:37Z",
       "source_workflow": "findings-seal.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/findings-seal.yml"
     },
@@ -495,14 +495,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-05T14:10:46Z"
+          "value": "2026-08-05T19:35:52Z"
         },
         {
           "label": "attack-pattern coverage",
           "value": "23%"
         }
       ],
-      "last_run_at": "2026-08-05T14:10:46Z",
+      "last_run_at": "2026-08-05T19:35:52Z",
       "source_workflow": "intel-sweeps.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/intel-sweeps.yml"
     }
@@ -583,6 +583,95 @@
   ],
   "recent_events": [
     {
+      "id": "news:The Executable Agent Trap: How Paperclip's RCE Flaws Turn AI Configurations Into Network Weapons",
+      "type": "news",
+      "timestamp": "2026-08-05T19:30:46Z",
+      "label": "The Executable Agent Trap: How Paperclip's RCE Flaws Turn AI Configurations Into Network Weapons"
+    },
+    {
+      "id": "investigation:0x1E674153229Dc206C681f5De6b2d9aaa21687Ba5",
+      "type": "investigation",
+      "timestamp": "2026-08-05T19:24:16Z",
+      "label": "CHECK",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x84EDc02Ba3c3388C437f02dfA2FE7707F5097777",
+      "type": "investigation",
+      "timestamp": "2026-08-05T19:08:45Z",
+      "label": "GRVT",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xe85A3fdd5eff4B1f8264ebAa91DD8cf8c7D07777",
+      "type": "investigation",
+      "timestamp": "2026-08-05T17:53:26Z",
+      "label": "GRVT",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x068018326d8ABCF258fdce5e28856c5109503Ae3",
+      "type": "investigation",
+      "timestamp": "2026-08-05T17:37:43Z",
+      "label": "CHECK",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x801a4f9c2AC1bcb5173753acD377A23A9F0feE4e",
+      "type": "investigation",
+      "timestamp": "2026-08-05T17:22:33Z",
+      "label": "CHECK",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x6fe4ff48F48Bc53120828eb7cbd1FA85F6E57EaA",
+      "type": "investigation",
+      "timestamp": "2026-08-05T16:52:31Z",
+      "label": "CYS",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "news:The Prompt-Stealing Shadow APIs Undercutting Anthropic and OpenAI",
+      "type": "news",
+      "timestamp": "2026-08-05T16:44:03Z",
+      "label": "The Prompt-Stealing Shadow APIs Undercutting Anthropic and OpenAI"
+    },
+    {
+      "id": "investigation:0xA311c0837BD9a38cac190bfFBd9f2CdC1Ad4FEAb",
+      "type": "investigation",
+      "timestamp": "2026-08-05T16:36:55Z",
+      "label": "MV Token",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x1f17582e4c96DfEF934aeEA23a9B2DFB47ffC215",
+      "type": "investigation",
+      "timestamp": "2026-08-05T16:21:19Z",
+      "label": "Synergy",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x189140FAb49FA6ae98095C22674448E7BaF33B45",
+      "type": "investigation",
+      "timestamp": "2026-08-05T15:47:53Z",
+      "label": "Stack",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x6aF0b0294B5c8b791c500490DAbf17832E0a7931",
+      "type": "investigation",
+      "timestamp": "2026-08-05T15:32:29Z",
+      "label": "Synapse",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x0f2D719407FdBeFF09D87557AbB7232601FD9F29",
+      "type": "investigation",
+      "timestamp": "2026-08-05T15:17:11Z",
+      "label": "Synapse",
+      "verdict": "CAUTION"
+    },
+    {
       "id": "news:Sparse Disclosure Leaves Linux Admins in the Dark on Open vSwitch Root Flaw",
       "type": "news",
       "timestamp": "2026-08-05T14:09:44Z",
@@ -656,95 +745,6 @@
       "timestamp": "2026-08-05T10:42:41Z",
       "label": "MarsCoin",
       "verdict": "PROCEED"
-    },
-    {
-      "id": "investigation:0x73ADFA3A448D63025D52E39f921369386E4fCB07",
-      "type": "investigation",
-      "timestamp": "2026-08-05T06:43:37Z",
-      "label": "OpenAI",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x8ad5D75DB9447F7300d74A151b9Cd24ed1a2cb07",
-      "type": "investigation",
-      "timestamp": "2026-08-05T06:28:33Z",
-      "label": "OpenAI",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "news:Stolen $36M Coldcard Bitcoin Haul Turned Into On-Chain Begging Board",
-      "type": "news",
-      "timestamp": "2026-08-05T05:47:53Z",
-      "label": "Stolen $36M Coldcard Bitcoin Haul Turned Into On-Chain Begging Board"
-    },
-    {
-      "id": "investigation:0x55aC7ac5316cDd2bb4219Ecd717171872C757777",
-      "type": "investigation",
-      "timestamp": "2026-08-05T02:13:28Z",
-      "label": "\u5e01\u6709",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x36bbf8bFe6921E137b621668Bda207A287c9442f",
-      "type": "investigation",
-      "timestamp": "2026-08-05T01:12:53Z",
-      "label": "Stack",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x8df8071168fD7a758A97398379eaa3199aF97346",
-      "type": "investigation",
-      "timestamp": "2026-08-05T00:57:43Z",
-      "label": "Stack",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x3fe29f85bd9B11eE79Ce69374B5560d8F4488fB2",
-      "type": "investigation",
-      "timestamp": "2026-08-05T00:42:36Z",
-      "label": "Stack",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xbd0B2307bDa31F2Ff88eDaf5c1e258cD1a55BA71",
-      "type": "investigation",
-      "timestamp": "2026-08-05T00:26:30Z",
-      "label": "Relics Strategy",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x84e51046a4298D436d7c927ccf21Ec0EF6c187Cb",
-      "type": "investigation",
-      "timestamp": "2026-08-05T00:11:29Z",
-      "label": "Elsa",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x8602b3BE38924Ac5330347BB3d41A48EcdD63d5b",
-      "type": "investigation",
-      "timestamp": "2026-08-04T23:56:12Z",
-      "label": "Elsa",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x147636F42a5CA2debF8f60f5f026521BB1767777",
-      "type": "investigation",
-      "timestamp": "2026-08-04T22:55:32Z",
-      "label": "NVDAB",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "news:Bitcoin Magazine's Self-Custody Headline Lands With Zero Extractable Arguments",
-      "type": "news",
-      "timestamp": "2026-08-04T22:13:17Z",
-      "label": "Bitcoin Magazine's Self-Custody Headline Lands With Zero Extractable Arguments"
-    },
-    {
-      "id": "investigation:0x02Fca66C1D1aFB4E2A7884261eB00F63598a7436",
-      "type": "investigation",
-      "timestamp": "2026-08-04T21:53:49Z",
-      "label": "NVIDIA Corp",
-      "verdict": "REJECT"
     }
   ]
 }

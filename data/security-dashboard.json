@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-08-05T14:37:49Z",
+  "generated_at": "2026-08-05T19:58:32Z",
   "overall_threat_level": "HIGH",
   "findings_by_severity": {
     "CRITICAL": 1,
-    "HIGH": 388,
-    "MEDIUM": 255,
+    "HIGH": 398,
+    "MEDIUM": 256,
     "LOW": 20,
-    "INFO": 940
+    "INFO": 949
   },
   "findings_by_verdict": {
     "PROCEED": 95,
-    "CAUTION": 177,
-    "REJECT": 379
+    "CAUTION": 178,
+    "REJECT": 389
   },
   "findings_timeline": [
     {
@@ -331,15 +331,308 @@
     },
     {
       "period": "2026-08-05",
-      "total": 35,
+      "total": 55,
       "CRITICAL": 0,
-      "HIGH": 14,
-      "MEDIUM": 5,
+      "HIGH": 24,
+      "MEDIUM": 6,
       "LOW": 0,
-      "INFO": 16
+      "INFO": 25
     }
   ],
   "findings_recent": [
+    {
+      "id": "1ad018c8bbdf",
+      "timestamp": "2026-08-05T19:37:07.611736",
+      "title": "Bounty-cycle analysis 20260805_193612 [HIGH]",
+      "source": "agents/run.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "bounty-cycle",
+        "base",
+        "defi",
+        "analysis",
+        "high"
+      ],
+      "report": null
+    },
+    {
+      "id": "16122241daaf",
+      "timestamp": "2026-08-05T19:36:53.565346",
+      "title": "security_sweep.py: HIGH",
+      "source": "agents/security_sweep.py",
+      "severity": "INFO",
+      "verdict": "HIGH",
+      "tags": [
+        "security",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/security-2026-08-05-19.md"
+    },
+    {
+      "id": "d8a93bb135a2",
+      "timestamp": "2026-08-05T19:30:46.584209",
+      "title": "news_reporter.py: Cybersecurity",
+      "source": "agents/news_reporter.py",
+      "severity": "INFO",
+      "verdict": "Cybersecurity",
+      "tags": [
+        "news-intel",
+        "cybersecurity",
+        "intel-sweep"
+      ],
+      "report": "intel/news/news-2026-08-05-the-executable-agent-trap-how-paperclip-s-rce-flaws-turn-ai-.md"
+    },
+    {
+      "id": "78f0532d225c",
+      "timestamp": "2026-08-05T19:24:16.723195",
+      "title": "Investigation: CHECK (0x1E674153) \u2192 REJECT 12/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "base",
+        "reject",
+        "check"
+      ],
+      "report": "intel/investigations/investigation-20260805-192416-0x1E674153.md"
+    },
+    {
+      "id": "513169d22994",
+      "timestamp": "2026-08-05T19:08:45.127482",
+      "title": "Investigation: GRVT (0x84EDc02B) \u2192 REJECT 0/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "bsc",
+        "reject",
+        "grvt"
+      ],
+      "report": "intel/investigations/investigation-20260805-190845-0x84EDc02B.md"
+    },
+    {
+      "id": "5fcb401eec33",
+      "timestamp": "2026-08-05T17:53:26.653636",
+      "title": "Investigation: GRVT (0xe85A3fdd) \u2192 REJECT 0/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "bsc",
+        "reject",
+        "grvt"
+      ],
+      "report": "intel/investigations/investigation-20260805-175326-0xe85A3fdd.md"
+    },
+    {
+      "id": "a628de7990ec",
+      "timestamp": "2026-08-05T17:40:07.073276",
+      "title": "Bounty-cycle analysis 20260805_173908 [HIGH]",
+      "source": "agents/run.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "bounty-cycle",
+        "base",
+        "defi",
+        "analysis",
+        "high"
+      ],
+      "report": null
+    },
+    {
+      "id": "f51476f78964",
+      "timestamp": "2026-08-05T17:37:43.930031",
+      "title": "Investigation: CHECK (0x06801832) \u2192 REJECT 0/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "base",
+        "reject",
+        "check"
+      ],
+      "report": "intel/investigations/investigation-20260805-173743-0x06801832.md"
+    },
+    {
+      "id": "14633783bb29",
+      "timestamp": "2026-08-05T17:22:33.410977",
+      "title": "Investigation: CHECK (0x801a4f9c) \u2192 REJECT 0/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "base",
+        "reject",
+        "check"
+      ],
+      "report": "intel/investigations/investigation-20260805-172233-0x801a4f9c.md"
+    },
+    {
+      "id": "2c721b76cdec",
+      "timestamp": "2026-08-05T16:52:31.742924",
+      "title": "Investigation: CTS (0x6fe4ff48) \u2192 REJECT 25/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "bsc",
+        "reject",
+        "cts"
+      ],
+      "report": "intel/investigations/investigation-20260805-165231-0x6fe4ff48.md"
+    },
+    {
+      "id": "c9f7ec8e6bb6",
+      "timestamp": "2026-08-05T16:44:03.680354",
+      "title": "news_reporter.py: Cybersecurity",
+      "source": "agents/news_reporter.py",
+      "severity": "INFO",
+      "verdict": "Cybersecurity",
+      "tags": [
+        "news-intel",
+        "cybersecurity",
+        "intel-sweep"
+      ],
+      "report": "intel/news/news-2026-08-05-the-prompt-stealing-shadow-apis-undercutting-anthropic-and-o.md"
+    },
+    {
+      "id": "d744b8513f65",
+      "timestamp": "2026-08-05T16:36:55.394201",
+      "title": "Investigation: MV (0xA311c083) \u2192 REJECT 0/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "polygon_pos",
+        "reject",
+        "mv"
+      ],
+      "report": "intel/investigations/investigation-20260805-163655-0xA311c083.md"
+    },
+    {
+      "id": "5f8b7de23841",
+      "timestamp": "2026-08-05T16:27:39.754847",
+      "title": "base_sweep.py: 7.0",
+      "source": "agents/base_sweep.py",
+      "severity": "INFO",
+      "verdict": "7.0",
+      "tags": [
+        "base",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/base-2026-08-05-16.md"
+    },
+    {
+      "id": "f95807018e7e",
+      "timestamp": "2026-08-05T16:21:19.094511",
+      "title": "Investigation: SYN (0x1f17582e) \u2192 REJECT 0/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "eth",
+        "reject",
+        "syn"
+      ],
+      "report": "intel/investigations/investigation-20260805-162119-0x1f17582e.md"
+    },
+    {
+      "id": "4eef902b13fe",
+      "timestamp": "2026-08-05T16:04:39.797981",
+      "title": "macro_sweep.py: NEUTRAL",
+      "source": "agents/macro_sweep.py",
+      "severity": "INFO",
+      "verdict": "NEUTRAL",
+      "tags": [
+        "macro",
+        "intel-sweep"
+      ],
+      "report": "intel/reports/macro-2026-08-05-16.md"
+    },
+    {
+      "id": "61ee0ef8a4f1",
+      "timestamp": "2026-08-05T15:47:53.717361",
+      "title": "Investigation: STACK (0x189140FA) \u2192 REJECT 0/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "eth",
+        "reject",
+        "stack"
+      ],
+      "report": "intel/investigations/investigation-20260805-154753-0x189140FA.md"
+    },
+    {
+      "id": "e3429beca5c8",
+      "timestamp": "2026-08-05T15:32:29.699420",
+      "title": "Investigation: SYN (0x6aF0b029) \u2192 REJECT 0/100",
+      "source": "agents/investigate.py",
+      "severity": "HIGH",
+      "verdict": "REJECT",
+      "tags": [
+        "investigation",
+        "eth",
+        "reject",
+        "syn"
+      ],
+      "report": "intel/investigations/investigation-20260805-153229-0x6aF0b029.md"
+    },
+    {
+      "id": "eab8613cfe3f",
+      "timestamp": "2026-08-05T15:17:11.479006",
+      "title": "Investigation: SYN (0x0f2D7194) \u2192 CAUTION 77/100",
+      "source": "agents/investigate.py",
+      "severity": "MEDIUM",
+      "verdict": "CAUTION",
+      "tags": [
+        "investigation",
+        "eth",
+        "caution",
+        "syn"
+      ],
+      "report": "intel/investigations/investigation-20260805-151711-0x0f2D7194.md"
+    },
+    {
+      "id": "03cdb960c33a",
+      "timestamp": "2026-08-05T15:15:03.548894",
+      "title": "Bounty-cycle analysis 20260805_151407 [HIGH]",
+      "source": "agents/run.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "bounty-cycle",
+        "base",
+        "defi",
+        "analysis",
+        "high"
+      ],
+      "report": null
+    },
+    {
+      "id": "5615a47e5a06",
+      "timestamp": "2026-08-05T14:44:41.918868",
+      "title": "Community broadcast 2026-08-05-14",
+      "source": "agents/broadcast.py",
+      "severity": "INFO",
+      "verdict": null,
+      "tags": [
+        "broadcast",
+        "community-intel"
+      ],
+      "report": null
+    },
     {
       "id": "7b894eaa23a2",
       "timestamp": "2026-08-05T14:11:23.292241",
@@ -2231,304 +2524,13 @@
         "caught-by-backstop"
       ],
       "report": null
-    },
-    {
-      "id": null,
-      "timestamp": "2026-08-03T15:23:06.165708+00:00",
-      "title": "AI red-team: fake-clean-verdict-via-token-symbol \u2014 raw model susceptible, caught by reconciliation",
-      "source": "agents/redteam.py",
-      "severity": "LOW",
-      "verdict": null,
-      "tags": [
-        "ai-redteam",
-        "prompt-injection",
-        "vape-report-pipeline",
-        "caught-by-backstop"
-      ],
-      "report": null
-    },
-    {
-      "id": "7ba3b95127a8",
-      "timestamp": "2026-08-03T14:41:36.706111",
-      "title": "security_sweep.py: HIGH",
-      "source": "agents/security_sweep.py",
-      "severity": "INFO",
-      "verdict": "HIGH",
-      "tags": [
-        "security",
-        "intel-sweep"
-      ],
-      "report": "intel/reports/security-2026-08-03-14.md"
-    },
-    {
-      "id": "942775020dde",
-      "timestamp": "2026-08-03T13:57:26.224386",
-      "title": "Investigation: SAFU (0x37b90664) \u2192 REJECT 32/100",
-      "source": "agents/investigate.py",
-      "severity": "HIGH",
-      "verdict": "REJECT",
-      "tags": [
-        "investigation",
-        "bsc",
-        "reject",
-        "safu"
-      ],
-      "report": "intel/investigations/investigation-20260803-135726-0x37b90664.md"
-    },
-    {
-      "id": "9f5e64f02ec8",
-      "timestamp": "2026-08-03T13:42:16.087892",
-      "title": "Bounty-cycle analysis 20260803_134137 [HIGH]",
-      "source": "agents/run.py",
-      "severity": "INFO",
-      "verdict": null,
-      "tags": [
-        "bounty-cycle",
-        "base",
-        "defi",
-        "analysis",
-        "high"
-      ],
-      "report": null
-    },
-    {
-      "id": "bf8c90e2e632",
-      "timestamp": "2026-08-03T13:42:02.391097",
-      "title": "Investigation: ICNT (0xE0Cd4cAc) \u2192 REJECT 28/100",
-      "source": "agents/investigate.py",
-      "severity": "HIGH",
-      "verdict": "REJECT",
-      "tags": [
-        "investigation",
-        "base",
-        "reject",
-        "icnt"
-      ],
-      "report": "intel/investigations/investigation-20260803-134202-0xE0Cd4cAc.md"
-    },
-    {
-      "id": "e78fb760965a",
-      "timestamp": "2026-08-03T13:33:53.942149",
-      "title": "bug_bounty_intel.py: NOT YET LAUNCHED",
-      "source": "agents/bug_bounty_intel.py",
-      "severity": "INFO",
-      "verdict": "NOT YET LAUNCHED",
-      "tags": [
-        "bounty",
-        "virtuals",
-        "intel-sweep"
-      ],
-      "report": "intel/reports/bug-bounty-intel-2026-08-03-13.md"
-    },
-    {
-      "id": "9206bb22a2a2",
-      "timestamp": "2026-08-03T12:57:02.259060",
-      "title": "Investigation: SAFU (0xc3bcd370) \u2192 REJECT 5/100",
-      "source": "agents/investigate.py",
-      "severity": "HIGH",
-      "verdict": "REJECT",
-      "tags": [
-        "investigation",
-        "bsc",
-        "reject",
-        "safu"
-      ],
-      "report": "intel/investigations/investigation-20260803-125702-0xc3bcd370.md"
-    },
-    {
-      "id": "3ba1565d7464",
-      "timestamp": "2026-08-03T12:52:35.752676",
-      "title": "mainnet_patch_check.py: NEEDS REVIEW",
-      "source": "agents/mainnet_patch_check.py",
-      "severity": "INFO",
-      "verdict": "NEEDS REVIEW",
-      "tags": [
-        "virtuals",
-        "patch-check",
-        "intel-sweep"
-      ],
-      "report": "intel/reports/mainnet-patch-check-2026-08-03-12.md"
-    },
-    {
-      "id": "f07c8a651220",
-      "timestamp": "2026-08-03T12:41:49.971846",
-      "title": "Investigation: \u50bb\u798f (0x3F117c34) \u2192 REJECT 40/100",
-      "source": "agents/investigate.py",
-      "severity": "HIGH",
-      "verdict": "REJECT",
-      "tags": [
-        "investigation",
-        "bsc",
-        "reject",
-        "\u50bb\u798f"
-      ],
-      "report": "intel/investigations/investigation-20260803-124149-0x3F117c34.md"
-    },
-    {
-      "id": "3571a7ee4a8b",
-      "timestamp": "2026-08-03T12:24:41.598983",
-      "title": "news_reporter.py: AI",
-      "source": "agents/news_reporter.py",
-      "severity": "INFO",
-      "verdict": "AI",
-      "tags": [
-        "news-intel",
-        "ai",
-        "intel-sweep"
-      ],
-      "report": "intel/news/news-2026-08-03-the-accelerationist-in-chief-pivots-inside-sam-altman-s-sudd.md"
-    },
-    {
-      "id": "e7a3303ff105",
-      "timestamp": "2026-08-03T12:14:24.619926",
-      "title": "base_sweep.py: 7.0",
-      "source": "agents/base_sweep.py",
-      "severity": "INFO",
-      "verdict": "7.0",
-      "tags": [
-        "base",
-        "intel-sweep"
-      ],
-      "report": "intel/reports/base-2026-08-03-12.md"
-    },
-    {
-      "id": "59046cd0d69b",
-      "timestamp": "2026-08-03T12:10:13.840877",
-      "title": "Investigation: SAFU (0x69C47C74) \u2192 REJECT 0/100",
-      "source": "agents/investigate.py",
-      "severity": "HIGH",
-      "verdict": "REJECT",
-      "tags": [
-        "investigation",
-        "bsc",
-        "reject",
-        "safu"
-      ],
-      "report": "intel/investigations/investigation-20260803-121013-0x69C47C74.md"
-    },
-    {
-      "id": "43306ede08d1",
-      "timestamp": "2026-08-03T11:55:11.266348",
-      "title": "Investigation: CATE (0x68902977) \u2192 REJECT 0/100",
-      "source": "agents/investigate.py",
-      "severity": "HIGH",
-      "verdict": "REJECT",
-      "tags": [
-        "investigation",
-        "eth",
-        "reject",
-        "cate"
-      ],
-      "report": "intel/investigations/investigation-20260803-115511-0x68902977.md"
-    },
-    {
-      "id": "4105eea39133",
-      "timestamp": "2026-08-03T11:35:58.189827",
-      "title": "sentiment_sweep.py: Fear / Bearish-leaning",
-      "source": "agents/sentiment_sweep.py",
-      "severity": "INFO",
-      "verdict": "Fear / Bearish-leaning",
-      "tags": [
-        "sentiment",
-        "intel-sweep"
-      ],
-      "report": "intel/reports/sentiment-2026-08-03-11.md"
-    },
-    {
-      "id": "4c36da857205",
-      "timestamp": "2026-08-03T11:25:20.017582",
-      "title": "Investigation: SAFU (0x3433a574) \u2192 PROCEED 82/100",
-      "source": "agents/investigate.py",
-      "severity": "INFO",
-      "verdict": "PROCEED",
-      "tags": [
-        "investigation",
-        "bsc",
-        "proceed",
-        "safu"
-      ],
-      "report": "intel/investigations/investigation-20260803-112520-0x3433a574.md"
-    },
-    {
-      "id": "cce288459e39",
-      "timestamp": "2026-08-03T10:55:22.111633",
-      "title": "Investigation: SAFU (0x3f2B10F3) \u2192 PROCEED 82/100",
-      "source": "agents/investigate.py",
-      "severity": "INFO",
-      "verdict": "PROCEED",
-      "tags": [
-        "investigation",
-        "bsc",
-        "proceed",
-        "safu"
-      ],
-      "report": "intel/investigations/investigation-20260803-105522-0x3f2B10F3.md"
-    },
-    {
-      "id": "bcdd254f6253",
-      "timestamp": "2026-08-03T10:44:15.447655",
-      "title": "Bounty-cycle analysis 20260803_104322 [HIGH]",
-      "source": "agents/run.py",
-      "severity": "INFO",
-      "verdict": null,
-      "tags": [
-        "bounty-cycle",
-        "base",
-        "defi",
-        "analysis",
-        "high"
-      ],
-      "report": null
-    },
-    {
-      "id": "53c6dbc5ac42",
-      "timestamp": "2026-08-03T10:25:14.686033",
-      "title": "Investigation: UNISTREET (0x08b82Ed4) \u2192 REJECT 25/100",
-      "source": "agents/investigate.py",
-      "severity": "HIGH",
-      "verdict": "REJECT",
-      "tags": [
-        "investigation",
-        "eth",
-        "reject",
-        "unistreet"
-      ],
-      "report": "intel/investigations/investigation-20260803-102514-0x08b82Ed4.md"
-    },
-    {
-      "id": "e057eb80502b",
-      "timestamp": "2026-08-03T10:11:48.479239",
-      "title": "Community broadcast 2026-08-03-10",
-      "source": "agents/broadcast.py",
-      "severity": "INFO",
-      "verdict": null,
-      "tags": [
-        "broadcast",
-        "community-intel"
-      ],
-      "report": null
-    },
-    {
-      "id": "e4075116ad13",
-      "timestamp": "2026-08-03T10:09:58.111414",
-      "title": "Investigation: UNISTREET (0xF5f052D1) \u2192 REJECT 9/100",
-      "source": "agents/investigate.py",
-      "severity": "HIGH",
-      "verdict": "REJECT",
-      "tags": [
-        "investigation",
-        "eth",
-        "reject",
-        "unistreet"
-      ],
-      "report": "intel/investigations/investigation-20260803-100958-0xF5f052D1.md"
     }
   ],
   "ledger_integrity": {
     "chain_intact": true,
-    "seals_checked": 84,
-    "lines_covered": 1601,
-    "unsealed_lines": 3
+    "seals_checked": 85,
+    "lines_covered": 1620,
+    "unsealed_lines": 4
   },
   "lanes": [
     {
@@ -2578,11 +2580,11 @@
       "label": "AI Red-Team",
       "source_workflow": "redteam.yml",
       "last_run_conclusion": "success",
-      "last_run_at": "2026-08-04T14:57:05Z",
-      "headline": "23 finding(s), 30d",
+      "last_run_at": "2026-08-05T14:43:02Z",
+      "headline": "22 finding(s), 30d",
       "severity_breakdown": {
         "CRITICAL": 1,
-        "HIGH": 3,
+        "HIGH": 2,
         "MEDIUM": 0,
         "LOW": 19,
         "INFO": 0
@@ -2593,11 +2595,11 @@
       "label": "AI Red-Team (deep)",
       "source_workflow": "redteam-deep.yml",
       "last_run_conclusion": "success",
-      "last_run_at": "2026-08-04T15:21:30Z",
-      "headline": "23 finding(s), 30d",
+      "last_run_at": "2026-08-05T15:10:43Z",
+      "headline": "22 finding(s), 30d",
       "severity_breakdown": {
         "CRITICAL": 1,
-        "HIGH": 3,
+        "HIGH": 2,
         "MEDIUM": 0,
         "LOW": 19,
         "INFO": 0
@@ -2608,7 +2610,7 @@
       "label": "Findings Ledger Seal",
       "source_workflow": "findings-seal.yml",
       "last_run_conclusion": "success",
-      "last_run_at": "2026-08-05T13:52:21Z",
+      "last_run_at": "2026-08-05T19:20:37Z",
       "headline": "intact",
       "chain_intact": true
     },
@@ -2627,7 +2629,7 @@
       "label": "On-Chain Attack Intelligence",
       "source_workflow": "intel-sweeps.yml",
       "last_run_conclusion": "success",
-      "last_run_at": "2026-08-05T14:10:46Z",
+      "last_run_at": "2026-08-05T19:35:52Z",
       "headline": "HIGH",
       "threat_level": "HIGH",
       "coverage_ratio": 0.23076923076923078,
