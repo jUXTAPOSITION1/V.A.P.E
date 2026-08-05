@@ -636,3 +636,4 @@
 {"ts": "2026-08-05T01:27:58.510432Z", "target": "avax", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
 {"ts": "2026-08-05T01:58:08.217435Z", "target": "aave-v3", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 61}
 {"ts": "2026-08-05T02:28:44.107499Z", "target": "none", "hired": ["yields"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
+{"ts": "2026-08-05T02:58:22.038719Z", "target": "0x4200000000000000000000000000000000000006", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
