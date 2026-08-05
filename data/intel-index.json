@@ -1,14 +1,14 @@
 {
-  "generated": "2026-08-05T21:11:23Z",
+  "generated": "2026-08-05T21:19:36Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 452,
+    "reports": 453,
     "reports_by_type": {
       "bounty": 125,
+      "sentiment": 48,
       "security": 79,
       "base": 89,
       "macro": 24,
-      "sentiment": 47,
       "bug": 5,
       "mainnet": 5,
       "virtuals": 74,
@@ -10669,6 +10669,17 @@
       "bytes": 16276
     },
     {
+      "kind": "intel",
+      "type": "sentiment",
+      "file": "sentiment-2026-08-05-21.md",
+      "title": "Sentiment Sweep Report \u2014 2026-08-05 21:19 UTC",
+      "date": "2026-08-05T21:00Z",
+      "threat": null,
+      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-08-05-21.md",
+      "bytes": 1599
+    },
+    {
       "kind": "bounty",
       "type": "bounty",
       "file": "bounty_report_20260805_193612.md",
@@ -11305,17 +11316,6 @@
       "summary": "Cycle: 20260802215902 \u00b7 Data timestamp (UTC): 2026-08-02T21:59:05Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_215902.md",
       "bytes": 15531
-    },
-    {
-      "kind": "intel",
-      "type": "sentiment",
-      "file": "sentiment-2026-08-02-21.md",
-      "title": "Sentiment Sweep Report \u2014 2026-08-02 21:02 UTC",
-      "date": "2026-08-02T21:00Z",
-      "threat": null,
-      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-08-02-21.md",
-      "bytes": 1582
     }
   ],
   "broadcasts": [
