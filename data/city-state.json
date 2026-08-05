@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-05T03:38:39Z",
+  "generated_at": "2026-08-05T09:10:17Z",
   "district_stats": {
     "overall_threat_level": "HIGH",
-    "lanes_passing": 9,
+    "lanes_passing": 7,
     "lanes_total": 10,
     "buildings_total": 19
   },
@@ -15,12 +15,12 @@
       "tier": 3,
       "stat_primary": {
         "label": "tracked",
-        "value": 747
+        "value": 749
       },
       "stat_secondary": [
         {
           "label": "reject",
-          "value": 412
+          "value": 414
         },
         {
           "label": "caution",
@@ -159,12 +159,12 @@
       "tier": 3,
       "stat_primary": {
         "label": "findings sealed",
-        "value": 1577
+        "value": 1588
       },
       "stat_secondary": [
         {
           "label": "unsealed lines",
-          "value": 2
+          "value": 1
         }
       ],
       "link": "index.html#security-dashboard",
@@ -207,7 +207,7 @@
       "tier": 4,
       "stat_primary": {
         "label": "data calls logged",
-        "value": 1842
+        "value": 1873
       },
       "stat_secondary": [],
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/memory",
@@ -222,7 +222,7 @@
       "id": "lane-codeql",
       "kind": "checkpoint",
       "title": "Static Analysis (CodeQL)",
-      "status": "ok",
+      "status": "alert",
       "tier": 1,
       "gridX": 8,
       "gridY": 4,
@@ -237,7 +237,7 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-04T18:28:44Z"
+          "value": "2026-08-05T08:42:06Z"
         },
         {
           "label": "open alerts",
@@ -248,7 +248,7 @@
           "value": 0
         }
       ],
-      "last_run_at": "2026-08-04T18:28:44Z",
+      "last_run_at": "2026-08-05T08:42:06Z",
       "source_workflow": "codeql.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/codeql.yml"
     },
@@ -282,7 +282,7 @@
       "id": "lane-vape-reviewer",
       "kind": "checkpoint",
       "title": "Code Review (VAPE Reviewer)",
-      "status": "ok",
+      "status": "alert",
       "tier": 1,
       "gridX": 14,
       "gridY": 4,
@@ -292,15 +292,15 @@
       ],
       "stat_primary": {
         "label": "last run",
-        "value": "success"
+        "value": "action_required"
       },
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-04T18:28:45Z"
+          "value": "2026-08-05T08:42:06Z"
         }
       ],
-      "last_run_at": "2026-08-04T18:28:45Z",
+      "last_run_at": "2026-08-05T08:42:06Z",
       "source_workflow": "vape-reviewer.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/vape-reviewer.yml"
     },
@@ -435,14 +435,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-05T01:55:34Z"
+          "value": "2026-08-05T08:25:51Z"
         },
         {
           "label": "ledger chain intact",
           "value": "yes"
         }
       ],
-      "last_run_at": "2026-08-05T01:55:34Z",
+      "last_run_at": "2026-08-05T08:25:51Z",
       "source_workflow": "findings-seal.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/findings-seal.yml"
     },
@@ -495,14 +495,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-05T02:35:56Z"
+          "value": "2026-08-05T08:36:52Z"
         },
         {
           "label": "attack-pattern coverage",
           "value": "23%"
         }
       ],
-      "last_run_at": "2026-08-05T02:35:56Z",
+      "last_run_at": "2026-08-05T08:36:52Z",
       "source_workflow": "intel-sweeps.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/intel-sweeps.yml"
     }
@@ -582,6 +582,26 @@
     ]
   ],
   "recent_events": [
+    {
+      "id": "investigation:0x73ADFA3A448D63025D52E39f921369386E4fCB07",
+      "type": "investigation",
+      "timestamp": "2026-08-05T06:43:37Z",
+      "label": "OpenAI",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x8ad5D75DB9447F7300d74A151b9Cd24ed1a2cb07",
+      "type": "investigation",
+      "timestamp": "2026-08-05T06:28:33Z",
+      "label": "OpenAI",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "news:Stolen $36M Coldcard Bitcoin Haul Turned Into On-Chain Begging Board",
+      "type": "news",
+      "timestamp": "2026-08-05T05:47:53Z",
+      "label": "Stolen $36M Coldcard Bitcoin Haul Turned Into On-Chain Begging Board"
+    },
     {
       "id": "investigation:0x55aC7ac5316cDd2bb4219Ecd717171872C757777",
       "type": "investigation",
@@ -725,25 +745,6 @@
       "type": "news",
       "timestamp": "2026-08-04T16:53:38Z",
       "label": "Signed, Sealed, Delivered: How Attackers Weaponize Legitimate RMM Tools via Fake Software Updates"
-    },
-    {
-      "id": "bounty:defillama-hack:RISEx-1785715200",
-      "type": "bounty",
-      "timestamp": "2026-08-04T15:06:01.250850Z",
-      "label": "RISEx (exploit $673,000)"
-    },
-    {
-      "id": "bounty:defillama-hack:Swan Treasury-1785369600",
-      "type": "bounty",
-      "timestamp": "2026-08-04T15:06:01.250850Z",
-      "label": "Swan Treasury (exploit $625,000)"
-    },
-    {
-      "id": "investigation:0xfc313C329dAf55b488d0A0EeeE5727e3cbC4D062",
-      "type": "investigation",
-      "timestamp": "2026-08-04T14:29:22Z",
-      "label": "lefkcoin",
-      "verdict": "REJECT"
     }
   ]
 }
