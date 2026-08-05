@@ -182,3 +182,4 @@
 {"ts": "2026-08-05T08:27:40.027695Z", "address": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "chain": "8453", "symbol": "HOME", "name": "HOME", "source": "base", "offering": "dossier_check"}
 {"ts": "2026-08-05T08:57:45.315498Z", "address": "0x1a44233fae8d50f1aeb3a5d58dd426ff4814cb53", "chain": "8453", "symbol": "QUID", "name": "Squid", "source": "base_trending", "offering": "rug_pull_alert"}
 {"ts": "2026-08-05T10:42:45.289599Z", "address": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "chain": "8453", "symbol": "VELVET", "name": "VELVET", "source": "base", "offering": "token_chart"}
+{"ts": "2026-08-05T12:12:22.298104Z", "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "chain": "8453", "symbol": "USDC", "name": "USDC", "source": "base_trending", "offering": "token_intel"}

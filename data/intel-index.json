@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T11:57:24Z",
+  "generated": "2026-08-05T12:12:22Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 443,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 152,
-    "investigations": 752,
+    "investigations": 753,
     "news": 69,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260805-115723-0xCAc44C05.md",
-      "title": "Investigation \u2014 WE NEED MORE RUGGED INDIVIDUALIS",
-      "symbol": "WE NEED MORE RUGGED INDIVIDUALIS",
-      "name": "WE NEED MORE RUGGED INDIVIDUALIS",
-      "date": "2026-08-05T11:57:23Z",
-      "target": "0xCAc44C05e1224ef9B1A5E2Dd56a59d45527b42e6",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "20",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: PLAY (0x068c1c81B802DE01E60C1393Ee974d896138aD56) \u2014 REJECT 35/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $1,062 (rug/illiquid);",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-115723-0xCAc44C05.md"
+      "file": "investigation-20260805-121219-0x4444512F.md",
+      "title": "Investigation \u2014 MarsCoin",
+      "symbol": "MarsCoin",
+      "name": "MarsCoin",
+      "date": "2026-08-05T12:12:19Z",
+      "target": "0x4444512F8995D1e7AaFBe13c8F11a4483f892C4f",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 101% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $45,285. Positive evidence: Ownership renounced; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 300+ days without a known incident in this scan; Custom verified source (not a mass-",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-121219-0x4444512F.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260805-121219-0x4444512F.md",
+      "title": "Investigation \u2014 MarsCoin",
+      "symbol": "MarsCoin",
+      "name": "MarsCoin",
+      "date": "2026-08-05T12:12:19Z",
+      "target": "0x4444512F8995D1e7AaFBe13c8F11a4483f892C4f",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 101% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $45,285. Positive evidence: Ownership renounced; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 300+ days without a known incident in this scan; Custom verified source (not a mass-",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-121219-0x4444512F.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260805-115723-0xCAc44C05.md",
