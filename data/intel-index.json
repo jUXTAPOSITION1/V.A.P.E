@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T00:04:50Z",
+  "generated": "2026-08-05T00:11:30Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 436,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 150,
-    "investigations": 741,
+    "investigations": 742,
     "news": 67,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260804-235612-0x8602b3BE.md",
+      "file": "investigation-20260805-001129-0x84e51046.md",
       "title": "Investigation \u2014 ELSA",
       "symbol": "ELSA",
       "name": "Elsa",
-      "date": "2026-08-04T23:56:12Z",
-      "target": "0x8602b3BE38924Ac5330347BB3d41A48EcdD63d5b",
+      "date": "2026-08-05T00:11:29Z",
+      "target": "0x84e51046a4298D436d7c927ccf21Ec0EF6c187Cb",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
       "score": "0",
       "summary": "Risk factors: [-20] Very few holders (14) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260804-235612-0x8602b3BE.md"
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-001129-0x84e51046.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260805-001129-0x84e51046.md",
+      "title": "Investigation \u2014 ELSA",
+      "symbol": "ELSA",
+      "name": "Elsa",
+      "date": "2026-08-05T00:11:29Z",
+      "target": "0x84e51046a4298D436d7c927ccf21Ec0EF6c187Cb",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Very few holders (14) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-001129-0x84e51046.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260804-235612-0x8602b3BE.md",
