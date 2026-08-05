@@ -1500,6 +1500,25 @@
     "symbol": "RELICSTR",
     "times_investigated": 1
   },
+  "1:0x189140fab49fa6ae98095c22674448e7baf33b45": {
+    "address": "0x189140FAb49FA6ae98095C22674448E7BaF33B45",
+    "chain": "1",
+    "creator_address": "0x856c1a92c879fe90e16a72c3d49fbf4b7402bb8a",
+    "first_investigated": "2026-08-05T15:47:53Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260805-154753-0x189140FA.md",
+        "score": 0,
+        "ts": "2026-08-05T15:47:53Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-05T15:47:53Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "STACK",
+    "times_investigated": 1
+  },
   "1:0x1f7b4051b39905ba61b7c8e946c32e9123b8b4cb": {
     "address": "0x1F7B4051b39905bA61b7c8E946C32E9123b8B4CB",
     "chain": "1",

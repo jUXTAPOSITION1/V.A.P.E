@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T15:32:34Z",
+  "generated": "2026-08-05T15:47:59Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 446,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 153,
-    "investigations": 760,
+    "investigations": 761,
     "news": 70,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260805-153229-0x6aF0b029.md",
-      "title": "Investigation \u2014 SYN",
-      "symbol": "SYN",
-      "name": "Synapse",
-      "date": "2026-08-05T15:32:29Z",
-      "target": "0x6aF0b0294B5c8b791c500490DAbf17832E0a7931",
+      "file": "investigation-20260805-154753-0x189140FA.md",
+      "title": "Investigation \u2014 STACK",
+      "symbol": "STACK",
+      "name": "Stack",
+      "date": "2026-08-05T15:47:53Z",
+      "target": "0x189140FAb49FA6ae98095C22674448E7BaF33B45",
       "chain": "1 (Ethereum)",
       "verdict": "REJECT",
       "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CTM (0x080272BBF71bFC9Da5a2e8bC1ec3EcF5626062CD) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders co",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-153229-0x6aF0b029.md"
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: UNISTREET (0x08b82Ed4fF66635866203904A7BcAbB64A4594e3) \u2014 REJECT 25/100 \u2014 likely the same serial campaign; [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders control 100% of supply \u2014 concentra",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-154753-0x189140FA.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260805-154753-0x189140FA.md",
+      "title": "Investigation \u2014 STACK",
+      "symbol": "STACK",
+      "name": "Stack",
+      "date": "2026-08-05T15:47:53Z",
+      "target": "0x189140FAb49FA6ae98095C22674448E7BaF33B45",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: UNISTREET (0x08b82Ed4fF66635866203904A7BcAbB64A4594e3) \u2014 REJECT 25/100 \u2014 likely the same serial campaign; [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders control 100% of supply \u2014 concentra",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-154753-0x189140FA.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260805-153229-0x6aF0b029.md",

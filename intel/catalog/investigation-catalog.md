@@ -1321,3 +1321,5 @@
 | 2026-08-05 | auto | 0x0f2D719407FdBeFF09D87557AbB7232601FD9F29 (SYN) | deep_investigation | CAUTION (77/100) | Top 10 non-LP/burn holders control 68% of supply — meaningful concentration | +7d |
 
 | 2026-08-05 | auto | 0x6aF0b0294B5c8b791c500490DAbf17832E0a7931 (SYN) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-08-05 | auto | 0x189140FAb49FA6ae98095C22674448E7BaF33B45 (STACK) | deep_investigation | REJECT (0/100) | Same deployer has a prior CAUTION/REJECT verdict on record: UNISTREET (0x08b82Ed | +7d |

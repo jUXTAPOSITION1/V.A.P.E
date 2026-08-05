@@ -661,3 +661,4 @@
 {"ts": "2026-08-05T14:14:28.782282Z", "target": "0x3fe29f85bd9B11eE79Ce69374B5560d8F4488fB2", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
 {"ts": "2026-08-05T15:01:05.641068Z", "target": "ccip", "hired": ["protocol"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
 {"ts": "2026-08-05T15:17:28.577989Z", "target": "optimism", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
+{"ts": "2026-08-05T15:47:58.743216Z", "target": "layerzero-v2", "hired": ["protocol"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
