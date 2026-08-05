@@ -1936,6 +1936,25 @@
     "symbol": "DIM",
     "times_investigated": 1
   },
+  "1:0x36bbf8bfe6921e137b621668bda207a287c9442f": {
+    "address": "0x36bbf8bFe6921E137b621668Bda207A287c9442f",
+    "chain": "1",
+    "creator_address": "0x7ebf7592100fa5769ddaa22e1b656035c47c6545",
+    "first_investigated": "2026-08-05T01:12:53Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260805-011253-0x36bbf8bF.md",
+        "score": 0,
+        "ts": "2026-08-05T01:12:53Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-05T01:12:53Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "STACK",
+    "times_investigated": 1
+  },
   "1:0x36d527d75aa29101c86ae420ea46dd7be34b529a": {
     "address": "0x36D527D75aa29101C86Ae420EA46Dd7bE34b529a",
     "chain": "1",
