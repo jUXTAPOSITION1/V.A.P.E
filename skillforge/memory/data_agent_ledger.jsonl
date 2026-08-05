@@ -752,3 +752,4 @@
 {"ts": "2026-08-05T20:40:30.364041Z", "target": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf", "hired": ["market_intel"], "paid": 1, "cost_usd": 0.07, "daily_target": 62}
 {"ts": "2026-08-05T20:55:36.764809Z", "target": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
 {"ts": "2026-08-05T21:10:49.441242Z", "target": "0x1a44233FAe8D50F1AeB3a5d58dd426ff4814Cb53", "hired": ["bridges"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
+{"ts": "2026-08-05T22:25:41.954739Z", "target": "0x5E80C63BE53369C7A4716c83aD60Ed0AcC2f2F38", "hired": ["dossier_check"], "paid": 1, "cost_usd": 0.1, "daily_target": 62}

@@ -1343,3 +1343,5 @@
 | 2026-08-05 | auto | 0xbD01D5f5D06113C1c8a837D95D1C6D8082EB9b10 (USDT) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-08-05 | auto | 0x290443760A831b41e610F6D6C727e55ebc4c7777 (GRVT) | deep_investigation | REJECT (2/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-05 | auto | 0x5E80C63BE53369C7A4716c83aD60Ed0AcC2f2F38 (QUID) | deep_investigation | REJECT (15/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
