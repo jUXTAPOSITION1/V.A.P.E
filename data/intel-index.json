@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T15:17:29Z",
+  "generated": "2026-08-05T15:32:34Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 446,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 153,
-    "investigations": 759,
+    "investigations": 760,
     "news": 70,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260805-151711-0x0f2D7194.md",
+      "file": "investigation-20260805-153229-0x6aF0b029.md",
       "title": "Investigation \u2014 SYN",
       "symbol": "SYN",
       "name": "Synapse",
-      "date": "2026-08-05T15:17:11Z",
-      "target": "0x0f2D719407FdBeFF09D87557AbB7232601FD9F29",
+      "date": "2026-08-05T15:32:29Z",
+      "target": "0x6aF0b0294B5c8b791c500490DAbf17832E0a7931",
       "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "77",
-      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 68% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 10661 holders \u2014 reasonably distributed; Trading 1803+ days without a known incident in this scan; Custom verified source (",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-151711-0x0f2D7194.md"
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CTM (0x080272BBF71bFC9Da5a2e8bC1ec3EcF5626062CD) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders co",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-153229-0x6aF0b029.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260805-153229-0x6aF0b029.md",
+      "title": "Investigation \u2014 SYN",
+      "symbol": "SYN",
+      "name": "Synapse",
+      "date": "2026-08-05T15:32:29Z",
+      "target": "0x6aF0b0294B5c8b791c500490DAbf17832E0a7931",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CTM (0x080272BBF71bFC9Da5a2e8bC1ec3EcF5626062CD) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders co",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-153229-0x6aF0b029.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260805-151711-0x0f2D7194.md",

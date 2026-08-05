@@ -2483,6 +2483,25 @@
     "symbol": "PUPPY",
     "times_investigated": 1
   },
+  "1:0x6af0b0294b5c8b791c500490dabf17832e0a7931": {
+    "address": "0x6aF0b0294B5c8b791c500490DAbf17832E0a7931",
+    "chain": "1",
+    "creator_address": "0x39718095694c258b13bb511f1082652a50574306",
+    "first_investigated": "2026-08-05T15:32:29Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260805-153229-0x6aF0b029.md",
+        "score": 0,
+        "ts": "2026-08-05T15:32:29Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-05T15:32:29Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "SYN",
+    "times_investigated": 1
+  },
   "1:0x6c240eccc311586fc4625ffc2ae205fff61a9e42": {
     "address": "0x6c240ECCc311586fc4625ffc2AE205fFf61a9e42",
     "chain": "1",

@@ -1319,3 +1319,5 @@
 | 2026-08-05 | auto | 0xB6bB786056c690e41b20a587573Fd77aade2eb07 (OpenAI) | deep_investigation | REJECT (0/100) | Owner not renounced (0x47be9db008d304546edde72a0f424ebdacdcbfa0) — can still act | +7d |
 
 | 2026-08-05 | auto | 0x0f2D719407FdBeFF09D87557AbB7232601FD9F29 (SYN) | deep_investigation | CAUTION (77/100) | Top 10 non-LP/burn holders control 68% of supply — meaningful concentration | +7d |
+
+| 2026-08-05 | auto | 0x6aF0b0294B5c8b791c500490DAbf17832E0a7931 (SYN) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
