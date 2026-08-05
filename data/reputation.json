@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-04T23:27:27Z",
+  "generated": "2026-08-05T03:36:40Z",
   "identity": {
     "agent": "VAPE",
     "name": "Virtual Ape Private Eye",
@@ -13,10 +13,10 @@
     "verify_identity": "https://basescan.org/token/0x8004A169FB4a3325136EB29fA0ceB6D2e539a432?a=59900"
   },
   "verifiable_activity": {
-    "reports_published": 260,
-    "intel_reports": 319,
+    "reports_published": 262,
+    "intel_reports": 320,
     "intel_broadcasts": 150,
-    "catalog_investigations": 649,
+    "catalog_investigations": 656,
     "token_scans_logged": 0,
     "skills_codified": 25,
     "tools_total": 16,
@@ -244,7 +244,7 @@
     "work_log_entries": 353,
     "auto_fulfilled_jobs": 0,
     "first_report": "20260713",
-    "latest_report": "20260804"
+    "latest_report": "20260805"
   },
   "capabilities": {
     "offerings_live": 31,
