@@ -748,3 +748,4 @@
 {"ts": "2026-08-05T19:39:32.579112Z", "target": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
 {"ts": "2026-08-05T19:54:31.196934Z", "target": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
 {"ts": "2026-08-05T20:09:51.265301Z", "target": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf", "hired": ["dossier_check"], "paid": 1, "cost_usd": 0.1, "daily_target": 62}
+{"ts": "2026-08-05T20:25:08.799377Z", "target": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf", "hired": ["yields"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}

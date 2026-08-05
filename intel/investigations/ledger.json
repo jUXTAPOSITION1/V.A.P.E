@@ -7740,6 +7740,25 @@
     "symbol": "BEAT",
     "times_investigated": 1
   },
+  "56:0xbd01d5f5d06113c1c8a837d95d1c6d8082eb9b10": {
+    "address": "0xbD01D5f5D06113C1c8a837D95D1C6D8082EB9b10",
+    "chain": "56",
+    "creator_address": "0xbf529469264b8809807cb683654017cde81d1c5d",
+    "first_investigated": "2026-08-05T20:25:05Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260805-202505-0xbD01D5f5.md",
+        "score": 0,
+        "ts": "2026-08-05T20:25:05Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-05T20:25:05Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "USDT",
+    "times_investigated": 1
+  },
   "56:0xbe9d156892e55e7154bcd3cb0fea677f9d3103e1": {
     "address": "0xbe9D156892E55e7154BcD3cB0FEA677F9D3103E1",
     "chain": "56",

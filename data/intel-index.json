@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T20:09:54Z",
+  "generated": "2026-08-05T20:25:13Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 451,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 154,
-    "investigations": 769,
+    "investigations": 770,
     "news": 72,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260805-192416-0x1E674153.md",
-      "title": "Investigation \u2014 CHECK",
-      "symbol": "CHECK",
-      "name": "CHECK",
-      "date": "2026-08-05T19:24:16Z",
-      "target": "0x1E674153229Dc206C681f5De6b2d9aaa21687Ba5",
-      "chain": "8453 (Base)",
+      "file": "investigation-20260805-202505-0xbD01D5f5.md",
+      "title": "Investigation \u2014 USDT",
+      "symbol": "USDT",
+      "name": "USDT",
+      "date": "2026-08-05T20:25:05Z",
+      "target": "0xbD01D5f5D06113C1c8a837D95D1C6D8082EB9b10",
+      "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "12",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (16) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $123 (rug/illiquid); [-10] Low liquidity $123; [-10] No known third-part",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-192416-0x1E674153.md"
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xbf529469264b8809807cb683654017cde81d1c5d) \u2014 can still act on the contract; [-40] Token name/symbol (USDT / USDT) claims a major stablecoin brand but trades at $0.000182, nowhere near the real $1 peg, and is not the independently-verified ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-202505-0xbD01D5f5.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260805-202505-0xbD01D5f5.md",
+      "title": "Investigation \u2014 USDT",
+      "symbol": "USDT",
+      "name": "USDT",
+      "date": "2026-08-05T20:25:05Z",
+      "target": "0xbD01D5f5D06113C1c8a837D95D1C6D8082EB9b10",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xbf529469264b8809807cb683654017cde81d1c5d) \u2014 can still act on the contract; [-40] Token name/symbol (USDT / USDT) claims a major stablecoin brand but trades at $0.000182, nowhere near the real $1 peg, and is not the independently-verified ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-202505-0xbD01D5f5.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260805-192416-0x1E674153.md",
