@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-05T09:10:17Z",
+  "generated_at": "2026-08-05T14:37:49Z",
   "district_stats": {
     "overall_threat_level": "HIGH",
     "lanes_passing": 7,
@@ -15,20 +15,20 @@
       "tier": 3,
       "stat_primary": {
         "label": "tracked",
-        "value": 749
+        "value": 758
       },
       "stat_secondary": [
         {
           "label": "reject",
-          "value": 414
+          "value": 420
         },
         {
           "label": "caution",
-          "value": 204
+          "value": 206
         },
         {
           "label": "proceed",
-          "value": 131
+          "value": 132
         }
       ],
       "link": "investigations.html",
@@ -159,12 +159,12 @@
       "tier": 3,
       "stat_primary": {
         "label": "findings sealed",
-        "value": 1588
+        "value": 1604
       },
       "stat_secondary": [
         {
           "label": "unsealed lines",
-          "value": 1
+          "value": 3
         }
       ],
       "link": "index.html#security-dashboard",
@@ -207,7 +207,7 @@
       "tier": 4,
       "stat_primary": {
         "label": "data calls logged",
-        "value": 1873
+        "value": 1902
       },
       "stat_secondary": [],
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/memory",
@@ -435,14 +435,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-05T08:25:51Z"
+          "value": "2026-08-05T13:52:21Z"
         },
         {
           "label": "ledger chain intact",
           "value": "yes"
         }
       ],
-      "last_run_at": "2026-08-05T08:25:51Z",
+      "last_run_at": "2026-08-05T13:52:21Z",
       "source_workflow": "findings-seal.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/findings-seal.yml"
     },
@@ -495,14 +495,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-05T08:36:52Z"
+          "value": "2026-08-05T14:10:46Z"
         },
         {
           "label": "attack-pattern coverage",
           "value": "23%"
         }
       ],
-      "last_run_at": "2026-08-05T08:36:52Z",
+      "last_run_at": "2026-08-05T14:10:46Z",
       "source_workflow": "intel-sweeps.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/intel-sweeps.yml"
     }
@@ -582,6 +582,81 @@
     ]
   ],
   "recent_events": [
+    {
+      "id": "news:Sparse Disclosure Leaves Linux Admins in the Dark on Open vSwitch Root Flaw",
+      "type": "news",
+      "timestamp": "2026-08-05T14:09:44Z",
+      "label": "Sparse Disclosure Leaves Linux Admins in the Dark on Open vSwitch Root Flaw"
+    },
+    {
+      "id": "investigation:0xB6bB786056c690e41b20a587573Fd77aade2eb07",
+      "type": "investigation",
+      "timestamp": "2026-08-05T13:59:31Z",
+      "label": "OpenAI",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x2B31D3eD065F1f834D5C85EFEd49089F4c4f6b07",
+      "type": "investigation",
+      "timestamp": "2026-08-05T13:14:39Z",
+      "label": "OpenAI",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x45cd1A07651edf0AabedefFA878b7fDA3DB3863B",
+      "type": "investigation",
+      "timestamp": "2026-08-05T12:59:01Z",
+      "label": "MarsCoin",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xec5196C10b719abd317FF550006471c9dC2556a0",
+      "type": "investigation",
+      "timestamp": "2026-08-05T12:43:07Z",
+      "label": "Marscoin",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xFE1F5ce0A21dD8494a29053A48dda4Eb2Be94444",
+      "type": "investigation",
+      "timestamp": "2026-08-05T12:27:19Z",
+      "label": "MarsCoin",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "investigation:0x4444512F8995D1e7AaFBe13c8F11a4483f892C4f",
+      "type": "investigation",
+      "timestamp": "2026-08-05T12:12:19Z",
+      "label": "MarsCoin",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "investigation:0xCAc44C05e1224ef9B1A5E2Dd56a59d45527b42e6",
+      "type": "investigation",
+      "timestamp": "2026-08-05T11:57:23Z",
+      "label": "WE NEED MORE RUGGED INDIVIDUALIS",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x7649080D56b9a6062378fb26a01A04c840ce7B07",
+      "type": "investigation",
+      "timestamp": "2026-08-05T11:27:25Z",
+      "label": "OpenAI",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "news:Developer Environments Under Siege: Open VSX Registry Nukes 77 'Evil Twin' Extensions Targeting API Keys and Source Code",
+      "type": "news",
+      "timestamp": "2026-08-05T11:22:44Z",
+      "label": "Developer Environments Under Siege: Open VSX Registry Nukes 77 'Evil Twin' Extensions Targeting API Keys and Source Code"
+    },
+    {
+      "id": "investigation:0x444416A582466fDAE0f2Fcdf0A859675f8fF6e9f",
+      "type": "investigation",
+      "timestamp": "2026-08-05T10:42:41Z",
+      "label": "MarsCoin",
+      "verdict": "PROCEED"
+    },
     {
       "id": "investigation:0x73ADFA3A448D63025D52E39f921369386E4fCB07",
       "type": "investigation",
@@ -670,81 +745,6 @@
       "timestamp": "2026-08-04T21:53:49Z",
       "label": "NVIDIA Corp",
       "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x000008D2175F9AEAdDb2430c26f8A6f73c5A0000",
-      "type": "investigation",
-      "timestamp": "2026-08-04T21:37:33Z",
-      "label": "Unitas",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0x965BA6FDe178cAe91b8868E2f82b84095c82e9e3",
-      "type": "investigation",
-      "timestamp": "2026-08-04T21:06:30Z",
-      "label": "Audiera AI (beataii.xyz)",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x500A02a20B0B0A3F3efCCFc0559543F5743bd1C4",
-      "type": "investigation",
-      "timestamp": "2026-08-04T20:50:38Z",
-      "label": "o1.exchange",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0x708383ae0e80E75377d664E4D6344404dede119A",
-      "type": "investigation",
-      "timestamp": "2026-08-04T20:19:52Z",
-      "label": "Earthmeta",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0x64f170A94CC75C406BA1398fD353841ba63a631D",
-      "type": "investigation",
-      "timestamp": "2026-08-04T20:03:33Z",
-      "label": "UB402",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x9F178347e7F2975bC4C942d292AE69295dAd3b7d",
-      "type": "investigation",
-      "timestamp": "2026-08-04T19:48:01Z",
-      "label": "UNICORN",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "news:Greatness PhaaS Quietly Rolls Out Device Code Phishing to Hijack OAuth Tokens",
-      "type": "news",
-      "timestamp": "2026-08-04T19:39:21Z",
-      "label": "Greatness PhaaS Quietly Rolls Out Device Code Phishing to Hijack OAuth Tokens"
-    },
-    {
-      "id": "investigation:0xf1Bf52E00bF5601EAA7d5F4b490273721E6cBD11",
-      "type": "investigation",
-      "timestamp": "2026-08-04T19:17:55Z",
-      "label": "UNICORN",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x2285BB5307BA5A229303959f677Cf5e56C8f8276",
-      "type": "investigation",
-      "timestamp": "2026-08-04T18:47:17Z",
-      "label": "Lord GENADES",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xa8D6737e035D4b5986a650198CE1CF5AdB06F4BE",
-      "type": "investigation",
-      "timestamp": "2026-08-04T17:01:30Z",
-      "label": "BNBFREN",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "news:Signed, Sealed, Delivered: How Attackers Weaponize Legitimate RMM Tools via Fake Software Updates",
-      "type": "news",
-      "timestamp": "2026-08-04T16:53:38Z",
-      "label": "Signed, Sealed, Delivered: How Attackers Weaponize Legitimate RMM Tools via Fake Software Updates"
     }
   ]
 }
