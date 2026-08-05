@@ -175,3 +175,4 @@
 {"ts": "2026-08-04T21:53:54.210119Z", "address": "0x3E5d4f8aee0D9B3082d5f6DA5D6e225D17ba9ea0", "chain": "56", "symbol": "UAI", "name": "UAI", "source": "evm", "offering": "token_safety_check"}
 {"ts": "2026-08-04T22:40:17.406253Z", "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "chain": "8453", "symbol": "USDC", "name": "USDC", "source": "base_trending", "offering": "dossier_check"}
 {"ts": "2026-08-04T23:56:15.350395Z", "address": "0x40b8129B786D766267A7a118cF8C07E31CDB6Fde", "chain": "56", "symbol": "UB", "name": "UB", "source": "evm", "offering": "rug_pull_alert"}
+{"ts": "2026-08-05T00:26:41.863056Z", "address": "0x0b3e328455c4059eeb9e3f84b5543f74e24e7e1b", "chain": "8453", "symbol": "VIRTUAL", "name": "VIRTUAL", "source": "base_trending", "offering": "token_intel"}

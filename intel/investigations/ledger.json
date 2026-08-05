@@ -3600,6 +3600,25 @@
     "symbol": "FERRET",
     "times_investigated": 1
   },
+  "1:0xbd0b2307bda31f2ff88edaf5c1e258cd1a55ba71": {
+    "address": "0xbd0B2307bDa31F2Ff88eDaf5c1e258cD1a55BA71",
+    "chain": "1",
+    "creator_address": "0x1397d00459a97f3a1de5d091227677471535b41f",
+    "first_investigated": "2026-08-05T00:26:30Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260805-002630-0xbd0B2307.md",
+        "score": 5,
+        "ts": "2026-08-05T00:26:30Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-05T00:26:30Z",
+    "last_score": 5,
+    "last_verdict": "REJECT",
+    "symbol": "RELICSSTR",
+    "times_investigated": 1
+  },
   "1:0xc0999ac376d383bd7744b59dfcee0c25f5c26393": {
     "address": "0xC0999aC376d383bd7744B59dFcee0c25F5C26393",
     "chain": "1",
