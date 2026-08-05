@@ -6431,6 +6431,25 @@
     "symbol": "BTW",
     "times_investigated": 1
   },
+  "56:0x55ac7ac5316cdd2bb4219ecd717171872c757777": {
+    "address": "0x55aC7ac5316cDd2bb4219Ecd717171872C757777",
+    "chain": "56",
+    "creator_address": "0x44f09d56040236c4c7e6df6ff9d2d8eecdc9d071",
+    "first_investigated": "2026-08-05T02:13:28Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260805-021328-0x55aC7ac5.md",
+        "score": 0,
+        "ts": "2026-08-05T02:13:28Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-05T02:13:28Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "NVDAB",
+    "times_investigated": 1
+  },
   "56:0x56bbbc01a416fb9b995949d105a5697c2338cd09": {
     "address": "0x56BBbC01a416Fb9b995949d105a5697c2338Cd09",
     "chain": "56",

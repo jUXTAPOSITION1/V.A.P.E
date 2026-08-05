@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T01:58:08Z",
+  "generated": "2026-08-05T02:13:28Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 436,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 150,
-    "investigations": 746,
+    "investigations": 747,
     "news": 67,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260805-011253-0x36bbf8bF.md",
-      "title": "Investigation \u2014 STACK",
-      "symbol": "STACK",
-      "name": "Stack",
-      "date": "2026-08-05T01:12:53Z",
-      "target": "0x36bbf8bFe6921E137b621668Bda207A287c9442f",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260805-021328-0x55aC7ac5.md",
+      "title": "Investigation \u2014 NVDAB",
+      "symbol": "NVDAB",
+      "name": "\u5e01\u6709",
+      "date": "2026-08-05T02:13:28Z",
+      "target": "0x55aC7ac5316cDd2bb4219Ecd717171872C757777",
+      "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
       "score": "0",
-      "summary": "Risk factors: [-10] Owner not renounced (0x7ebf7592100fa5769ddaa22e1b656035c47c6545) \u2014 can still act on the contract; [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders control 195% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $1,945 (rug/illiqu",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-011253-0x36bbf8bF.md"
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $7,224 (rug/illiquid); [-10] Low liquidity $7,224; [-15] Pair only 0.7 day",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-021328-0x55aC7ac5.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260805-021328-0x55aC7ac5.md",
+      "title": "Investigation \u2014 NVDAB",
+      "symbol": "NVDAB",
+      "name": "\u5e01\u6709",
+      "date": "2026-08-05T02:13:28Z",
+      "target": "0x55aC7ac5316cDd2bb4219Ecd717171872C757777",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $7,224 (rug/illiquid); [-10] Low liquidity $7,224; [-15] Pair only 0.7 day",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-021328-0x55aC7ac5.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260805-011253-0x36bbf8bF.md",
