@@ -649,3 +649,4 @@
 {"ts": "2026-08-05T07:57:53.573824Z", "target": "polygon", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
 {"ts": "2026-08-05T08:27:40.028014Z", "target": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "hired": ["dossier_check"], "paid": 1, "cost_usd": 0.1, "daily_target": 61}
 {"ts": "2026-08-05T08:57:45.315774Z", "target": "0x1a44233fae8d50f1aeb3a5d58dd426ff4814cb53", "hired": ["rug_pull_alert"], "paid": 1, "cost_usd": 0.03, "daily_target": 61}
+{"ts": "2026-08-05T09:27:38.758520Z", "target": "optimism", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
