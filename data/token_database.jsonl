@@ -196,3 +196,4 @@
 {"ts": "2026-08-05T20:55:41.979853Z", "address": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf", "chain": "8453", "symbol": "cbBTC", "name": "cbBTC", "source": "base", "offering": "token_chart"}
 {"ts": "2026-08-05T21:10:52.783940Z", "address": "0x1a44233fae8d50f1aeb3a5d58dd426ff4814cb53", "chain": "8453", "symbol": "QUID", "name": "Squid", "source": "base_trending", "offering": "token_intel"}
 {"ts": "2026-08-05T21:25:51.509210Z", "address": "0x940181a94a35a4569e4529a3cdfb74e38fd98631", "chain": "8453", "symbol": "AERO", "name": "Aerodrome", "source": "base_trending", "offering": "dossier_check"}
+{"ts": "2026-08-05T21:41:00.159862Z", "address": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf", "chain": "8453", "symbol": "VVV", "name": "Venice Token", "source": "base_trending", "offering": "token_safety_check"}
