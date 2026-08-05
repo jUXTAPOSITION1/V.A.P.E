@@ -720,3 +720,4 @@
 {"ts": "2026-08-05T08:27:31.731628Z", "target": "0x4BfAa776991E85e5f8b1255461cbbd216cFc714f", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
 {"ts": "2026-08-05T08:57:39.727051Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["bridges"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
 {"ts": "2026-08-05T09:27:37.765720Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
+{"ts": "2026-08-05T09:57:33.492085Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
