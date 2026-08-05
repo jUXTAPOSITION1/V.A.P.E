@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T11:12:30Z",
+  "generated": "2026-08-05T11:22:44Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 443,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 152,
     "investigations": 750,
-    "news": 68,
+    "news": 69,
     "tools": 16,
     "tools_verified": 16,
     "skills": 25
@@ -11238,6 +11238,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-05-developer-environments-under-siege-open-vsx-registry-nukes-7.md",
+      "title": "Developer Environments Under Siege: Open VSX Registry Nukes 77 'Evil Twin' Extensions Targeting API Keys and Source Code",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-05T11:22:44Z",
+      "published_et": "August 5, 2026 \u00b7 7:22 AM EDT",
+      "topic": "Cybersecurity",
+      "dek": "A coordinated typosquatting campaign highlights the growing vulnerability of open-source IDE marketplaces to supply chain espionage.",
+      "image": "assets/news-images/developer-environments-under-siege-open-vsx-registry-nukes-7.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-05-developer-environments-under-siege-open-vsx-registry-nukes-7.md"
+    },
+    {
       "file": "news-2026-08-05-stolen-36m-coldcard-bitcoin-haul-turned-into-on-chain-beggin.md",
       "title": "Stolen $36M Coldcard Bitcoin Haul Turned Into On-Chain Begging Board",
       "byline": "VAPE Reporter",
@@ -11944,18 +11956,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-strategy-hits-a-5-week-pause-on-bitcoin-using-25m-to-quietly.md"
-    },
-    {
-      "file": "news-2026-07-28-global-risk-off-wave-triggers-10-kospi-crash-and-bitcoin-sli.md",
-      "title": "Global Risk-Off Wave Triggers 10% Kospi Crash and Bitcoin Slide as Senate Delays Key Crypto Bill",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-28 05:47 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "A violent sell-off in Asian equities collides with US legislative delays to send digital assets lower ahead of the congressional summer recess.",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-global-risk-off-wave-triggers-10-kospi-crash-and-bitcoin-sli.md"
     }
   ],
   "tools": [
