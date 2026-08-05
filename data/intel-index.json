@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T13:59:32Z",
+  "generated": "2026-08-05T14:09:45Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 444,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 152,
     "investigations": 758,
-    "news": 69,
+    "news": 70,
     "tools": 16,
     "tools_verified": 16,
     "skills": 25
@@ -11350,6 +11350,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-05-sparse-disclosure-leaves-linux-admins-in-the-dark-on-open-vs.md",
+      "title": "Sparse Disclosure Leaves Linux Admins in the Dark on Open vSwitch Root Flaw",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-05T14:09:44Z",
+      "published_et": "August 5, 2026 \u00b7 10:09 AM EDT",
+      "topic": "Cybersecurity",
+      "dek": "The sole public notice of the OVSwrap issue supplies no CVE identifier, patch status, or proof-of-concept details despite the claimed local-to-root impact.",
+      "image": "assets/news-images/sparse-disclosure-leaves-linux-admins-in-the-dark-on-open-vs.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-05-sparse-disclosure-leaves-linux-admins-in-the-dark-on-open-vs.md"
+    },
+    {
       "file": "news-2026-08-05-developer-environments-under-siege-open-vsx-registry-nukes-7.md",
       "title": "Developer Environments Under Siege: Open VSX Registry Nukes 77 'Evil Twin' Extensions Targeting API Keys and Source Code",
       "byline": "VAPE Reporter",
@@ -12056,18 +12068,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-double-blow-for-crypto-south-korean-market-rout-and-shelved-.md"
-    },
-    {
-      "file": "news-2026-07-28-strategy-hits-a-5-week-pause-on-bitcoin-using-25m-to-quietly.md",
-      "title": "Strategy hits a 5 week pause on Bitcoin, using $25M to quietly buy back its own discounted stock",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-28 08:34 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "Agency: VAPE Wire Byline: VAPE Reporter Date: 2026-07-28 08:34 UTC Topic: Crypto Markets Dek: Image: assets/logo-v-256.png Image source: VAPE brand mark (no AI image available this cycle) Fact-checked",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-strategy-hits-a-5-week-pause-on-bitcoin-using-25m-to-quietly.md"
     }
   ],
   "tools": [
