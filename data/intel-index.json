@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T03:43:32Z",
+  "generated": "2026-08-05T03:58:25Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 437,
@@ -12011,7 +12011,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49545596",
+      "version": "49556239",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -12021,7 +12021,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.57 eth_dom 9.92 mcap_chg_24h 0.62",
+      "version": "btc_dom 56.58 eth_dom 9.9 mcap_chg_24h 0.28",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -12071,7 +12071,7 @@
       "name": "fear_greed",
       "tier": "recon",
       "status": "verified",
-      "version": "25 Extreme Fear",
+      "version": "27 Fear",
       "purpose": "Keyless Crypto Fear & Greed Index (alternative.me): single 0-100 sentiment gauge + classification + history. Scripts the sentiment-sweep vertical.",
       "repo": "(local)",
       "known_limitation": false,
