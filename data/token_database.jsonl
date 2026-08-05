@@ -188,3 +188,4 @@
 {"ts": "2026-08-05T14:14:28.781964Z", "address": "0x3fe29f85bd9B11eE79Ce69374B5560d8F4488fB2", "chain": "1", "symbol": "STACK", "name": "STACK", "source": "evm", "offering": "token_chart"}
 {"ts": "2026-08-05T16:21:38.259835Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "liquidity_check"}
 {"ts": "2026-08-05T16:52:40.533398Z", "address": "0xf1Bf52E00bF5601EAA7d5F4b490273721E6cBD11", "chain": "1", "symbol": "UNI", "name": "UNI", "source": "evm", "offering": "liquidity_check"}
+{"ts": "2026-08-05T17:07:34.830978Z", "address": "0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db", "chain": "10", "symbol": "VELO", "name": "VELO", "source": "evm", "offering": "token_chart"}
