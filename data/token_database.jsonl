@@ -192,3 +192,4 @@
 {"ts": "2026-08-05T18:38:37.255056Z", "address": "0x9126236476eFBA9Ad8aB77855c60eB5BF37586Eb", "chain": "8453", "symbol": "CHECK", "name": "CHECK", "source": "base", "offering": "liquidity_check"}
 {"ts": "2026-08-05T18:53:35.332281Z", "address": "0x311935Cd80B76769bF2ecC9D8Ab7635b2139cf82", "chain": "8453", "symbol": "SOL", "name": "SOL", "source": "base", "offering": "token_safety_check"}
 {"ts": "2026-08-05T19:39:37.462961Z", "address": "0x832b55B0fA6397ca9e63B8c15DAdeF3f6E44614c", "chain": "8453", "symbol": "DUAL", "name": "DUAL", "source": "base", "offering": "dossier_check"}
+{"ts": "2026-08-05T20:09:54.004485Z", "address": "0x8F294a99a0609822C233b24867F331c292cE2DA9", "chain": "1", "symbol": "RELICS", "name": "RELICS", "source": "evm", "offering": "liquidity_check"}
