@@ -200,3 +200,4 @@
 {"ts": "2026-08-05T21:55:49.788824Z", "address": "0x0b3e328455c4059eeb9e3f84b5543f74e24e7e1b", "chain": "8453", "symbol": "VIRTUAL", "name": "VIRTUAL", "source": "base_trending", "offering": "token_intel"}
 {"ts": "2026-08-05T22:25:55.916692Z", "address": "0xcb585250f852c6c6bf90434ab21a00f02833a4af", "chain": "8453", "symbol": "cbXRP", "name": "Coinbase Wrapped XRP", "source": "base_trending", "offering": "token_chart"}
 {"ts": "2026-08-05T22:55:37.364788Z", "address": "0xbf927b841994731c573bdf09ceb0c6b0aa887cdd", "chain": "8453", "symbol": "VELVET", "name": "Velvet", "source": "base_trending", "offering": "token_safety_check"}
+{"ts": "2026-08-05T23:10:35.398812Z", "address": "0xfde4c96c8593536e31f229ea8f37b2ada2699bb2", "chain": "8453", "symbol": "USDT", "name": "Tether USD", "source": "base_trending", "offering": "exploit_check"}
