@@ -8138,6 +8138,25 @@
     "symbol": "UAI",
     "times_investigated": 1
   },
+  "56:0xe85a3fdd5eff4b1f8264ebaa91dd8cf8c7d07777": {
+    "address": "0xe85A3fdd5eff4B1f8264ebAa91DD8cf8c7D07777",
+    "chain": "56",
+    "creator_address": "0x5c87e99f1905b8ca5b9d8b5c89a6b7b1a272d490",
+    "first_investigated": "2026-08-05T17:53:26Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260805-175326-0xe85A3fdd.md",
+        "score": 0,
+        "ts": "2026-08-05T17:53:26Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-05T17:53:26Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "GRVT",
+    "times_investigated": 1
+  },
   "56:0xea4d009dd99cb83ff4e27c533e279e6120364444": {
     "address": "0xeA4D009DD99cb83FF4e27C533e279e6120364444",
     "chain": "56",
