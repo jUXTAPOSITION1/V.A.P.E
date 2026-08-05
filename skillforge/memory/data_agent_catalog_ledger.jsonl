@@ -644,3 +644,4 @@
 {"ts": "2026-08-05T05:28:37.507351Z", "target": "0xCFB287565201763743A77c556dcA44A673d0a777", "hired": ["token_safety_check"], "paid": 1, "cost_usd": 0.02, "daily_target": 61}
 {"ts": "2026-08-05T05:58:32.780128Z", "target": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf", "hired": ["dossier_check"], "paid": 1, "cost_usd": 0.1, "daily_target": 61}
 {"ts": "2026-08-05T06:28:37.164065Z", "target": "base", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
+{"ts": "2026-08-05T06:58:43.361867Z", "target": "none", "hired": ["yields"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
