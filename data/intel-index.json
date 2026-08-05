@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T19:54:35Z",
+  "generated": "2026-08-05T20:05:18Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 451,
@@ -14,7 +14,7 @@
       "virtuals": 74,
       "skillforge": 4
     },
-    "broadcasts": 153,
+    "broadcasts": 154,
     "investigations": 769,
     "news": 72,
     "tools": 16,
@@ -11292,6 +11292,13 @@
   ],
   "broadcasts": [
     {
+      "file": "broadcast-2026-08-05-20.md",
+      "title": "VAPE Community Intelligence Broadcast",
+      "date": "2026-08-05T20:00Z",
+      "summary": "11 new VAPE investigation(s) in the last 6h and 1 rule-based anomaly flag(s) this cycle. Base TVL $4.64B, 626 targets on VAPE's permanent record (384 REJECT / 162 CAUTION / 80 PROCEED).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-08-05-20.md"
+    },
+    {
       "file": "broadcast-2026-08-05-14.md",
       "title": "VAPE Community Intelligence Broadcast",
       "date": "2026-08-05T14:00Z",
@@ -11493,13 +11500,6 @@
       "date": "2026-07-29T19:00Z",
       "summary": "11 new VAPE investigation(s) in the last 6h and 2 rule-based anomaly flag(s) this cycle. Base TVL $4.59B, 378 targets on VAPE's permanent record (220 REJECT / 96 CAUTION / 62 PROCEED).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-29-19.md"
-    },
-    {
-      "file": "broadcast-2026-07-29-14.md",
-      "title": "VAPE Community Intelligence Broadcast",
-      "date": "2026-07-29T14:00Z",
-      "summary": "10 new VAPE investigation(s) in the last 6h and 2 rule-based anomaly flag(s) this cycle. Base TVL $4.59B, 367 targets on VAPE's permanent record (213 REJECT / 92 CAUTION / 62 PROCEED).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-29-14.md"
     }
   ],
   "news": [
