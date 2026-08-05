@@ -1297,3 +1297,5 @@
 | 2026-08-05 | auto | 0x55aC7ac5316cDd2bb4219Ecd717171872C757777 (NVDAB) | deep_investigation | REJECT (0/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-05 | auto | 0x8ad5D75DB9447F7300d74A151b9Cd24ed1a2cb07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
+
+| 2026-08-05 | auto | 0x73ADFA3A448D63025D52E39f921369386E4fCB07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
