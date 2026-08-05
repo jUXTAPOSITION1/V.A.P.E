@@ -1,13 +1,13 @@
 {
-  "generated": "2026-08-05T21:55:50Z",
+  "generated": "2026-08-05T22:06:57Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 453,
+    "reports": 454,
     "reports_by_type": {
+      "base": 90,
       "bounty": 125,
       "sentiment": 48,
       "security": 79,
-      "base": 89,
       "macro": 24,
       "bug": 5,
       "mainnet": 5,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-204027-0x29044376.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260805_211029.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-05T21:10:29Z",
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-08-05-22.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-08-05T22:00Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: RISEx $0.673M on ['RISE'] (Access Control Exploit) \u00b7 Base mover: OpenAI / USDC +9947% 24h (liq $9442530.9733) \u2014 volatility/rug watch \u00b7 Base mover: OpenAI / USDC -28% 24h (liq $0.004055609983) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260805_211029.md",
-      "bytes": 16276
+      "summary": "Date: 2026-08-05 22:06 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-05-22.md",
+      "bytes": 7601
     }
   },
   "investigations": [
@@ -10658,6 +10658,17 @@
   ],
   "reports": [
     {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-08-05-22.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-08-05T22:00Z",
+      "threat": null,
+      "summary": "Date: 2026-08-05 22:06 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-05-22.md",
+      "bytes": 7601
+    },
+    {
       "kind": "bounty",
       "type": "bounty",
       "file": "bounty_report_20260805_211029.md",
@@ -11305,17 +11316,6 @@
       "summary": "The feed lists 12 incidents from 2026-07-21 to 2026-07-30, with six occurring in the most recent seven days. Losses range from $0.01M (Set Protocol, malicious SetToken & Manager Contract on Ethereum) to $24.15M (AFX Bridge, private key compromise on Arbitrum). Techniques include private key compromise (Garden on Ethereum/Base/Arbitrum/BSC",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-02-23.md",
       "bytes": 6533
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260802_215902.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-02T21:59:02Z",
-      "threat": null,
-      "summary": "Cycle: 20260802215902 \u00b7 Data timestamp (UTC): 2026-08-02T21:59:05Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_215902.md",
-      "bytes": 15531
     }
   ],
   "broadcasts": [
@@ -12347,7 +12347,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49582094",
+      "version": "49588806",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -12357,7 +12357,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.57 eth_dom 10.07 mcap_chg_24h 0.74",
+      "version": "btc_dom 56.62 eth_dom 10.05 mcap_chg_24h 0.7",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -12377,7 +12377,7 @@
       "name": "wallet_trace",
       "tier": "recon",
       "status": "verified",
-      "version": "0xb4fe38c36758 OpenAI 250.0 from 0xd6ced7e9 to 0x833589fc",
+      "version": "0xb3b7cd9fb487 SAOF 12.0 from 0x3433e16e to 0x833589fc",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": false,
