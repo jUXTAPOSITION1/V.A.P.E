@@ -10133,6 +10133,25 @@
     "symbol": "MidnightProtocol",
     "times_investigated": 1
   },
+  "8453:0x8ad5d75db9447f7300d74a151b9cd24ed1a2cb07": {
+    "address": "0x8ad5D75DB9447F7300d74A151b9Cd24ed1a2cb07",
+    "chain": "8453",
+    "creator_address": "0xa8264c56bbe61c38bec6825ff48d30682a20a66b",
+    "first_investigated": "2026-08-05T06:28:33Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260805-062833-0x8ad5D75D.md",
+        "score": 0,
+        "ts": "2026-08-05T06:28:33Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-05T06:28:33Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "OpenAI",
+    "times_investigated": 1
+  },
   "8453:0x8b7dde054be9d180c1be7fae0874697374a49832": {
     "address": "0x8B7DdE054BE9D180c1Be7FaE0874697374A49832",
     "chain": "8453",
