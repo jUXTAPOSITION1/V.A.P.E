@@ -1,14 +1,14 @@
 {
-  "generated": "2026-08-05T02:28:44Z",
+  "generated": "2026-08-05T02:36:28Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 436,
+    "reports": 437,
     "reports_by_type": {
+      "security": 76,
       "bounty": 117,
       "base": 87,
       "sentiment": 46,
       "macro": 23,
-      "security": 75,
       "bug": 5,
       "mainnet": 5,
       "virtuals": 74,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260805-021328-0x55aC7ac5.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260805_000416.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-05T00:04:16Z",
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-05-02.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-05T02:00Z",
       "threat": null,
-      "summary": "RECENT EXPLOIT: RISEx $0.673M on ['RISE'] (Access Control Exploit)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260805_000416.md",
-      "bytes": 16546
+      "summary": "The feed shows 6 incidents in the last 7 days and one incident exceeding $50M in the prior 14 days. Reported events include a $115.0M non-random private key generation loss on Bitcoin (COLDCARD), a $9.7M hot wallet compromise spanning Ethereum/Tron/Arbitrum (Triple-A), an $8.2M loss on BSC (Crypto DAO), and smaller events such as access-c",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-05-02.md",
+      "bytes": 6724
     }
   },
   "investigations": [
@@ -10322,6 +10322,17 @@
   ],
   "reports": [
     {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-05-02.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-05T02:00Z",
+      "threat": null,
+      "summary": "The feed shows 6 incidents in the last 7 days and one incident exceeding $50M in the prior 14 days. Reported events include a $115.0M non-random private key generation loss on Bitcoin (COLDCARD), a $9.7M hot wallet compromise spanning Ethereum/Tron/Arbitrum (Triple-A), an $8.2M loss on BSC (Crypto DAO), and smaller events such as access-c",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-05-02.md",
+      "bytes": 6724
+    },
+    {
       "kind": "bounty",
       "type": "bounty",
       "file": "bounty_report_20260805_000416.md",
@@ -10969,17 +10980,6 @@
       "summary": "Date: 2026-08-02 05:48 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-02-05.md",
       "bytes": 7673
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260802_042408.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-02T04:24:08Z",
-      "threat": null,
-      "summary": "Cycle: 20260802042408 \u00b7 Data timestamp (UTC): 2026-08-02T04:24:16Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260802_042408.md",
-      "bytes": 16302
     }
   ],
   "broadcasts": [
