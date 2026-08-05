@@ -2920,6 +2920,25 @@
     "symbol": "PUPPY",
     "times_investigated": 1
   },
+  "1:0x8df8071168fd7a758a97398379eaa3199af97346": {
+    "address": "0x8df8071168fD7a758A97398379eaa3199aF97346",
+    "chain": "1",
+    "creator_address": "0x1e7628fc965a1a2f84d1fd4ef003f1fa0cd78e3a",
+    "first_investigated": "2026-08-05T00:57:43Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260805-005743-0x8df80711.md",
+        "score": 0,
+        "ts": "2026-08-05T00:57:43Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-05T00:57:43Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "STACK",
+    "times_investigated": 1
+  },
   "1:0x8e7a9f9817ecf2649c0316b22fea274d522c7b9b": {
     "address": "0x8e7A9f9817eCf2649c0316b22Fea274D522C7b9B",
     "chain": "1",

@@ -1289,3 +1289,5 @@
 | 2026-08-05 | auto | 0xbd0B2307bDa31F2Ff88eDaf5c1e258cD1a55BA71 (RELICSSTR) | deep_investigation | REJECT (5/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
 
 | 2026-08-05 | auto | 0x3fe29f85bd9B11eE79Ce69374B5560d8F4488fB2 (STACK) | deep_investigation | REJECT (20/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
+
+| 2026-08-05 | auto | 0x8df8071168fD7a758A97398379eaa3199aF97346 (STACK) | deep_investigation | REJECT (0/100) | Owner not renounced (0x1e7628fc965a1a2f84d1fd4ef003f1fa0cd78e3a) — can still act | +7d |

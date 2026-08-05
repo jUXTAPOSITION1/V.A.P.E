@@ -632,3 +632,4 @@
 {"ts": "2026-08-04T23:40:57.931899Z", "target": "uniswap-v2", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 61}
 {"ts": "2026-08-04T23:56:15.350670Z", "target": "0x40b8129B786D766267A7a118cF8C07E31CDB6Fde", "hired": ["rug_pull_alert"], "paid": 1, "cost_usd": 0.03, "daily_target": 61}
 {"ts": "2026-08-05T00:26:41.863345Z", "target": "0x0b3e328455c4059eeb9e3f84b5543f74e24e7e1b", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
+{"ts": "2026-08-05T00:57:52.096679Z", "target": "uniswap-v3", "hired": ["protocol_fees"], "paid": 1, "cost_usd": 0.01, "daily_target": 61}
