@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-06T07:31:48Z",
+  "generated": "2026-08-06T07:41:51Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 459,
+    "reports": 460,
     "reports_by_type": {
+      "bounty": 129,
       "base": 91,
-      "bounty": 128,
       "security": 80,
       "sentiment": 48,
       "macro": 24,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-064632-0xfc0f4739.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-08-06-05.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-08-06T05:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260806_074102.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-06T07:41:02Z",
       "threat": null,
-      "summary": "Date: 2026-08-06 05:40 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-06-05.md",
-      "bytes": 7991
+      "summary": "Cycle: 20260806074102 \u00b7 Data timestamp (UTC): 2026-08-06T07:41:08Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260806_074102.md",
+      "bytes": 17058
     }
   },
   "investigations": [
@@ -10826,6 +10826,17 @@
   ],
   "reports": [
     {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260806_074102.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-06T07:41:02Z",
+      "threat": null,
+      "summary": "Cycle: 20260806074102 \u00b7 Data timestamp (UTC): 2026-08-06T07:41:08Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260806_074102.md",
+      "bytes": 17058
+    },
+    {
       "kind": "intel",
       "type": "base",
       "file": "base-2026-08-06-05.md",
@@ -11473,17 +11484,6 @@
       "summary": "In the last 7 days, 3 incidents occurred. The feed lists 14 incidents total across the provided dates, with realized losses ranging from $0.01M (Set Protocol, Malicious SetToken & Manager Contract on Ethereum) to $24.15M (AFX Bridge, Private Key Compromised on Arbitrum). Other confirmed entries include Crypto DAO $8.2M on BSC, Triple-A $9",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-03-09.md",
       "bytes": 6586
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260803_062429.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-03T06:24:29Z",
-      "threat": null,
-      "summary": "Base mover: aeon / WETH +187% 24h (liq $1011448.2897) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260803_062429.md",
-      "bytes": 16768
     }
   ],
   "broadcasts": [
