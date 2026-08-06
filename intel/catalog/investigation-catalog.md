@@ -1383,3 +1383,5 @@
 | 2026-08-06 | auto | 0x2A4332d0333473618fE76bcED4270095547E6B07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
 
 | 2026-08-06 | auto | 0x2E3D50C01cB261Ec5383BF5dc55285880480c28e (CYS) | deep_investigation | REJECT (40/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
+
+| 2026-08-06 | auto | 0xBD1EaB2845661762DED14566b8864560532E4444 (MOON DOGE) | deep_investigation | REJECT (45/100) | Owner not renounced (0x5c952063c7fc8610ffdb798152d69f0b9550762b) — can still act | +7d |

@@ -8024,6 +8024,24 @@
     "symbol": "USDT",
     "times_investigated": 1
   },
+  "56:0xbd1eab2845661762ded14566b8864560532e4444": {
+    "address": "0xBD1EaB2845661762DED14566b8864560532E4444",
+    "chain": "56",
+    "first_investigated": "2026-08-06T12:21:23Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260806-122123-0xBD1EaB28.md",
+        "score": 45,
+        "ts": "2026-08-06T12:21:23Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-06T12:21:23Z",
+    "last_score": 45,
+    "last_verdict": "REJECT",
+    "symbol": "MOON DOGE",
+    "times_investigated": 1
+  },
   "56:0xbe9d156892e55e7154bcd3cb0fea677f9d3103e1": {
     "address": "0xbe9D156892E55e7154BcD3cB0FEA677F9D3103E1",
     "chain": "56",
