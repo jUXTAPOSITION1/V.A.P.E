@@ -1,7 +1,14 @@
 {
-  "generated": "2026-08-06T12:36:43Z",
-  "synthesis": "VAPE's automation has been running various sweeps, investigations, and generating reports at frequent intervals.",
+  "generated": "2026-08-06T12:52:13Z",
+  "synthesis": "_Analyst narrative unavailable this cycle (no LLM provider reachable)._",
   "tasks": [
+    {
+      "sha": "d34510fdf3",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-08-06T12:36Z",
+      "date": "2026-08-06T12:36:47Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d34510fdf3a892066ecea842b555d850ae3f2f2e"
+    },
     {
       "sha": "7432b8d17a",
       "kind": "investigation",
@@ -99,13 +106,6 @@
       "message": "sentiment_sweep 2026-08-06T10:46Z",
       "date": "2026-08-06T10:46:38Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/ce93dbb09f96267c7052691e9bfc6cee9284759d"
-    },
-    {
-      "sha": "88e36cef4f",
-      "kind": "automation",
-      "message": "Auto-generated bounty report 2026-08-06T10:41Z",
-      "date": "2026-08-06T10:41:02Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/88e36cef4f82c435608b127e6094e91052c2b86d"
     }
   ]
 }

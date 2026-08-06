@@ -213,3 +213,4 @@
 {"ts": "2026-08-06T10:50:01.539815Z", "address": "0x3b8db18e69d6686Ad9371A423aFe3Dd1065C94f1", "chain": "42161", "symbol": "ESP", "name": "ESP", "source": "evm", "offering": "liquidity_check"}
 {"ts": "2026-08-06T11:50:48.816145Z", "address": "0xEAe6F7e171e0A681004CcEd3c74dC351cd8F6b07", "chain": "8453", "symbol": "OpenAI", "name": "OpenAI", "source": "base", "offering": "token_safety_check"}
 {"ts": "2026-08-06T12:21:27.297803Z", "address": "0x1a44233FAe8D50F1AeB3a5d58dd426ff4814Cb53", "chain": "8453", "symbol": "QUID", "name": "QUID", "source": "base", "offering": "token_safety_check"}
+{"ts": "2026-08-06T12:52:12.338745Z", "address": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "chain": "8453", "symbol": "VELVET", "name": "VELVET", "source": "base", "offering": "token_intel"}

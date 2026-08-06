@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-06T12:36:43Z",
+  "generated": "2026-08-06T12:52:12Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 463,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 156,
-    "investigations": 793,
+    "investigations": 794,
     "news": 77,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260806-123640-0xBA6F9a11.md",
-      "title": "Investigation \u2014 MOON DOGE",
-      "symbol": "MOON DOGE",
-      "name": "MOON DOGE",
-      "date": "2026-08-06T12:36:40Z",
-      "target": "0xBA6F9a11f48e965a63bA4FB827a21a51b3354444",
+      "file": "investigation-20260806-125156-0xc52e3b77.md",
+      "title": "Investigation \u2014 BLESS",
+      "symbol": "BLESS",
+      "name": "Bless America",
+      "date": "2026-08-06T12:51:56Z",
+      "target": "0xc52e3b77821406A04D8B2294E77E29270b940637",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-10] Owner not renounced (0x5c952063c7fc8610ffdb798152d69f0b9550762b) \u2014 can still act on the contract; [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Violent 24h move +240% (volatility/manipulation); [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-123640-0xBA6F9a11.md"
+      "score": "32",
+      "summary": "Risk factors: [-8] Low holder count (51); [-15] Top 10 non-LP/burn holders control 94% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $734 (rug/illiquid); [-10] Low liquidity $734; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Pos",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-125156-0xc52e3b77.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260806-125156-0xc52e3b77.md",
+      "title": "Investigation \u2014 BLESS",
+      "symbol": "BLESS",
+      "name": "Bless America",
+      "date": "2026-08-06T12:51:56Z",
+      "target": "0xc52e3b77821406A04D8B2294E77E29270b940637",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "32",
+      "summary": "Risk factors: [-8] Low holder count (51); [-15] Top 10 non-LP/burn holders control 94% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $734 (rug/illiquid); [-10] Low liquidity $734; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Pos",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-125156-0xc52e3b77.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260806-123640-0xBA6F9a11.md",

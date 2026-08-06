@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-08-06T12:36:40Z — 403 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-08-06T12:51:56Z — 404 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| BLESS | BNB Chain | `0xc52e3b77821406A04D8B2294E77E29270b940637` | 32/100 | 1 | 2026-08-06T12:51:56Z |
 | MOON DOGE | BNB Chain | `0xBA6F9a11f48e965a63bA4FB827a21a51b3354444` | 35/100 | 1 | 2026-08-06T12:36:40Z |
 | MOON DOGE | BNB Chain | `0xBD1EaB2845661762DED14566b8864560532E4444` | 45/100 | 1 | 2026-08-06T12:21:23Z |
 | CYS | BNB Chain | `0x2E3D50C01cB261Ec5383BF5dc55285880480c28e` | 40/100 | 1 | 2026-08-06T12:06:13Z |
