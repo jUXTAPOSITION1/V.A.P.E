@@ -1379,3 +1379,5 @@
 | 2026-08-06 | auto | 0x747E550a7B848acE786C3CFe754Aa78feBC8A022 (DODO) | deep_investigation | PROCEED (100/100) | clean | +7d |
 
 | 2026-08-06 | auto | 0x003AFA6D1eddF81326106D19A59Fd4B5f90CdB07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
+
+| 2026-08-06 | auto | 0x2A4332d0333473618fE76bcED4270095547E6B07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
