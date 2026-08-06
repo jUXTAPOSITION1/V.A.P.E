@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-06T02:11:41Z",
+  "generated": "2026-08-06T02:27:26Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 456,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 154,
-    "investigations": 775,
+    "investigations": 776,
     "news": 73,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260806-021141-0x3DE26c6a.md",
-      "title": "Investigation \u2014 LDO",
-      "symbol": "LDO",
-      "name": "Lido DAO Token",
-      "date": "2026-08-06T02:11:41Z",
-      "target": "0x3DE26c6ab39d0Ae455201b55Da7F974A03CD8bA0",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260806-022723-0xd177e58B.md",
+      "title": "Investigation \u2014 USDC",
+      "symbol": "USDC",
+      "name": "United States Degen Coin",
+      "date": "2026-08-06T02:27:23Z",
+      "target": "0xd177e58B02E68b2d13f792288385dB41569b104f",
+      "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: SHIB (0x0Fa73480b77B9E3B8C16540b71F9e33247FB395E) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (7) \u2014 thin, easily manipulated distribution; [-15] Top 7 non-LP/burn holders c",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-021141-0x3DE26c6a.md"
+      "score": "22",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-40] Token name/symbol (United States Degen Coin / USDC) claims a major stablecoin brand but trades at $0.000379, nowhere near the real $1 peg, and is not the independently-verified real asset at this address \u2014 brand impersonation, not a real stablecoin; [-",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-022723-0xd177e58B.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260806-022723-0xd177e58B.md",
+      "title": "Investigation \u2014 USDC",
+      "symbol": "USDC",
+      "name": "United States Degen Coin",
+      "date": "2026-08-06T02:27:23Z",
+      "target": "0xd177e58B02E68b2d13f792288385dB41569b104f",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "22",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-40] Token name/symbol (United States Degen Coin / USDC) claims a major stablecoin brand but trades at $0.000379, nowhere near the real $1 peg, and is not the independently-verified real asset at this address \u2014 brand impersonation, not a real stablecoin; [-",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-022723-0xd177e58B.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260806-021141-0x3DE26c6a.md",

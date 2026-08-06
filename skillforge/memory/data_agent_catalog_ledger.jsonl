@@ -696,3 +696,4 @@
 {"ts": "2026-08-06T00:55:35.551582Z", "target": "0x1F32b1c2345538c0c6f582fCB022739c4A194Ebb", "hired": ["dossier_check"], "paid": 1, "cost_usd": 0.1, "daily_target": 62}
 {"ts": "2026-08-06T01:25:33.225767Z", "target": "Polygon", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
 {"ts": "2026-08-06T01:56:14.161026Z", "target": "none", "hired": ["yields"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
+{"ts": "2026-08-06T02:27:25.623458Z", "target": "stargate-v2", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 62}
