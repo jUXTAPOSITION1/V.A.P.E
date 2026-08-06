@@ -528,3 +528,4 @@
 {"ts": "2026-08-06T04:58:53.473383Z", "target": "0x624e2e7fDc8903165F64891672267AB0FCB98831", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-08-06T05:29:28.743163Z", "target": "0x624e2e7fDc8903165F64891672267AB0FCB98831", "hired": ["rug_pull_alert"], "paid": 1, "cost_usd": 0.03}
 {"ts": "2026-08-06T05:59:52.660489Z", "target": "0x624e2e7fDc8903165F64891672267AB0FCB98831", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-08-06T06:31:02.297958Z", "target": "0x624e2e7fDc8903165F64891672267AB0FCB98831", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01}
