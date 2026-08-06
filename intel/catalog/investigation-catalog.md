@@ -1371,3 +1371,5 @@
 | 2026-08-06 | auto | 0x3f58E7054FcaA38c74C1f46A5206E479ED995b07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
 
 | 2026-08-06 | auto | 0x73A15FeD60Bf67631dC6cd7Bc5B6e8da8190aCF5 (bUSD0) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-06 | auto | 0x35D8949372D46B7a3D5A56006AE77B215fc69bC0 (bUSD0) | deep_investigation | REJECT (32/100) | Upgradeable proxy (verify implementation) | +7d |

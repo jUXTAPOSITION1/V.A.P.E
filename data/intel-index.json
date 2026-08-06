@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-06T08:17:50Z",
+  "generated": "2026-08-06T08:33:33Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 460,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 155,
-    "investigations": 785,
+    "investigations": 786,
     "news": 75,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260806-081728-0x73A15FeD.md",
+      "file": "investigation-20260806-083326-0x35D89493.md",
       "title": "Investigation \u2014 bUSD0",
       "symbol": "bUSD0",
       "name": "USD0 Liquid Bond",
-      "date": "2026-08-06T08:17:28Z",
-      "target": "0x73A15FeD60Bf67631dC6cd7Bc5B6e8da8190aCF5",
+      "date": "2026-08-06T08:33:26Z",
+      "target": "0x35D8949372D46B7a3D5A56006AE77B215fc69bC0",
       "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "62",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: Verified as a real, market-data-recognized major stablecoin ($55",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-081728-0x73A15FeD.md"
+      "verdict": "REJECT",
+      "score": "32",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: bUSD0 (0x73A15FeD60Bf67631dC6cd7Bc5B6e8da8190aCF5) \u2014 CAUTION 62/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-083326-0x35D89493.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260806-083326-0x35D89493.md",
+      "title": "Investigation \u2014 bUSD0",
+      "symbol": "bUSD0",
+      "name": "USD0 Liquid Bond",
+      "date": "2026-08-06T08:33:26Z",
+      "target": "0x35D8949372D46B7a3D5A56006AE77B215fc69bC0",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "32",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: bUSD0 (0x73A15FeD60Bf67631dC6cd7Bc5B6e8da8190aCF5) \u2014 CAUTION 62/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-083326-0x35D89493.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260806-081728-0x73A15FeD.md",
