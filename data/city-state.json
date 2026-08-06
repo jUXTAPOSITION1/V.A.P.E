@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-06T09:10:17Z",
+  "generated_at": "2026-08-06T14:38:35Z",
   "district_stats": {
     "overall_threat_level": "HIGH",
-    "lanes_passing": 6,
+    "lanes_passing": 7,
     "lanes_total": 10,
     "buildings_total": 19
   },
@@ -15,20 +15,20 @@
       "tier": 3,
       "stat_primary": {
         "label": "tracked",
-        "value": 786
+        "value": 795
       },
       "stat_secondary": [
         {
           "label": "reject",
-          "value": 444
+          "value": 451
         },
         {
           "label": "caution",
-          "value": 210
+          "value": 211
         },
         {
           "label": "proceed",
-          "value": 132
+          "value": 133
         }
       ],
       "link": "investigations.html",
@@ -159,12 +159,12 @@
       "tier": 3,
       "stat_primary": {
         "label": "findings sealed",
-        "value": 1659
+        "value": 1675
       },
       "stat_secondary": [
         {
           "label": "unsealed lines",
-          "value": 2
+          "value": 1
         }
       ],
       "link": "index.html#security-dashboard",
@@ -207,7 +207,7 @@
       "tier": 4,
       "stat_primary": {
         "label": "data calls logged",
-        "value": 2018
+        "value": 2049
       },
       "stat_secondary": [],
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/memory",
@@ -435,14 +435,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-06T08:23:38Z"
+          "value": "2026-08-06T13:49:52Z"
         },
         {
           "label": "ledger chain intact",
           "value": "yes"
         }
       ],
-      "last_run_at": "2026-08-06T08:23:38Z",
+      "last_run_at": "2026-08-06T13:49:52Z",
       "source_workflow": "findings-seal.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/findings-seal.yml"
     },
@@ -480,7 +480,7 @@
       "id": "lane-intel-sweeps",
       "kind": "checkpoint",
       "title": "On-Chain Attack Intelligence",
-      "status": "alert",
+      "status": "ok",
       "tier": 1,
       "gridX": 5,
       "gridY": 6,
@@ -495,14 +495,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-06T08:37:04Z"
+          "value": "2026-08-06T14:11:54Z"
         },
         {
           "label": "attack-pattern coverage",
           "value": "23%"
         }
       ],
-      "last_run_at": "2026-08-06T08:37:04Z",
+      "last_run_at": "2026-08-06T14:11:54Z",
       "source_workflow": "intel-sweeps.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/intel-sweeps.yml"
     }
@@ -582,6 +582,75 @@
     ]
   ],
   "recent_events": [
+    {
+      "id": "investigation:0x4c0d96C66b4df9DC7C878ecD36170B6a8673e60f",
+      "type": "investigation",
+      "timestamp": "2026-08-06T13:38:20Z",
+      "label": "Grvt",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xc52e3b77821406A04D8B2294E77E29270b940637",
+      "type": "investigation",
+      "timestamp": "2026-08-06T12:51:56Z",
+      "label": "Bless America",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xBA6F9a11f48e965a63bA4FB827a21a51b3354444",
+      "type": "investigation",
+      "timestamp": "2026-08-06T12:36:40Z",
+      "label": "MOON DOGE",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xBD1EaB2845661762DED14566b8864560532E4444",
+      "type": "investigation",
+      "timestamp": "2026-08-06T12:21:23Z",
+      "label": "MOON DOGE",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x2E3D50C01cB261Ec5383BF5dc55285880480c28e",
+      "type": "investigation",
+      "timestamp": "2026-08-06T12:06:13Z",
+      "label": "CYS",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x2A4332d0333473618fE76bcED4270095547E6B07",
+      "type": "investigation",
+      "timestamp": "2026-08-06T11:35:50Z",
+      "label": "OpenAI",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "news:Zuckerberg's Parallel Coding Army: Inside Meta's New 'Muse Code' Agent",
+      "type": "news",
+      "timestamp": "2026-08-06T11:24:33Z",
+      "label": "Zuckerberg's Parallel Coding Army: Inside Meta's New 'Muse Code' Agent"
+    },
+    {
+      "id": "investigation:0x003AFA6D1eddF81326106D19A59Fd4B5f90CdB07",
+      "type": "investigation",
+      "timestamp": "2026-08-06T11:20:32Z",
+      "label": "OpenAI",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x747E550a7B848acE786C3CFe754Aa78feBC8A022",
+      "type": "investigation",
+      "timestamp": "2026-08-06T09:49:32Z",
+      "label": "DODO",
+      "verdict": "PROCEED"
+    },
+    {
+      "id": "investigation:0x43Dfc4159D86F3A37A5A4B3D4580b888ad7d4DDd",
+      "type": "investigation",
+      "timestamp": "2026-08-06T09:33:55Z",
+      "label": "DODO bird",
+      "verdict": "CAUTION"
+    },
     {
       "id": "news:Meta Enters the AI Coding Arena with 'Muse' to Challenge Claude Code and OpenAI's Legacy",
       "type": "news",
@@ -675,74 +744,6 @@
       "type": "investigation",
       "timestamp": "2026-08-06T02:27:23Z",
       "label": "United States Degen Coin",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x3DE26c6ab39d0Ae455201b55Da7F974A03CD8bA0",
-      "type": "investigation",
-      "timestamp": "2026-08-06T02:11:41Z",
-      "label": "Lido DAO Token",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x497A0815AB8BD49C9522086d5be7052e14D68b20",
-      "type": "investigation",
-      "timestamp": "2026-08-06T01:56:06Z",
-      "label": "Lido DAO",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x5A98FcBEA516Cf06857215779Fd812CA3beF1B32",
-      "type": "investigation",
-      "timestamp": "2026-08-06T01:40:50Z",
-      "label": "Lido DAO Token",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x5E80C63BE53369C7A4716c83aD60Ed0AcC2f2F38",
-      "type": "investigation",
-      "timestamp": "2026-08-05T22:25:52Z",
-      "label": "Squid",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "news:US Crypto Holders Face Three-Day Race to Rescue Funds as BitMart Tightens Noose Ahead of Global Shutdown",
-      "type": "news",
-      "timestamp": "2026-08-05T22:14:01Z",
-      "label": "US Crypto Holders Face Three-Day Race to Rescue Funds as BitMart Tightens Noose Ahead of Global Shutdown"
-    },
-    {
-      "id": "investigation:0x290443760A831b41e610F6D6C727e55ebc4c7777",
-      "type": "investigation",
-      "timestamp": "2026-08-05T20:40:27Z",
-      "label": "GRVT",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xbD01D5f5D06113C1c8a837D95D1C6D8082EB9b10",
-      "type": "investigation",
-      "timestamp": "2026-08-05T20:25:05Z",
-      "label": "USDT",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "news:The Executable Agent Trap: How Paperclip's RCE Flaws Turn AI Configurations Into Network Weapons",
-      "type": "news",
-      "timestamp": "2026-08-05T19:30:46Z",
-      "label": "The Executable Agent Trap: How Paperclip's RCE Flaws Turn AI Configurations Into Network Weapons"
-    },
-    {
-      "id": "investigation:0x1E674153229Dc206C681f5De6b2d9aaa21687Ba5",
-      "type": "investigation",
-      "timestamp": "2026-08-05T19:24:16Z",
-      "label": "CHECK",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x84EDc02Ba3c3388C437f02dfA2FE7707F5097777",
-      "type": "investigation",
-      "timestamp": "2026-08-05T19:08:45Z",
-      "label": "GRVT",
       "verdict": "REJECT"
     }
   ]
