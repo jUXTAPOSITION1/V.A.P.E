@@ -7248,6 +7248,24 @@
     "symbol": "Subject 3",
     "times_investigated": 1
   },
+  "56:0x8df85ae8c36f50f37e92c65668607993ba597777": {
+    "address": "0x8dF85ae8c36F50F37E92C65668607993BA597777",
+    "chain": "56",
+    "first_investigated": "2026-08-06T05:14:33Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260806-051433-0x8dF85ae8.md",
+        "score": 12,
+        "ts": "2026-08-06T05:14:33Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-06T05:14:33Z",
+    "last_score": 12,
+    "last_verdict": "REJECT",
+    "symbol": "BLESS",
+    "times_investigated": 1
+  },
   "56:0x8e9adb904824fdfbec1a5f15c4146a23dc3453ef": {
     "address": "0x8E9AdB904824fDfBEc1a5f15c4146a23dc3453EF",
     "chain": "56",

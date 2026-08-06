@@ -1359,3 +1359,5 @@
 | 2026-08-06 | auto | 0x8bFAc1b375bf2894D6F12fb2Eb48B1C1a7916789 (MEY) | deep_investigation | CAUTION (75/100) | Owner not renounced (0x7a4019ed07f9bcf4b6340a57fc7aa0c2f204ea83) — can still act | +7d |
 
 | 2026-08-06 | auto | 0xAeF08f360c7abf7b0fe84BDfA5dbE6A3aF80a850 ($LGNS) | deep_investigation | CAUTION (52/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-06 | auto | 0x8dF85ae8c36F50F37E92C65668607993BA597777 (BLESS) | deep_investigation | REJECT (12/100) | Upgradeable proxy (verify implementation) | +7d |

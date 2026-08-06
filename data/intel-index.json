@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-06T04:58:56Z",
+  "generated": "2026-08-06T05:14:34Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 458,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 155,
-    "investigations": 779,
+    "investigations": 780,
     "news": 74,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260806-045847-0xAeF08f36.md",
-      "title": "Investigation \u2014 $LGNS",
-      "symbol": "$LGNS",
-      "name": "Loginuss",
-      "date": "2026-08-06T04:58:47Z",
-      "target": "0xAeF08f360c7abf7b0fe84BDfA5dbE6A3aF80a850",
-      "chain": "137 (Polygon)",
-      "verdict": "CAUTION",
-      "score": "52",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $14,249. Positive evidence: 1105 holders \u2014 reasonably distribut",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-045847-0xAeF08f36.md"
+      "file": "investigation-20260806-051433-0x8dF85ae8.md",
+      "title": "Investigation \u2014 BLESS",
+      "symbol": "BLESS",
+      "name": "Blessed",
+      "date": "2026-08-06T05:14:33Z",
+      "target": "0x8dF85ae8c36F50F37E92C65668607993BA597777",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "12",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $7,285 (rug/illiquid); [-10] Low liquidity $7,285; [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team iden",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-051433-0x8dF85ae8.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260806-051433-0x8dF85ae8.md",
+      "title": "Investigation \u2014 BLESS",
+      "symbol": "BLESS",
+      "name": "Blessed",
+      "date": "2026-08-06T05:14:33Z",
+      "target": "0x8dF85ae8c36F50F37E92C65668607993BA597777",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "12",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $7,285 (rug/illiquid); [-10] Low liquidity $7,285; [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team iden",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-051433-0x8dF85ae8.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260806-045847-0xAeF08f36.md",
