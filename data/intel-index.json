@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-06T05:45:00Z",
+  "generated": "2026-08-06T05:50:49Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 459,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 155,
     "investigations": 781,
-    "news": 74,
+    "news": 75,
     "tools": 16,
     "tools_verified": 16,
     "skills": 25
@@ -11672,6 +11672,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-06-grayscale-xrp-trust-recovers-just-12-of-q1-redemptions-as-16.md",
+      "title": "Grayscale XRP Trust Recovers Just 12% of Q1 Redemptions as $16.8M Loss Erases Fresh Inflows",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-06T05:50:48Z",
+      "published_et": "August 6, 2026 \u00b7 1:50 AM EDT",
+      "topic": "Crypto Markets",
+      "dek": "Six-month net share contraction hits 3.46 million even after Q2 turned positive, leaving net assets at $57.4 million.",
+      "image": "assets/news-images/grayscale-xrp-trust-recovers-just-12-of-q1-redemptions-as-16.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-06-grayscale-xrp-trust-recovers-just-12-of-q1-redemptions-as-16.md"
+    },
+    {
       "file": "news-2026-08-06-terawulf-s-ai-leases-now-dominate-revenue-but-leave-a-941-mi.md",
       "title": "TeraWulf\u2019s AI Leases Now Dominate Revenue but Leave a $941 Million Hole in Q2 Results",
       "byline": "VAPE Reporter",
@@ -12378,18 +12390,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-29-insider-trading-in-the-prediction-era-white-house-teleprompt.md"
-    },
-    {
-      "file": "news-2026-07-29-fed-credibility-vs-crypto-liquidity-citadel-s-surprise-hike-.md",
-      "title": "Fed Credibility vs. Crypto Liquidity: Citadel's Surprise Hike Bet Clashes With Bitcoin Pause Consensus",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-29 05:53 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "A high-stakes FOMC showdown pits Wall Street's premier macro fund against digital asset analysts, setting up a binary volatility trigger for Bitcoin.",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-29-fed-credibility-vs-crypto-liquidity-citadel-s-surprise-hike-.md"
     }
   ],
   "tools": [
