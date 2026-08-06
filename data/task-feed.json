@@ -1,7 +1,21 @@
 {
-  "generated": "2026-08-06T08:02:08Z",
-  "synthesis": "_Analyst narrative unavailable this cycle (no LLM provider reachable)._",
+  "generated": "2026-08-06T08:17:51Z",
+  "synthesis": "VAPE's automation has been running repeated investigations and sweeps with some repository reviews and toolchecks.",
   "tasks": [
+    {
+      "sha": "0b67a1109a",
+      "kind": "bounty-radar",
+      "message": "SCOUT bounty radar sweep 2026-08-06T08:03Z",
+      "date": "2026-08-06T08:03:47Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/0b67a1109a816908637966ef6d0d45d1a1c1c760"
+    },
+    {
+      "sha": "5bd227cb1f",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-08-06T08:02Z",
+      "date": "2026-08-06T08:02:19Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/5bd227cb1f6d1453f373b52d8378169704e40018"
+    },
     {
       "sha": "eeb0c44624",
       "kind": "investigation",
@@ -92,20 +106,6 @@
       "message": "HACK sweep: 2026-08-06T05:57Z",
       "date": "2026-08-06T05:57:02Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/ed2ee75da414ad722e186865519983772be84cec"
-    },
-    {
-      "sha": "3b933ad0d4",
-      "kind": "automation",
-      "message": "news-intel 2026-08-06T05:50Z",
-      "date": "2026-08-06T05:50:49Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/3b933ad0d43dc8a67bfee7b885cd03811544bc09"
-    },
-    {
-      "sha": "d4ba410989",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-08-06T05:45Z",
-      "date": "2026-08-06T05:45:04Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d4ba410989d514ca75ffacdcb58b46500d3aa6ac"
     }
   ]
 }
