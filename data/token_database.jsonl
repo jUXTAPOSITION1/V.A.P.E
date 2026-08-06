@@ -210,3 +210,4 @@
 {"ts": "2026-08-06T06:46:36.345627Z", "address": "0x624e2e7fDc8903165F64891672267AB0FCB98831", "chain": "8453", "symbol": "SOSO", "name": "SOSO", "source": "base", "offering": "token_safety_check"}
 {"ts": "2026-08-06T07:46:43.845295Z", "address": "0xed664536023d8e4b1640c394777d34abaff1df8f", "chain": "8453", "symbol": "POD", "name": "Dolphin", "source": "base_trending", "offering": "token_chart"}
 {"ts": "2026-08-06T09:49:37.471835Z", "address": "0x912CE59144191C1204E64559FE8253a0e49E6548", "chain": "42161", "symbol": "ARB", "name": "ARB", "source": "evm", "offering": "token_safety_check"}
+{"ts": "2026-08-06T10:50:01.539815Z", "address": "0x3b8db18e69d6686Ad9371A423aFe3Dd1065C94f1", "chain": "42161", "symbol": "ESP", "name": "ESP", "source": "evm", "offering": "liquidity_check"}
