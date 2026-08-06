@@ -720,3 +720,4 @@
 {"ts": "2026-08-06T13:23:00.279656Z", "target": "0xCFB287565201763743A77c556dcA44A673d0a777", "hired": ["exploit_check"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
 {"ts": "2026-08-06T13:53:23.189726Z", "target": "indodax", "hired": ["protocol_fees"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
 {"ts": "2026-08-06T14:23:18.407879Z", "target": "BNB Chain", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
+{"ts": "2026-08-06T14:53:22.463102Z", "target": "centrifuge-protocol", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 62}
