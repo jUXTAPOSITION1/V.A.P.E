@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-06T03:43:52Z",
+  "generated_at": "2026-08-06T09:10:17Z",
   "district_stats": {
     "overall_threat_level": "HIGH",
-    "lanes_passing": 9,
+    "lanes_passing": 6,
     "lanes_total": 10,
     "buildings_total": 19
   },
@@ -15,16 +15,16 @@
       "tier": 3,
       "stat_primary": {
         "label": "tracked",
-        "value": 778
+        "value": 786
       },
       "stat_secondary": [
         {
           "label": "reject",
-          "value": 438
+          "value": 444
         },
         {
           "label": "caution",
-          "value": 208
+          "value": 210
         },
         {
           "label": "proceed",
@@ -159,12 +159,12 @@
       "tier": 3,
       "stat_primary": {
         "label": "findings sealed",
-        "value": 1642
+        "value": 1659
       },
       "stat_secondary": [
         {
           "label": "unsealed lines",
-          "value": 6
+          "value": 2
         }
       ],
       "link": "index.html#security-dashboard",
@@ -207,7 +207,7 @@
       "tier": 4,
       "stat_primary": {
         "label": "data calls logged",
-        "value": 1988
+        "value": 2018
       },
       "stat_secondary": [],
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/memory",
@@ -222,7 +222,7 @@
       "id": "lane-codeql",
       "kind": "checkpoint",
       "title": "Static Analysis (CodeQL)",
-      "status": "ok",
+      "status": "alert",
       "tier": 1,
       "gridX": 8,
       "gridY": 4,
@@ -237,7 +237,7 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-06T02:14:56Z"
+          "value": "2026-08-06T08:43:43Z"
         },
         {
           "label": "open alerts",
@@ -248,7 +248,7 @@
           "value": 0
         }
       ],
-      "last_run_at": "2026-08-06T02:14:56Z",
+      "last_run_at": "2026-08-06T08:43:43Z",
       "source_workflow": "codeql.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/codeql.yml"
     },
@@ -282,7 +282,7 @@
       "id": "lane-vape-reviewer",
       "kind": "checkpoint",
       "title": "Code Review (VAPE Reviewer)",
-      "status": "ok",
+      "status": "alert",
       "tier": 1,
       "gridX": 14,
       "gridY": 4,
@@ -292,15 +292,15 @@
       ],
       "stat_primary": {
         "label": "last run",
-        "value": "success"
+        "value": "action_required"
       },
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-06T02:14:56Z"
+          "value": "2026-08-06T08:43:43Z"
         }
       ],
-      "last_run_at": "2026-08-06T02:14:56Z",
+      "last_run_at": "2026-08-06T08:43:43Z",
       "source_workflow": "vape-reviewer.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/vape-reviewer.yml"
     },
@@ -435,14 +435,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-06T01:59:11Z"
+          "value": "2026-08-06T08:23:38Z"
         },
         {
           "label": "ledger chain intact",
           "value": "yes"
         }
       ],
-      "last_run_at": "2026-08-06T01:59:11Z",
+      "last_run_at": "2026-08-06T08:23:38Z",
       "source_workflow": "findings-seal.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/findings-seal.yml"
     },
@@ -480,7 +480,7 @@
       "id": "lane-intel-sweeps",
       "kind": "checkpoint",
       "title": "On-Chain Attack Intelligence",
-      "status": "ok",
+      "status": "alert",
       "tier": 1,
       "gridX": 5,
       "gridY": 6,
@@ -495,14 +495,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-06T02:38:49Z"
+          "value": "2026-08-06T08:37:04Z"
         },
         {
           "label": "attack-pattern coverage",
           "value": "23%"
         }
       ],
-      "last_run_at": "2026-08-06T02:38:49Z",
+      "last_run_at": "2026-08-06T08:37:04Z",
       "source_workflow": "intel-sweeps.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/intel-sweeps.yml"
     }
@@ -582,6 +582,74 @@
     ]
   ],
   "recent_events": [
+    {
+      "id": "news:Meta Enters the AI Coding Arena with 'Muse' to Challenge Claude Code and OpenAI's Legacy",
+      "type": "news",
+      "timestamp": "2026-08-06T08:37:08Z",
+      "label": "Meta Enters the AI Coding Arena with 'Muse' to Challenge Claude Code and OpenAI's Legacy"
+    },
+    {
+      "id": "investigation:0x35D8949372D46B7a3D5A56006AE77B215fc69bC0",
+      "type": "investigation",
+      "timestamp": "2026-08-06T08:33:26Z",
+      "label": "USD0 Liquid Bond",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x73A15FeD60Bf67631dC6cd7Bc5B6e8da8190aCF5",
+      "type": "investigation",
+      "timestamp": "2026-08-06T08:17:28Z",
+      "label": "USD0 Liquid Bond",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "investigation:0x3f58E7054FcaA38c74C1f46A5206E479ED995b07",
+      "type": "investigation",
+      "timestamp": "2026-08-06T08:02:07Z",
+      "label": "OpenAI",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xfc0f47393d8B9890ad73F8eB30E713E48E0E7777",
+      "type": "investigation",
+      "timestamp": "2026-08-06T06:46:32Z",
+      "label": "All on BINANCE",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x862d877AF6D0fE1dc7F6AA181A0141dF83857777",
+      "type": "investigation",
+      "timestamp": "2026-08-06T06:15:47Z",
+      "label": "Blessed",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "news:Grayscale XRP Trust Recovers Just 12% of Q1 Redemptions as $16.8M Loss Erases Fresh Inflows",
+      "type": "news",
+      "timestamp": "2026-08-06T05:50:48Z",
+      "label": "Grayscale XRP Trust Recovers Just 12% of Q1 Redemptions as $16.8M Loss Erases Fresh Inflows"
+    },
+    {
+      "id": "investigation:0x1EC9FcE135d48217A46207e151A426f09AED3e43",
+      "type": "investigation",
+      "timestamp": "2026-08-06T05:44:54Z",
+      "label": "Stakeds Longinus",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x8dF85ae8c36F50F37E92C65668607993BA597777",
+      "type": "investigation",
+      "timestamp": "2026-08-06T05:14:33Z",
+      "label": "Blessed",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xAeF08f360c7abf7b0fe84BDfA5dbE6A3aF80a850",
+      "type": "investigation",
+      "timestamp": "2026-08-06T04:58:47Z",
+      "label": "Loginuss",
+      "verdict": "CAUTION"
+    },
     {
       "id": "investigation:0x8bFAc1b375bf2894D6F12fb2Eb48B1C1a7916789",
       "type": "investigation",
@@ -676,75 +744,6 @@
       "timestamp": "2026-08-05T19:08:45Z",
       "label": "GRVT",
       "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xe85A3fdd5eff4B1f8264ebAa91DD8cf8c7D07777",
-      "type": "investigation",
-      "timestamp": "2026-08-05T17:53:26Z",
-      "label": "GRVT",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x068018326d8ABCF258fdce5e28856c5109503Ae3",
-      "type": "investigation",
-      "timestamp": "2026-08-05T17:37:43Z",
-      "label": "CHECK",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x801a4f9c2AC1bcb5173753acD377A23A9F0feE4e",
-      "type": "investigation",
-      "timestamp": "2026-08-05T17:22:33Z",
-      "label": "CHECK",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x6fe4ff48F48Bc53120828eb7cbd1FA85F6E57EaA",
-      "type": "investigation",
-      "timestamp": "2026-08-05T16:52:31Z",
-      "label": "CYS",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "news:The Prompt-Stealing Shadow APIs Undercutting Anthropic and OpenAI",
-      "type": "news",
-      "timestamp": "2026-08-05T16:44:03Z",
-      "label": "The Prompt-Stealing Shadow APIs Undercutting Anthropic and OpenAI"
-    },
-    {
-      "id": "investigation:0xA311c0837BD9a38cac190bfFBd9f2CdC1Ad4FEAb",
-      "type": "investigation",
-      "timestamp": "2026-08-05T16:36:55Z",
-      "label": "MV Token",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x1f17582e4c96DfEF934aeEA23a9B2DFB47ffC215",
-      "type": "investigation",
-      "timestamp": "2026-08-05T16:21:19Z",
-      "label": "Synergy",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x189140FAb49FA6ae98095C22674448E7BaF33B45",
-      "type": "investigation",
-      "timestamp": "2026-08-05T15:47:53Z",
-      "label": "Stack",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x6aF0b0294B5c8b791c500490DAbf17832E0a7931",
-      "type": "investigation",
-      "timestamp": "2026-08-05T15:32:29Z",
-      "label": "Synapse",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x0f2D719407FdBeFF09D87557AbB7232601FD9F29",
-      "type": "investigation",
-      "timestamp": "2026-08-05T15:17:11Z",
-      "label": "Synapse",
-      "verdict": "CAUTION"
     }
   ]
 }
