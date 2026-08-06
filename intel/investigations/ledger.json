@@ -7229,6 +7229,25 @@
     "symbol": "QLM",
     "times_investigated": 1
   },
+  "56:0x862d877af6d0fe1dc7f6aa181a0141df83857777": {
+    "address": "0x862d877AF6D0fE1dc7F6AA181A0141dF83857777",
+    "chain": "56",
+    "creator_address": "0x4f351eb3c99a3f3d00b84f4666eca192e99b5ce1",
+    "first_investigated": "2026-08-06T06:15:47Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260806-061547-0x862d877A.md",
+        "score": 12,
+        "ts": "2026-08-06T06:15:47Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-06T06:15:47Z",
+    "last_score": 12,
+    "last_verdict": "REJECT",
+    "symbol": "BLESS",
+    "times_investigated": 1
+  },
   "56:0x867c3370ca238e38bf8f59e7817d8872ffc49d94": {
     "address": "0x867c3370Ca238E38Bf8f59E7817d8872FFc49d94",
     "chain": "56",

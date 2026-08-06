@@ -703,3 +703,4 @@
 {"ts": "2026-08-06T04:28:21.486278Z", "target": "0x2B31D3eD065F1f834D5C85EFEd49089F4c4f6b07", "hired": ["dossier_check"], "paid": 1, "cost_usd": 0.1, "daily_target": 62}
 {"ts": "2026-08-06T04:58:55.760307Z", "target": "none", "hired": ["yields"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
 {"ts": "2026-08-06T05:44:59.657219Z", "target": "0x4200000000000000000000000000000000000006", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01, "daily_target": 62}
+{"ts": "2026-08-06T06:15:54.463308Z", "target": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "hired": ["rug_pull_alert"], "paid": 1, "cost_usd": 0.03, "daily_target": 62}
