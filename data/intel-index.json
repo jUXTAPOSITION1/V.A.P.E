@@ -1,13 +1,13 @@
 {
-  "generated": "2026-08-06T02:32:51Z",
+  "generated": "2026-08-06T02:39:28Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 456,
+    "reports": 457,
     "reports_by_type": {
+      "security": 80,
       "bounty": 127,
       "base": 90,
       "sentiment": 48,
-      "security": 79,
       "macro": 24,
       "bug": 5,
       "mainnet": 5,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-022723-0xd177e58B.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260806_000716.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-06T00:07:16Z",
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-06-02.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-06T02:00Z",
       "threat": null,
-      "summary": "Base mover: OpenAI / USDC +10009% 24h (liq $9503545.0554) \u2014 volatility/rug watch \u00b7 Base mover: OpenAI / USDC -27% 24h (liq $0.004055609983) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260806_000716.md",
-      "bytes": 16896
+      "summary": "The feed shows 6 incidents in the last 7 days and 1 incident exceeding $50M in the prior 14 days. Confirmed events include a $115.0M Bitcoin loss from non-random private key generation on 2026-07-31, multiple BSC price-manipulation attacks (LOOPSDAO $0.696M, MOKE $0.907M, LULA $0.578M), access-control exploits on RISEx ($0.673M) and WEMIX",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-06-02.md",
+      "bytes": 6804
     }
   },
   "investigations": [
@@ -10728,6 +10728,17 @@
   ],
   "reports": [
     {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-06-02.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-06T02:00Z",
+      "threat": null,
+      "summary": "The feed shows 6 incidents in the last 7 days and 1 incident exceeding $50M in the prior 14 days. Confirmed events include a $115.0M Bitcoin loss from non-random private key generation on 2026-07-31, multiple BSC price-manipulation attacks (LOOPSDAO $0.696M, MOKE $0.907M, LULA $0.578M), access-control exploits on RISEx ($0.673M) and WEMIX",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-06-02.md",
+      "bytes": 6804
+    },
+    {
       "kind": "bounty",
       "type": "bounty",
       "file": "bounty_report_20260806_000716.md",
@@ -11375,17 +11386,6 @@
       "summary": "Cycle: 20260803025345 \u00b7 Data timestamp (UTC): 2026-08-03T02:53:47Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260803_025345.md",
       "bytes": 16026
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-08-03-02.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-08-03T02:00Z",
-      "threat": null,
-      "summary": "The global on-chain threat level is currently assessed as HIGH, driven by 3 security incidents recorded in the last 7 days, though no exploits exceeding $50M have occurred in the last 14 days. Over the last 7 days, the following incidents were documented: Set Protocol (2026-07-30): Lost $0.01M on Ethereum due to a malicious SetToken and M",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-03-02.md",
-      "bytes": 8517
     }
   ],
   "broadcasts": [
