@@ -1,7 +1,21 @@
 {
-  "generated": "2026-08-06T09:18:22Z",
-  "synthesis": "VAPE's automation generated security dashboards, news intel, bounty reports, repo reviews, tool checks, and sealed findings chains.",
+  "generated": "2026-08-06T09:33:59Z",
+  "synthesis": "_Analyst narrative unavailable this cycle (no LLM provider reachable)._",
   "tasks": [
+    {
+      "sha": "ae0b39dcc7",
+      "kind": "broadcast",
+      "message": "community broadcast 2026-08-06T09:19Z",
+      "date": "2026-08-06T09:19:59Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/ae0b39dcc70fdb6b57910de4c8d295684e85fbc7"
+    },
+    {
+      "sha": "5347f649ff",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-08-06T09:18Z",
+      "date": "2026-08-06T09:18:28Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/5347f649ffef47938a3b5c59e762d22567d487b1"
+    },
     {
       "sha": "665ed279c4",
       "kind": "automation",
@@ -92,20 +106,6 @@
       "message": "Featured investigation 2026-08-06T07:31Z",
       "date": "2026-08-06T07:31:58Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/5693483399ec78d571fd3af5afbc52a90b6a3478"
-    },
-    {
-      "sha": "177df800e2",
-      "kind": "automation",
-      "message": "skillforge toolcheck 2026-08-06T07:25Z",
-      "date": "2026-08-06T07:25:01Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/177df800e270bc14861635faed35aad936c99fe5"
-    },
-    {
-      "sha": "81a9f986bd",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-08-06T07:16Z",
-      "date": "2026-08-06T07:16:58Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/81a9f986bda23810504470e001b88f9573aaf7db"
     }
   ]
 }

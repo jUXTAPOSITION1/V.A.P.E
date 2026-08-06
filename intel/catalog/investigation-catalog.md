@@ -1373,3 +1373,5 @@
 | 2026-08-06 | auto | 0x73A15FeD60Bf67631dC6cd7Bc5B6e8da8190aCF5 (bUSD0) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-06 | auto | 0x35D8949372D46B7a3D5A56006AE77B215fc69bC0 (bUSD0) | deep_investigation | REJECT (32/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-06 | auto | 0x43Dfc4159D86F3A37A5A4B3D4580b888ad7d4DDd (DODO) | deep_investigation | CAUTION (70/100) | Top 10 non-LP/burn holders control 85% of supply — concentrated, easily manipula | +7d |
