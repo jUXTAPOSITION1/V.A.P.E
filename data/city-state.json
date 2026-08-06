@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-05T19:58:32Z",
+  "generated_at": "2026-08-06T03:43:52Z",
   "district_stats": {
     "overall_threat_level": "HIGH",
-    "lanes_passing": 7,
+    "lanes_passing": 9,
     "lanes_total": 10,
     "buildings_total": 19
   },
@@ -15,16 +15,16 @@
       "tier": 3,
       "stat_primary": {
         "label": "tracked",
-        "value": 769
+        "value": 778
       },
       "stat_secondary": [
         {
           "label": "reject",
-          "value": 430
+          "value": 438
         },
         {
           "label": "caution",
-          "value": 207
+          "value": 208
         },
         {
           "label": "proceed",
@@ -159,12 +159,12 @@
       "tier": 3,
       "stat_primary": {
         "label": "findings sealed",
-        "value": 1624
+        "value": 1642
       },
       "stat_secondary": [
         {
           "label": "unsealed lines",
-          "value": 4
+          "value": 6
         }
       ],
       "link": "index.html#security-dashboard",
@@ -207,7 +207,7 @@
       "tier": 4,
       "stat_primary": {
         "label": "data calls logged",
-        "value": 1946
+        "value": 1988
       },
       "stat_secondary": [],
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/memory",
@@ -222,7 +222,7 @@
       "id": "lane-codeql",
       "kind": "checkpoint",
       "title": "Static Analysis (CodeQL)",
-      "status": "alert",
+      "status": "ok",
       "tier": 1,
       "gridX": 8,
       "gridY": 4,
@@ -237,7 +237,7 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-05T08:42:06Z"
+          "value": "2026-08-06T02:14:56Z"
         },
         {
           "label": "open alerts",
@@ -248,7 +248,7 @@
           "value": 0
         }
       ],
-      "last_run_at": "2026-08-05T08:42:06Z",
+      "last_run_at": "2026-08-06T02:14:56Z",
       "source_workflow": "codeql.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/codeql.yml"
     },
@@ -271,10 +271,10 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-03T18:18:55Z"
+          "value": "2026-08-06T02:14:48Z"
         }
       ],
-      "last_run_at": "2026-08-03T18:18:55Z",
+      "last_run_at": "2026-08-06T02:14:48Z",
       "source_workflow": "security-lint.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/security-lint.yml"
     },
@@ -282,7 +282,7 @@
       "id": "lane-vape-reviewer",
       "kind": "checkpoint",
       "title": "Code Review (VAPE Reviewer)",
-      "status": "alert",
+      "status": "ok",
       "tier": 1,
       "gridX": 14,
       "gridY": 4,
@@ -292,15 +292,15 @@
       ],
       "stat_primary": {
         "label": "last run",
-        "value": "action_required"
+        "value": "success"
       },
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-05T08:42:06Z"
+          "value": "2026-08-06T02:14:56Z"
         }
       ],
-      "last_run_at": "2026-08-05T08:42:06Z",
+      "last_run_at": "2026-08-06T02:14:56Z",
       "source_workflow": "vape-reviewer.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/vape-reviewer.yml"
     },
@@ -323,10 +323,10 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-04T18:28:45Z"
+          "value": "2026-08-06T02:14:56Z"
         }
       ],
-      "last_run_at": "2026-08-04T18:28:45Z",
+      "last_run_at": "2026-08-06T02:14:56Z",
       "source_workflow": "dependency-audit.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/dependency-audit.yml"
     },
@@ -435,14 +435,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-05T19:20:37Z"
+          "value": "2026-08-06T01:59:11Z"
         },
         {
           "label": "ledger chain intact",
           "value": "yes"
         }
       ],
-      "last_run_at": "2026-08-05T19:20:37Z",
+      "last_run_at": "2026-08-06T01:59:11Z",
       "source_workflow": "findings-seal.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/findings-seal.yml"
     },
@@ -495,14 +495,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-05T19:35:52Z"
+          "value": "2026-08-06T02:38:49Z"
         },
         {
           "label": "attack-pattern coverage",
           "value": "23%"
         }
       ],
-      "last_run_at": "2026-08-05T19:35:52Z",
+      "last_run_at": "2026-08-06T02:38:49Z",
       "source_workflow": "intel-sweeps.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/intel-sweeps.yml"
     }
@@ -582,6 +582,81 @@
     ]
   ],
   "recent_events": [
+    {
+      "id": "investigation:0x8bFAc1b375bf2894D6F12fb2Eb48B1C1a7916789",
+      "type": "investigation",
+      "timestamp": "2026-08-06T02:58:17Z",
+      "label": "Mey Network",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "investigation:0x673CDBcB4aD81fC325c84463e2EEe02F90AA97c1",
+      "type": "investigation",
+      "timestamp": "2026-08-06T02:42:41Z",
+      "label": "Lido DAO",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "news:TeraWulf\u2019s AI Leases Now Dominate Revenue but Leave a $941 Million Hole in Q2 Results",
+      "type": "news",
+      "timestamp": "2026-08-06T02:32:51Z",
+      "label": "TeraWulf\u2019s AI Leases Now Dominate Revenue but Leave a $941 Million Hole in Q2 Results"
+    },
+    {
+      "id": "investigation:0xd177e58B02E68b2d13f792288385dB41569b104f",
+      "type": "investigation",
+      "timestamp": "2026-08-06T02:27:23Z",
+      "label": "United States Degen Coin",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x3DE26c6ab39d0Ae455201b55Da7F974A03CD8bA0",
+      "type": "investigation",
+      "timestamp": "2026-08-06T02:11:41Z",
+      "label": "Lido DAO Token",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x497A0815AB8BD49C9522086d5be7052e14D68b20",
+      "type": "investigation",
+      "timestamp": "2026-08-06T01:56:06Z",
+      "label": "Lido DAO",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x5A98FcBEA516Cf06857215779Fd812CA3beF1B32",
+      "type": "investigation",
+      "timestamp": "2026-08-06T01:40:50Z",
+      "label": "Lido DAO Token",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x5E80C63BE53369C7A4716c83aD60Ed0AcC2f2F38",
+      "type": "investigation",
+      "timestamp": "2026-08-05T22:25:52Z",
+      "label": "Squid",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "news:US Crypto Holders Face Three-Day Race to Rescue Funds as BitMart Tightens Noose Ahead of Global Shutdown",
+      "type": "news",
+      "timestamp": "2026-08-05T22:14:01Z",
+      "label": "US Crypto Holders Face Three-Day Race to Rescue Funds as BitMart Tightens Noose Ahead of Global Shutdown"
+    },
+    {
+      "id": "investigation:0x290443760A831b41e610F6D6C727e55ebc4c7777",
+      "type": "investigation",
+      "timestamp": "2026-08-05T20:40:27Z",
+      "label": "GRVT",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xbD01D5f5D06113C1c8a837D95D1C6D8082EB9b10",
+      "type": "investigation",
+      "timestamp": "2026-08-05T20:25:05Z",
+      "label": "USDT",
+      "verdict": "REJECT"
+    },
     {
       "id": "news:The Executable Agent Trap: How Paperclip's RCE Flaws Turn AI Configurations Into Network Weapons",
       "type": "news",
@@ -670,81 +745,6 @@
       "timestamp": "2026-08-05T15:17:11Z",
       "label": "Synapse",
       "verdict": "CAUTION"
-    },
-    {
-      "id": "news:Sparse Disclosure Leaves Linux Admins in the Dark on Open vSwitch Root Flaw",
-      "type": "news",
-      "timestamp": "2026-08-05T14:09:44Z",
-      "label": "Sparse Disclosure Leaves Linux Admins in the Dark on Open vSwitch Root Flaw"
-    },
-    {
-      "id": "investigation:0xB6bB786056c690e41b20a587573Fd77aade2eb07",
-      "type": "investigation",
-      "timestamp": "2026-08-05T13:59:31Z",
-      "label": "OpenAI",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x2B31D3eD065F1f834D5C85EFEd49089F4c4f6b07",
-      "type": "investigation",
-      "timestamp": "2026-08-05T13:14:39Z",
-      "label": "OpenAI",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x45cd1A07651edf0AabedefFA878b7fDA3DB3863B",
-      "type": "investigation",
-      "timestamp": "2026-08-05T12:59:01Z",
-      "label": "MarsCoin",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xec5196C10b719abd317FF550006471c9dC2556a0",
-      "type": "investigation",
-      "timestamp": "2026-08-05T12:43:07Z",
-      "label": "Marscoin",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xFE1F5ce0A21dD8494a29053A48dda4Eb2Be94444",
-      "type": "investigation",
-      "timestamp": "2026-08-05T12:27:19Z",
-      "label": "MarsCoin",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0x4444512F8995D1e7AaFBe13c8F11a4483f892C4f",
-      "type": "investigation",
-      "timestamp": "2026-08-05T12:12:19Z",
-      "label": "MarsCoin",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0xCAc44C05e1224ef9B1A5E2Dd56a59d45527b42e6",
-      "type": "investigation",
-      "timestamp": "2026-08-05T11:57:23Z",
-      "label": "WE NEED MORE RUGGED INDIVIDUALIS",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x7649080D56b9a6062378fb26a01A04c840ce7B07",
-      "type": "investigation",
-      "timestamp": "2026-08-05T11:27:25Z",
-      "label": "OpenAI",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "news:Developer Environments Under Siege: Open VSX Registry Nukes 77 'Evil Twin' Extensions Targeting API Keys and Source Code",
-      "type": "news",
-      "timestamp": "2026-08-05T11:22:44Z",
-      "label": "Developer Environments Under Siege: Open VSX Registry Nukes 77 'Evil Twin' Extensions Targeting API Keys and Source Code"
-    },
-    {
-      "id": "investigation:0x444416A582466fDAE0f2Fcdf0A859675f8fF6e9f",
-      "type": "investigation",
-      "timestamp": "2026-08-05T10:42:41Z",
-      "label": "MarsCoin",
-      "verdict": "PROCEED"
     }
   ]
 }
