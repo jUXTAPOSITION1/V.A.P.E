@@ -10665,6 +10665,25 @@
     "symbol": "PROS",
     "times_investigated": 1
   },
+  "8453:0x8bfac1b375bf2894d6f12fb2eb48b1c1a7916789": {
+    "address": "0x8bFAc1b375bf2894D6F12fb2Eb48B1C1a7916789",
+    "chain": "8453",
+    "creator_address": "0x613367aca8c693b1b2f97f4683f332d53a85a320",
+    "first_investigated": "2026-08-06T02:58:17Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260806-025817-0x8bFAc1b3.md",
+        "score": 75,
+        "ts": "2026-08-06T02:58:17Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-06T02:58:17Z",
+    "last_score": 75,
+    "last_verdict": "CAUTION",
+    "symbol": "MEY",
+    "times_investigated": 1
+  },
   "8453:0x8c0d3adcf8ce094e1ae437557ec90a6374dc9bdd": {
     "address": "0x8C0d3ADCF8Ce094E1aE437557Ec90A6374dC9BDD",
     "chain": "8453",

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-06T02:42:42Z",
+  "generated": "2026-08-06T02:58:20Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 457,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 154,
-    "investigations": 777,
+    "investigations": 778,
     "news": 74,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260806-024241-0x673CDBcB.md",
-      "title": "Investigation \u2014 LDO",
-      "symbol": "LDO",
-      "name": "Lido DAO",
-      "date": "2026-08-06T02:42:41Z",
-      "target": "0x673CDBcB4aD81fC325c84463e2EEe02F90AA97c1",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CTM (0x279a9C40151bfe9AFEFf5530c5F32bc6ecea652a) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders co",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-024241-0x673CDBcB.md"
+      "file": "investigation-20260806-025817-0x8bFAc1b3.md",
+      "title": "Investigation \u2014 MEY",
+      "symbol": "MEY",
+      "name": "Mey Network",
+      "date": "2026-08-06T02:58:17Z",
+      "target": "0x8bFAc1b375bf2894D6F12fb2Eb48B1C1a7916789",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-10] Owner not renounced (0x7a4019ed07f9bcf4b6340a57fc7aa0c2f204ea83) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 86% of supply \u2014 concentrated, easily manipulated. Positive evidence: 14452 holders \u2014 reasonably distributed; 99% of liquidity is locked \u2014 reduced rug-pull risk; ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-025817-0x8bFAc1b3.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260806-025817-0x8bFAc1b3.md",
+      "title": "Investigation \u2014 MEY",
+      "symbol": "MEY",
+      "name": "Mey Network",
+      "date": "2026-08-06T02:58:17Z",
+      "target": "0x8bFAc1b375bf2894D6F12fb2Eb48B1C1a7916789",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-10] Owner not renounced (0x7a4019ed07f9bcf4b6340a57fc7aa0c2f204ea83) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 86% of supply \u2014 concentrated, easily manipulated. Positive evidence: 14452 holders \u2014 reasonably distributed; 99% of liquidity is locked \u2014 reduced rug-pull risk; ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-025817-0x8bFAc1b3.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260806-024241-0x673CDBcB.md",
