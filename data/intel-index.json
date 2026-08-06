@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-06T15:22:19Z",
+  "generated": "2026-08-06T15:36:45Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 466,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 157,
     "investigations": 796,
-    "news": 77,
+    "news": 78,
     "tools": 16,
     "tools_verified": 16,
     "skills": 25
@@ -11207,17 +11207,6 @@
     },
     {
       "kind": "intel",
-      "type": "macro",
-      "file": "macro-2026-08-05-16.md",
-      "title": "Macro & Micro News Sweep Report",
-      "date": "2026-08-05T16:00Z",
-      "threat": null,
-      "summary": "Computed deterministically from real Fear & Greed (27, prior day 25) and global market cap 24h change (0.5%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-08-05-16.md",
-      "bytes": 3129
-    },
-    {
-      "kind": "intel",
       "type": "base",
       "file": "base-2026-08-05-16.md",
       "title": "Base Blockchain Sweep Report",
@@ -11226,6 +11215,17 @@
       "summary": "Date: 2026-08-05 16:27 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-05-16.md",
       "bytes": 7756
+    },
+    {
+      "kind": "intel",
+      "type": "macro",
+      "file": "macro-2026-08-05-16.md",
+      "title": "Macro & Micro News Sweep Report",
+      "date": "2026-08-05T16:00Z",
+      "threat": null,
+      "summary": "Computed deterministically from real Fear & Greed (27, prior day 25) and global market cap 24h change (0.5%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-08-05-16.md",
+      "bytes": 3129
     },
     {
       "kind": "bounty",
@@ -11881,6 +11881,18 @@
     }
   ],
   "news": [
+    {
+      "file": "news-2026-08-06-white-house-scrutinizes-crypto-clarity-act-ethics-text-as-re.md",
+      "title": "White House Scrutinizes Crypto Clarity Act Ethics Text as Recess Threatens Bipartisan Breakthrough",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-06T15:36:45Z",
+      "published_et": "August 6, 2026 \u00b7 11:36 AM EDT",
+      "topic": "Crypto Markets",
+      "dek": "Senator Thom Tillis warns a pre-recess vote is a \"moonshot\" after Senate Majority Leader John Thune declines to force a vote on the market structure bill.",
+      "image": "assets/news-images/white-house-scrutinizes-crypto-clarity-act-ethics-text-as-re.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-06-white-house-scrutinizes-crypto-clarity-act-ethics-text-as-re.md"
+    },
     {
       "file": "news-2026-08-06-zuckerberg-s-parallel-coding-army-inside-meta-s-new-muse-cod.md",
       "title": "Zuckerberg's Parallel Coding Army: Inside Meta's New 'Muse Code' Agent",
@@ -12588,18 +12600,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-29-binance-us-targets-prediction-markets-expansion-with-upcomin.md"
-    },
-    {
-      "file": "news-2026-07-29-agentic-escalation-openai-rogue-ai-breach-spans-five-develop.md",
-      "title": "AGENTIC ESCALATION: OPENAI 'ROGUE' AI BREACH SPANS FIVE DEVELOPER PLATFORMS",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-29 16:23 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "The compromise of Hugging Face and four additional platforms exposes a critical architectural flaw in how autonomous AI agents manage high-privilege API tools.",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-29-agentic-escalation-openai-rogue-ai-breach-spans-five-develop.md"
     }
   ],
   "tools": [
