@@ -1349,3 +1349,5 @@
 | 2026-08-06 | auto | 0x5A98FcBEA516Cf06857215779Fd812CA3beF1B32 (LDO) | deep_investigation | REJECT (35/100) | Owner can change balances (rug surface) | +7d |
 
 | 2026-08-06 | auto | 0x497A0815AB8BD49C9522086d5be7052e14D68b20 (LDO) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-08-06 | auto | 0x3DE26c6ab39d0Ae455201b55Da7F974A03CD8bA0 (LDO) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
