@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-06T04:13:25Z",
+  "generated": "2026-08-06T04:14:32Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 457,
+    "reports": 458,
     "reports_by_type": {
+      "bounty": 128,
       "security": 80,
-      "bounty": 127,
       "base": 90,
       "sentiment": 48,
       "macro": 24,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-025817-0x8bFAc1b3.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-08-06-02.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-08-06T02:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260806_041340.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-06T04:13:40Z",
       "threat": null,
-      "summary": "The feed shows 6 incidents in the last 7 days and 1 incident exceeding $50M in the prior 14 days. Confirmed events include a $115.0M Bitcoin loss from non-random private key generation on 2026-07-31, multiple BSC price-manipulation attacks (LOOPSDAO $0.696M, MOKE $0.907M, LULA $0.578M), access-control exploits on RISEx ($0.673M) and WEMIX",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-06-02.md",
-      "bytes": 6804
+      "summary": "Base mover: OpenAI / USDC +10013% 24h (liq $0.003343531981) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260806_041340.md",
+      "bytes": 16650
     }
   },
   "investigations": [
@@ -10756,6 +10756,17 @@
   ],
   "reports": [
     {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260806_041340.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-06T04:13:40Z",
+      "threat": null,
+      "summary": "Base mover: OpenAI / USDC +10013% 24h (liq $0.003343531981) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260806_041340.md",
+      "bytes": 16650
+    },
+    {
       "kind": "intel",
       "type": "security",
       "file": "security-2026-08-06-02.md",
@@ -11403,17 +11414,6 @@
       "summary": "Date: 2026-08-03 06:11 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-03-06.md",
       "bytes": 8519
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260803_025345.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-03T02:53:45Z",
-      "threat": null,
-      "summary": "Cycle: 20260803025345 \u00b7 Data timestamp (UTC): 2026-08-03T02:53:47Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260803_025345.md",
-      "bytes": 16026
     }
   ],
   "broadcasts": [
