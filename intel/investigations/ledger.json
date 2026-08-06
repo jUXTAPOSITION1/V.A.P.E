@@ -8024,6 +8024,25 @@
     "symbol": "ON",
     "times_investigated": 1
   },
+  "56:0xb76c15b17fcfabc7b2174efd7c4854e571f813bb": {
+    "address": "0xb76C15b17FcFabc7B2174EFd7C4854E571f813bB",
+    "chain": "56",
+    "creator_address": "0x60c8ceadf6225e5be9268eeec030340e372e5514",
+    "first_investigated": "2026-08-06T23:53:16Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260806-235316-0xb76C15b1.md",
+        "score": 0,
+        "ts": "2026-08-06T23:53:16Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-06T23:53:16Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "GRVT",
+    "times_investigated": 1
+  },
   "56:0xb7e4183260bfc5ed9965f723bf739451c7757f89": {
     "address": "0xb7E4183260BfC5ED9965f723bF739451c7757f89",
     "chain": "56",

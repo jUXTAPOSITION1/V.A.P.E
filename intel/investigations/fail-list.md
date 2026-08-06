@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-08-06T23:22:30Z — 410 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-08-06T23:53:16Z — 411 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| GRVT | BNB Chain | `0xb76C15b17FcFabc7B2174EFd7C4854E571f813bB` | 0/100 | 1 | 2026-08-06T23:53:16Z |
 | ZBT | BNB Chain | `0xfAB99fCF605fD8f4593EDb70A43bA56542777777` | 18/100 | 1 | 2026-08-06T23:22:30Z |
 | MOMO | Ethereum | `0x62acdEF82daC67975a21C67c4639654091297a2E` | 12/100 | 1 | 2026-08-06T22:51:10Z |
 | MOMO | Ethereum | `0x664E9D73db2A3514F6B437137dE4779977a06E81` | 15/100 | 1 | 2026-08-06T22:35:40Z |

@@ -1401,3 +1401,5 @@
 | 2026-08-06 | auto | 0x62acdEF82daC67975a21C67c4639654091297a2E (MOMO) | deep_investigation | REJECT (12/100) | Hidden owner | +7d |
 
 | 2026-08-06 | auto | 0xfAB99fCF605fD8f4593EDb70A43bA56542777777 (ZBT) | deep_investigation | REJECT (18/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-08-06 | auto | 0xb76C15b17FcFabc7B2174EFd7C4854E571f813bB (GRVT) | deep_investigation | REJECT (0/100) | HONEYPOT detected | +7d |

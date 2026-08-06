@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-06T23:37:53Z",
+  "generated": "2026-08-06T23:53:23Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 467,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 157,
-    "investigations": 800,
+    "investigations": 801,
     "news": 78,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260806-232230-0xfAB99fCF.md",
-      "title": "Investigation \u2014 ZBT",
-      "symbol": "ZBT",
-      "name": "ZEROBASE",
-      "date": "2026-08-06T23:22:30Z",
-      "target": "0xfAB99fCF605fD8f4593EDb70A43bA56542777777",
+      "file": "investigation-20260806-235316-0xb76C15b1.md",
+      "title": "Investigation \u2014 GRVT",
+      "symbol": "GRVT",
+      "name": "Grvt",
+      "date": "2026-08-06T23:53:16Z",
+      "target": "0xb76C15b17FcFabc7B2174EFd7C4854E571f813bB",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "18",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-20] Hidden owner; [-10] Owner not renounced (0xa14f20130e9a0a27d580fd30fd4bbf035a492ab2) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-232230-0xfAB99fCF.md"
+      "score": "0",
+      "summary": "Risk factors: [-60] HONEYPOT detected; [-12] Mintable supply (dilution risk); [-20] Very few holders (17) \u2014 thin, easily manipulated distribution; [-15] Top 9 non-LP/burn holders control 11579208923731620727573696716028624256438916371759126288531456% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidit",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-235316-0xb76C15b1.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260806-235316-0xb76C15b1.md",
+      "title": "Investigation \u2014 GRVT",
+      "symbol": "GRVT",
+      "name": "Grvt",
+      "date": "2026-08-06T23:53:16Z",
+      "target": "0xb76C15b17FcFabc7B2174EFd7C4854E571f813bB",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-60] HONEYPOT detected; [-12] Mintable supply (dilution risk); [-20] Very few holders (17) \u2014 thin, easily manipulated distribution; [-15] Top 9 non-LP/burn holders control 11579208923731620727573696716028624256438916371759126288531456% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidit",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-235316-0xb76C15b1.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260806-232230-0xfAB99fCF.md",
@@ -11274,17 +11288,6 @@
     },
     {
       "kind": "intel",
-      "type": "base",
-      "file": "base-2026-08-05-16.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-08-05T16:00Z",
-      "threat": null,
-      "summary": "Date: 2026-08-05 16:27 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-05-16.md",
-      "bytes": 7756
-    },
-    {
-      "kind": "intel",
       "type": "macro",
       "file": "macro-2026-08-05-16.md",
       "title": "Macro & Micro News Sweep Report",
@@ -11293,6 +11296,17 @@
       "summary": "Computed deterministically from real Fear & Greed (27, prior day 25) and global market cap 24h change (0.5%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-08-05-16.md",
       "bytes": 3129
+    },
+    {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-08-05-16.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-08-05T16:00Z",
+      "threat": null,
+      "summary": "Date: 2026-08-05 16:27 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-05-16.md",
+      "bytes": 7756
     },
     {
       "kind": "bounty",
