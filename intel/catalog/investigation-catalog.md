@@ -1367,3 +1367,5 @@
 | 2026-08-06 | auto | 0x862d877AF6D0fE1dc7F6AA181A0141dF83857777 (BLESS) | deep_investigation | REJECT (12/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-06 | auto | 0xfc0f47393d8B9890ad73F8eB30E713E48E0E7777 (AOB) | deep_investigation | REJECT (42/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-06 | auto | 0x3f58E7054FcaA38c74C1f46A5206E479ED995b07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |

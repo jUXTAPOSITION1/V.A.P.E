@@ -1,7 +1,14 @@
 {
-  "generated": "2026-08-06T07:46:44Z",
-  "synthesis": "VAPE automation generated bounty reports, repo reviews, skillforge toolchecks, news-intel, reputation snapshots, multiple sweeps, and frequent featured investigations on 2026-08-06.",
+  "generated": "2026-08-06T08:02:08Z",
+  "synthesis": "_Analyst narrative unavailable this cycle (no LLM provider reachable)._",
   "tasks": [
+    {
+      "sha": "eeb0c44624",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-08-06T07:46Z",
+      "date": "2026-08-06T07:46:53Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/eeb0c44624dbdb6f6ef8cd40e148c3ba43e2783b"
+    },
     {
       "sha": "39607ac027",
       "kind": "automation",
@@ -99,13 +106,6 @@
       "message": "Featured investigation 2026-08-06T05:45Z",
       "date": "2026-08-06T05:45:04Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d4ba410989d514ca75ffacdcb58b46500d3aa6ac"
-    },
-    {
-      "sha": "dc99d65a14",
-      "kind": "sweep",
-      "message": "base_sweep 2026-08-06T05:40Z",
-      "date": "2026-08-06T05:40:46Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/dc99d65a140da4f3b63a519358d4bcd7f5a66beb"
     }
   ]
 }
