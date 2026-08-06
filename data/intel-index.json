@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-06T21:57:55Z",
+  "generated": "2026-08-06T22:20:16Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 467,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 157,
-    "investigations": 796,
+    "investigations": 797,
     "news": 78,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260806-150846-0x568414B8.md",
-      "title": "Investigation \u2014 GRVT",
-      "symbol": "GRVT",
-      "name": "Grvt",
-      "date": "2026-08-06T15:08:46Z",
-      "target": "0x568414B867D07Bac8e5b9fbD268d64639e57eA84",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260806-222011-0xcBBD206D.md",
+      "title": "Investigation \u2014 Claude",
+      "symbol": "Claude",
+      "name": "Claude",
+      "date": "2026-08-06T22:20:11Z",
+      "target": "0xcBBD206D1b844fB3A2AaD1bA198686C616e46737",
+      "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-60] HONEYPOT detected; [-12] Mintable supply (dilution risk); [-20] Very few holders (17) \u2014 thin, easily manipulated distribution; [-15] Top 9 non-LP/burn holders control 1157920892373162037076177353953865399186742400938534219284480% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-150846-0x568414B8.md"
+      "score": "27",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation pattern, not coincidence; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-222011-0xcBBD206D.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260806-222011-0xcBBD206D.md",
+      "title": "Investigation \u2014 Claude",
+      "symbol": "Claude",
+      "name": "Claude",
+      "date": "2026-08-06T22:20:11Z",
+      "target": "0xcBBD206D1b844fB3A2AaD1bA198686C616e46737",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "27",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation pattern, not coincidence; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-222011-0xcBBD206D.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260806-150846-0x568414B8.md",
@@ -12697,7 +12711,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49619586",
+      "version": "49632379",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -12707,7 +12721,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.68 eth_dom 10.07 mcap_chg_24h 0.22",
+      "version": "btc_dom 56.62 eth_dom 10.08 mcap_chg_24h -0.36",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -12727,7 +12741,7 @@
       "name": "wallet_trace",
       "tier": "recon",
       "status": "verified",
-      "version": "0xae9f44ceede2 Claude 466.0 from 0x0efb3ae3 to 0x833589fc",
+      "version": "0xce173c3173f6 (RNDR) 1.0 from 0x3935fa9a to 0x833589fc",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": false,
@@ -12768,7 +12782,7 @@
     {
       "file": "base-token-investigation.md",
       "title": "Base Token Investigation",
-      "summary": "Distilled 2026-07-25T08:11:52Z from real SKILLFORGE memory.",
+      "summary": "Distilled 2026-08-06T08:43:37Z from real SKILLFORGE memory.",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/base-token-investigation.md"
     },
     {

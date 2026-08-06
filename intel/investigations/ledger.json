@@ -12038,6 +12038,25 @@
     "symbol": "cbBTC",
     "times_investigated": 1
   },
+  "8453:0xcbbd206d1b844fb3a2aad1ba198686c616e46737": {
+    "address": "0xcBBD206D1b844fB3A2AaD1bA198686C616e46737",
+    "chain": "8453",
+    "creator_address": "0x6eb0b010c7e16a007d0b4f575f20cef16319912e",
+    "first_investigated": "2026-08-06T22:20:11Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260806-222011-0xcBBD206D.md",
+        "score": 27,
+        "ts": "2026-08-06T22:20:11Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-06T22:20:11Z",
+    "last_score": 27,
+    "last_verdict": "REJECT",
+    "symbol": "Claude",
+    "times_investigated": 1
+  },
   "8453:0xcc67e54fc715246e5b27a97e69747ecd4c6375b6": {
     "address": "0xcC67e54FC715246E5B27a97E69747Ecd4c6375B6",
     "chain": "8453",

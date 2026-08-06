@@ -1393,3 +1393,5 @@
 | 2026-08-06 | auto | 0x4c0d96C66b4df9DC7C878ecD36170B6a8673e60f (GRVT) | deep_investigation | REJECT (0/100) | HONEYPOT detected | +7d |
 
 | 2026-08-06 | auto | 0x568414B867D07Bac8e5b9fbD268d64639e57eA84 (GRVT) | deep_investigation | REJECT (0/100) | HONEYPOT detected | +7d |
+
+| 2026-08-06 | auto | 0xcBBD206D1b844fB3A2AaD1bA198686C616e46737 (Claude) | deep_investigation | REJECT (27/100) | Upgradeable proxy (verify implementation) | +7d |
