@@ -1391,3 +1391,5 @@
 | 2026-08-06 | auto | 0xc52e3b77821406A04D8B2294E77E29270b940637 (BLESS) | deep_investigation | REJECT (32/100) | Low holder count (51) | +7d |
 
 | 2026-08-06 | auto | 0x4c0d96C66b4df9DC7C878ecD36170B6a8673e60f (GRVT) | deep_investigation | REJECT (0/100) | HONEYPOT detected | +7d |
+
+| 2026-08-06 | auto | 0x568414B867D07Bac8e5b9fbD268d64639e57eA84 (GRVT) | deep_investigation | REJECT (0/100) | HONEYPOT detected | +7d |

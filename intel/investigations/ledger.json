@@ -6849,6 +6849,25 @@
     "symbol": "NVDAB",
     "times_investigated": 1
   },
+  "56:0x568414b867d07bac8e5b9fbd268d64639e57ea84": {
+    "address": "0x568414B867D07Bac8e5b9fbD268d64639e57eA84",
+    "chain": "56",
+    "creator_address": "0x04c546ce6eba8c23cf33abb11b4abf709bae5b68",
+    "first_investigated": "2026-08-06T15:08:46Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260806-150846-0x568414B8.md",
+        "score": 0,
+        "ts": "2026-08-06T15:08:46Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-06T15:08:46Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "GRVT",
+    "times_investigated": 1
+  },
   "56:0x56bbbc01a416fb9b995949d105a5697c2338cd09": {
     "address": "0x56BBbC01a416Fb9b995949d105a5697c2338Cd09",
     "chain": "56",
