@@ -2579,6 +2579,25 @@
     "symbol": "SRC",
     "times_investigated": 1
   },
+  "1:0x664e9d73db2a3514f6b437137de4779977a06e81": {
+    "address": "0x664E9D73db2A3514F6B437137dE4779977a06E81",
+    "chain": "1",
+    "creator_address": "0x03711e1fa84ae3814e00bdf9f219cd75fb500b60",
+    "first_investigated": "2026-08-06T22:35:40Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260806-223540-0x664E9D73.md",
+        "score": 15,
+        "ts": "2026-08-06T22:35:40Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-06T22:35:40Z",
+    "last_score": 15,
+    "last_verdict": "REJECT",
+    "symbol": "MOMO",
+    "times_investigated": 1
+  },
   "1:0x6664347791c8d58e266eb8f824ce774a2624fa07": {
     "address": "0x6664347791C8d58E266EB8F824CE774a2624Fa07",
     "chain": "1",

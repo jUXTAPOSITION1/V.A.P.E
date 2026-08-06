@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-08-06T22:20:11Z — 407 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-08-06T22:35:40Z — 408 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| MOMO | Ethereum | `0x664E9D73db2A3514F6B437137dE4779977a06E81` | 15/100 | 1 | 2026-08-06T22:35:40Z |
 | Claude | Base | `0xcBBD206D1b844fB3A2AaD1bA198686C616e46737` | 27/100 | 1 | 2026-08-06T22:20:11Z |
 | GRVT | BNB Chain | `0x568414B867D07Bac8e5b9fbD268d64639e57eA84` | 0/100 | 1 | 2026-08-06T15:08:46Z |
 | GRVT | BNB Chain | `0x4c0d96C66b4df9DC7C878ecD36170B6a8673e60f` | 0/100 | 1 | 2026-08-06T13:38:20Z |
