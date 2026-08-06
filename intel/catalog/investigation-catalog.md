@@ -1385,3 +1385,5 @@
 | 2026-08-06 | auto | 0x2E3D50C01cB261Ec5383BF5dc55285880480c28e (CYS) | deep_investigation | REJECT (40/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
 
 | 2026-08-06 | auto | 0xBD1EaB2845661762DED14566b8864560532E4444 (MOON DOGE) | deep_investigation | REJECT (45/100) | Owner not renounced (0x5c952063c7fc8610ffdb798152d69f0b9550762b) — can still act | +7d |
+
+| 2026-08-06 | auto | 0xBA6F9a11f48e965a63bA4FB827a21a51b3354444 (MOON DOGE) | deep_investigation | REJECT (35/100) | Owner not renounced (0x5c952063c7fc8610ffdb798152d69f0b9550762b) — can still act | +7d |

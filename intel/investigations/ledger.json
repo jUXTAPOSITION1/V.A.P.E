@@ -7986,6 +7986,24 @@
     "symbol": "SOON",
     "times_investigated": 1
   },
+  "56:0xba6f9a11f48e965a63ba4fb827a21a51b3354444": {
+    "address": "0xBA6F9a11f48e965a63bA4FB827a21a51b3354444",
+    "chain": "56",
+    "first_investigated": "2026-08-06T12:36:40Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260806-123640-0xBA6F9a11.md",
+        "score": 35,
+        "ts": "2026-08-06T12:36:40Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-06T12:36:40Z",
+    "last_score": 35,
+    "last_verdict": "REJECT",
+    "symbol": "MOON DOGE",
+    "times_investigated": 1
+  },
   "56:0xbaf069e57ae635e28f33da73534008dddcc99f76": {
     "address": "0xBaf069e57AE635e28f33Da73534008dDdCC99F76",
     "chain": "56",
