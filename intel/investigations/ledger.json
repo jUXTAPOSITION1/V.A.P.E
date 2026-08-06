@@ -8876,6 +8876,25 @@
     "symbol": "SAFU",
     "times_investigated": 1
   },
+  "56:0xfab99fcf605fd8f4593edb70a43ba56542777777": {
+    "address": "0xfAB99fCF605fD8f4593EDb70A43bA56542777777",
+    "chain": "56",
+    "creator_address": "0x2dc74bc942faa2619717a46a3b1867653c777777",
+    "first_investigated": "2026-08-06T23:22:30Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260806-232230-0xfAB99fCF.md",
+        "score": 18,
+        "ts": "2026-08-06T23:22:30Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-06T23:22:30Z",
+    "last_score": 18,
+    "last_verdict": "REJECT",
+    "symbol": "ZBT",
+    "times_investigated": 1
+  },
   "56:0xfb4ea38d713afbb3ed35869b790aec3ca53b0000": {
     "address": "0xFB4EA38d713afBb3eD35869B790aec3CA53B0000",
     "chain": "56",

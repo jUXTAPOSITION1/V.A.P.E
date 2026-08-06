@@ -1399,3 +1399,5 @@
 | 2026-08-06 | auto | 0x664E9D73db2A3514F6B437137dE4779977a06E81 (MOMO) | deep_investigation | REJECT (15/100) | Very few holders (3) — thin, easily manipulated distribution | +7d |
 
 | 2026-08-06 | auto | 0x62acdEF82daC67975a21C67c4639654091297a2E (MOMO) | deep_investigation | REJECT (12/100) | Hidden owner | +7d |
+
+| 2026-08-06 | auto | 0xfAB99fCF605fD8f4593EDb70A43bA56542777777 (ZBT) | deep_investigation | REJECT (18/100) | Mintable supply (dilution risk) | +7d |
