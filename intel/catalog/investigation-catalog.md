@@ -1389,3 +1389,5 @@
 | 2026-08-06 | auto | 0xBA6F9a11f48e965a63bA4FB827a21a51b3354444 (MOON DOGE) | deep_investigation | REJECT (35/100) | Owner not renounced (0x5c952063c7fc8610ffdb798152d69f0b9550762b) — can still act | +7d |
 
 | 2026-08-06 | auto | 0xc52e3b77821406A04D8B2294E77E29270b940637 (BLESS) | deep_investigation | REJECT (32/100) | Low holder count (51) | +7d |
+
+| 2026-08-06 | auto | 0x4c0d96C66b4df9DC7C878ecD36170B6a8673e60f (GRVT) | deep_investigation | REJECT (0/100) | HONEYPOT detected | +7d |
