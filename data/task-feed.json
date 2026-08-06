@@ -1,7 +1,14 @@
 {
-  "generated": "2026-08-06T00:25:39Z",
-  "synthesis": "VAPE's automation has repeatedly generated featured investigations, bounty reports, repo reviews, radar sweeps, reputation snapshots, and news updates.",
+  "generated": "2026-08-06T00:40:38Z",
+  "synthesis": "VAPE's automation has repeatedly generated featured investigations every 10-15 minutes, plus occasional bounty reports, repo reviews, radar sweeps, and reputation snapshots.",
   "tasks": [
+    {
+      "sha": "b347e6b696",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-08-06T00:25Z",
+      "date": "2026-08-06T00:25:42Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/b347e6b696b492221065c74ae077b20806d1354e"
+    },
     {
       "sha": "e5c9104c1c",
       "kind": "investigation",
@@ -99,13 +106,6 @@
       "message": "Featured investigation 2026-08-05T22:26Z",
       "date": "2026-08-05T22:26:01Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/98582ceab7dd4f78058b53486c13f9bcc3d50d87"
-    },
-    {
-      "sha": "fd3d26d9a6",
-      "kind": "automation",
-      "message": "news-intel 2026-08-05T22:14Z",
-      "date": "2026-08-05T22:14:01Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/fd3d26d9a61aa977fd888753225a13195177dbee"
     }
   ]
 }
