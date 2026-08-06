@@ -2806,6 +2806,25 @@
     "symbol": "bUSD0",
     "times_investigated": 1
   },
+  "1:0x747e550a7b848ace786c3cfe754aa78febc8a022": {
+    "address": "0x747E550a7B848acE786C3CFe754Aa78feBC8A022",
+    "chain": "1",
+    "creator_address": "0x2483dee04092a0675681f0077a3fbc1ad59a2098",
+    "first_investigated": "2026-08-06T09:49:32Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260806-094932-0x747E550a.md",
+        "score": 100,
+        "ts": "2026-08-06T09:49:32Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-08-06T09:49:32Z",
+    "last_score": 100,
+    "last_verdict": "PROCEED",
+    "symbol": "DODO",
+    "times_investigated": 1
+  },
   "1:0x75f16b63e8f94f91dbc924845aa42093396283e8": {
     "address": "0x75F16b63e8f94F91dbc924845Aa42093396283e8",
     "chain": "1",
