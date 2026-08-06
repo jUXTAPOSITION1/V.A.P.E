@@ -1345,3 +1345,5 @@
 | 2026-08-05 | auto | 0x290443760A831b41e610F6D6C727e55ebc4c7777 (GRVT) | deep_investigation | REJECT (2/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-05 | auto | 0x5E80C63BE53369C7A4716c83aD60Ed0AcC2f2F38 (QUID) | deep_investigation | REJECT (15/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
+
+| 2026-08-06 | auto | 0x5A98FcBEA516Cf06857215779Fd812CA3beF1B32 (LDO) | deep_investigation | REJECT (35/100) | Owner can change balances (rug surface) | +7d |
