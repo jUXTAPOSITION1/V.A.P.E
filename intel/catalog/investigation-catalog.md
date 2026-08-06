@@ -1377,3 +1377,5 @@
 | 2026-08-06 | auto | 0x43Dfc4159D86F3A37A5A4B3D4580b888ad7d4DDd (DODO) | deep_investigation | CAUTION (70/100) | Top 10 non-LP/burn holders control 85% of supply — concentrated, easily manipula | +7d |
 
 | 2026-08-06 | auto | 0x747E550a7B848acE786C3CFe754Aa78feBC8A022 (DODO) | deep_investigation | PROCEED (100/100) | clean | +7d |
+
+| 2026-08-06 | auto | 0x003AFA6D1eddF81326106D19A59Fd4B5f90CdB07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |

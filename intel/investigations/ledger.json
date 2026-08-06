@@ -8859,6 +8859,25 @@
     "symbol": "DOJI",
     "times_investigated": 1
   },
+  "8453:0x003afa6d1eddf81326106d19a59fd4b5f90cdb07": {
+    "address": "0x003AFA6D1eddF81326106D19A59Fd4B5f90CdB07",
+    "chain": "8453",
+    "creator_address": "0x47be9db008d304546edde72a0f424ebdacdcbfa0",
+    "first_investigated": "2026-08-06T11:20:32Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260806-112032-0x003AFA6D.md",
+        "score": 0,
+        "ts": "2026-08-06T11:20:32Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-06T11:20:32Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "OpenAI",
+    "times_investigated": 1
+  },
   "8453:0x006b340bee30f8425cf65f064712f57b2bc0bb07": {
     "address": "0x006b340bEE30F8425cf65f064712F57B2BC0bB07",
     "chain": "8453",
