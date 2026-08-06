@@ -1,12 +1,12 @@
 {
-  "generated": "2026-08-06T05:29:30Z",
+  "generated": "2026-08-06T05:40:46Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 458,
+    "reports": 459,
     "reports_by_type": {
+      "base": 91,
       "bounty": 128,
       "security": 80,
-      "base": 90,
       "sentiment": 48,
       "macro": 24,
       "bug": 5,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-051433-0x8dF85ae8.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260806_041340.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-06T04:13:40Z",
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-08-06-05.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-08-06T05:00Z",
       "threat": null,
-      "summary": "Base mover: OpenAI / USDC +10013% 24h (liq $0.003343531981) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260806_041340.md",
-      "bytes": 16650
+      "summary": "Date: 2026-08-06 05:40 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-06-05.md",
+      "bytes": 7991
     }
   },
   "investigations": [
@@ -10784,6 +10784,17 @@
   ],
   "reports": [
     {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-08-06-05.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-08-06T05:00Z",
+      "threat": null,
+      "summary": "Date: 2026-08-06 05:40 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-06-05.md",
+      "bytes": 7991
+    },
+    {
       "kind": "bounty",
       "type": "bounty",
       "file": "bounty_report_20260806_041340.md",
@@ -11431,17 +11442,6 @@
       "summary": "Base mover: aeon / WETH +187% 24h (liq $1011448.2897) \u2014 volatility/rug watch",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260803_062429.md",
       "bytes": 16768
-    },
-    {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-08-03-06.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-08-03T06:00Z",
-      "threat": null,
-      "summary": "Date: 2026-08-03 06:11 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-03-06.md",
-      "bytes": 8519
     }
   ],
   "broadcasts": [
