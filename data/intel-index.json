@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-06T22:35:47Z",
+  "generated": "2026-08-06T22:51:17Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 467,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 157,
-    "investigations": 798,
+    "investigations": 799,
     "news": 78,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260806-223540-0x664E9D73.md",
+      "file": "investigation-20260806-225110-0x62acdEF8.md",
       "title": "Investigation \u2014 MOMO",
       "symbol": "MOMO",
-      "name": "MOMO",
-      "date": "2026-08-06T22:35:40Z",
-      "target": "0x664E9D73db2A3514F6B437137dE4779977a06E81",
+      "name": "Momo",
+      "date": "2026-08-06T22:51:10Z",
+      "target": "0x62acdEF82daC67975a21C67c4639654091297a2E",
       "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "15",
-      "summary": "Risk factors: [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +1708% (volatility/manipulation); [-15] P",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-223540-0x664E9D73.md"
+      "score": "12",
+      "summary": "Risk factors: [-20] Hidden owner; [-8] Low holder count (72); [-15] Top 10 non-LP/burn holders control 77% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $5,479 (rug/illiquid); [-10] Low liquidity $5,479; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/a",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-225110-0x62acdEF8.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260806-225110-0x62acdEF8.md",
+      "title": "Investigation \u2014 MOMO",
+      "symbol": "MOMO",
+      "name": "Momo",
+      "date": "2026-08-06T22:51:10Z",
+      "target": "0x62acdEF82daC67975a21C67c4639654091297a2E",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "12",
+      "summary": "Risk factors: [-20] Hidden owner; [-8] Low holder count (72); [-15] Top 10 non-LP/burn holders control 77% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $5,479 (rug/illiquid); [-10] Low liquidity $5,479; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/a",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-225110-0x62acdEF8.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260806-223540-0x664E9D73.md",
@@ -11246,17 +11260,6 @@
     },
     {
       "kind": "intel",
-      "type": "macro",
-      "file": "macro-2026-08-05-16.md",
-      "title": "Macro & Micro News Sweep Report",
-      "date": "2026-08-05T16:00Z",
-      "threat": null,
-      "summary": "Computed deterministically from real Fear & Greed (27, prior day 25) and global market cap 24h change (0.5%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-08-05-16.md",
-      "bytes": 3129
-    },
-    {
-      "kind": "intel",
       "type": "base",
       "file": "base-2026-08-05-16.md",
       "title": "Base Blockchain Sweep Report",
@@ -11265,6 +11268,17 @@
       "summary": "Date: 2026-08-05 16:27 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-05-16.md",
       "bytes": 7756
+    },
+    {
+      "kind": "intel",
+      "type": "macro",
+      "file": "macro-2026-08-05-16.md",
+      "title": "Macro & Micro News Sweep Report",
+      "date": "2026-08-05T16:00Z",
+      "threat": null,
+      "summary": "Computed deterministically from real Fear & Greed (27, prior day 25) and global market cap 24h change (0.5%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-08-05-16.md",
+      "bytes": 3129
     },
     {
       "kind": "bounty",
