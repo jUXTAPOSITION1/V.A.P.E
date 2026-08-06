@@ -1353,3 +1353,5 @@
 | 2026-08-06 | auto | 0x3DE26c6ab39d0Ae455201b55Da7F974A03CD8bA0 (LDO) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-08-06 | auto | 0xd177e58B02E68b2d13f792288385dB41569b104f (USDC) | deep_investigation | REJECT (22/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-06 | auto | 0x673CDBcB4aD81fC325c84463e2EEe02F90AA97c1 (LDO) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |

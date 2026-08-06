@@ -2522,6 +2522,25 @@
     "symbol": "TRUMP2028",
     "times_investigated": 1
   },
+  "1:0x673cdbcb4ad81fc325c84463e2eee02f90aa97c1": {
+    "address": "0x673CDBcB4aD81fC325c84463e2EEe02F90AA97c1",
+    "chain": "1",
+    "creator_address": "0x6f4c892a500719726952d0cfa4b124db35033106",
+    "first_investigated": "2026-08-06T02:42:41Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260806-024241-0x673CDBcB.md",
+        "score": 0,
+        "ts": "2026-08-06T02:42:41Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-06T02:42:41Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "LDO",
+    "times_investigated": 1
+  },
   "1:0x67e5481ed9f785db6508761eef45b85a19ee0df3": {
     "address": "0x67E5481ED9F785Db6508761eef45b85a19Ee0Df3",
     "chain": "1",
