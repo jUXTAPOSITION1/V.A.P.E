@@ -541,3 +541,4 @@
 {"ts": "2026-08-06T11:50:47.267039Z", "target": "0xEAe6F7e171e0A681004CcEd3c74dC351cd8F6b07", "hired": ["stablecoins"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-08-06T12:21:26.058946Z", "target": "0x1a44233FAe8D50F1AeB3a5d58dd426ff4814Cb53", "hired": ["rug_pull_alert"], "paid": 1, "cost_usd": 0.03}
 {"ts": "2026-08-06T12:52:09.949294Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["dossier_check"], "paid": 1, "cost_usd": 0.1}
+{"ts": "2026-08-06T13:22:58.172419Z", "target": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf", "hired": ["rug_pull_alert"], "paid": 1, "cost_usd": 0.03}

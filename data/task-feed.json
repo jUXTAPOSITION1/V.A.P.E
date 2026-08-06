@@ -1,7 +1,21 @@
 {
-  "generated": "2026-08-06T13:07:32Z",
-  "synthesis": "VAPE automation produced repeated featured investigations plus bounty reports, repo reviews, reputation snapshots, news intel, skillforge builds, and sweeps.",
+  "generated": "2026-08-06T13:23:01Z",
+  "synthesis": "VAPE's automation ran repeated bounty sweeps, generated multiple featured investigations, auto-created bounty reports and repo reviews, plus reputation snapshots and skillforge builds.",
   "tasks": [
+    {
+      "sha": "97fb9c2ab3",
+      "kind": "bounty-radar",
+      "message": "SCOUT bounty radar sweep 2026-08-06T13:13Z",
+      "date": "2026-08-06T13:13:15Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/97fb9c2ab3f3aaecc5c1ee4c7625fb9a5c7f34d3"
+    },
+    {
+      "sha": "c6c2f920f0",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-08-06T13:07Z",
+      "date": "2026-08-06T13:07:40Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/c6c2f920f051e18a6f19d7b01a6f260d49f9e1cd"
+    },
     {
       "sha": "c7edb6df85",
       "kind": "automation",
@@ -92,20 +106,6 @@
       "message": "base_sweep 2026-08-06T11:13Z",
       "date": "2026-08-06T11:13:40Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/8ea6ca036dafc396d3ed37311f7b44cfbdf9017f"
-    },
-    {
-      "sha": "3827d642b1",
-      "kind": "automation",
-      "message": "skillforge toolcheck 2026-08-06T11:08Z",
-      "date": "2026-08-06T11:08:01Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/3827d642b113ec670b172498e2c416a45b928760"
-    },
-    {
-      "sha": "4fadd8ce89",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-08-06T11:05Z",
-      "date": "2026-08-06T11:05:03Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/4fadd8ce89d00905fce42e3cdbac17243ef2ec04"
     }
   ]
 }

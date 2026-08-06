@@ -214,3 +214,4 @@
 {"ts": "2026-08-06T11:50:48.816145Z", "address": "0xEAe6F7e171e0A681004CcEd3c74dC351cd8F6b07", "chain": "8453", "symbol": "OpenAI", "name": "OpenAI", "source": "base", "offering": "token_safety_check"}
 {"ts": "2026-08-06T12:21:27.297803Z", "address": "0x1a44233FAe8D50F1AeB3a5d58dd426ff4814Cb53", "chain": "8453", "symbol": "QUID", "name": "QUID", "source": "base", "offering": "token_safety_check"}
 {"ts": "2026-08-06T12:52:12.338745Z", "address": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "chain": "8453", "symbol": "VELVET", "name": "VELVET", "source": "base", "offering": "token_intel"}
+{"ts": "2026-08-06T13:23:00.279415Z", "address": "0xCFB287565201763743A77c556dcA44A673d0a777", "chain": "137", "symbol": "RISE", "name": "RISE", "source": "evm", "offering": "exploit_check"}
