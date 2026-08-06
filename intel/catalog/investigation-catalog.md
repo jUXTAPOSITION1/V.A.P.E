@@ -1357,3 +1357,5 @@
 | 2026-08-06 | auto | 0x673CDBcB4aD81fC325c84463e2EEe02F90AA97c1 (LDO) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-08-06 | auto | 0x8bFAc1b375bf2894D6F12fb2Eb48B1C1a7916789 (MEY) | deep_investigation | CAUTION (75/100) | Owner not renounced (0x7a4019ed07f9bcf4b6340a57fc7aa0c2f204ea83) — can still act | +7d |
+
+| 2026-08-06 | auto | 0xAeF08f360c7abf7b0fe84BDfA5dbE6A3aF80a850 ($LGNS) | deep_investigation | CAUTION (52/100) | Upgradeable proxy (verify implementation) | +7d |

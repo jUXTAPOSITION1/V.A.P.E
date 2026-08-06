@@ -888,6 +888,25 @@
     "symbol": "CRO",
     "times_investigated": 1
   },
+  "137:0xaef08f360c7abf7b0fe84bdfa5dbe6a3af80a850": {
+    "address": "0xAeF08f360c7abf7b0fe84BDfA5dbE6A3aF80a850",
+    "chain": "137",
+    "creator_address": "0xcb857fb1f331220ed92e9dd4db51d65a9b719908",
+    "first_investigated": "2026-08-06T04:58:47Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260806-045847-0xAeF08f36.md",
+        "score": 52,
+        "ts": "2026-08-06T04:58:47Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-06T04:58:47Z",
+    "last_score": 52,
+    "last_verdict": "CAUTION",
+    "symbol": "$LGNS",
+    "times_investigated": 1
+  },
   "137:0xb5c064f955d8e7f38fe0460c556a72987494ee17": {
     "address": "0xB5C064F955D8e7F38fE0460C556a72987494eE17",
     "chain": "137",

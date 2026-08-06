@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-06T04:43:17Z",
+  "generated": "2026-08-06T04:58:56Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 458,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 155,
-    "investigations": 778,
+    "investigations": 779,
     "news": 74,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260806-025817-0x8bFAc1b3.md",
-      "title": "Investigation \u2014 MEY",
-      "symbol": "MEY",
-      "name": "Mey Network",
-      "date": "2026-08-06T02:58:17Z",
-      "target": "0x8bFAc1b375bf2894D6F12fb2Eb48B1C1a7916789",
-      "chain": "8453 (Base)",
+      "file": "investigation-20260806-045847-0xAeF08f36.md",
+      "title": "Investigation \u2014 $LGNS",
+      "symbol": "$LGNS",
+      "name": "Loginuss",
+      "date": "2026-08-06T04:58:47Z",
+      "target": "0xAeF08f360c7abf7b0fe84BDfA5dbE6A3aF80a850",
+      "chain": "137 (Polygon)",
       "verdict": "CAUTION",
-      "score": "75",
-      "summary": "Risk factors: [-10] Owner not renounced (0x7a4019ed07f9bcf4b6340a57fc7aa0c2f204ea83) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 86% of supply \u2014 concentrated, easily manipulated. Positive evidence: 14452 holders \u2014 reasonably distributed; 99% of liquidity is locked \u2014 reduced rug-pull risk; ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-025817-0x8bFAc1b3.md"
+      "score": "52",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $14,249. Positive evidence: 1105 holders \u2014 reasonably distribut",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-045847-0xAeF08f36.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260806-045847-0xAeF08f36.md",
+      "title": "Investigation \u2014 $LGNS",
+      "symbol": "$LGNS",
+      "name": "Loginuss",
+      "date": "2026-08-06T04:58:47Z",
+      "target": "0xAeF08f360c7abf7b0fe84BDfA5dbE6A3aF80a850",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "52",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $14,249. Positive evidence: 1105 holders \u2014 reasonably distribut",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-045847-0xAeF08f36.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260806-025817-0x8bFAc1b3.md",
