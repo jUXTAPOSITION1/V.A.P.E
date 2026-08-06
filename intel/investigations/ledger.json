@@ -8669,6 +8669,25 @@
     "symbol": "\u5e01\u6709",
     "times_investigated": 1
   },
+  "56:0xfc0f47393d8b9890ad73f8eb30e713e48e0e7777": {
+    "address": "0xfc0f47393d8B9890ad73F8eB30E713E48E0E7777",
+    "chain": "56",
+    "creator_address": "0x05c7d2027d49303d281da0fe93eeab9ba1817d4f",
+    "first_investigated": "2026-08-06T06:46:32Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260806-064632-0xfc0f4739.md",
+        "score": 42,
+        "ts": "2026-08-06T06:46:32Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-06T06:46:32Z",
+    "last_score": 42,
+    "last_verdict": "REJECT",
+    "symbol": "AOB",
+    "times_investigated": 1
+  },
   "56:0xfc313c329daf55b488d0a0eeee5727e3cbc4d062": {
     "address": "0xfc313C329dAf55b488d0A0EeeE5727e3cbC4D062",
     "chain": "56",

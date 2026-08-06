@@ -207,3 +207,4 @@
 {"ts": "2026-08-06T04:28:21.485969Z", "address": "0x2B31D3eD065F1f834D5C85EFEd49089F4c4f6b07", "chain": "8453", "symbol": "OpenAI", "name": "OpenAI", "source": "base", "offering": "dossier_check"}
 {"ts": "2026-08-06T05:44:59.656935Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "token_chart"}
 {"ts": "2026-08-06T06:15:54.463090Z", "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "chain": "8453", "symbol": "USDC", "name": "USDC", "source": "base_trending", "offering": "rug_pull_alert"}
+{"ts": "2026-08-06T06:46:36.345627Z", "address": "0x624e2e7fDc8903165F64891672267AB0FCB98831", "chain": "8453", "symbol": "SOSO", "name": "SOSO", "source": "base", "offering": "token_safety_check"}
