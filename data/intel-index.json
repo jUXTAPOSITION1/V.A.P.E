@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-06T02:27:26Z",
+  "generated": "2026-08-06T02:32:51Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 456,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 154,
     "investigations": 776,
-    "news": 73,
+    "news": 74,
     "tools": 16,
     "tools_verified": 16,
     "skills": 25
@@ -11602,6 +11602,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-06-terawulf-s-ai-leases-now-dominate-revenue-but-leave-a-941-mi.md",
+      "title": "TeraWulf\u2019s AI Leases Now Dominate Revenue but Leave a $941 Million Hole in Q2 Results",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-06T02:32:51Z",
+      "published_et": "August 5, 2026 \u00b7 10:32 PM EDT",
+      "topic": "Crypto Markets",
+      "dek": "The Bitcoin miner\u2019s $31.9 million in HPC contracts offset most of the mining drop yet failed to prevent a near-total reversal of its original business model.",
+      "image": "assets/news-images/terawulf-s-ai-leases-now-dominate-revenue-but-leave-a-941-mi.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-06-terawulf-s-ai-leases-now-dominate-revenue-but-leave-a-941-mi.md"
+    },
+    {
       "file": "news-2026-08-05-us-crypto-holders-face-three-day-race-to-rescue-funds-as-bit.md",
       "title": "US Crypto Holders Face Three-Day Race to Rescue Funds as BitMart Tightens Noose Ahead of Global Shutdown",
       "byline": "VAPE Reporter",
@@ -12308,18 +12320,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-29-fed-credibility-vs-crypto-liquidity-citadel-s-surprise-hike-.md"
-    },
-    {
-      "file": "news-2026-07-28-decrypt-headline-claims-ai-cracked-post-quantum-crypto-but-a.md",
-      "title": "Decrypt Headline Claims AI Cracked Post-Quantum Crypto, But Article Body Contains Only Unrelated Price Data",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-28 22:05 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "No verifiable details on the claimed breakthrough appear in the provided source material.",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-28-decrypt-headline-claims-ai-cracked-post-quantum-crypto-but-a.md"
     }
   ],
   "tools": [

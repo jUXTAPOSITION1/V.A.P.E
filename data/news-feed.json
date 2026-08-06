@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-05T22:12:42Z",
+  "generated": "2026-08-06T02:31:36Z",
   "count": 60,
   "headlines": [
     {
@@ -24,6 +24,78 @@
       "source": "Krebs on Security",
       "published": "Wed, 08 Jul 2026 12:31:39 +0000",
       "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "TeraWulf\u2019s Bitcoin mining revenue fell 73% as AI related leases reached 71% of sales",
+      "url": "https://cryptoslate.com/terawulfs-bitcoin-mining-revenue-fell-73-as-hpc-leases-reached-71-of-sales/",
+      "source": "CryptoSlate",
+      "published": "Wed, 05 Aug 2026 23:40:34 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Jamie Dimon Says Margin Debt Is Highest Ever: And Here\u2019s the Risks",
+      "url": "https://beincrypto.com/jamie-dimon-margin-debt-record-high/",
+      "source": "BeInCrypto",
+      "published": "Wed, 05 Aug 2026 23:30:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin Miners are Leaving the Network. Will It Impact BTC Price?",
+      "url": "https://beincrypto.com/bitcoin-miner-exit-hash-rate-slump/",
+      "source": "BeInCrypto",
+      "published": "Wed, 05 Aug 2026 23:20:19 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Musk Says SpaceX Revenue Could Hit $1 Trillion a Year Early Even as Stock Slides",
+      "url": "https://beincrypto.com/spacex-trillion-revenue-target-2030/",
+      "source": "BeInCrypto",
+      "published": "Wed, 05 Aug 2026 22:57:45 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Polymarket Gives 18% Odds to a Tesla-SpaceX Merger Announcement in 2026",
+      "url": "https://beincrypto.com/polymarket-odds-tesla-spacex-merger-2026/",
+      "source": "BeInCrypto",
+      "published": "Wed, 05 Aug 2026 22:50:26 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Elon Musk\u2019s Controversial X Staffer Steps Back After Nearly 30 Products",
+      "url": "https://beincrypto.com/nikita-bier-steps-back-x-product/",
+      "source": "BeInCrypto",
+      "published": "Wed, 05 Aug 2026 22:43:33 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Investors poured millions back into Grayscale\u2019s XRP fund, but a $16.8M market hit instantly wiped out the comeback",
+      "url": "https://cryptoslate.com/investors-poured-millions-back-into-grayscales-bleeding-xrp-fund-but-a-16-8-million-market-hit-instantly-wiped-out-the-comeback/",
+      "source": "CryptoSlate",
+      "published": "Wed, 05 Aug 2026 22:35:45 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Cathie Wood\u2019s Ark Invest scoops up $17 million in Circle, $20 million in SpaceX shares following Q2 results",
+      "url": "https://www.theblock.co/post/410948/cathie-wood-ark-invest-circle-spacex-q2?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Wed, 05 Aug 2026 22:22:22 -0400",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Putin signs landmark crypto law allowing regulated retail trading in Russia",
+      "url": "https://www.theblock.co/post/410951/putin-signs-russia-crypto-law?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Wed, 05 Aug 2026 22:11:16 -0400",
+      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -131,14 +203,6 @@
       "crypto": true
     },
     {
-      "title": "3 Citadel Funds Soar After Buying Situational Awareness\u2019s Distressed AI Stocks",
-      "url": "https://beincrypto.com/citadel-funds-situational-awareness-ai-stocks/",
-      "source": "BeInCrypto",
-      "published": "Wed, 05 Aug 2026 20:11:06 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Klaviyo acquires Elias Torres\u2019 Agency in full-circle reunion for tech founders",
       "url": "https://techcrunch.com/2026/08/05/klaviyo-acquires-elias-torres-agency-in-full-circle-reunion-for-tech-founders/",
       "source": "TechCrunch AI",
@@ -219,19 +283,11 @@
       "crypto": true
     },
     {
-      "title": "Gold Breaks Out From a Downtrend That Started in January 2026, What\u2019s Next?",
-      "url": "https://beincrypto.com/gold-price-bollinger-squeeze-breakout/",
-      "source": "BeInCrypto",
-      "published": "Wed, 05 Aug 2026 18:59:35 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Marex invests in Digital Prime to expand institutional crypto lending",
-      "url": "https://cointelegraph.com/news/marex-digital-prime-tokenet-institutional-crypto-lending?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Wed, 05 Aug 2026 18:53:47 +0000",
-      "topic": "Crypto Markets",
+      "title": "Ransom Cartel ransomware creator sentenced to 16 years in prison",
+      "url": "https://www.bleepingcomputer.com/news/security/ransom-cartel-ransomware-creator-sentenced-to-16-years-in-prison/",
+      "source": "BleepingComputer",
+      "published": "Wed, 05 Aug 2026 19:00:50 -0400",
+      "topic": "Cybersecurity",
       "crypto": true
     },
     {
@@ -239,14 +295,6 @@
       "url": "https://decrypt.co/374986/nft-founder-10-million-fraud-gambling-dj-hobby",
       "source": "Decrypt",
       "published": "Wed, 05 Aug 2026 18:43:47 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Update: BIP-110 Activation Was Never Delayed, Mandatory Signaling Begins This Week",
-      "url": "https://beincrypto.com/bip-110-activation-postponed-coldcard-exploit/",
-      "source": "BeInCrypto",
-      "published": "Wed, 05 Aug 2026 18:20:26 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -267,27 +315,11 @@
       "crypto": true
     },
     {
-      "title": "Dubai\u2019s New AI Immigration Cleared 9.4 Million Travelers: The Future of Travel?",
-      "url": "https://beincrypto.com/dubai-ai-immigration-biometric-border-privacy/",
-      "source": "BeInCrypto",
-      "published": "Wed, 05 Aug 2026 18:11:51 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Canadian pleads guilty to Snowflake cloud data-theft attacks",
       "url": "https://www.bleepingcomputer.com/news/security/canadian-pleads-guilty-to-snowflake-cloud-data-theft-attacks/",
       "source": "BleepingComputer",
       "published": "Wed, 05 Aug 2026 17:53:26 -0400",
       "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "Google Stock Falls 5% as 4 AI Leaders Quit, Including the Most-Cited Researchers",
-      "url": "https://beincrypto.com/google-stock-falls-ai-leaders-quit/",
-      "source": "BeInCrypto",
-      "published": "Wed, 05 Aug 2026 17:52:49 +0000",
-      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -307,22 +339,6 @@
       "crypto": true
     },
     {
-      "title": "Bitcoin treasury Strive bought 20 BTC, but 110,000 new shares left holders with less Bitcoin exposure",
-      "url": "https://cryptoslate.com/bitcoin-treasury-firm-strive-bought-20-btc-but-110000-new-shares-left-holders-with-less-bitcoin-exposure/",
-      "source": "CryptoSlate",
-      "published": "Wed, 05 Aug 2026 17:10:41 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Crypto-backed Michigan House incumbent loses primary despite $2M PAC support",
-      "url": "https://cointelegraph.com/news/michigan-house-rep-loses-primary-support-crypto-pac?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Wed, 05 Aug 2026 16:51:54 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Block\u2019s bitcoin gross profit falls 31% after Cash App fee cuts as shares reverse initial gains",
       "url": "https://www.theblock.co/post/410923/blocks-bitcoin-gross-profit-falls-31-cash-app-fee-cuts-shares-reverse-initial-gains?utm_source=rss&utm_medium=rss",
       "source": "The Block",
@@ -331,26 +347,10 @@
       "crypto": true
     },
     {
-      "title": "Western Union brings stablecoin remittances to Visa network with Stablecard",
-      "url": "https://cointelegraph.com/news/western-union-stablecard-stablecoin-remittances-visa?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Wed, 05 Aug 2026 16:30:56 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "\u2018If Clarity Dies, Democrats Killed It\u2019: Lummis Urges Senate to Act on Crypto Bill Before Recess",
       "url": "https://bitcoinmagazine.com/news/cynthia-lummis-urges-clarity-act-speed",
       "source": "Bitcoin Magazine",
       "published": "Wed, 05 Aug 2026 16:12:01 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "An AI data center firm just raised $25 million, but 90% of it vanishes in days to pay off one massive loan",
-      "url": "https://cryptoslate.com/an-ai-data-center-firm-just-raised-25-million-but-90-of-it-vanishes-in-days-to-pay-off-one-massive-loan/",
-      "source": "CryptoSlate",
-      "published": "Wed, 05 Aug 2026 16:05:32 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -383,14 +383,6 @@
       "url": "https://www.coindesk.com/tech/2026/08/05/coldcard-exploit-could-boost-demand-for-regulated-bitcoin-exposure-analysts-say",
       "source": "CoinDesk",
       "published": "Wed, 05 Aug 2026 15:44:08 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "CryptoQuant says bitcoin, ether and XRP whales are accumulating, signaling a \u2018late-stage bear market\u2019",
-      "url": "https://www.theblock.co/post/410920/cryptoquant-bitcoin-ether-xrp-whales-accumulating-late-stage-bear-market?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Wed, 05 Aug 2026 15:09:26 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -467,18 +459,26 @@
       "crypto": true
     },
     {
-      "title": "TeraWulf\u2019s HPC leasing revenue jumps 52%, widening lead over bitcoin mining",
-      "url": "https://www.theblock.co/post/410888/terawulf-hpc-leasing-revenue-jumps-52-widening-lead-over-bitcoin-mining?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Wed, 05 Aug 2026 13:09:28 -0400",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "The Fourth Battlefield: The Growing Role of Cyber Operations in Global Conflict",
       "url": "https://www.securityweek.com/the-fourth-battlefield-the-growing-role-of-cyber-operations-in-global-conflict/",
       "source": "SecurityWeek",
       "published": "Wed, 05 Aug 2026 13:00:08 +0000",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "New Attack Methods Enable Malware to Hijack Passkey-Protected Accounts",
+      "url": "https://www.securityweek.com/new-attack-methods-enable-malware-to-hijack-passkey-protected-accounts/",
+      "source": "SecurityWeek",
+      "published": "Wed, 05 Aug 2026 12:48:49 +0000",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "CISA warns of hackers exploiting Langflow, N-central, Apache Tomcat flaws",
+      "url": "https://www.bleepingcomputer.com/news/security/cisa-warns-of-hackers-exploiting-langflow-n-central-apache-tomcat-flaws/",
+      "source": "BleepingComputer",
+      "published": "Wed, 05 Aug 2026 11:51:33 -0400",
       "topic": "Cybersecurity",
       "crypto": true
     }
