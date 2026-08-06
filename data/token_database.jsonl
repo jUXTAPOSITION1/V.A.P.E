@@ -216,3 +216,4 @@
 {"ts": "2026-08-06T12:52:12.338745Z", "address": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "chain": "8453", "symbol": "VELVET", "name": "VELVET", "source": "base", "offering": "token_intel"}
 {"ts": "2026-08-06T13:23:00.279415Z", "address": "0xCFB287565201763743A77c556dcA44A673d0a777", "chain": "137", "symbol": "RISE", "name": "RISE", "source": "evm", "offering": "exploit_check"}
 {"ts": "2026-08-06T22:35:46.777873Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "token_safety_check"}
+{"ts": "2026-08-06T23:06:26.026467Z", "address": "0xcBBD206D1b844fB3A2AaD1bA198686C616e46737", "chain": "8453", "symbol": "Claude", "name": "Claude", "source": "base", "offering": "token_chart"}
