@@ -6165,6 +6165,25 @@
     "symbol": "Buddy",
     "times_investigated": 1
   },
+  "56:0x2e3d50c01cb261ec5383bf5dc55285880480c28e": {
+    "address": "0x2E3D50C01cB261Ec5383BF5dc55285880480c28e",
+    "chain": "56",
+    "creator_address": "0xc95405d45e94d321f6848e794fe6d5cbc783a783",
+    "first_investigated": "2026-08-06T12:06:13Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260806-120613-0x2E3D50C0.md",
+        "score": 40,
+        "ts": "2026-08-06T12:06:13Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-06T12:06:13Z",
+    "last_score": 40,
+    "last_verdict": "REJECT",
+    "symbol": "CYS",
+    "times_investigated": 1
+  },
   "56:0x2f67d3bcdbc5030a79de0b217b934781a181c706": {
     "address": "0x2f67D3BCdbc5030A79De0B217B934781A181c706",
     "chain": "56",

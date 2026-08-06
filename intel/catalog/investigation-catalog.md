@@ -1381,3 +1381,5 @@
 | 2026-08-06 | auto | 0x003AFA6D1eddF81326106D19A59Fd4B5f90CdB07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
 
 | 2026-08-06 | auto | 0x2A4332d0333473618fE76bcED4270095547E6B07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
+
+| 2026-08-06 | auto | 0x2E3D50C01cB261Ec5383BF5dc55285880480c28e (CYS) | deep_investigation | REJECT (40/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
