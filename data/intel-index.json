@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-06T08:33:33Z",
+  "generated": "2026-08-06T08:37:08Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 460,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 155,
     "investigations": 786,
-    "news": 75,
+    "news": 76,
     "tools": 16,
     "tools_verified": 16,
     "skills": 25
@@ -11742,6 +11742,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-06-meta-enters-the-ai-coding-arena-with-muse-to-challenge-claud.md",
+      "title": "Meta Enters the AI Coding Arena with 'Muse' to Challenge Claude Code and OpenAI's Legacy",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-06T08:37:08Z",
+      "published_et": "August 6, 2026 \u00b7 4:37 AM EDT",
+      "topic": "Crypto Markets",
+      "dek": "A newly announced coding agent pits Facebook's parent company directly against Anthropic's terminal-based powerhouse, though technical details remain tightly under wraps.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-06-meta-enters-the-ai-coding-arena-with-muse-to-challenge-claud.md"
+    },
+    {
       "file": "news-2026-08-06-grayscale-xrp-trust-recovers-just-12-of-q1-redemptions-as-16.md",
       "title": "Grayscale XRP Trust Recovers Just 12% of Q1 Redemptions as $16.8M Loss Erases Fresh Inflows",
       "byline": "VAPE Reporter",
@@ -12448,18 +12460,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-29-schwab-rebrands-232m-crypto-etf-with-nlp-buzzword-without-ch.md"
-    },
-    {
-      "file": "news-2026-07-29-insider-trading-in-the-prediction-era-white-house-teleprompt.md",
-      "title": "Insider Trading in the Prediction Era: White House Teleprompter Operator Out of Government After $100K Speech-Betting Scandal",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-29 08:41 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "The departure of Gabriel Perez highlights the growing regulatory and ethical battlefields facing prediction markets as real-world insiders exploit regulated betting pools.",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-29-insider-trading-in-the-prediction-era-white-house-teleprompt.md"
     }
   ],
   "tools": [

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-06T05:49:03Z",
+  "generated": "2026-08-06T08:35:55Z",
   "count": 60,
   "headlines": [
     {
@@ -67,14 +67,6 @@
       "crypto": true
     },
     {
-      "title": "Crypto firm RedotPay says it will defend itself \u2018vigorously\u2019 against Binance lawsuit",
-      "url": "https://www.coindesk.com/business/2026/08/05/binance-sues-redotpay-for-usd470-million-claiming-it-diverted-users",
-      "source": "CoinDesk",
-      "published": "Wed, 05 Aug 2026 21:40:33 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Meta Debuts AI Coding Agent Muse: Here\u2019s How It Compares to Claude Code and Codex",
       "url": "https://decrypt.co/375001/muse-code-meta-ai-coding-agent-claude-codex",
       "source": "Decrypt",
@@ -99,27 +91,11 @@
       "crypto": true
     },
     {
-      "title": "Poison Claude Sells Discounted Claude Access While Its Operator Sees Every Customer Prompt",
-      "url": "https://thehackernews.com/2026/08/poison-claude-sells-discounted-claude.html",
-      "source": "The Hacker News",
-      "published": "Wed, 05 Aug 2026 21:06:03 +0530",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
       "title": "Cloudflare OS: Here\u2019s What\u2019s Inside the Open-Source AI Agent Platform",
       "url": "https://decrypt.co/374997/cloudflare-os-inside-open-source-ai-agent-platform",
       "source": "Decrypt",
       "published": "Wed, 05 Aug 2026 20:46:03 +0000",
       "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Paperclip AI Flaws Let Attackers Run Host Commands via Malicious Agent Imports",
-      "url": "https://thehackernews.com/2026/08/paperclip-ai-flaws-let-attackers-run.html",
-      "source": "The Hacker News",
-      "published": "Wed, 05 Aug 2026 20:44:05 +0530",
-      "topic": "Cybersecurity",
       "crypto": true
     },
     {
@@ -155,14 +131,6 @@
       "crypto": true
     },
     {
-      "title": "Veeam, Terraform MCP, Django Patch Critical Flaws, Led by CVSS 10.0 Cross-Tenant Bug",
-      "url": "https://thehackernews.com/2026/08/veeam-terraform-mcp-django-patch.html",
-      "source": "The Hacker News",
-      "published": "Wed, 05 Aug 2026 19:57:30 +0530",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
       "title": "Visa Widens Stablecoin Payouts via Zerohash Rails",
       "url": "https://decrypt.co/374994/visa-stablecoin-payouts-zerohash",
       "source": "Decrypt",
@@ -195,14 +163,6 @@
       "crypto": true
     },
     {
-      "title": "Trojanized npm Packages Employ NullReceiver Tactic to Decode C2 IP from Blockchain",
-      "url": "https://thehackernews.com/2026/08/trojanized-npm-packages-decode-c2-ip.html",
-      "source": "The Hacker News",
-      "published": "Wed, 05 Aug 2026 19:11:27 +0530",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
       "title": "OpenAI and Anthropic's Rogue Models Hacked Real Companies. The Law Has No Answer",
       "url": "https://decrypt.co/374991/openai-anthropic-rogue-ai-models-hacked-law",
       "source": "Decrypt",
@@ -223,22 +183,6 @@
       "url": "https://decrypt.co/374986/nft-founder-10-million-fraud-gambling-dj-hobby",
       "source": "Decrypt",
       "published": "Wed, 05 Aug 2026 18:43:47 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "USDC redemptions just outpaced mints by $4B, but a massive new token presale is quietly doubling Circle\u2019s revenue outlook",
-      "url": "https://cryptoslate.com/usdc-redemptions-just-outpaced-mints-by-4-billion-but-a-massive-new-token-presale-is-quietly-doubling-circles-revenue-outlook/",
-      "source": "CryptoSlate",
-      "published": "Wed, 05 Aug 2026 18:20:07 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Crypto's campaign efforts see rare loss, but crypto roster in Congress likely to grow",
-      "url": "https://www.coindesk.com/policy/2026/08/05/crypto-s-campaign-efforts-see-rare-loss-but-crypto-roster-in-congress-likely-to-grow",
-      "source": "CoinDesk",
-      "published": "Wed, 05 Aug 2026 18:15:21 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -347,14 +291,6 @@
       "crypto": true
     },
     {
-      "title": "Analysts see bitcoin bottom forming through boredom as price clings to $64K amid spot ETF inflows",
-      "url": "https://www.theblock.co/post/410905/analysts-see-bitcoin-bottom-forming-through-boredom-price-clings-64k-amid-spot-etf-inflows?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Wed, 05 Aug 2026 13:31:31 -0400",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "The Fourth Battlefield: The Growing Role of Cyber Operations in Global Conflict",
       "url": "https://www.securityweek.com/the-fourth-battlefield-the-growing-role-of-cyber-operations-in-global-conflict/",
       "source": "SecurityWeek",
@@ -375,22 +311,6 @@
       "url": "https://www.bleepingcomputer.com/news/security/cisa-warns-of-hackers-exploiting-langflow-n-central-apache-tomcat-flaws/",
       "source": "BleepingComputer",
       "published": "Wed, 05 Aug 2026 11:51:33 -0400",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "311,000 Impacted by Brown Health Medical Group-MA Data Breach",
-      "url": "https://www.securityweek.com/311000-impacted-by-brown-health-medical-group-ma-data-breach/",
-      "source": "SecurityWeek",
-      "published": "Wed, 05 Aug 2026 11:35:23 +0000",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "Cybersecurity Alliance Drafts SAFE Guidelines for Sharing AI Incident Data",
-      "url": "https://www.securityweek.com/cybersecurity-alliance-drafts-safe-guidelines-for-sharing-ai-incident-data/",
-      "source": "SecurityWeek",
-      "published": "Wed, 05 Aug 2026 11:11:29 +0000",
       "topic": "Cybersecurity",
       "crypto": true
     },
@@ -451,35 +371,115 @@
       "crypto": true
     },
     {
-      "title": "Fed\u2019s Cook says she\u2019d support rate hike if disinflation stalls",
-      "url": "https://cointelegraph.com/markets/feds-cook-warns-persistent-inflation-could-prompt-rate-hike?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "title": "Chinese-Made Zbtlink Routers Ship With Backdoor That Opens Unauthenticated Root Shells",
+      "url": "https://thehackernews.com/2026/08/chinese-made-zbtlink-routers-ship-with.html",
+      "source": "The Hacker News",
+      "published": "Thu, 06 Aug 2026 13:35:22 +0530",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Ransom Cartel Creator Gets 16 Years in Prison for Operating Ransomware-as-a-Service",
+      "url": "https://thehackernews.com/2026/08/ransom-cartel-creator-gets-16-years-in.html",
+      "source": "The Hacker News",
+      "published": "Thu, 06 Aug 2026 12:49:54 +0530",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "CISA Flags TeamCity CVE-2026-63077 RCE Flaw Under Active Exploitation in the Wild",
+      "url": "https://thehackernews.com/2026/08/cisa-flags-teamcity-cve-2026-63077-rce.html",
+      "source": "The Hacker News",
+      "published": "Thu, 06 Aug 2026 12:21:43 +0530",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Snowflake Hacker Pleads Guilty Over Breaches Affecting at Least 100 Million People",
+      "url": "https://thehackernews.com/2026/08/snowflake-hacker-pleads-guilty-over.html",
+      "source": "The Hacker News",
+      "published": "Thu, 06 Aug 2026 11:34:30 +0530",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Is crypto dead yet? Project shutdowns peaked this April but the latest 2026 data hides a scarier trend",
+      "url": "https://cryptoslate.com/is-crypto-dead-yet-project-shutdowns-peaked-this-april-but-the-latest-2026-data-hides-a-scarier-trend/",
+      "source": "CryptoSlate",
+      "published": "Thu, 06 Aug 2026 08:14:09 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin-backed loan refinances PowerCompute\u2019s $18M debt at 2%",
+      "url": "https://cointelegraph.com/news/bitcoin-collateral-cuts-powercompute-debt-rate?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
       "source": "Cointelegraph",
-      "published": "Thu, 06 Aug 2026 05:44:04 +0000",
+      "published": "Thu, 06 Aug 2026 07:56:34 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
     {
-      "title": "ElizaOS token sinks 19% to record low after founder declares it \u2018dead\u2019",
-      "url": "https://cointelegraph.com/markets/elizaos-token-record-low-founder-declares-dead?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Thu, 06 Aug 2026 05:08:04 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Bitcoin steadies above $64,000 as traders watch $100 billion SpaceX unlock",
-      "url": "https://www.coindesk.com/markets/2026/08/06/bitcoin-steadies-above-usd64-000-as-traders-watch-usd100-billion-spacex-unlock",
-      "source": "CoinDesk",
-      "published": "Thu, 06 Aug 2026 04:59:11 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "PEPE Exchange Outflows Hit Nearly 2-Year High as Whales Accumulate",
-      "url": "https://beincrypto.com/pepe-exchange-outflows-november-2024/",
+      "title": "L&C Bio\u2019s Human-Fat Injection Could Fix \u201cOzempic Face\u201d: Will Gains Hold?",
+      "url": "https://beincrypto.com/lc-bio-ozempic-face-fix/",
       "source": "BeInCrypto",
-      "published": "Thu, 06 Aug 2026 04:57:35 +0000",
+      "published": "Thu, 06 Aug 2026 07:53:17 +0000",
       "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Live updates: Coinbase lets U.K. users trade U.S. equities. BTC trades near $65,000",
+      "url": "https://www.coindesk.com/tech/2026/08/06/live-updates-bitcoin-nears-usd65-000-as-oil-inflation-hopes-keep-macro-bid-alive",
+      "source": "CoinDesk",
+      "published": "Thu, 06 Aug 2026 07:26:23 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Cisco Patches Critical SD-WAN, IOS XE, FMC Vulnerabilities",
+      "url": "https://www.securityweek.com/cisco-patches-critical-sd-wan-ios-xe-fmc-vulnerabilities/",
+      "source": "SecurityWeek",
+      "published": "Thu, 06 Aug 2026 07:20:20 +0000",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Why Is The Crypto Market Up Today?",
+      "url": "https://beincrypto.com/why-is-the-crypto-market-up-today/",
+      "source": "BeInCrypto",
+      "published": "Thu, 06 Aug 2026 07:14:22 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin developers flag 85 critical bugs in an \"extremely bad\" situation",
+      "url": "https://www.coindesk.com/tech/2026/08/06/bitcoin-developers-flag-85-critical-bugs-in-an-extremely-bad-situation",
+      "source": "CoinDesk",
+      "published": "Thu, 06 Aug 2026 07:14:11 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin ETFs pull in $244M, 3-day inflow streak tops $626M",
+      "url": "https://cointelegraph.com/markets/bitcoin-etf-244-million-three-day-inflow-streak-626-million?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Thu, 06 Aug 2026 06:57:31 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Galaxy Digital Stock Slides 14% as Crypto Prices Hit Earnings",
+      "url": "https://beincrypto.com/galaxy-digital-stock-q2-2026-loss/",
+      "source": "BeInCrypto",
+      "published": "Thu, 06 Aug 2026 06:40:10 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Hackers Start Exploiting Recent JetBrains TeamCity Vulnerability",
+      "url": "https://www.securityweek.com/hackers-start-exploiting-recent-jetbrains-teamcity-vulnerability/",
+      "source": "SecurityWeek",
+      "published": "Thu, 06 Aug 2026 06:37:44 +0000",
+      "topic": "Cybersecurity",
       "crypto": true
     }
   ]
