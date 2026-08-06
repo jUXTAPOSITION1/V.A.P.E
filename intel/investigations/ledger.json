@@ -2201,6 +2201,25 @@
     "symbol": "FWA",
     "times_investigated": 1
   },
+  "1:0x497a0815ab8bd49c9522086d5be7052e14d68b20": {
+    "address": "0x497A0815AB8BD49C9522086d5be7052e14D68b20",
+    "chain": "1",
+    "creator_address": "0x39718095694c258b13bb511f1082652a50574306",
+    "first_investigated": "2026-08-06T01:56:06Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260806-015606-0x497A0815.md",
+        "score": 0,
+        "ts": "2026-08-06T01:56:06Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-06T01:56:06Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "LDO",
+    "times_investigated": 1
+  },
   "1:0x4c746edf20762dc201ac40135e0c13e400d23d58": {
     "address": "0x4c746Edf20762dC201aC40135e0C13e400d23D58",
     "chain": "1",

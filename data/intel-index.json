@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-06T01:40:51Z",
+  "generated": "2026-08-06T01:56:14Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 456,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 154,
-    "investigations": 773,
+    "investigations": 774,
     "news": 73,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260806-014050-0x5A98FcBE.md",
+      "file": "investigation-20260806-015606-0x497A0815.md",
       "title": "Investigation \u2014 LDO",
       "symbol": "LDO",
-      "name": "Lido DAO Token",
-      "date": "2026-08-06T01:40:50Z",
-      "target": "0x5A98FcBEA516Cf06857215779Fd812CA3beF1B32",
+      "name": "Lido DAO",
+      "date": "2026-08-06T01:56:06Z",
+      "target": "0x497A0815AB8BD49C9522086d5be7052e14D68b20",
       "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-15] Transfers can be paused by owner; [-10] Owner not renounced (0xf73a1260d222f447210581ddf212d915c09a3249) \u2014 can still act on the contract; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 63396 holders",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-014050-0x5A98FcBE.md"
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CTM (0x080272BBF71bFC9Da5a2e8bC1ec3EcF5626062CD) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders co",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-015606-0x497A0815.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260806-015606-0x497A0815.md",
+      "title": "Investigation \u2014 LDO",
+      "symbol": "LDO",
+      "name": "Lido DAO",
+      "date": "2026-08-06T01:56:06Z",
+      "target": "0x497A0815AB8BD49C9522086d5be7052e14D68b20",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CTM (0x080272BBF71bFC9Da5a2e8bC1ec3EcF5626062CD) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders co",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-015606-0x497A0815.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260806-014050-0x5A98FcBE.md",
