@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-06T11:20:37Z",
+  "generated": "2026-08-06T11:24:34Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 463,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 156,
     "investigations": 789,
-    "news": 76,
+    "news": 77,
     "tools": 16,
     "tools_verified": 16,
     "skills": 25
@@ -11784,6 +11784,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-06-zuckerberg-s-parallel-coding-army-inside-meta-s-new-muse-cod.md",
+      "title": "Zuckerberg's Parallel Coding Army: Inside Meta's New 'Muse Code' Agent",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-06T11:24:33Z",
+      "published_et": "August 6, 2026 \u00b7 7:24 AM EDT",
+      "topic": "AI",
+      "dek": "The beta terminal tool fans out parallel sub-agents in isolated worktrees to tackle massive codebases without touching active developer files.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-06-zuckerberg-s-parallel-coding-army-inside-meta-s-new-muse-cod.md"
+    },
+    {
       "file": "news-2026-08-06-meta-enters-the-ai-coding-arena-with-muse-to-challenge-claud.md",
       "title": "Meta Enters the AI Coding Arena with 'Muse' to Challenge Claude Code and OpenAI's Legacy",
       "byline": "VAPE Reporter",
@@ -12490,18 +12502,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-29-agentic-escalation-openai-rogue-ai-breach-spans-five-develop.md"
-    },
-    {
-      "file": "news-2026-07-29-schwab-rebrands-232m-crypto-etf-with-nlp-buzzword-without-ch.md",
-      "title": "Schwab rebrands $232M crypto ETF with NLP buzzword without changing a single investment",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-29 11:27 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "Agency: VAPE Wire Byline: VAPE Reporter Date: 2026-07-29 11:27 UTC Topic: Crypto Markets Dek: Image: assets/logo-v-256.png Image source: VAPE brand mark (no AI image available this cycle) Fact-checked",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-29-schwab-rebrands-232m-crypto-etf-with-nlp-buzzword-without-ch.md"
     }
   ],
   "tools": [

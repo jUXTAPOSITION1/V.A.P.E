@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-06T08:35:55Z",
+  "generated": "2026-08-06T11:23:30Z",
   "count": 60,
   "headlines": [
     {
@@ -59,14 +59,6 @@
       "crypto": true
     },
     {
-      "title": "BitMart gives US users just days to pull crypto before aggressive new compliance checks risk freezing their assets",
-      "url": "https://cryptoslate.com/bitmart-gives-us-users-just-days-to-pull-crypto-before-aggressive-new-compliance-checks-risk-freezing-their-assets/",
-      "source": "CryptoSlate",
-      "published": "Wed, 05 Aug 2026 21:40:56 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Meta Debuts AI Coding Agent Muse: Here\u2019s How It Compares to Claude Code and Codex",
       "url": "https://decrypt.co/375001/muse-code-meta-ai-coding-agent-claude-codex",
       "source": "Decrypt",
@@ -95,14 +87,6 @@
       "url": "https://decrypt.co/374997/cloudflare-os-inside-open-source-ai-agent-platform",
       "source": "Decrypt",
       "published": "Wed, 05 Aug 2026 20:46:03 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "All six US Solana ETFs have suffered five consecutive days of absolute zero net flows",
-      "url": "https://cryptoslate.com/all-six-us-solana-etfs-have-suffered-five-consecutive-days-of-absolute-zero-net-flows/",
-      "source": "CryptoSlate",
-      "published": "Wed, 05 Aug 2026 20:35:44 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -147,14 +131,6 @@
       "crypto": true
     },
     {
-      "title": "A massive 100 million PROVE tokens unlock today, but razor-thin liquidity reveals a market unprepared for a 51% supply shock",
-      "url": "https://cryptoslate.com/a-massive-100-million-prove-tokens-unlock-today-but-razor-thin-exchange-liquidity-reveals-a-market-completely-unprepared-for-a-51-supply-shock/",
-      "source": "CryptoSlate",
-      "published": "Wed, 05 Aug 2026 19:30:35 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Jeff Dean and other top AI researchers are leaving Google to launch their own startup",
       "url": "https://techcrunch.com/2026/08/05/jeff-dean-and-other-top-ai-researchers-are-leaving-google-to-launch-their-own-startup/",
       "source": "TechCrunch AI",
@@ -179,14 +155,6 @@
       "crypto": true
     },
     {
-      "title": "Feds Say an NFT Founder Raised $10 Million Only to Blow It All on Gambling, Trading, and a DJ Hobby",
-      "url": "https://decrypt.co/374986/nft-founder-10-million-fraud-gambling-dj-hobby",
-      "source": "Decrypt",
-      "published": "Wed, 05 Aug 2026 18:43:47 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Canadian pleads guilty to Snowflake cloud data-theft attacks",
       "url": "https://www.bleepingcomputer.com/news/security/canadian-pleads-guilty-to-snowflake-cloud-data-theft-attacks/",
       "source": "BleepingComputer",
@@ -195,26 +163,10 @@
       "crypto": true
     },
     {
-      "title": "\u2018At a standstill:\u2019 Senate races to salvage Clarity Act before August recess as ethics fight, law enforcement concerns loom",
-      "url": "https://www.theblock.co/post/410940/standstill-senate-races-salvage-clarity-act-before-august-recess-ethics-fight-law-enforcement-concerns-loom?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Wed, 05 Aug 2026 17:41:36 -0400",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Russia Passes Law to Regulate Crypto Exchanges, Keeps Payment Ban in Place",
       "url": "https://bitcoinmagazine.com/news/russia-keeps-payment-ban-in-place",
       "source": "Bitcoin Magazine",
       "published": "Wed, 05 Aug 2026 17:39:39 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Block\u2019s bitcoin gross profit falls 31% after Cash App fee cuts as shares reverse initial gains",
-      "url": "https://www.theblock.co/post/410923/blocks-bitcoin-gross-profit-falls-31-cash-app-fee-cuts-shares-reverse-initial-gains?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Wed, 05 Aug 2026 16:47:25 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -259,14 +211,6 @@
       "crypto": true
     },
     {
-      "title": "Black Hat USA 2026 \u2013 Summary of Vendor Announcements (Part 3)",
-      "url": "https://www.securityweek.com/black-hat-usa-2026-summary-of-vendor-announcements-part-3/",
-      "source": "SecurityWeek",
-      "published": "Wed, 05 Aug 2026 14:36:29 +0000",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
       "title": "SEC Establishes Financial Reporting and Accounting Unit in Enforcement Division",
       "url": "https://www.sec.gov/newsroom/press-releases/2026-72-sec-establishes-financial-reporting-accounting-unit-enforcement-division",
       "source": "SEC Press Releases",
@@ -287,22 +231,6 @@
       "url": "https://www.bleepingcomputer.com/news/security/coldcard-security-audit-phishing-attack-installs-remote-access-tool/",
       "source": "BleepingComputer",
       "published": "Wed, 05 Aug 2026 13:49:41 -0400",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "The Fourth Battlefield: The Growing Role of Cyber Operations in Global Conflict",
-      "url": "https://www.securityweek.com/the-fourth-battlefield-the-growing-role-of-cyber-operations-in-global-conflict/",
-      "source": "SecurityWeek",
-      "published": "Wed, 05 Aug 2026 13:00:08 +0000",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "New Attack Methods Enable Malware to Hijack Passkey-Protected Accounts",
-      "url": "https://www.securityweek.com/new-attack-methods-enable-malware-to-hijack-passkey-protected-accounts/",
-      "source": "SecurityWeek",
-      "published": "Wed, 05 Aug 2026 12:48:49 +0000",
       "topic": "Cybersecurity",
       "crypto": true
     },
@@ -371,6 +299,22 @@
       "crypto": true
     },
     {
+      "title": "Attackers Compile khunt Inside Oracle to Turn SQL Injection Into Windows SYSTEM Access",
+      "url": "https://thehackernews.com/2026/08/attackers-compile-khunt-inside-oracle.html",
+      "source": "The Hacker News",
+      "published": "Thu, 06 Aug 2026 14:49:23 +0530",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "AWS, Google, and Vercel Agent Flaws Let Attackers Trigger Tools Without Running the Model",
+      "url": "https://thehackernews.com/2026/08/aws-google-and-vercel-patch-agent-flaws.html",
+      "source": "The Hacker News",
+      "published": "Thu, 06 Aug 2026 14:27:30 +0530",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
       "title": "Chinese-Made Zbtlink Routers Ship With Backdoor That Opens Unauthenticated Root Shells",
       "url": "https://thehackernews.com/2026/08/chinese-made-zbtlink-routers-ship-with.html",
       "source": "The Hacker News",
@@ -403,82 +347,138 @@
       "crypto": true
     },
     {
-      "title": "Is crypto dead yet? Project shutdowns peaked this April but the latest 2026 data hides a scarier trend",
-      "url": "https://cryptoslate.com/is-crypto-dead-yet-project-shutdowns-peaked-this-april-but-the-latest-2026-data-hides-a-scarier-trend/",
+      "title": "Canaan can use crypto to buy back nearly 20% of its market value while its core business burns cash",
+      "url": "https://cryptoslate.com/canaan-can-use-crypto-to-buy-back-nearly-20-of-its-market-value-while-its-core-business-burns-cash/",
       "source": "CryptoSlate",
-      "published": "Thu, 06 Aug 2026 08:14:09 +0000",
+      "published": "Thu, 06 Aug 2026 11:20:41 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
     {
-      "title": "Bitcoin-backed loan refinances PowerCompute\u2019s $18M debt at 2%",
-      "url": "https://cointelegraph.com/news/bitcoin-collateral-cuts-powercompute-debt-rate?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Thu, 06 Aug 2026 07:56:34 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "L&C Bio\u2019s Human-Fat Injection Could Fix \u201cOzempic Face\u201d: Will Gains Hold?",
-      "url": "https://beincrypto.com/lc-bio-ozempic-face-fix/",
-      "source": "BeInCrypto",
-      "published": "Thu, 06 Aug 2026 07:53:17 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Live updates: Coinbase lets U.K. users trade U.S. equities. BTC trades near $65,000",
-      "url": "https://www.coindesk.com/tech/2026/08/06/live-updates-bitcoin-nears-usd65-000-as-oil-inflation-hopes-keep-macro-bid-alive",
+      "title": "Why Sandisk and Western Digital crashed 10% and what it means for bitcoin",
+      "url": "https://www.coindesk.com/markets/2026/08/06/why-sandisk-and-western-digital-crashed-10-and-what-it-means-for-bitcoin",
       "source": "CoinDesk",
-      "published": "Thu, 06 Aug 2026 07:26:23 +0000",
+      "published": "Thu, 06 Aug 2026 11:14:47 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
     {
-      "title": "Cisco Patches Critical SD-WAN, IOS XE, FMC Vulnerabilities",
-      "url": "https://www.securityweek.com/cisco-patches-critical-sd-wan-ios-xe-fmc-vulnerabilities/",
+      "title": "Critical Paperclip Flaw Allowed Admin Access, Code Execution",
+      "url": "https://www.securityweek.com/critical-paperclip-flaw-allowed-admin-access-code-execution/",
       "source": "SecurityWeek",
-      "published": "Thu, 06 Aug 2026 07:20:20 +0000",
+      "published": "Thu, 06 Aug 2026 11:09:11 +0000",
       "topic": "Cybersecurity",
       "crypto": true
     },
     {
-      "title": "Why Is The Crypto Market Up Today?",
-      "url": "https://beincrypto.com/why-is-the-crypto-market-up-today/",
-      "source": "BeInCrypto",
-      "published": "Thu, 06 Aug 2026 07:14:22 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Bitcoin developers flag 85 critical bugs in an \"extremely bad\" situation",
-      "url": "https://www.coindesk.com/tech/2026/08/06/bitcoin-developers-flag-85-critical-bugs-in-an-extremely-bad-situation",
+      "title": "JPYC raises $38 million Series B led by major Japanese logistics firm AZ-COM Maruwa",
+      "url": "https://www.coindesk.com/business/2026/08/06/jpyc-raises-usd38-million-series-b-led-by-major-japanese-logistics-firm-az-com-maruwa",
       "source": "CoinDesk",
-      "published": "Thu, 06 Aug 2026 07:14:11 +0000",
+      "published": "Thu, 06 Aug 2026 10:53:09 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
     {
-      "title": "Bitcoin ETFs pull in $244M, 3-day inflow streak tops $626M",
-      "url": "https://cointelegraph.com/markets/bitcoin-etf-244-million-three-day-inflow-streak-626-million?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Thu, 06 Aug 2026 06:57:31 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Galaxy Digital Stock Slides 14% as Crypto Prices Hit Earnings",
-      "url": "https://beincrypto.com/galaxy-digital-stock-q2-2026-loss/",
+      "title": "This One Word On SpaceX\u2019s First Earnings Call Cost It 11%, And Sent Nvidia Higher",
+      "url": "https://beincrypto.com/spacex-stock-falls-nvidia-exclusive-supplier-comment/",
       "source": "BeInCrypto",
-      "published": "Thu, 06 Aug 2026 06:40:10 +0000",
+      "published": "Thu, 06 Aug 2026 10:52:05 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
     {
-      "title": "Hackers Start Exploiting Recent JetBrains TeamCity Vulnerability",
-      "url": "https://www.securityweek.com/hackers-start-exploiting-recent-jetbrains-teamcity-vulnerability/",
+      "title": "Bitcoin, ether benefit as traders seek safety of largest tokens",
+      "url": "https://www.coindesk.com/markets/2026/08/06/bitcoin-ether-benefit-as-traders-seek-safety-of-largest-tokens",
+      "source": "CoinDesk",
+      "published": "Thu, 06 Aug 2026 10:43:07 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Situational Awareness returns with $400M investment after nearly collapsing: Report",
+      "url": "https://cointelegraph.com/markets/situational-awareness-400m-investment-nearly-collapsing?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Thu, 06 Aug 2026 10:41:49 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin Enters Accumulation Zone as 41 of 45 On-Chain Indicators Hit Cycle Lows",
+      "url": "https://beincrypto.com/bitcoin-accumulation-zone-onchain-indicators/",
+      "source": "BeInCrypto",
+      "published": "Thu, 06 Aug 2026 10:39:07 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "SpaceX\u2019s $85 billion IPO windfall went everywhere except Bitcoin",
+      "url": "https://cryptoslate.com/spacexs-85-billion-ipo-windfall-went-everywhere-except-bitcoin/",
+      "source": "CryptoSlate",
+      "published": "Thu, 06 Aug 2026 10:15:21 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Investors Send SoftBank Stock 4.4% Lower Even as Profit Beats Estimates",
+      "url": "https://beincrypto.com/softbank-shares-drop-profit-beat-intel/",
+      "source": "BeInCrypto",
+      "published": "Thu, 06 Aug 2026 10:12:53 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitget Signs Cooperation Agreement with Gelephu Mindfulness City Authority to Explore Licensed Digital Asset Presence in Bhutan",
+      "url": "https://beincrypto.com/bitget-partners-with-gelephu-mindfulness-city-bhutan/",
+      "source": "BeInCrypto",
+      "published": "Thu, 06 Aug 2026 10:00:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Toobit Turns Futures Trading Into a 3 Million USDT Team Race",
+      "url": "https://beincrypto.com/toobit-usdt-futures-tournament/",
+      "source": "BeInCrypto",
+      "published": "Thu, 06 Aug 2026 10:00:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Meta AI Hacked External Systems During Cybersecurity Testing",
+      "url": "https://www.securityweek.com/meta-ai-hacked-external-systems-during-cybersecurity-testing/",
       "source": "SecurityWeek",
-      "published": "Thu, 06 Aug 2026 06:37:44 +0000",
+      "published": "Thu, 06 Aug 2026 09:56:26 +0000",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Meta Becomes 3rd AI Firm to Report Model Breaching Outside Company",
+      "url": "https://beincrypto.com/meta-ai-model-breach-testing-irregular/",
+      "source": "BeInCrypto",
+      "published": "Thu, 06 Aug 2026 09:49:59 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin AI Security Audit Files 4,962 Findings Across 390 Projects",
+      "url": "https://decrypt.co/375029/bitcoin-ai-security-audit-files-4962-findings-across-390-projects",
+      "source": "Decrypt",
+      "published": "Thu, 06 Aug 2026 09:43:34 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Russian president signs crypto law, core rules take effect in 2026",
+      "url": "https://cointelegraph.com/news/putin-signs-crypto-law-core-rules-take-effect-2026?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Thu, 06 Aug 2026 09:38:54 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Belarusian Ransom Cartel Mastermind Gets 16 Years in Prison",
+      "url": "https://www.securityweek.com/belarusian-ransom-cartel-mastermind-gets-16-years-in-prison/",
+      "source": "SecurityWeek",
+      "published": "Thu, 06 Aug 2026 09:30:30 +0000",
       "topic": "Cybersecurity",
       "crypto": true
     }
