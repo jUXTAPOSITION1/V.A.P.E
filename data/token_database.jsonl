@@ -203,3 +203,4 @@
 {"ts": "2026-08-05T23:10:35.398812Z", "address": "0xfde4c96c8593536e31f229ea8f37b2ada2699bb2", "chain": "8453", "symbol": "USDT", "name": "Tether USD", "source": "base_trending", "offering": "exploit_check"}
 {"ts": "2026-08-05T23:25:44.378143Z", "address": "0x60a3e35cc302bfa44cb288bc5a4f316fdb1adb42", "chain": "8453", "symbol": "EURC", "name": "EURC", "source": "base_trending", "offering": "token_safety_check"}
 {"ts": "2026-08-05T23:40:43.467155Z", "address": "0xbf8e8f0e8866a7052f948c16508644347c57aba3", "chain": "8453", "symbol": "aeon", "name": "aeon", "source": "base_trending", "offering": "token_intel"}
+{"ts": "2026-08-06T00:55:35.551243Z", "address": "0x1F32b1c2345538c0c6f582fCB022739c4A194Ebb", "chain": "10", "symbol": "wstETH", "name": "wstETH", "source": "evm", "offering": "dossier_check"}
