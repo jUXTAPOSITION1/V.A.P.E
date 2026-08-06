@@ -1361,3 +1361,5 @@
 | 2026-08-06 | auto | 0xAeF08f360c7abf7b0fe84BDfA5dbE6A3aF80a850 ($LGNS) | deep_investigation | CAUTION (52/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-06 | auto | 0x8dF85ae8c36F50F37E92C65668607993BA597777 (BLESS) | deep_investigation | REJECT (12/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-06 | auto | 0x1EC9FcE135d48217A46207e151A426f09AED3e43 (SLGNS) | deep_investigation | REJECT (37/100) | Upgradeable proxy (verify implementation) | +7d |

@@ -205,3 +205,4 @@
 {"ts": "2026-08-05T23:40:43.467155Z", "address": "0xbf8e8f0e8866a7052f948c16508644347c57aba3", "chain": "8453", "symbol": "aeon", "name": "aeon", "source": "base_trending", "offering": "token_intel"}
 {"ts": "2026-08-06T00:55:35.551243Z", "address": "0x1F32b1c2345538c0c6f582fCB022739c4A194Ebb", "chain": "10", "symbol": "wstETH", "name": "wstETH", "source": "evm", "offering": "dossier_check"}
 {"ts": "2026-08-06T04:28:21.485969Z", "address": "0x2B31D3eD065F1f834D5C85EFEd49089F4c4f6b07", "chain": "8453", "symbol": "OpenAI", "name": "OpenAI", "source": "base", "offering": "dossier_check"}
+{"ts": "2026-08-06T05:44:59.656935Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "token_chart"}
