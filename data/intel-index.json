@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-06T12:52:12Z",
+  "generated": "2026-08-06T12:58:11Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 463,
+    "reports": 464,
     "reports_by_type": {
+      "bounty": 131,
       "base": 92,
-      "bounty": 130,
       "sentiment": 49,
       "security": 80,
       "macro": 24,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260806-125156-0xc52e3b77.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-08-06-11.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-08-06T11:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260806_125748.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-06T12:57:48Z",
       "threat": null,
-      "summary": "Date: 2026-08-06 11:13 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-06-11.md",
-      "bytes": 9158
+      "summary": "Cycle: 20260806125748 \u00b7 Data timestamp (UTC): 2026-08-06T12:57:51Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260806_125748.md",
+      "bytes": 16242
     }
   },
   "investigations": [
@@ -10980,6 +10980,17 @@
   ],
   "reports": [
     {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260806_125748.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-06T12:57:48Z",
+      "threat": null,
+      "summary": "Cycle: 20260806125748 \u00b7 Data timestamp (UTC): 2026-08-06T12:57:51Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260806_125748.md",
+      "bytes": 16242
+    },
+    {
       "kind": "intel",
       "type": "base",
       "file": "base-2026-08-06-11.md",
@@ -11627,17 +11638,6 @@
       "summary": "Date: 2026-08-03 12:14 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-03-12.md",
       "bytes": 8173
-    },
-    {
-      "kind": "intel",
-      "type": "mainnet",
-      "file": "mainnet-patch-check-2026-08-03-12.md",
-      "title": "Mainnet Patch Status Check \u2014 Virtuals Protocol AgentNftV2",
-      "date": "2026-08-03T12:00Z",
-      "threat": null,
-      "summary": "Date: 2026-08-03 12:52 UTC Contract: 0xdE8299ba9a20f6aca7516735FcAe3E04F8ba417b (AgentNftV2 implementation, Base 8453) Source: live on-chain verified source fetch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/mainnet-patch-check-2026-08-03-12.md",
-      "bytes": 2981
     }
   ],
   "broadcasts": [
