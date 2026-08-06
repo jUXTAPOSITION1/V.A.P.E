@@ -1,10 +1,10 @@
 {
-  "generated": "2026-08-06T15:36:45Z",
+  "generated": "2026-08-06T21:57:55Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 466,
+    "reports": 467,
     "reports_by_type": {
-      "bounty": 132,
+      "bounty": 133,
       "security": 81,
       "base": 92,
       "sentiment": 49,
@@ -39,13 +39,13 @@
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260806_152158.md",
+      "file": "bounty_report_20260806_215737.md",
       "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-06T15:21:58Z",
+      "date": "2026-08-06T21:57:37Z",
       "threat": null,
-      "summary": "Cycle: 20260806152158 \u00b7 Data timestamp (UTC): 2026-08-06T15:22:02Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260806_152158.md",
-      "bytes": 15902
+      "summary": "Base mover: Claude / USDC +10034% 24h (liq $9038411.9225) \u2014 volatility/rug watch \u00b7 Base mover: 1F916 / WETH +3533% 24h (liq $143760.0777) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260806_215737.md",
+      "bytes": 15741
     }
   },
   "investigations": [
@@ -11010,6 +11010,17 @@
     {
       "kind": "bounty",
       "type": "bounty",
+      "file": "bounty_report_20260806_215737.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-06T21:57:37Z",
+      "threat": null,
+      "summary": "Base mover: Claude / USDC +10034% 24h (liq $9038411.9225) \u2014 volatility/rug watch \u00b7 Base mover: 1F916 / WETH +3533% 24h (liq $143760.0777) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260806_215737.md",
+      "bytes": 15741
+    },
+    {
+      "kind": "bounty",
+      "type": "bounty",
       "file": "bounty_report_20260806_152158.md",
       "title": "V.A.P.E. Intelligence Report",
       "date": "2026-08-06T15:21:58Z",
@@ -11655,17 +11666,6 @@
       "summary": "The feed shows three incidents in the last 7 days, all under $10M, with zero incidents at or above $50M in the prior 14 days. Documented events include a $0.45M private-key compromise affecting Garden across Ethereum, Base, Arbitrum and BSC; a $0.65M unauthorized-access event on ChainConnect spanning Ethereum, BSC, Avalanche and Polygon; ",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-03-14.md",
       "bytes": 6057
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260803_134137.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-03T13:41:37Z",
-      "threat": null,
-      "summary": "Base mover: aeon / WETH +197% 24h (liq $1019647.6312) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260803_134137.md",
-      "bytes": 16983
     }
   ],
   "broadcasts": [
