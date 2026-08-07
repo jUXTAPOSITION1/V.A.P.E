@@ -7075,6 +7075,25 @@
     "symbol": "BLESS",
     "times_investigated": 1
   },
+  "56:0x514cadd2707f1fa06a5d30312bcde77ddde6f4c4": {
+    "address": "0x514CaDd2707f1FA06a5d30312BcdE77DDDE6f4C4",
+    "chain": "56",
+    "creator_address": "0x42614123844a9a3416fe75a6f6d0ca503d4ec9c3",
+    "first_investigated": "2026-08-07T12:59:23Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260807-125923-0x514CaDd2.md",
+        "score": 55,
+        "ts": "2026-08-07T12:59:23Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-07T12:59:23Z",
+    "last_score": 55,
+    "last_verdict": "CAUTION",
+    "symbol": "OPTIMUSBNB",
+    "times_investigated": 1
+  },
   "56:0x51cf4242ac4bd24ff6d13be521cba280962b4444": {
     "address": "0x51cF4242AC4Bd24Ff6D13Be521CBa280962b4444",
     "chain": "56",

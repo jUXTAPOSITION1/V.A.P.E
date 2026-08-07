@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T12:43:09Z",
+  "generated": "2026-08-07T12:59:33Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 479,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 160,
-    "investigations": 828,
+    "investigations": 829,
     "news": 82,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260807-124304-0xe3395e13.md",
-      "title": "Investigation \u2014 jobless",
-      "symbol": "jobless",
-      "name": "bsc\u7684useless",
-      "date": "2026-08-07T12:43:04Z",
-      "target": "0xe3395e137E04a07590821b8aEd4AE24B97657777",
+      "file": "investigation-20260807-125923-0x514CaDd2.md",
+      "title": "Investigation \u2014 OPTIMUSBNB",
+      "symbol": "OPTIMUSBNB",
+      "name": "OPTIMUSBNB",
+      "date": "2026-08-07T12:59:23Z",
+      "target": "0x514CaDd2707f1FA06a5d30312BcdE77DDDE6f4C4",
       "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "2",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Owner not renounced (0xe2ce6ab80874fa9fa2aae65d277dd6b8e65c9de0) \u2014 can still act on the contract; [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $7,281 (rug/illiquid); [-10] Low liquidity $7,281; [-15] Pair",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-124304-0xe3395e13.md"
+      "verdict": "CAUTION",
+      "score": "55",
+      "summary": "Risk factors: [-10] Owner not renounced (0x000000000000000000000000000000000000dead) \u2014 can still act on the contract; [-25] Very low liquidity $4,467 (rug/illiquid); [-10] Low liquidity $4,467. Positive evidence: 25141 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 412+ d",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-125923-0x514CaDd2.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260807-125923-0x514CaDd2.md",
+      "title": "Investigation \u2014 OPTIMUSBNB",
+      "symbol": "OPTIMUSBNB",
+      "name": "OPTIMUSBNB",
+      "date": "2026-08-07T12:59:23Z",
+      "target": "0x514CaDd2707f1FA06a5d30312BcdE77DDDE6f4C4",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "55",
+      "summary": "Risk factors: [-10] Owner not renounced (0x000000000000000000000000000000000000dead) \u2014 can still act on the contract; [-25] Very low liquidity $4,467 (rug/illiquid); [-10] Low liquidity $4,467. Positive evidence: 25141 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading 412+ d",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-125923-0x514CaDd2.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260807-124304-0xe3395e13.md",

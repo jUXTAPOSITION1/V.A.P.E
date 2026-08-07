@@ -227,3 +227,4 @@
 {"ts": "2026-08-07T10:52:30.694978Z", "address": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "chain": "8453", "symbol": "VELVET", "name": "VELVET", "source": "base", "offering": "dossier_check"}
 {"ts": "2026-08-07T11:56:00.827669Z", "address": "0x9E00FC92493451EBA1c63DD3880D68b622037bA3", "chain": "8453", "symbol": "1F916", "name": "1F916", "source": "base", "offering": "dossier_check"}
 {"ts": "2026-08-07T12:27:29.631425Z", "address": "0x01cA5ACf53D0a18943dAe0dd6C08B88e62ad0BA3", "chain": "1", "symbol": "FORGE", "name": "FORGE", "source": "evm", "offering": "liquidity_check"}
+{"ts": "2026-08-07T12:59:32.563373Z", "address": "0x296F55F8Fb28E498B858d0BcDA06D955B2Cb3f97", "chain": "10", "symbol": "STG", "name": "STG", "source": "evm", "offering": "token_intel"}
