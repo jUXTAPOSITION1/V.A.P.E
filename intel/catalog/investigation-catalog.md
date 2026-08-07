@@ -1417,3 +1417,5 @@
 | 2026-08-07 | auto | 0x296F55F8Fb28E498B858d0BcDA06D955B2Cb3f97 (STG) | deep_investigation | REJECT (38/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-08-07 | auto | 0xEa8CAc26211e1fCD512c8B45f33F30c8Ef4fc76d (LGNS) | deep_investigation | REJECT (37/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-07 | auto | 0x54609991482600e1B1552F7243ABBADc137d2b19 (CC) | deep_investigation | REJECT (40/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
