@@ -747,3 +747,4 @@
 {"ts": "2026-08-07T08:45:33.795873Z", "target": "Base", "hired": ["chain_protocols"], "paid": 1, "cost_usd": 0.01, "daily_target": 63}
 {"ts": "2026-08-07T09:16:58.445602Z", "target": "Polygon", "hired": ["chain_overview"], "paid": 1, "cost_usd": 0.01, "daily_target": 63}
 {"ts": "2026-08-07T09:49:29.066157Z", "target": "aave-v3", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
+{"ts": "2026-08-07T10:21:18.582120Z", "target": "arbitrum", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01, "daily_target": 63}
