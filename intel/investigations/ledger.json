@@ -5955,6 +5955,24 @@
     "symbol": "PIEVERSE",
     "times_investigated": 1
   },
+  "56:0x0f8f9e859178faefba50a106fd6b3c90445b7777": {
+    "address": "0x0f8F9E859178FAefba50A106fD6B3C90445B7777",
+    "chain": "56",
+    "first_investigated": "2026-08-07T12:27:11Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260807-122711-0x0f8F9E85.md",
+        "score": 20,
+        "ts": "2026-08-07T12:27:11Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-07T12:27:11Z",
+    "last_score": 20,
+    "last_verdict": "REJECT",
+    "symbol": "jobless",
+    "times_investigated": 1
+  },
   "56:0x143e73837fd47cc9477c694b37123ccbd4c0eb93": {
     "address": "0x143E73837FD47cC9477c694B37123ccbd4C0eB93",
     "chain": "56",

@@ -1453,3 +1453,5 @@
 | 2026-08-07 | auto | 0x42907d9F7E3d4291C801BbD1F601066EB1dfA956 (BLEC) | deep_investigation | REJECT (27/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-07 | auto | 0xAd97D6D4268B26aC08c5c30467FAEe96e9297777 (BSB) | deep_investigation | REJECT (12/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-07 | auto | 0x0f8F9E859178FAefba50A106fD6B3C90445B7777 (jobless) | deep_investigation | REJECT (20/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |

@@ -571,3 +571,4 @@
 {"ts": "2026-08-07T10:52:20.325721Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["stablecoins"], "paid": 0, "cost_usd": 0.0}
 {"ts": "2026-08-07T11:24:15.057773Z", "target": "0x0dE085831b467D3228d485c5E91C506dF1208e06", "hired": ["dex_volumes"], "paid": 0, "cost_usd": 0.0}
 {"ts": "2026-08-07T11:55:53.640461Z", "target": "0x9E00FC92493451EBA1c63DD3880D68b622037bA3", "hired": ["dex_volumes"], "paid": 1, "cost_usd": 0.01}
+{"ts": "2026-08-07T12:27:26.857116Z", "target": "0x3221BAEB0c2745e39A1dbA73CD413361b7f5Fe13", "hired": ["yields"], "paid": 1, "cost_usd": 0.01}
