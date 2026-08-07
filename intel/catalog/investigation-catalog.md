@@ -1481,3 +1481,5 @@
 | 2026-08-07 | auto | 0xA70136c6AA83cfa85405f552D37453E0ab5e4444 (RedHorseX) | deep_investigation | CAUTION (50/100) | Top 10 non-LP/burn holders control 95% of supply — concentrated, easily manipula | +7d |
 
 | 2026-08-07 | auto | 0xE9d12f8e2A4136E5F2F0f4ff585924FBe8aBb395 (1F916) | deep_investigation | CAUTION (55/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
+
+| 2026-08-07 | auto | 0x480AE57d90fFb90A0400877c52eb633BE23CFFFF (bStocks) | deep_investigation | CAUTION (52/100) | Low holder count (83) | +7d |

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T20:12:12Z",
+  "generated": "2026-08-07T20:29:07Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 489,
@@ -15,26 +15,26 @@
       "skillforge": 4
     },
     "broadcasts": 162,
-    "investigations": 840,
+    "investigations": 841,
     "news": 84,
     "tools": 16,
     "tools_verified": 16,
-    "skills": 25
+    "skills": 26
   },
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260807-201207-0xE9d12f8e.md",
-      "title": "Investigation \u2014 1F916",
-      "symbol": "1F916",
-      "name": "A Society For AI Agents",
-      "date": "2026-08-07T20:12:07Z",
-      "target": "0xE9d12f8e2A4136E5F2F0f4ff585924FBe8aBb395",
-      "chain": "8453 (Base)",
+      "file": "investigation-20260807-202906-0x480AE57d.md",
+      "title": "Investigation \u2014 bStocks",
+      "symbol": "bStocks",
+      "name": "bStocks Never Sleep",
+      "date": "2026-08-07T20:29:06Z",
+      "target": "0x480AE57d90fFb90A0400877c52eb633BE23CFFFF",
+      "chain": "56 (BNB Chain)",
       "verdict": "CAUTION",
-      "score": "55",
-      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified source (not a mass-produced facto",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-201207-0xE9d12f8e.md"
+      "score": "52",
+      "summary": "Risk factors: [-8] Low holder count (83); [-15] Top 10 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-202906-0x480AE57d.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260807-202906-0x480AE57d.md",
+      "title": "Investigation \u2014 bStocks",
+      "symbol": "bStocks",
+      "name": "bStocks Never Sleep",
+      "date": "2026-08-07T20:29:06Z",
+      "target": "0x480AE57d90fFb90A0400877c52eb633BE23CFFFF",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "52",
+      "summary": "Risk factors: [-8] Low holder count (83); [-15] Top 10 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-202906-0x480AE57d.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260807-201207-0xE9d12f8e.md",
@@ -13488,6 +13502,12 @@
       "title": "Token Risk Screening via investigate.py",
       "summary": "When-to-use Screen any ERC-20/ BEP-20 token on Polygon (137), BSC (56) or Base (8453) before liquidity provision, swaps or wallet interaction. Use when tokensafety or contractrecon flags are unavailable or when a full 0-",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/token-risk-screening-via-investigate-py.md"
+    },
+    {
+      "file": "token-safety-investigation.md",
+      "title": "Token Safety Investigation",
+      "summary": "Distilled 2026-08-07T07:22:03Z from real SKILLFORGE memory.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/skillforge/skills/token-safety-investigation.md"
     },
     {
       "file": "triage-suspicious-contracts-from-vape-broadcasts.md",

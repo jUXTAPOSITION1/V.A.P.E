@@ -7018,6 +7018,25 @@
     "symbol": "JoblessRou",
     "times_investigated": 1
   },
+  "56:0x480ae57d90ffb90a0400877c52eb633be23cffff": {
+    "address": "0x480AE57d90fFb90A0400877c52eb633BE23CFFFF",
+    "chain": "56",
+    "creator_address": "0xd975cd7231d069fe00346a457dda8b9326b8136f",
+    "first_investigated": "2026-08-07T20:29:06Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260807-202906-0x480AE57d.md",
+        "score": 52,
+        "ts": "2026-08-07T20:29:06Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-07T20:29:06Z",
+    "last_score": 52,
+    "last_verdict": "CAUTION",
+    "symbol": "bStocks",
+    "times_investigated": 1
+  },
   "56:0x4879d5c0d925a6cf3a76633e6c0f7b15aa4c5628": {
     "address": "0x4879d5c0D925a6Cf3A76633e6C0f7b15aa4c5628",
     "chain": "56",
