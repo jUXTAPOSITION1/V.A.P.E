@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-07T21:41:19Z",
+  "generated": "2026-08-07T21:41:47Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 492,
+    "reports": 493,
     "reports_by_type": {
+      "bounty": 149,
       "base": 97,
-      "bounty": 148,
       "sentiment": 52,
       "macro": 25,
       "security": 82,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 162,
     "investigations": 841,
-    "news": 85,
+    "news": 84,
     "tools": 16,
     "tools_verified": 16,
     "skills": 26
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-202906-0x480AE57d.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-08-07-21.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-08-07T21:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260807_214044.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-07T21:40:44Z",
       "threat": null,
-      "summary": "Date: 2026-08-07 21:30 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-07-21.md",
-      "bytes": 7851
+      "summary": "Cycle: 20260807214044 \u00b7 Data timestamp (UTC): 2026-08-07T21:40:52Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260807_214044.md",
+      "bytes": 15846
     }
   },
   "investigations": [
@@ -11638,6 +11638,17 @@
   ],
   "reports": [
     {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260807_214044.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-07T21:40:44Z",
+      "threat": null,
+      "summary": "Cycle: 20260807214044 \u00b7 Data timestamp (UTC): 2026-08-07T21:40:52Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260807_214044.md",
+      "bytes": 15846
+    },
+    {
       "kind": "intel",
       "type": "base",
       "file": "base-2026-08-07-21.md",
@@ -12285,17 +12296,6 @@
       "summary": "Date: 2026-08-04 22:05 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-04-22.md",
       "bytes": 8543
-    },
-    {
-      "kind": "intel",
-      "type": "sentiment",
-      "file": "sentiment-2026-08-04-21.md",
-      "title": "Sentiment Sweep Report \u2014 2026-08-04 21:19 UTC",
-      "date": "2026-08-04T21:00Z",
-      "threat": null,
-      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-08-04-21.md",
-      "bytes": 1601
     }
   ],
   "broadcasts": [
@@ -12511,18 +12511,6 @@
     }
   ],
   "news": [
-    {
-      "file": "news-2026-08-07-unmasking-judische-canadian-hacker-behind-snowflake-and-at-t.md",
-      "title": "Unmasking 'Judische': Canadian Hacker Behind Snowflake and AT&T Mega-Breaches Pleads Guilty",
-      "byline": "VAPE Reporter",
-      "date": "2026-08-07T21:41:19Z",
-      "published_et": "August 7, 2026 \u00b7 5:41 PM EDT",
-      "topic": "Cybersecurity",
-      "dek": "Connor Riley Moucka admits to extorting 165 companies, stealing 100 million AT&T records, and laundering $2.5 million in ransom payments.",
-      "image": "assets/news-images/unmasking-judische-canadian-hacker-behind-snowflake-and-at-t.jpg",
-      "image_source": "AI-generated \u2014 VAPE Wire branded",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-07-unmasking-judische-canadian-hacker-behind-snowflake-and-at-t.md"
-    },
     {
       "file": "news-2026-08-07-trustd-impersonator-macos-clickfix-campaign-drains-crypto-wa.md",
       "title": "Trustd Impersonator: macOS ClickFix Campaign Drains Crypto Wallets With Go-Based Stealer",
@@ -13230,6 +13218,18 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-30-bipartisan-senate-coalition-presses-white-house-on-strict-cr.md"
+    },
+    {
+      "file": "news-2026-07-30-researchers-tried-letting-ai-do-science-it-failed.md",
+      "title": "Researchers Tried Letting AI Do Science. It Failed",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-30 19:26 UTC",
+      "published_et": null,
+      "topic": "Crypto Markets",
+      "dek": "Agency: VAPE Wire Byline: VAPE Reporter Date: 2026-07-30 19:26 UTC Topic: Crypto Markets Dek: Image: assets/logo-v-256.png Image source: VAPE brand mark (no AI image available this cycle) Fact-checked",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-30-researchers-tried-letting-ai-do-science-it-failed.md"
     }
   ],
   "tools": [
