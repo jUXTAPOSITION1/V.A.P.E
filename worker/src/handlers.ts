@@ -25,9 +25,23 @@ export interface Requirement {
   chain?: number;
 }
 
+// Security audit: unlike dataHandlers.ts's requireAddress(), this had no
+// format check at all -- the raw trimmed string flowed straight into
+// investigateLite.ts's/contractSource.ts's template-literal URL builders
+// (goplusRaw, dexscreenerFull, onchainPresence, getContractSource). Not
+// SSRF/RCE-exploitable (every one of those URLs has a fixed host literal
+// ahead of the interpolation point), but a malformed value still reaches a
+// third-party API call for no reason when it could be rejected up front.
+// Matches dataHandlers.ts's own strict pattern for the same offerings' HTTP
+// routes and the new MCP tools built off this same dispatch.
+const ADDRESS_RE = /^0x[a-fA-F0-9]{40}$/;
+
 function addrFrom(req: Requirement): string | null {
   for (const k of ["address", "contract", "token", "target"] as const) {
-    if (req[k]) return String(req[k]).trim();
+    if (req[k]) {
+      const a = String(req[k]).trim();
+      return ADDRESS_RE.test(a) ? a : null;
+    }
   }
   return null;
 }

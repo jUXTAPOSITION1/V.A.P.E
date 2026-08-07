@@ -41,7 +41,7 @@
  */
 import { z, type ZodTypeAny } from "zod";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { createPaymentWrapper, type SettlementContext } from "@x402/mcp";
+import { createPaymentWrapper, createToolResourceUrl, type SettlementContext } from "@x402/mcp";
 import type { x402ResourceServer } from "@x402/core/server";
 import { HANDLERS, fulfill, OFFERING_PRICES, OFFERING_DISCOVERY, ADDRESS_INPUT_SCHEMA, type HandlerName, type Requirement } from "./handlers";
 import { DL_OFFERINGS, fulfillData, type DlEnv, type DlQuery } from "./dataHandlers";
@@ -126,8 +126,22 @@ async function logMcpSettlement(
   }
 }
 
-function toolResult(payload: unknown) {
-  return { content: [{ type: "text" as const, text: JSON.stringify(payload) }] };
+// Real bug this fixes (security audit, confirmed against @x402/mcp's own
+// createPaymentWrapper() source): fulfill()/fulfillData() never throw --
+// on any internal failure (bad address, upstream API down, missing key) they
+// return {status:"error", error:"..."} as a NORMAL, successful-looking
+// return value. Without isError:true here, createPaymentWrapper() has no
+// signal that anything went wrong (`if (result.isError) { cancel; return; }`
+// never fires) and SETTLES THE PAYMENT ANYWAY -- a caller gets charged for a
+// non-deliverable. index.ts's HTTP routes already hit and fixed this exact
+// failure mode (`return c.json(result, result.status === "error" ? 502 :
+// 200)`, so @x402/hono's own >=400-cancels-settlement gate engages); this is
+// the same fix for the MCP transport's own error signal.
+function toolResult(payload: { status?: string } & Record<string, unknown>) {
+  return {
+    content: [{ type: "text" as const, text: JSON.stringify(payload) }],
+    isError: payload?.status === "error",
+  };
 }
 
 /**
@@ -159,7 +173,16 @@ export async function buildMcpServer(resourceServer: x402ResourceServer, env: Mc
     const paid = createPaymentWrapper(resourceServer, {
       accepts,
       resource: {
-        url: `mcp://vape-detective/tool/${name}`,
+        // createToolResourceUrl()'s default shape ("mcp://tool/<name>") is
+        // load-bearing, not cosmetic: createPaymentWrapper() extracts its own
+        // internal `toolName` (used in hook/error contexts) by stripping the
+        // literal prefix "mcp://tool/" off this exact string (@x402/mcp's own
+        // source, dist/cjs/index.js). A custom scheme here silently breaks
+        // that extraction (toolName falls back to the whole URL) -- doesn't
+        // affect payment matching (this file's own accepts/price stay
+        // correctly scoped per tool regardless), but do use the library's
+        // real convention rather than inventing one it doesn't expect.
+        url: createToolResourceUrl(name),
         description,
         serviceName: "VAPE",
       },
@@ -190,7 +213,7 @@ export async function buildMcpServer(resourceServer: x402ResourceServer, env: Mc
     const paid = createPaymentWrapper(resourceServer, {
       accepts,
       resource: {
-        url: `mcp://vape-detective/tool/${off.name}`,
+        url: createToolResourceUrl(off.name),
         description: off.description,
         serviceName: "VAPE",
         tags: off.tags,
