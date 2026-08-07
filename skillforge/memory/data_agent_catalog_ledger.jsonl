@@ -755,3 +755,4 @@
 {"ts": "2026-08-07T12:59:32.563613Z", "target": "0x296F55F8Fb28E498B858d0BcDA06D955B2Cb3f97", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01, "daily_target": 63}
 {"ts": "2026-08-07T13:31:35.224905Z", "target": "robinhood", "hired": ["protocol"], "paid": 1, "cost_usd": 0.01, "daily_target": 63}
 {"ts": "2026-08-07T14:04:33.454153Z", "target": "kucoin", "hired": ["protocol_fees"], "paid": 1, "cost_usd": 0.01, "daily_target": 63}
+{"ts": "2026-08-07T14:20:29.934936Z", "target": "aave-v2", "hired": ["treasury"], "paid": 1, "cost_usd": 0.01, "daily_target": 63}
