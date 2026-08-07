@@ -1,12 +1,12 @@
 {
-  "generated": "2026-08-07T09:49:29Z",
+  "generated": "2026-08-07T09:53:39Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 476,
+    "reports": 477,
     "reports_by_type": {
       "sentiment": 51,
+      "base": 95,
       "bounty": 138,
-      "base": 94,
       "security": 81,
       "macro": 24,
       "bug": 5,
@@ -11383,6 +11383,17 @@
       "bytes": 1599
     },
     {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-08-07-09.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-08-07T09:00Z",
+      "threat": null,
+      "summary": "Date: 2026-08-07 09:53 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-07-09.md",
+      "bytes": 7682
+    },
+    {
       "kind": "bounty",
       "type": "bounty",
       "file": "bounty_report_20260807_090032.md",
@@ -12019,17 +12030,6 @@
       "summary": "The real incident feed shows 6 incidents in the last 7 days and 1 incident exceeding $50M in the last 14 days. The $115M COLDCARD loss stemmed from non-random private key generation on Bitcoin. Multiple smaller incidents on BSC involved price manipulation attacks (LOOPSDAO, MOKE, LULA). Other entries include a malicious SetToken and manag",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-04-02.md",
       "bytes": 6948
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260804_001001.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-04T00:10:01Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: LOOPSDAO $0.696M on ['BSC'] (Price Manipulation Attack) \u00b7 RECENT EXPLOIT: MOKE $0.907M on ['BSC'] (Price Manipulation Attack)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260804_001001.md",
-      "bytes": 16771
     }
   ],
   "broadcasts": [
