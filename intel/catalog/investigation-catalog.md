@@ -1467,3 +1467,5 @@
 | 2026-08-07 | auto | 0x58e0893DC6d7E875547Bc1f6D034FF443d9F2F52 (AS) | deep_investigation | CAUTION (52/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-07 | auto | 0x3183214919ee829446fD12695c5e9E09C47bb01d (MOMO) | deep_investigation | REJECT (0/100) | Owner can change balances (rug surface) | +7d |
+
+| 2026-08-07 | auto | 0x45E1C92Cb7F0Ff24d9092579014Bab2413B0CD87 (LGNS) | deep_investigation | REJECT (25/100) | Very few holders (7) — thin, easily manipulated distribution | +7d |

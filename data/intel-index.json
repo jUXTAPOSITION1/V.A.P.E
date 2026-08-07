@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T14:36:23Z",
+  "generated": "2026-08-07T14:52:46Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 481,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 161,
-    "investigations": 833,
+    "investigations": 834,
     "news": 83,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260807-143613-0x31832149.md",
-      "title": "Investigation \u2014 MOMO",
-      "symbol": "MOMO",
-      "name": "Momo",
-      "date": "2026-08-07T14:36:13Z",
-      "target": "0x3183214919ee829446fD12695c5e9E09C47bb01d",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260807-145238-0x45E1C92C.md",
+      "title": "Investigation \u2014 LGNS",
+      "symbol": "LGNS",
+      "name": "Longinus",
+      "date": "2026-08-07T14:52:38Z",
+      "target": "0x45E1C92Cb7F0Ff24d9092579014Bab2413B0CD87",
+      "chain": "137 (Polygon)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-20] Very few holders (7) \u2014 thin, easily manipulated distribution; [-15] Top 7 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $2,236 (rug/illiquid); [-10] Low liquidity $2,236; [-10] No known third-par",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-143613-0x31832149.md"
+      "score": "25",
+      "summary": "Risk factors: [-20] Very few holders (7) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity $0; [-10] Violent 24h move +797% (volatility/manipulation); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Po",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-145238-0x45E1C92C.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260807-145238-0x45E1C92C.md",
+      "title": "Investigation \u2014 LGNS",
+      "symbol": "LGNS",
+      "name": "Longinus",
+      "date": "2026-08-07T14:52:38Z",
+      "target": "0x45E1C92Cb7F0Ff24d9092579014Bab2413B0CD87",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "25",
+      "summary": "Risk factors: [-20] Very few holders (7) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity $0; [-10] Violent 24h move +797% (volatility/manipulation); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Po",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-145238-0x45E1C92C.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260807-143613-0x31832149.md",
