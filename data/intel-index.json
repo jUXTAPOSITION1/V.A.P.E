@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T09:32:33Z",
+  "generated": "2026-08-07T09:49:29Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 476,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 160,
-    "investigations": 821,
+    "investigations": 822,
     "news": 81,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260807-093233-0xbF1a80CA.md",
-      "title": "Investigation \u2014 FORGE",
-      "symbol": "FORGE",
-      "name": "Forge",
-      "date": "2026-08-07T09:32:33Z",
-      "target": "0xbF1a80CAAa62Bf7a24f04305164aFF668f30AafB",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260807-094910-0xC08B0473.md",
+      "title": "Investigation \u2014 BSB",
+      "symbol": "BSB",
+      "name": "Binance Street Bets",
+      "date": "2026-08-07T09:49:10Z",
+      "target": "0xC08B04733dBBc92369872000A547954F7449FaB5",
+      "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: UNISTREET (0x08b82Ed4fF66635866203904A7BcAbB64A4594e3) \u2014 REJECT 25/100 \u2014 likely the same serial campaign; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-15] Top 4 non-LP/burn holders control 100% of supply \u2014 concentra",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-093233-0xbF1a80CA.md"
+      "score": "32",
+      "summary": "Risk factors: [-8] Low holder count (151); [-15] Top 10 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $1,454 (rug/illiquid); [-10] Low liquidity $1,454; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-094910-0xC08B0473.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260807-094910-0xC08B0473.md",
+      "title": "Investigation \u2014 BSB",
+      "symbol": "BSB",
+      "name": "Binance Street Bets",
+      "date": "2026-08-07T09:49:10Z",
+      "target": "0xC08B04733dBBc92369872000A547954F7449FaB5",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "32",
+      "summary": "Risk factors: [-8] Low holder count (151); [-15] Top 10 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $1,454 (rug/illiquid); [-10] Low liquidity $1,454; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-094910-0xC08B0473.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260807-093233-0xbF1a80CA.md",
@@ -13047,7 +13061,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49646582",
+      "version": "49653133",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -13057,7 +13071,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.67 eth_dom 10.07 mcap_chg_24h -0.82",
+      "version": "btc_dom 56.77 eth_dom 10.07 mcap_chg_24h 0.31",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -13077,7 +13091,7 @@
       "name": "wallet_trace",
       "tier": "recon",
       "status": "verified",
-      "version": "0xce173c3173f6 (RNDR) 1.0 from 0x3935fa9a to 0x833589fc",
+      "version": "0x686edcd5dba1 www.appswebstore.com/earn-solana/ 1000.0 from 0x20ad2b4b to 0x833",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": false,

@@ -8458,6 +8458,25 @@
     "symbol": "SPCXB",
     "times_investigated": 1
   },
+  "56:0xc08b04733dbbc92369872000a547954f7449fab5": {
+    "address": "0xC08B04733dBBc92369872000A547954F7449FaB5",
+    "chain": "56",
+    "creator_address": "0xe8ebff93ad94eba4fc604f1743e2a77efc3b6a54",
+    "first_investigated": "2026-08-07T09:49:10Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260807-094910-0xC08B0473.md",
+        "score": 32,
+        "ts": "2026-08-07T09:49:10Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-07T09:49:10Z",
+    "last_score": 32,
+    "last_verdict": "REJECT",
+    "symbol": "BSB",
+    "times_investigated": 1
+  },
   "56:0xc3bcd37061bde710293d0272bb2924d308d5314d": {
     "address": "0xc3bcd37061bde710293D0272Bb2924D308D5314D",
     "chain": "56",
