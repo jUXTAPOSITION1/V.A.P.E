@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-06T23:58:54Z",
+  "generated": "2026-08-07T03:09:34Z",
   "count": 60,
   "headlines": [
     {
@@ -75,6 +75,14 @@
       "crypto": true
     },
     {
+      "title": "Tom Lee Sees S&P 500 at 8,000, Names Ethereum the Next Rally Leader",
+      "url": "https://beincrypto.com/tom-lee-ethereum-magnificent-seven-rally/",
+      "source": "BeInCrypto",
+      "published": "Thu, 06 Aug 2026 23:43:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
       "title": "New Zapscape KVM Flaw Could Let Privileged L1 Guest Code Escape to Linux Hosts",
       "url": "https://thehackernews.com/2026/08/new-zapscape-kvm-flaw-could-let.html",
       "source": "The Hacker News",
@@ -95,6 +103,14 @@
       "url": "https://cryptoslate.com/blocks-total-profits-jumped-25-last-quarter-masking-a-31-profit-drop-inside-its-1-8-billion-bitcoin-arm/",
       "source": "CryptoSlate",
       "published": "Thu, 06 Aug 2026 23:10:28 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Senate delays Clarity Act vote until after August recess, Thune confirms",
+      "url": "https://www.theblock.co/post/411083/senate-delays-clarity-act-vote?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Thu, 06 Aug 2026 22:55:45 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -127,6 +143,14 @@
       "url": "https://beincrypto.com/deutsche-telekom-spherenet-ai-agent-payments/",
       "source": "BeInCrypto",
       "published": "Thu, 06 Aug 2026 22:38:01 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Sui to add post-quantum signature schemes for quantum-safe accounts",
+      "url": "https://www.theblock.co/post/410968/sui-post-quantum-signature-scheme?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Thu, 06 Aug 2026 22:09:29 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -227,26 +251,10 @@
       "crypto": true
     },
     {
-      "title": "Wintermute Lands US Broker License and a 5-Year Plan to Rival Citadel",
-      "url": "https://beincrypto.com/wintermute-us-broker-dealer-license/",
-      "source": "BeInCrypto",
-      "published": "Thu, 06 Aug 2026 20:26:39 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Breez Announces Glow, an Open Source Bitcoin to Stablecoins Progressive Web App",
       "url": "https://bitcoinmagazine.com/business/breez-announces-glow-an-open-source-bitcoin-to-stablecoins-progressive-web-app",
       "source": "Bitcoin Magazine",
       "published": "Thu, 06 Aug 2026 20:07:16 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Hyperscale sells Bitcoin for AI business set to deliver less than 20% of 2027 revenue",
-      "url": "https://cryptoslate.com/hyperscale-sells-bitcoin-for-ai-business-set-to-deliver-less-than-20-of-2027-revenue/",
-      "source": "CryptoSlate",
-      "published": "Thu, 06 Aug 2026 20:00:46 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -287,14 +295,6 @@
       "url": "https://bitcoinmagazine.com/technical/the-end-of-the-closed-source-era-is-at-hand-obscurity-was-never-security",
       "source": "Bitcoin Magazine",
       "published": "Thu, 06 Aug 2026 18:43:13 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "How a crypto startup quietly siphoned 470,000 Binance users to build a $4 billion card empire",
-      "url": "https://cryptoslate.com/how-a-crypto-startup-quietly-siphoned-470000-binance-users-to-build-a-4-billion-card-empire/",
-      "source": "CryptoSlate",
-      "published": "Thu, 06 Aug 2026 18:40:14 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -371,27 +371,11 @@
       "crypto": true
     },
     {
-      "title": "BNY and BlackRock funnel billions through one infrastructure provider, exposing the fragile illusion of crypto diversification",
-      "url": "https://cryptoslate.com/bny-blackrock-funnel-billions-infrastructure-exposing-crypto-diversification/",
-      "source": "CryptoSlate",
-      "published": "Thu, 06 Aug 2026 17:25:40 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "CryptoJS Weak RNG Behind $5.7 Million in Drains Affects Five Crypto Wallet Apps",
       "url": "https://thehackernews.com/2026/08/cryptojs-weak-rng-behind-57-million-in.html",
       "source": "The Hacker News",
       "published": "Thu, 06 Aug 2026 17:19:48 +0530",
       "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "US appellate court mandate affirms Sam Bankman-Fried conviction",
-      "url": "https://cointelegraph.com/news/us-appellate-court-mandate-sam-bankman-fried?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Thu, 06 Aug 2026 17:17:34 +0000",
-      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -416,22 +400,6 @@
       "source": "TechCrunch AI",
       "published": "Thu, 06 Aug 2026 17:00:37 +0000",
       "topic": "AI",
-      "crypto": true
-    },
-    {
-      "title": "US Senate will vote on CLARITY crypto bill \u2018without any question\u2019 this week: Tim Scott",
-      "url": "https://cointelegraph.com/news/us-senate-vote-clarity-act-tim-scott?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Thu, 06 Aug 2026 16:53:45 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Bitcoin miners\u2019 AI pivot loses Wall Street\u2019s wow factor",
-      "url": "https://cointelegraph.com/news/bitcoin-miners-ai-infrastructure-deals-wall-street-reaction?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Thu, 06 Aug 2026 16:42:33 +0000",
-      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -480,6 +448,38 @@
       "source": "TechCrunch AI",
       "published": "Thu, 06 Aug 2026 15:10:32 +0000",
       "topic": "AI",
+      "crypto": true
+    },
+    {
+      "title": "Crypto for Advisors: Europe's crypto rules, U.S. Preview",
+      "url": "https://www.coindesk.com/coindesk-indices/2026/08/06/crypto-for-advisors-europe-s-crypto-rules-u-s-preview",
+      "source": "CoinDesk",
+      "published": "Thu, 06 Aug 2026 15:07:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Snowflake Hacker Pleads Guilty in US Court",
+      "url": "https://www.securityweek.com/snowflake-hacker-pleads-guilty-in-us-court/",
+      "source": "SecurityWeek",
+      "published": "Thu, 06 Aug 2026 14:56:31 +0000",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Swiss government SharePoint breach compromised 200 accounts",
+      "url": "https://www.bleepingcomputer.com/news/security/swiss-government-sharepoint-breach-compromised-200-accounts/",
+      "source": "BleepingComputer",
+      "published": "Thu, 06 Aug 2026 14:14:19 -0400",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "New TONTOU CPU attack bypasses Spectre v2 fixes, leaks Linux password hashes",
+      "url": "https://www.bleepingcomputer.com/news/security/new-tontou-cpu-attack-bypasses-spectre-v2-fixes-leaks-linux-password-hashes/",
+      "source": "BleepingComputer",
+      "published": "Thu, 06 Aug 2026 14:03:45 -0400",
+      "topic": "Cybersecurity",
       "crypto": true
     }
   ]

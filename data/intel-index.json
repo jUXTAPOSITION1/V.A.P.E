@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T03:01:29Z",
+  "generated": "2026-08-07T03:11:20Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 470,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 158,
     "investigations": 806,
-    "news": 79,
+    "news": 80,
     "tools": 16,
     "tools_verified": 16,
     "skills": 25
@@ -12022,6 +12022,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-07-block-s-bitcoin-margins-collapse-100-basis-points-after-cash.md",
+      "title": "Block\u2019s Bitcoin Margins Collapse 100+ Basis Points After Cash App Fee Retreat",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-07T03:11:20Z",
+      "published_et": "August 6, 2026 \u00b7 11:11 PM EDT",
+      "topic": "Crypto Markets",
+      "dek": "Lower transaction fees and trading headwinds squeeze the payments giant\u2019s crypto profit to $72 million, contrasting sharp growth across its broader financial ecosystem.",
+      "image": "assets/news-images/block-s-bitcoin-margins-collapse-100-basis-points-after-cash.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-07-block-s-bitcoin-margins-collapse-100-basis-points-after-cash.md"
+    },
+    {
       "file": "news-2026-08-07-zapscape-use-after-free-hands-l1-root-guests-direct-write-ac.md",
       "title": "Zapscape Use-After-Free Hands L1 Root Guests Direct Write Access to KVM Hosts",
       "byline": "VAPE Reporter",
@@ -12728,18 +12740,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-30-binance-us-plots-regulatory-rehabilitation-with-august-cftc-.md"
-    },
-    {
-      "file": "news-2026-07-30-senators-ready-to-send-stricter-ethics-rules-on-trump-s-cryp.md",
-      "title": "Senators ready to send stricter ethics rules on Trump's crypto ventures to White House, sources say",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-30 02:23 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "Agency: VAPE Wire Byline: VAPE Reporter Date: 2026-07-30 02:23 UTC Topic: Crypto Markets Dek: Image: assets/logo-v-256.png Image source: VAPE brand mark (no AI image available this cycle) Fact-checked",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-30-senators-ready-to-send-stricter-ethics-rules-on-trump-s-cryp.md"
     }
   ],
   "tools": [
