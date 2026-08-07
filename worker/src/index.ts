@@ -235,6 +235,7 @@ const OFFERING_DISCOVERY: Record<HandlerName, { description: string; output: Rec
       + "detection, recent-hack correlation, public web-reputation search, a live check of the "
       + "project's declared socials, and a frontier-LLM quick read of the verified source.",
     output: { address: "0x...", symbol: "TOKEN", name: "Token Name", score: 82, verdict: "PROCEED", reasons: [], positive_signals: [],
+              categories: { "Contract Security & Controls": { weight: 0.25, score: 90, rationale: "..." } },
               verified: true, meme_factory_template: false, hack_correlation: [],
               web_reputation: { checked: true, flagged: false }, social_verification: { declared_count: 2 },
               ai_review: { available: true, provider: "gemini", summary: "..." } },
