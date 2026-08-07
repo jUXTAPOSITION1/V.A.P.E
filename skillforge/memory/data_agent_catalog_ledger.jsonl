@@ -776,3 +776,4 @@
 {"ts": "2026-08-07T20:29:07.411495Z", "target": "Optimism", "hired": ["chain_overview"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-07T21:00:32.438675Z", "target": "arbitrum-bridge", "hired": ["protocol_fees"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-07T21:15:48.678542Z", "target": "0x1Bdf71EDe1a4777dB1EebE7232BcdA20d6FC1610", "hired": ["liquidity_check"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
+{"ts": "2026-08-07T21:47:32.058786Z", "target": "gate", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}

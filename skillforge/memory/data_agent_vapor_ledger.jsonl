@@ -588,3 +588,4 @@
 {"ts": "2026-08-07T20:11:57.004602Z", "target": "0xE9d12f8e2A4136E5F2F0f4ff585924FBe8aBb395", "hired": ["token_intel"], "paid": 1, "cost_usd": 0.01}
 {"ts": "2026-08-07T20:44:46.391657Z", "target": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf", "chain": "8453", "hired": ["chain_protocols"], "paid": 0, "cost_usd": 0.0}
 {"ts": "2026-08-07T21:15:48.389313Z", "target": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf", "chain": "8453", "hired": ["stablecoins"], "paid": 0, "cost_usd": 0.0}
+{"ts": "2026-08-07T21:47:31.343435Z", "target": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf", "chain": "8453", "hired": ["chain_overview"], "paid": 0, "cost_usd": 0.0}

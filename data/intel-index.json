@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T21:41:47Z",
+  "generated": "2026-08-07T21:47:32Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 493,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 162,
     "investigations": 841,
-    "news": 84,
+    "news": 85,
     "tools": 16,
     "tools_verified": 16,
     "skills": 26
@@ -12512,6 +12512,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-07-unmasking-judische-canadian-hacker-behind-snowflake-and-at-t.md",
+      "title": "Unmasking 'Judische': Canadian Hacker Behind Snowflake and AT&T Mega-Breaches Pleads Guilty",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-07T21:41:19Z",
+      "published_et": "August 7, 2026 \u00b7 5:41 PM EDT",
+      "topic": "Cybersecurity",
+      "dek": "Connor Riley Moucka admits to extorting 165 companies, stealing 100 million AT&T records, and laundering $2.5 million in ransom payments.",
+      "image": "assets/news-images/unmasking-judische-canadian-hacker-behind-snowflake-and-at-t.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-07-unmasking-judische-canadian-hacker-behind-snowflake-and-at-t.md"
+    },
+    {
       "file": "news-2026-08-07-trustd-impersonator-macos-clickfix-campaign-drains-crypto-wa.md",
       "title": "Trustd Impersonator: macOS ClickFix Campaign Drains Crypto Wallets With Go-Based Stealer",
       "byline": "VAPE Reporter",
@@ -13218,18 +13230,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-30-bipartisan-senate-coalition-presses-white-house-on-strict-cr.md"
-    },
-    {
-      "file": "news-2026-07-30-researchers-tried-letting-ai-do-science-it-failed.md",
-      "title": "Researchers Tried Letting AI Do Science. It Failed",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-30 19:26 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "Agency: VAPE Wire Byline: VAPE Reporter Date: 2026-07-30 19:26 UTC Topic: Crypto Markets Dek: Image: assets/logo-v-256.png Image source: VAPE brand mark (no AI image available this cycle) Fact-checked",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-30-researchers-tried-letting-ai-do-science-it-failed.md"
     }
   ],
   "tools": [

@@ -841,3 +841,4 @@
 {"ts": "2026-08-07T20:44:45.443028Z", "target": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf", "chain": "8453", "hired": ["token_intel"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-07T21:00:31.272118Z", "target": "0x3b8db18e69d6686Ad9371A423aFe3Dd1065C94f1", "chain": "42161", "hired": ["market_intel"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-07T21:15:47.855951Z", "target": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf", "chain": "8453", "hired": ["token_intel"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
+{"ts": "2026-08-07T21:47:30.531598Z", "target": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf", "chain": "8453", "hired": ["dex_volumes"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
