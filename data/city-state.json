@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-06T14:38:35Z",
+  "generated_at": "2026-08-07T00:18:27Z",
   "district_stats": {
     "overall_threat_level": "HIGH",
-    "lanes_passing": 7,
+    "lanes_passing": 8,
     "lanes_total": 10,
     "buildings_total": 19
   },
@@ -15,12 +15,12 @@
       "tier": 3,
       "stat_primary": {
         "label": "tracked",
-        "value": 795
+        "value": 801
       },
       "stat_secondary": [
         {
           "label": "reject",
-          "value": 451
+          "value": 457
         },
         {
           "label": "caution",
@@ -159,12 +159,12 @@
       "tier": 3,
       "stat_primary": {
         "label": "findings sealed",
-        "value": 1675
+        "value": 1688
       },
       "stat_secondary": [
         {
           "label": "unsealed lines",
-          "value": 1
+          "value": 3
         }
       ],
       "link": "index.html#security-dashboard",
@@ -207,7 +207,7 @@
       "tier": 4,
       "stat_primary": {
         "label": "data calls logged",
-        "value": 2049
+        "value": 2073
       },
       "stat_secondary": [],
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/memory",
@@ -222,7 +222,7 @@
       "id": "lane-codeql",
       "kind": "checkpoint",
       "title": "Static Analysis (CodeQL)",
-      "status": "alert",
+      "status": "ok",
       "tier": 1,
       "gridX": 8,
       "gridY": 4,
@@ -237,7 +237,7 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-06T08:43:43Z"
+          "value": "2026-08-06T19:15:54Z"
         },
         {
           "label": "open alerts",
@@ -248,7 +248,7 @@
           "value": 0
         }
       ],
-      "last_run_at": "2026-08-06T08:43:43Z",
+      "last_run_at": "2026-08-06T19:15:54Z",
       "source_workflow": "codeql.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/codeql.yml"
     },
@@ -282,7 +282,7 @@
       "id": "lane-vape-reviewer",
       "kind": "checkpoint",
       "title": "Code Review (VAPE Reviewer)",
-      "status": "alert",
+      "status": "ok",
       "tier": 1,
       "gridX": 14,
       "gridY": 4,
@@ -292,15 +292,15 @@
       ],
       "stat_primary": {
         "label": "last run",
-        "value": "action_required"
+        "value": "success"
       },
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-06T08:43:43Z"
+          "value": "2026-08-06T19:17:14Z"
         }
       ],
-      "last_run_at": "2026-08-06T08:43:43Z",
+      "last_run_at": "2026-08-06T19:17:14Z",
       "source_workflow": "vape-reviewer.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/vape-reviewer.yml"
     },
@@ -323,10 +323,10 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-06T02:14:56Z"
+          "value": "2026-08-06T19:15:54Z"
         }
       ],
-      "last_run_at": "2026-08-06T02:14:56Z",
+      "last_run_at": "2026-08-06T19:15:54Z",
       "source_workflow": "dependency-audit.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/dependency-audit.yml"
     },
@@ -375,14 +375,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-05T14:43:02Z"
+          "value": "2026-08-06T14:43:00Z"
         },
         {
           "label": "critical/high findings",
-          "value": 3
+          "value": 2
         }
       ],
-      "last_run_at": "2026-08-05T14:43:02Z",
+      "last_run_at": "2026-08-06T14:43:00Z",
       "source_workflow": "redteam.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/redteam.yml"
     },
@@ -405,14 +405,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-05T15:10:43Z"
+          "value": "2026-08-06T15:09:55Z"
         },
         {
           "label": "critical/high findings",
-          "value": 3
+          "value": 2
         }
       ],
-      "last_run_at": "2026-08-05T15:10:43Z",
+      "last_run_at": "2026-08-06T15:09:55Z",
       "source_workflow": "redteam-deep.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/redteam-deep.yml"
     },
@@ -435,14 +435,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-06T13:49:52Z"
+          "value": "2026-08-06T23:52:41Z"
         },
         {
           "label": "ledger chain intact",
           "value": "yes"
         }
       ],
-      "last_run_at": "2026-08-06T13:49:52Z",
+      "last_run_at": "2026-08-06T23:52:41Z",
       "source_workflow": "findings-seal.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/findings-seal.yml"
     },
@@ -480,7 +480,7 @@
       "id": "lane-intel-sweeps",
       "kind": "checkpoint",
       "title": "On-Chain Attack Intelligence",
-      "status": "ok",
+      "status": "alert",
       "tier": 1,
       "gridX": 5,
       "gridY": 6,
@@ -495,14 +495,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-06T14:11:54Z"
+          "value": "2026-08-07T00:02:17Z"
         },
         {
           "label": "attack-pattern coverage",
           "value": "23%"
         }
       ],
-      "last_run_at": "2026-08-06T14:11:54Z",
+      "last_run_at": "2026-08-07T00:02:17Z",
       "source_workflow": "intel-sweeps.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/intel-sweeps.yml"
     }
@@ -582,6 +582,60 @@
     ]
   ],
   "recent_events": [
+    {
+      "id": "news:Zapscape Use-After-Free Hands L1 Root Guests Direct Write Access to KVM Hosts",
+      "type": "news",
+      "timestamp": "2026-08-07T00:00:08Z",
+      "label": "Zapscape Use-After-Free Hands L1 Root Guests Direct Write Access to KVM Hosts"
+    },
+    {
+      "id": "investigation:0xb76C15b17FcFabc7B2174EFd7C4854E571f813bB",
+      "type": "investigation",
+      "timestamp": "2026-08-06T23:53:16Z",
+      "label": "Grvt",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xfAB99fCF605fD8f4593EDb70A43bA56542777777",
+      "type": "investigation",
+      "timestamp": "2026-08-06T23:22:30Z",
+      "label": "ZEROBASE",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x62acdEF82daC67975a21C67c4639654091297a2E",
+      "type": "investigation",
+      "timestamp": "2026-08-06T22:51:10Z",
+      "label": "Momo",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x664E9D73db2A3514F6B437137dE4779977a06E81",
+      "type": "investigation",
+      "timestamp": "2026-08-06T22:35:40Z",
+      "label": "MOMO",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xcBBD206D1b844fB3A2AaD1bA198686C616e46737",
+      "type": "investigation",
+      "timestamp": "2026-08-06T22:20:11Z",
+      "label": "Claude",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "news:White House Scrutinizes Crypto Clarity Act Ethics Text as Recess Threatens Bipartisan Breakthrough",
+      "type": "news",
+      "timestamp": "2026-08-06T15:36:45Z",
+      "label": "White House Scrutinizes Crypto Clarity Act Ethics Text as Recess Threatens Bipartisan Breakthrough"
+    },
+    {
+      "id": "investigation:0x568414B867D07Bac8e5b9fbD268d64639e57eA84",
+      "type": "investigation",
+      "timestamp": "2026-08-06T15:08:46Z",
+      "label": "Grvt",
+      "verdict": "REJECT"
+    },
     {
       "id": "investigation:0x4c0d96C66b4df9DC7C878ecD36170B6a8673e60f",
       "type": "investigation",
@@ -690,60 +744,6 @@
       "type": "investigation",
       "timestamp": "2026-08-06T06:15:47Z",
       "label": "Blessed",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "news:Grayscale XRP Trust Recovers Just 12% of Q1 Redemptions as $16.8M Loss Erases Fresh Inflows",
-      "type": "news",
-      "timestamp": "2026-08-06T05:50:48Z",
-      "label": "Grayscale XRP Trust Recovers Just 12% of Q1 Redemptions as $16.8M Loss Erases Fresh Inflows"
-    },
-    {
-      "id": "investigation:0x1EC9FcE135d48217A46207e151A426f09AED3e43",
-      "type": "investigation",
-      "timestamp": "2026-08-06T05:44:54Z",
-      "label": "Stakeds Longinus",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x8dF85ae8c36F50F37E92C65668607993BA597777",
-      "type": "investigation",
-      "timestamp": "2026-08-06T05:14:33Z",
-      "label": "Blessed",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xAeF08f360c7abf7b0fe84BDfA5dbE6A3aF80a850",
-      "type": "investigation",
-      "timestamp": "2026-08-06T04:58:47Z",
-      "label": "Loginuss",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0x8bFAc1b375bf2894D6F12fb2Eb48B1C1a7916789",
-      "type": "investigation",
-      "timestamp": "2026-08-06T02:58:17Z",
-      "label": "Mey Network",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0x673CDBcB4aD81fC325c84463e2EEe02F90AA97c1",
-      "type": "investigation",
-      "timestamp": "2026-08-06T02:42:41Z",
-      "label": "Lido DAO",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "news:TeraWulf\u2019s AI Leases Now Dominate Revenue but Leave a $941 Million Hole in Q2 Results",
-      "type": "news",
-      "timestamp": "2026-08-06T02:32:51Z",
-      "label": "TeraWulf\u2019s AI Leases Now Dominate Revenue but Leave a $941 Million Hole in Q2 Results"
-    },
-    {
-      "id": "investigation:0xd177e58B02E68b2d13f792288385dB41569b104f",
-      "type": "investigation",
-      "timestamp": "2026-08-06T02:27:23Z",
-      "label": "United States Degen Coin",
       "verdict": "REJECT"
     }
   ]
