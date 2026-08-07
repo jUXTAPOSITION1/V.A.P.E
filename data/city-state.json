@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-07T07:46:07Z",
+  "generated_at": "2026-08-07T13:42:46Z",
   "district_stats": {
     "overall_threat_level": "HIGH",
-    "lanes_passing": 6,
+    "lanes_passing": 7,
     "lanes_total": 10,
     "buildings_total": 19
   },
@@ -15,16 +15,16 @@
       "tier": 3,
       "stat_primary": {
         "label": "tracked",
-        "value": 816
+        "value": 831
       },
       "stat_secondary": [
         {
           "label": "reject",
-          "value": 468
+          "value": 482
         },
         {
           "label": "caution",
-          "value": 215
+          "value": 216
         },
         {
           "label": "proceed",
@@ -159,12 +159,12 @@
       "tier": 3,
       "stat_primary": {
         "label": "findings sealed",
-        "value": 1716
+        "value": 1741
       },
       "stat_secondary": [
         {
           "label": "unsealed lines",
-          "value": 5
+          "value": 6
         }
       ],
       "link": "index.html#security-dashboard",
@@ -207,7 +207,7 @@
       "tier": 4,
       "stat_primary": {
         "label": "data calls logged",
-        "value": 2115
+        "value": 2150
       },
       "stat_secondary": [],
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/memory",
@@ -435,14 +435,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-07T07:04:37Z"
+          "value": "2026-08-07T12:48:08Z"
         },
         {
           "label": "ledger chain intact",
           "value": "yes"
         }
       ],
-      "last_run_at": "2026-08-07T07:04:37Z",
+      "last_run_at": "2026-08-07T12:48:08Z",
       "source_workflow": "findings-seal.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/findings-seal.yml"
     },
@@ -480,7 +480,7 @@
       "id": "lane-intel-sweeps",
       "kind": "checkpoint",
       "title": "On-Chain Attack Intelligence",
-      "status": "alert",
+      "status": "ok",
       "tier": 1,
       "gridX": 5,
       "gridY": 6,
@@ -495,14 +495,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-07T07:17:05Z"
+          "value": "2026-08-07T13:05:23Z"
         },
         {
           "label": "attack-pattern coverage",
           "value": "23%"
         }
       ],
-      "last_run_at": "2026-08-07T07:17:05Z",
+      "last_run_at": "2026-08-07T13:05:23Z",
       "source_workflow": "intel-sweeps.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/intel-sweeps.yml"
     }
@@ -583,6 +583,123 @@
   ],
   "recent_events": [
     {
+      "id": "investigation:0x1884daA51E761519d847E19b367ad1ba164370be",
+      "type": "investigation",
+      "timestamp": "2026-08-07T13:31:26Z",
+      "label": "Infinite Monkey: POAYFPKWSKCHB",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xF66a9c73F34b56579A9E25e7eC89bca5a9C83b07",
+      "type": "investigation",
+      "timestamp": "2026-08-07T13:14:50Z",
+      "label": "Claude",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "news:Cuomo, Now OKX Director, Warns Senate Must Break Ethics Stalemate or Lose U.S. Crypto Ground",
+      "type": "news",
+      "timestamp": "2026-08-07T13:05:11Z",
+      "label": "Cuomo, Now OKX Director, Warns Senate Must Break Ethics Stalemate or Lose U.S. Crypto Ground"
+    },
+    {
+      "id": "investigation:0x514CaDd2707f1FA06a5d30312BcdE77DDDE6f4C4",
+      "type": "investigation",
+      "timestamp": "2026-08-07T12:59:23Z",
+      "label": "OPTIMUSBNB",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "investigation:0xe3395e137E04a07590821b8aEd4AE24B97657777",
+      "type": "investigation",
+      "timestamp": "2026-08-07T12:43:04Z",
+      "label": "bsc\u7684useless",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x0f8F9E859178FAefba50A106fD6B3C90445B7777",
+      "type": "investigation",
+      "timestamp": "2026-08-07T12:27:11Z",
+      "label": "bsc\u7684useless",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xAd97D6D4268B26aC08c5c30467FAEe96e9297777",
+      "type": "investigation",
+      "timestamp": "2026-08-07T12:11:46Z",
+      "label": "\ud55c\uad6d \uc6d0",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x42907d9F7E3d4291C801BbD1F601066EB1dfA956",
+      "type": "investigation",
+      "timestamp": "2026-08-07T11:40:33Z",
+      "label": "Bless Global Credit",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x0dE085831b467D3228d485c5E91C506dF1208e06",
+      "type": "investigation",
+      "timestamp": "2026-08-07T11:24:26Z",
+      "label": "A Society of AI Agents",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x9EC378b1935c8ceCaA31fe343e4fdb1e2344636C",
+      "type": "investigation",
+      "timestamp": "2026-08-07T11:08:18Z",
+      "label": "A Society for AI Agents",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "news:AI Hunters Expose Triple 9.9 Critical Flaws in Cisco's Enterprise SD-WAN and IOS XE",
+      "type": "news",
+      "timestamp": "2026-08-07T10:03:38Z",
+      "label": "AI Hunters Expose Triple 9.9 Critical Flaws in Cisco's Enterprise SD-WAN and IOS XE"
+    },
+    {
+      "id": "investigation:0xC08B04733dBBc92369872000A547954F7449FaB5",
+      "type": "investigation",
+      "timestamp": "2026-08-07T09:49:10Z",
+      "label": "Binance Street Bets",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xbF1a80CAAa62Bf7a24f04305164aFF668f30AafB",
+      "type": "investigation",
+      "timestamp": "2026-08-07T09:32:33Z",
+      "label": "Forge",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x080aecD15886219446D2c961C7EfE17b60fBf156",
+      "type": "investigation",
+      "timestamp": "2026-08-07T09:16:53Z",
+      "label": "Stalked LGNS.",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xAA1BBb6D9A375b61DD3Bc5f8AcB09E97F8c4ebBC",
+      "type": "investigation",
+      "timestamp": "2026-08-07T08:45:31Z",
+      "label": "A Society for AI Agents (1F916)",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x59FCe1d4493553fcb1b002F72D6ea0A99b9B0f06",
+      "type": "investigation",
+      "timestamp": "2026-08-07T08:30:14Z",
+      "label": "A Society for AI Agents",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xD70d796d782173aD35D5bF17B6c9b5517130e4E0",
+      "type": "investigation",
+      "timestamp": "2026-08-07T07:59:46Z",
+      "label": "RISE Token",
+      "verdict": "REJECT"
+    },
+    {
       "id": "investigation:0x9E00FC92493451EBA1c63DD3880D68b622037bA3",
       "type": "investigation",
       "timestamp": "2026-08-07T07:43:50Z",
@@ -629,122 +746,6 @@
       "timestamp": "2026-08-07T05:53:33Z",
       "label": "TRADOOR",
       "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0x667A36584De1d725373E07A6Aa3eAdB72fbD3224",
-      "type": "investigation",
-      "timestamp": "2026-08-07T05:06:45Z",
-      "label": "Canton Network",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0x54609991482600e1B1552F7243ABBADc137d2b19",
-      "type": "investigation",
-      "timestamp": "2026-08-07T04:34:27Z",
-      "label": "Canton Network",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xEa8CAc26211e1fCD512c8B45f33F30c8Ef4fc76d",
-      "type": "investigation",
-      "timestamp": "2026-08-07T04:18:38Z",
-      "label": "LGNS COIN",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x296F55F8Fb28E498B858d0BcDA06D955B2Cb3f97",
-      "type": "investigation",
-      "timestamp": "2026-08-07T03:16:55Z",
-      "label": "StargateToken",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "news:Block\u2019s Bitcoin Margins Collapse 100+ Basis Points After Cash App Fee Retreat",
-      "type": "news",
-      "timestamp": "2026-08-07T03:11:20Z",
-      "label": "Block\u2019s Bitcoin Margins Collapse 100+ Basis Points After Cash App Fee Retreat"
-    },
-    {
-      "id": "investigation:0xd8a9812abbFE7129cE0eeb372a19F1C869fACf45",
-      "type": "investigation",
-      "timestamp": "2026-08-07T03:01:29Z",
-      "label": "SpaceX",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x03B30Efae20655B1315eD97Ef8c3b92E5667daB0",
-      "type": "investigation",
-      "timestamp": "2026-08-07T02:45:25Z",
-      "label": "SpaceX",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x47dd7BEDF9A1f9f256309b6d3147Dd234f634444",
-      "type": "investigation",
-      "timestamp": "2026-08-07T01:43:19Z",
-      "label": "Driving Granny",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xE747E54783Ba3F77a8E5251a3cBA19EBe9C0E197",
-      "type": "investigation",
-      "timestamp": "2026-08-07T01:27:32Z",
-      "label": "TAKE",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0xAdf48B42BE9A927dD35684E86927BB26d1957777",
-      "type": "investigation",
-      "timestamp": "2026-08-07T00:24:27Z",
-      "label": "SPCXB",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "news:Zapscape Use-After-Free Hands L1 Root Guests Direct Write Access to KVM Hosts",
-      "type": "news",
-      "timestamp": "2026-08-07T00:00:08Z",
-      "label": "Zapscape Use-After-Free Hands L1 Root Guests Direct Write Access to KVM Hosts"
-    },
-    {
-      "id": "investigation:0xb76C15b17FcFabc7B2174EFd7C4854E571f813bB",
-      "type": "investigation",
-      "timestamp": "2026-08-06T23:53:16Z",
-      "label": "Grvt",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xfAB99fCF605fD8f4593EDb70A43bA56542777777",
-      "type": "investigation",
-      "timestamp": "2026-08-06T23:22:30Z",
-      "label": "ZEROBASE",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x62acdEF82daC67975a21C67c4639654091297a2E",
-      "type": "investigation",
-      "timestamp": "2026-08-06T22:51:10Z",
-      "label": "Momo",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x664E9D73db2A3514F6B437137dE4779977a06E81",
-      "type": "investigation",
-      "timestamp": "2026-08-06T22:35:40Z",
-      "label": "MOMO",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xcBBD206D1b844fB3A2AaD1bA198686C616e46737",
-      "type": "investigation",
-      "timestamp": "2026-08-06T22:20:11Z",
-      "label": "Claude",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "news:White House Scrutinizes Crypto Clarity Act Ethics Text as Recess Threatens Bipartisan Breakthrough",
-      "type": "news",
-      "timestamp": "2026-08-06T15:36:45Z",
-      "label": "White House Scrutinizes Crypto Clarity Act Ethics Text as Recess Threatens Bipartisan Breakthrough"
     }
   ]
 }
