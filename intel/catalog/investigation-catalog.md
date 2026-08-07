@@ -1445,3 +1445,5 @@
 | 2026-08-07 | auto | 0xbF1a80CAAa62Bf7a24f04305164aFF668f30AafB (FORGE) | deep_investigation | REJECT (0/100) | Same deployer has a prior CAUTION/REJECT verdict on record: UNISTREET (0x08b82Ed | +7d |
 
 | 2026-08-07 | auto | 0xC08B04733dBBc92369872000A547954F7449FaB5 (BSB) | deep_investigation | REJECT (32/100) | Low holder count (151) | +7d |
+
+| 2026-08-07 | auto | 0x9EC378b1935c8ceCaA31fe343e4fdb1e2344636C (1F916) | deep_investigation | REJECT (2/100) | Upgradeable proxy (verify implementation) | +7d |
