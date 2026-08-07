@@ -780,3 +780,4 @@
 {"ts": "2026-08-07T22:02:48.051836Z", "target": "grove-finance", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-07T22:18:26.419189Z", "target": "aerodrome-v1", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-07T22:33:55.017355Z", "target": "0x080aecD15886219446D2c961C7EfE17b60fBf156", "hired": ["token_chart"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
+{"ts": "2026-08-07T22:50:02.965495Z", "target": "k3-capital", "hired": ["protocol"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
