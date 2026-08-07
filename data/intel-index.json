@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T03:17:02Z",
+  "generated": "2026-08-07T03:27:40Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 470,
@@ -14,7 +14,7 @@
       "virtuals": 74,
       "skillforge": 4
     },
-    "broadcasts": 158,
+    "broadcasts": 159,
     "investigations": 807,
     "news": 80,
     "tools": 16,
@@ -11405,17 +11405,6 @@
     },
     {
       "kind": "intel",
-      "type": "macro",
-      "file": "macro-2026-08-05-16.md",
-      "title": "Macro & Micro News Sweep Report",
-      "date": "2026-08-05T16:00Z",
-      "threat": null,
-      "summary": "Computed deterministically from real Fear & Greed (27, prior day 25) and global market cap 24h change (0.5%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-08-05-16.md",
-      "bytes": 3129
-    },
-    {
-      "kind": "intel",
       "type": "base",
       "file": "base-2026-08-05-16.md",
       "title": "Base Blockchain Sweep Report",
@@ -11424,6 +11413,17 @@
       "summary": "Date: 2026-08-05 16:27 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-05-16.md",
       "bytes": 7756
+    },
+    {
+      "kind": "intel",
+      "type": "macro",
+      "file": "macro-2026-08-05-16.md",
+      "title": "Macro & Micro News Sweep Report",
+      "date": "2026-08-05T16:00Z",
+      "threat": null,
+      "summary": "Computed deterministically from real Fear & Greed (27, prior day 25) and global market cap 24h change (0.5%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-08-05-16.md",
+      "bytes": 3129
     },
     {
       "kind": "bounty",
@@ -11824,6 +11824,13 @@
   ],
   "broadcasts": [
     {
+      "file": "broadcast-2026-08-07-03.md",
+      "title": "VAPE Community Intelligence Broadcast",
+      "date": "2026-08-07T03:00Z",
+      "summary": "11 new VAPE investigation(s) in the last 6h and 1 rule-based anomaly flag(s) this cycle. Base TVL $4.63B, 664 targets on VAPE's permanent record (416 REJECT / 167 CAUTION / 81 PROCEED).",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-08-07-03.md"
+    },
+    {
       "file": "broadcast-2026-08-07-00.md",
       "title": "VAPE Community Intelligence Broadcast",
       "date": "2026-08-07T00:00Z",
@@ -12025,13 +12032,6 @@
       "date": "2026-07-31T03:00Z",
       "summary": "17 new VAPE investigation(s) in the last 6h and 1 rule-based anomaly flag(s) this cycle. Base TVL $4.63B, 437 targets on VAPE's permanent record (261 REJECT / 110 CAUTION / 66 PROCEED).",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-31-03.md"
-    },
-    {
-      "file": "broadcast-2026-07-30-19.md",
-      "title": "VAPE Community Intelligence Broadcast",
-      "date": "2026-07-30T19:00Z",
-      "summary": "12 new VAPE investigation(s) in the last 6h and 3 rule-based anomaly flag(s) this cycle. Base TVL $4.67B, 418 targets on VAPE's permanent record (247 REJECT / 107 CAUTION / 64 PROCEED).",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/broadcasts/broadcast-2026-07-30-19.md"
     }
   ],
   "news": [
