@@ -1407,3 +1407,5 @@
 | 2026-08-07 | auto | 0xAdf48B42BE9A927dD35684E86927BB26d1957777 (SPCXB) | deep_investigation | REJECT (0/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-07 | auto | 0xE747E54783Ba3F77a8E5251a3cBA19EBe9C0E197 (TAKE) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-07 | auto | 0x47dd7BEDF9A1f9f256309b6d3147Dd234f634444 (JoblessRou) | deep_investigation | REJECT (32/100) | Low holder count (67) | +7d |

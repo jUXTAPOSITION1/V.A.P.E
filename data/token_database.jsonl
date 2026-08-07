@@ -219,3 +219,4 @@
 {"ts": "2026-08-06T23:06:26.026467Z", "address": "0xcBBD206D1b844fB3A2AaD1bA198686C616e46737", "chain": "8453", "symbol": "Claude", "name": "Claude", "source": "base", "offering": "token_chart"}
 {"ts": "2026-08-07T00:24:37.165619Z", "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "chain": "8453", "symbol": "USDC", "name": "USDC", "source": "base_trending", "offering": "token_chart"}
 {"ts": "2026-08-07T01:11:50.331927Z", "address": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf", "chain": "8453", "symbol": "cbBTC", "name": "CBBTC Coinbase Wrapped BTC", "source": "base_trending", "offering": "liquidity_check"}
+{"ts": "2026-08-07T01:43:31.985351Z", "address": "0xE747E54783Ba3F77a8E5251a3cBA19EBe9C0E197", "chain": "56", "symbol": "TAKE", "name": "TAKE", "source": "evm", "offering": "rug_pull_alert"}

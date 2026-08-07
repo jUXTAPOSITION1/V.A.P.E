@@ -6640,6 +6640,25 @@
     "symbol": "jlefk",
     "times_investigated": 1
   },
+  "56:0x47dd7bedf9a1f9f256309b6d3147dd234f634444": {
+    "address": "0x47dd7BEDF9A1f9f256309b6d3147Dd234f634444",
+    "chain": "56",
+    "creator_address": "0xf69c428a41631490c3554b70d72f9c7ea6c3e467",
+    "first_investigated": "2026-08-07T01:43:19Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260807-014319-0x47dd7BED.md",
+        "score": 32,
+        "ts": "2026-08-07T01:43:19Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-07T01:43:19Z",
+    "last_score": 32,
+    "last_verdict": "REJECT",
+    "symbol": "JoblessRou",
+    "times_investigated": 1
+  },
   "56:0x4879d5c0d925a6cf3a76633e6c0f7b15aa4c5628": {
     "address": "0x4879d5c0D925a6Cf3A76633e6C0f7b15aa4c5628",
     "chain": "56",

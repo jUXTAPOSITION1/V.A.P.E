@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T01:27:32Z",
+  "generated": "2026-08-07T01:43:32Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 470,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 158,
-    "investigations": 803,
+    "investigations": 804,
     "news": 79,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260807-012732-0xE747E547.md",
-      "title": "Investigation \u2014 TAKE",
-      "symbol": "TAKE",
-      "name": "TAKE",
-      "date": "2026-08-07T01:27:32Z",
-      "target": "0xE747E54783Ba3F77a8E5251a3cBA19EBe9C0E197",
+      "file": "investigation-20260807-014319-0x47dd7BED.md",
+      "title": "Investigation \u2014 JoblessRou",
+      "symbol": "JoblessRou",
+      "name": "Driving Granny",
+      "date": "2026-08-07T01:43:19Z",
+      "target": "0x47dd7BEDF9A1f9f256309b6d3147Dd234f634444",
       "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "62",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 88% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: Ownership renounced; 20831 holders \u2014 reasonably distributed; Trad",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-012732-0xE747E547.md"
+      "verdict": "REJECT",
+      "score": "32",
+      "summary": "Risk factors: [-8] Low holder count (67); [-15] Top 10 non-LP/burn holders control 106% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $4,474 (rug/illiquid); [-10] Low liquidity $4,474; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-014319-0x47dd7BED.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260807-014319-0x47dd7BED.md",
+      "title": "Investigation \u2014 JoblessRou",
+      "symbol": "JoblessRou",
+      "name": "Driving Granny",
+      "date": "2026-08-07T01:43:19Z",
+      "target": "0x47dd7BEDF9A1f9f256309b6d3147Dd234f634444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "32",
+      "summary": "Risk factors: [-8] Low holder count (67); [-15] Top 10 non-LP/burn holders control 106% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $4,474 (rug/illiquid); [-10] Low liquidity $4,474; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-014319-0x47dd7BED.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260807-012732-0xE747E547.md",
