@@ -783,3 +783,4 @@
 {"ts": "2026-08-07T22:50:02.965495Z", "target": "k3-capital", "hired": ["protocol"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-07T23:05:24.978199Z", "target": "0x3b8db18e69d6686Ad9371A423aFe3Dd1065C94f1", "hired": ["exploit_check"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-07T23:20:39.562678Z", "target": "pharaoh-v3", "hired": ["protocol"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
+{"ts": "2026-08-07T23:51:58.775466Z", "target": "pendle", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
