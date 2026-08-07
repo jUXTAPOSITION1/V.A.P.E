@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T19:55:31Z",
+  "generated": "2026-08-07T20:12:12Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 489,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 162,
-    "investigations": 839,
+    "investigations": 840,
     "news": 84,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260807-192335-0xA70136c6.md",
-      "title": "Investigation \u2014 RedHorseX",
-      "symbol": "RedHorseX",
-      "name": "RedHorseX",
-      "date": "2026-08-07T19:23:35Z",
-      "target": "0xA70136c6AA83cfa85405f552D37453E0ab5e4444",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260807-201207-0xE9d12f8e.md",
+      "title": "Investigation \u2014 1F916",
+      "symbol": "1F916",
+      "name": "A Society For AI Agents",
+      "date": "2026-08-07T20:12:07Z",
+      "target": "0xE9d12f8e2A4136E5F2F0f4ff585924FBe8aBb395",
+      "chain": "8453 (Base)",
       "verdict": "CAUTION",
-      "score": "50",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $5,096 (rug/illiquid); [-10] Low liquidity $5,096. Positive evidence: Ownership renounced; 1329 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-192335-0xA70136c6.md"
+      "score": "55",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified source (not a mass-produced facto",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-201207-0xE9d12f8e.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260807-201207-0xE9d12f8e.md",
+      "title": "Investigation \u2014 1F916",
+      "symbol": "1F916",
+      "name": "A Society For AI Agents",
+      "date": "2026-08-07T20:12:07Z",
+      "target": "0xE9d12f8e2A4136E5F2F0f4ff585924FBe8aBb395",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "55",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Custom verified source (not a mass-produced facto",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-201207-0xE9d12f8e.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260807-192335-0xA70136c6.md",
