@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T12:59:33Z",
+  "generated": "2026-08-07T13:05:12Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 479,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 160,
     "investigations": 829,
-    "news": 82,
+    "news": 83,
     "tools": 16,
     "tools_verified": 16,
     "skills": 25
@@ -12344,6 +12344,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-07-cuomo-now-okx-director-warns-senate-must-break-ethics-stalem.md",
+      "title": "Cuomo, Now OKX Director, Warns Senate Must Break Ethics Stalemate or Lose U.S. Crypto Ground",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-07T13:05:11Z",
+      "published_et": "August 7, 2026 \u00b7 9:05 AM EDT",
+      "topic": "Crypto Markets",
+      "dek": "The former governor ties Democratic delays on the Clarity Act to Trump family crypto profits and says new bipartisan ethics language is already under White House review.",
+      "image": "assets/news-images/cuomo-now-okx-director-warns-senate-must-break-ethics-stalem.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-07-cuomo-now-okx-director-warns-senate-must-break-ethics-stalem.md"
+    },
+    {
       "file": "news-2026-08-07-ai-hunters-expose-triple-9-9-critical-flaws-in-cisco-s-enter.md",
       "title": "AI Hunters Expose Triple 9.9 Critical Flaws in Cisco's Enterprise SD-WAN and IOS XE",
       "byline": "VAPE Reporter",
@@ -13050,18 +13062,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-30-triple-demand-stall-strips-bitcoin-of-bullish-catalysts-putt.md"
-    },
-    {
-      "file": "news-2026-07-30-robinhood-posts-best-quarter-ever-as-prediction-market-and-r.md",
-      "title": "Robinhood Posts Best Quarter Ever as Prediction Market and Robinhood Chain Take Off",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-30 11:09 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "Agency: VAPE Wire Byline: VAPE Reporter Date: 2026-07-30 11:09 UTC Topic: Crypto Markets Dek: Image: assets/logo-v-256.png Image source: VAPE brand mark (no AI image available this cycle) Fact-checked",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-30-robinhood-posts-best-quarter-ever-as-prediction-market-and-r.md"
     }
   ],
   "tools": [
