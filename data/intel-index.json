@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T06:56:44Z",
+  "generated": "2026-08-07T07:12:30Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 473,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 159,
-    "investigations": 813,
+    "investigations": 814,
     "news": 80,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260807-065643-0x595dEaad.md",
+      "file": "investigation-20260807-071222-0x33cd9f87.md",
       "title": "Investigation \u2014 BSB",
       "symbol": "BSB",
-      "name": "Block Street",
-      "date": "2026-08-07T06:56:43Z",
-      "target": "0x595dEaad1eB5476Ff1E649fDb7EFC36F1E4679cc",
+      "name": "\ud55c\uad6d \uc6d0",
+      "date": "2026-08-07T07:12:22Z",
+      "target": "0x33cd9f873B85d2c2d11791A2CAe5170B82Ac7777",
       "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "62",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 90% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 59039 holders \u2014 reasonably distributed; Trading 156+ days without",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-065643-0x595dEaad.md"
+      "verdict": "REJECT",
+      "score": "12",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $7,282 (rug/illiquid); [-10] Low liquidity $7,282; [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team iden",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-071222-0x33cd9f87.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260807-071222-0x33cd9f87.md",
+      "title": "Investigation \u2014 BSB",
+      "symbol": "BSB",
+      "name": "\ud55c\uad6d \uc6d0",
+      "date": "2026-08-07T07:12:22Z",
+      "target": "0x33cd9f873B85d2c2d11791A2CAe5170B82Ac7777",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "12",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $7,282 (rug/illiquid); [-10] Low liquidity $7,282; [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team iden",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-071222-0x33cd9f87.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260807-065643-0x595dEaad.md",

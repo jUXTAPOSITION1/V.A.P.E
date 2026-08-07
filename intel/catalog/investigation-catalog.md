@@ -1427,3 +1427,5 @@
 | 2026-08-07 | auto | 0x01cA5ACf53D0a18943dAe0dd6C08B88e62ad0BA3 (FORGE) | deep_investigation | REJECT (7/100) | Owner not renounced (0xf45930620d727a222826729d4abc08cb2c6162a2) — can still act | +7d |
 
 | 2026-08-07 | auto | 0x595dEaad1eB5476Ff1E649fDb7EFC36F1E4679cc (BSB) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-07 | auto | 0x33cd9f873B85d2c2d11791A2CAe5170B82Ac7777 (BSB) | deep_investigation | REJECT (12/100) | Upgradeable proxy (verify implementation) | +7d |
