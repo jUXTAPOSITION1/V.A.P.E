@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T15:01:25Z",
+  "generated": "2026-08-07T15:08:49Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 483,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 161,
-    "investigations": 834,
+    "investigations": 835,
     "news": 83,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260807-145238-0x45E1C92C.md",
-      "title": "Investigation \u2014 LGNS",
-      "symbol": "LGNS",
-      "name": "Longinus",
-      "date": "2026-08-07T14:52:38Z",
-      "target": "0x45E1C92Cb7F0Ff24d9092579014Bab2413B0CD87",
-      "chain": "137 (Polygon)",
+      "file": "investigation-20260807-150844-0x4E2b5225.md",
+      "title": "Investigation \u2014 1F916",
+      "symbol": "1F916",
+      "name": "A Society For AI Agents",
+      "date": "2026-08-07T15:08:44Z",
+      "target": "0x4E2b5225152d5E18fB6A22F972Ff9e90A4E9AF8e",
+      "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "25",
-      "summary": "Risk factors: [-20] Very few holders (7) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity $0; [-10] Violent 24h move +797% (volatility/manipulation); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Po",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-145238-0x45E1C92C.md"
+      "score": "0",
+      "summary": "Risk factors: [-20] Very few holders (13) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 98% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $3 (rug/illiquid); [-10] Low liquidity",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-150844-0x4E2b5225.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260807-150844-0x4E2b5225.md",
+      "title": "Investigation \u2014 1F916",
+      "symbol": "1F916",
+      "name": "A Society For AI Agents",
+      "date": "2026-08-07T15:08:44Z",
+      "target": "0x4E2b5225152d5E18fB6A22F972Ff9e90A4E9AF8e",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Very few holders (13) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 98% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $3 (rug/illiquid); [-10] Low liquidity",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-150844-0x4E2b5225.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260807-145238-0x45E1C92C.md",
