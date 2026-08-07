@@ -22485,7 +22485,7 @@
     "bountyFitScore": 50,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785485914.7350109,
+      "checkedAt": 1786110863.87831,
       "ok": true
     }
   },
@@ -22513,7 +22513,7 @@
     "bountyFitScore": 50,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785485914.7350109,
+      "checkedAt": 1786110863.87831,
       "ok": true
     }
   },
@@ -22541,7 +22541,7 @@
     "bountyFitScore": 50,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785485914.7350109,
+      "checkedAt": 1786110863.87831,
       "ok": true
     }
   },
@@ -22569,7 +22569,7 @@
     "bountyFitScore": 50,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785485914.7350109,
+      "checkedAt": 1786110863.87831,
       "ok": true
     }
   },
@@ -22597,7 +22597,7 @@
     "bountyFitScore": 49,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785485914.7350109,
+      "checkedAt": 1786110863.87831,
       "ok": true
     }
   },
@@ -22625,7 +22625,7 @@
     "bountyFitScore": 49,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785485914.7350109,
+      "checkedAt": 1786110863.87831,
       "ok": true
     }
   },
@@ -22653,7 +22653,7 @@
     "bountyFitScore": 48,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785485914.7350109,
+      "checkedAt": 1786110863.87831,
       "ok": true
     }
   },
@@ -22681,7 +22681,7 @@
     "bountyFitScore": 48,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785485914.7350109,
+      "checkedAt": 1786110863.87831,
       "ok": true
     }
   },
@@ -22709,7 +22709,7 @@
     "bountyFitScore": 48,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785485914.7350109,
+      "checkedAt": 1786110863.87831,
       "ok": true
     }
   },
@@ -22737,7 +22737,7 @@
     "bountyFitScore": 52,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785485914.7350109,
+      "checkedAt": 1786110863.87831,
       "ok": true
     }
   },
@@ -22765,7 +22765,7 @@
     "bountyFitScore": 51,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785485914.7350109,
+      "checkedAt": 1786110863.87831,
       "ok": true
     }
   },
@@ -22793,7 +22793,7 @@
     "bountyFitScore": 48,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785485914.7350109,
+      "checkedAt": 1786110863.87831,
       "ok": true
     }
   },
@@ -22820,8 +22820,8 @@
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
     "bountyFitScore": 0,
     "liveCheck": {
-      "consecutiveFailures": 2,
-      "checkedAt": 1785485914.7350109,
+      "consecutiveFailures": 3,
+      "checkedAt": 1786110863.87831,
       "ok": false
     }
   },
@@ -22849,7 +22849,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785485914.7350109,
+      "checkedAt": 1786110863.87831,
       "ok": true
     }
   },
@@ -22877,7 +22877,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785485914.7350109,
+      "checkedAt": 1786110863.87831,
       "ok": true
     }
   },
