@@ -3285,3 +3285,4 @@
 {"ts": "2026-08-07T05:22:25Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1186, "completion_tokens": 33, "total_tokens": 1858}
 {"ts": "2026-08-07T05:37:58Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1186, "completion_tokens": 28, "total_tokens": 1862}
 {"ts": "2026-08-07T05:41:27Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 5727, "completion_tokens": 589, "total_tokens": 6808}
+{"ts": "2026-08-07T05:42:01Z", "provider": "gemini", "model": "gemini-2.5-flash", "tier": "deep", "prompt_tokens": 2875, "completion_tokens": 507, "total_tokens": 4799, "fallback_from": ["groq:HTTP429 {\"error\":{\"message\":\"Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kvrrkqgsfk4thyv722a2ttvm` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 96825,"]}
