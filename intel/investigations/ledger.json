@@ -1217,6 +1217,24 @@
     "symbol": "USD\u20ae",
     "times_investigated": 1
   },
+  "137:0xea8cac26211e1fcd512c8b45f33f30c8ef4fc76d": {
+    "address": "0xEa8CAc26211e1fCD512c8B45f33F30c8Ef4fc76d",
+    "chain": "137",
+    "first_investigated": "2026-08-07T04:18:38Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260807-041838-0xEa8CAc26.md",
+        "score": 37,
+        "ts": "2026-08-07T04:18:38Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-07T04:18:38Z",
+    "last_score": 37,
+    "last_verdict": "REJECT",
+    "symbol": "LGNS",
+    "times_investigated": 1
+  },
   "137:0xeb51d9a39ad5eef215dc0bf39a8821ff804a0f01": {
     "address": "0xeB51D9A39AD5EEF215dC0Bf39a8821ff804A0F01",
     "chain": "137",

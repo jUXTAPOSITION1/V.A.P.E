@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T04:03:10Z",
+  "generated": "2026-08-07T04:18:45Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 471,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 159,
-    "investigations": 807,
+    "investigations": 808,
     "news": 80,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260807-031655-0x296F55F8.md",
-      "title": "Investigation \u2014 STG",
-      "symbol": "STG",
-      "name": "StargateToken",
-      "date": "2026-08-07T03:16:55Z",
-      "target": "0x296F55F8Fb28E498B858d0BcDA06D955B2Cb3f97",
-      "chain": "10 (Optimism)",
+      "file": "investigation-20260807-041838-0xEa8CAc26.md",
+      "title": "Investigation \u2014 LGNS",
+      "symbol": "LGNS",
+      "name": "LGNS COIN",
+      "date": "2026-08-07T04:18:38Z",
+      "target": "0xEa8CAc26211e1fCD512c8B45f33F30c8Ef4fc76d",
+      "chain": "137 (Polygon)",
       "verdict": "REJECT",
-      "score": "38",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xec230013182261343f235b8c92b443f90a8a3c86) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 71% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-031655-0x296F55F8.md"
+      "score": "37",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $28,197; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-041838-0xEa8CAc26.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260807-041838-0xEa8CAc26.md",
+      "title": "Investigation \u2014 LGNS",
+      "symbol": "LGNS",
+      "name": "LGNS COIN",
+      "date": "2026-08-07T04:18:38Z",
+      "target": "0xEa8CAc26211e1fCD512c8B45f33F30c8Ef4fc76d",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "37",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $28,197; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-041838-0xEa8CAc26.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260807-031655-0x296F55F8.md",
