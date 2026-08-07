@@ -1,10 +1,10 @@
 {
-  "generated": "2026-08-07T00:00:09Z",
+  "generated": "2026-08-07T00:03:41Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 467,
+    "reports": 468,
     "reports_by_type": {
-      "bounty": 133,
+      "bounty": 134,
       "security": 81,
       "base": 92,
       "sentiment": 49,
@@ -39,13 +39,13 @@
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260806_215737.md",
+      "file": "bounty_report_20260807_000254.md",
       "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-06T21:57:37Z",
+      "date": "2026-08-07T00:02:54Z",
       "threat": null,
-      "summary": "Base mover: Claude / USDC +10034% 24h (liq $9038411.9225) \u2014 volatility/rug watch \u00b7 Base mover: 1F916 / WETH +3533% 24h (liq $143760.0777) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260806_215737.md",
-      "bytes": 15741
+      "summary": "Base mover: 1F916 / WETH +10036% 24h (liq $286759.5602) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260807_000254.md",
+      "bytes": 16559
     }
   },
   "investigations": [
@@ -11080,6 +11080,17 @@
     {
       "kind": "bounty",
       "type": "bounty",
+      "file": "bounty_report_20260807_000254.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-07T00:02:54Z",
+      "threat": null,
+      "summary": "Base mover: 1F916 / WETH +10036% 24h (liq $286759.5602) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260807_000254.md",
+      "bytes": 16559
+    },
+    {
+      "kind": "bounty",
+      "type": "bounty",
       "file": "bounty_report_20260806_215737.md",
       "title": "V.A.P.E. Intelligence Report",
       "date": "2026-08-06T21:57:37Z",
@@ -11288,17 +11299,6 @@
     },
     {
       "kind": "intel",
-      "type": "macro",
-      "file": "macro-2026-08-05-16.md",
-      "title": "Macro & Micro News Sweep Report",
-      "date": "2026-08-05T16:00Z",
-      "threat": null,
-      "summary": "Computed deterministically from real Fear & Greed (27, prior day 25) and global market cap 24h change (0.5%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-08-05-16.md",
-      "bytes": 3129
-    },
-    {
-      "kind": "intel",
       "type": "base",
       "file": "base-2026-08-05-16.md",
       "title": "Base Blockchain Sweep Report",
@@ -11307,6 +11307,17 @@
       "summary": "Date: 2026-08-05 16:27 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-05-16.md",
       "bytes": 7756
+    },
+    {
+      "kind": "intel",
+      "type": "macro",
+      "file": "macro-2026-08-05-16.md",
+      "title": "Macro & Micro News Sweep Report",
+      "date": "2026-08-05T16:00Z",
+      "threat": null,
+      "summary": "Computed deterministically from real Fear & Greed (27, prior day 25) and global market cap 24h change (0.5%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-08-05-16.md",
+      "bytes": 3129
     },
     {
       "kind": "bounty",
@@ -11725,17 +11736,6 @@
       "summary": "Computed deterministically from real Fear & Greed (28, prior day 27) and global market cap 24h change (0.74%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-08-03-16.md",
       "bytes": 2086
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-08-03-14.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-08-03T14:00Z",
-      "threat": null,
-      "summary": "The feed shows three incidents in the last 7 days, all under $10M, with zero incidents at or above $50M in the prior 14 days. Documented events include a $0.45M private-key compromise affecting Garden across Ethereum, Base, Arbitrum and BSC; a $0.65M unauthorized-access event on ChainConnect spanning Ethereum, BSC, Avalanche and Polygon; ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-03-14.md",
-      "bytes": 6057
     }
   ],
   "broadcasts": [
