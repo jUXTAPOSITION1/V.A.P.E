@@ -16,7 +16,22 @@ import { webSearch, webScrape, type ResearchEnv } from "./webResearch";
 import { getContractMarketData, type CoingeckoContractMarket } from "./coingecko";
 
 const UA = { "User-Agent": "VAPE-PrivateEye/1.0" };
-const BASE_RPC = "https://mainnet.base.org";
+
+// Same 7 chains + public RPC URLs as agents/investigate.py's EVM_CHAINS[*]["rpc"]
+// (including the Avalanche C-Chain path fix documented there: /ext/bc/C/rpc,
+// not /ext/bc/C/Chain). Real bug this fixes: onchainPresence() below used to
+// always hit Base's own RPC regardless of the token's actual chain, so
+// dossierCheck() silently checked on-chain presence on the wrong network for
+// every non-Base token.
+const CHAIN_RPC: Record<number, string> = {
+  8453: "https://mainnet.base.org",
+  1: "https://ethereum.publicnode.com",
+  42161: "https://arb1.arbitrum.io/rpc",
+  10: "https://mainnet.optimism.io",
+  137: "https://polygon-rpc.com",
+  56: "https://bsc-dataseed.binance.org",
+  43114: "https://api.avax.network/ext/bc/C/rpc",
+};
 
 // CoinGecko's own "asset platform" id per chain — a distinct slug family
 // from GeckoTerminal's network id or DexScreener's chainId. Mirrors
@@ -98,11 +113,13 @@ export async function dexscreenerFull(address: string): Promise<DexInfo> {
 // penalty.
 export async function onchainPresence(
   address: string,
+  chainId: number = 8453,
 ): Promise<{ is_contract: boolean | null; code_size_bytes: number | null; error?: string }> {
+  const rpc = CHAIN_RPC[chainId] || CHAIN_RPC[8453];
   let lastErr = "RPC call failed";
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
-      const res = await fetch(BASE_RPC, {
+      const res = await fetch(rpc, {
         method: "POST",
         headers: { "Content-Type": "application/json", ...UA },
         body: JSON.stringify({ jsonrpc: "2.0", method: "eth_getCode", params: [address, "latest"], id: 1 }),

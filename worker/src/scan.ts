@@ -18,7 +18,14 @@ const UA = { "User-Agent": "VAPE-PrivateEye/1.0 (+https://github.com/jUXTAPOSITI
 // as JSON throws a raw "Unexpected token '<'..." parser exception, which used
 // to leak straight into a paying customer's report as `data_error`. GoPlus
 // is rock-solid by comparison, so DexScreener is the one worth retrying.
-const GECKOTERMINAL_NETWORK: Record<number, string> = { 8453: "base", 1: "eth", 42161: "arbitrum" };
+// Same 7 chains as agents/token_scan.py's GECKOTERMINAL_NETWORK (and
+// docs/assets/app.js's _GECKOTERMINAL_NETWORK) -- kept in sync across all
+// three per this file's own scan-parity CI check. Real gap this closes:
+// this used to stop at 3 of the 7 EVM chains VAPE otherwise tracks.
+const GECKOTERMINAL_NETWORK: Record<number, string> = {
+  8453: "base", 1: "eth", 42161: "arbitrum", 10: "optimism",
+  137: "polygon_pos", 56: "bsc", 43114: "avax",
+};
 
 export interface ScanResult {
   ts: string;

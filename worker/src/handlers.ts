@@ -187,7 +187,7 @@ async function dossierCheck(req: Requirement, env: { ETHERSCAN_API_KEY?: string;
   const [gp, dex, onchain, src, cgContract] = await Promise.all([
     goplusRaw(a, chain),
     dexscreenerFull(a),
-    onchainPresence(a),
+    onchainPresence(a, chain),
     getContractSource(a, chain, env.ETHERSCAN_API_KEY),
     cgPlatform ? getContractMarketData(env, a, cgPlatform) : Promise.resolve(null),
   ]);
