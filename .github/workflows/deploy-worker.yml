@@ -14,6 +14,11 @@ on:
 
 permissions:
   contents: read
+  # For the "Open an issue if the deploy failed" step below -- this workflow
+  # had no failure-visibility mechanism at all before (see that step's own
+  # comment), which is exactly how two consecutive real production deploy
+  # failures went unnoticed for ~1h40m.
+  issues: write
 
 jobs:
   deploy:
@@ -142,3 +147,50 @@ jobs:
         if: ${{ failure() }}
         run: |
           echo "::error::Deploy or the post-deploy smoke test failed. If the Deploy step's log shows 'You need to register a workers.dev subdomain', this is an account-level Cloudflare setup step, not a code issue: Workers & Pages -> Overview in the dashboard, claim a subdomain, confirm it shows an active value (not blank/-null), then re-run this workflow. If Deploy succeeded but the smoke test failed, the Worker uploaded but isn't answering at the expected URL — check that vape-x402.vapex402.workers.dev still matches this account's actual claimed subdomain. See worker/README.md's 'Cloudflare + Deno Deploy' section."
+
+      # Real gap this closes: before this step existed, a failed deploy had
+      # NO visibility beyond this run's own Actions log -- confirmed live,
+      # this is exactly how two consecutive real production deploy failures
+      # (the ERESOLVE break worker/.npmrc fixes) sat unnoticed for ~1h40m
+      # across two separate merges to main. Dedupes against any still-open
+      # issue with the same label (mirrors version-currency.yml's pattern)
+      # instead of opening a new one on every failed push.
+      - name: Open (or update) an issue so a broken deploy is never silent
+        if: ${{ failure() }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          BODY="The Worker deploy failed on \`${{ github.sha }}\` (triggered by ${{ github.event_name }}).
+
+          Run: $RUN_URL
+
+          Check the Deploy and Smoke test step logs first. Common causes: an ERESOLVE peer-dependency conflict in a fresh npm install (see worker/.npmrc and worker/README.md's Solana section), an unclaimed workers.dev subdomain, or the deployed Worker not answering at the expected URL.
+
+          This issue is reused across consecutive failures and closes itself on the next successful deploy (see deploy-worker.yml)."
+          # `gh issue create --label` fails outright if the label doesn't
+          # already exist in the repo -- create it first, ignoring the
+          # already-exists case, so this doesn't depend on a manual
+          # one-time repo-admin setup step.
+          gh label create "deploy-failure" --color "d73a4a" \
+            --description "A push to main failed to deploy the x402 Worker" 2>/dev/null || true
+          EXISTING=$(gh issue list --state open --label deploy-failure --json number --jq '.[0].number')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body "$BODY"
+          else
+            gh issue create --title "Worker deploy is failing" --body "$BODY" --label "deploy-failure" || true
+          fi
+
+      # Closes the loop: a deploy-failure issue that's still open once a
+      # later run succeeds means the outage is over, so say so instead of
+      # leaving a stale-looking open issue as the only record.
+      - name: Close any open deploy-failure issue on success
+        if: ${{ success() && env.HAS_CF_TOKEN == 'true' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          EXISTING=$(gh issue list --state open --label deploy-failure --json number --jq '.[0].number')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body "Resolved by a subsequent successful deploy on \`${{ github.sha }}\`."
+            gh issue close "$EXISTING"
+          fi
