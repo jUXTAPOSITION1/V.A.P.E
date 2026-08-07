@@ -1403,3 +1403,5 @@
 | 2026-08-06 | auto | 0xfAB99fCF605fD8f4593EDb70A43bA56542777777 (ZBT) | deep_investigation | REJECT (18/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-08-06 | auto | 0xb76C15b17FcFabc7B2174EFd7C4854E571f813bB (GRVT) | deep_investigation | REJECT (0/100) | HONEYPOT detected | +7d |
+
+| 2026-08-07 | auto | 0xAdf48B42BE9A927dD35684E86927BB26d1957777 (SPCXB) | deep_investigation | REJECT (0/100) | Upgradeable proxy (verify implementation) | +7d |
