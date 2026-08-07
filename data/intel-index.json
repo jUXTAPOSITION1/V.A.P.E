@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T02:45:36Z",
+  "generated": "2026-08-07T03:01:29Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 470,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 158,
-    "investigations": 805,
+    "investigations": 806,
     "news": 79,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260807-024525-0x03B30Efa.md",
+      "file": "investigation-20260807-030129-0xd8a9812a.md",
       "title": "Investigation \u2014 SPCXB",
       "symbol": "SPCXB",
       "name": "SpaceX",
-      "date": "2026-08-07T02:45:25Z",
-      "target": "0x03B30Efae20655B1315eD97Ef8c3b92E5667daB0",
+      "date": "2026-08-07T03:01:29Z",
+      "target": "0xd8a9812abbFE7129cE0eeb372a19F1C869fACf45",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: 100% of liquidi",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-024525-0x03B30Efa.md"
+      "score": "20",
+      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $17,231; [-10] Violent 24h move +2058807298604% (volatility/manipulation); [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-030129-0xd8a9812a.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260807-030129-0xd8a9812a.md",
+      "title": "Investigation \u2014 SPCXB",
+      "symbol": "SPCXB",
+      "name": "SpaceX",
+      "date": "2026-08-07T03:01:29Z",
+      "target": "0xd8a9812abbFE7129cE0eeb372a19F1C869fACf45",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "20",
+      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $17,231; [-10] Violent 24h move +2058807298604% (volatility/manipulation); [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-15] Contract source UNVERIFIED; [-10] No known third-party audit or verifiable team",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-030129-0xd8a9812a.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260807-024525-0x03B30Efa.md",

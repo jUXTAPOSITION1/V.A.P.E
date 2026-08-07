@@ -8478,6 +8478,25 @@
     "symbol": "AKE",
     "times_investigated": 1
   },
+  "56:0xd8a9812abbfe7129ce0eeb372a19f1c869facf45": {
+    "address": "0xd8a9812abbFE7129cE0eeb372a19F1C869fACf45",
+    "chain": "56",
+    "creator_address": "0x1cf63a87e5a9f5b460e4a0d2869ed90721804329",
+    "first_investigated": "2026-08-07T03:01:29Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260807-030129-0xd8a9812a.md",
+        "score": 20,
+        "ts": "2026-08-07T03:01:29Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-07T03:01:29Z",
+    "last_score": 20,
+    "last_verdict": "REJECT",
+    "symbol": "SPCXB",
+    "times_investigated": 1
+  },
   "56:0xd8db79190fb3ddb6a30f27d0ba11634b05a54444": {
     "address": "0xD8Db79190FB3Ddb6A30f27d0Ba11634b05a54444",
     "chain": "56",
