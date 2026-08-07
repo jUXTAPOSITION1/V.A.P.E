@@ -1459,3 +1459,5 @@
 | 2026-08-07 | auto | 0xe3395e137E04a07590821b8aEd4AE24B97657777 (jobless) | deep_investigation | REJECT (2/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-07 | auto | 0x514CaDd2707f1FA06a5d30312BcdE77DDDE6f4C4 (OPTIMUSBNB) | deep_investigation | CAUTION (55/100) | Owner not renounced (0x000000000000000000000000000000000000dead) — can still act | +7d |
+
+| 2026-08-07 | auto | 0xF66a9c73F34b56579A9E25e7eC89bca5a9C83b07 (Claude) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
