@@ -225,3 +225,4 @@
 {"ts": "2026-08-07T07:12:30.016747Z", "address": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf", "chain": "8453", "symbol": "VVV", "name": "Venice Token", "source": "base_trending", "offering": "token_chart"}
 {"ts": "2026-08-07T08:15:00.842059Z", "address": "0x0b3e328455c4059eeb9e3f84b5543f74e24e7e1b", "chain": "8453", "symbol": "VIRTUAL", "name": "VIRTUAL", "source": "base_trending", "offering": "token_chart"}
 {"ts": "2026-08-07T10:52:30.694978Z", "address": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "chain": "8453", "symbol": "VELVET", "name": "VELVET", "source": "base", "offering": "dossier_check"}
+{"ts": "2026-08-07T11:56:00.827669Z", "address": "0x9E00FC92493451EBA1c63DD3880D68b622037bA3", "chain": "8453", "symbol": "1F916", "name": "1F916", "source": "base", "offering": "dossier_check"}
