@@ -229,3 +229,4 @@
 {"ts": "2026-08-07T12:27:29.631425Z", "address": "0x01cA5ACf53D0a18943dAe0dd6C08B88e62ad0BA3", "chain": "1", "symbol": "FORGE", "name": "FORGE", "source": "evm", "offering": "liquidity_check"}
 {"ts": "2026-08-07T12:59:32.563373Z", "address": "0x296F55F8Fb28E498B858d0BcDA06D955B2Cb3f97", "chain": "10", "symbol": "STG", "name": "STG", "source": "evm", "offering": "token_intel"}
 {"ts": "2026-08-07T15:25:21.768045Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "token_chart"}
+{"ts": "2026-08-07T16:12:31.616216Z", "address": "0x3221BAEB0c2745e39A1dbA73CD413361b7f5Fe13", "chain": "8453", "symbol": "ETD", "name": "ETD", "source": "base", "offering": "liquidity_check"}
