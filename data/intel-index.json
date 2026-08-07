@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-07T04:34:28Z",
+  "generated": "2026-08-07T04:49:51Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 471,
+    "reports": 472,
     "reports_by_type": {
+      "base": 94,
       "bounty": 135,
-      "base": 93,
       "sentiment": 50,
       "security": 81,
       "macro": 24,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-043427-0x54609991.md"
     },
     "report": {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260807_035024.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-07T03:50:24Z",
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-08-07-04.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-08-07T04:00Z",
       "threat": null,
-      "summary": "Base mover: 1F916 / WETH +4047% 24h (liq $147373.195) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260807_035024.md",
-      "bytes": 16229
+      "summary": "Date: 2026-08-07 04:49 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-07-04.md",
+      "bytes": 7824
     }
   },
   "investigations": [
@@ -11190,6 +11190,17 @@
   ],
   "reports": [
     {
+      "kind": "intel",
+      "type": "base",
+      "file": "base-2026-08-07-04.md",
+      "title": "Base Blockchain Sweep Report",
+      "date": "2026-08-07T04:00Z",
+      "threat": null,
+      "summary": "Date: 2026-08-07 04:49 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-07-04.md",
+      "bytes": 7824
+    },
+    {
       "kind": "bounty",
       "type": "bounty",
       "file": "bounty_report_20260807_035024.md",
@@ -11837,17 +11848,6 @@
       "summary": "The feed shows 6 incidents in the last 7 days and 1 incident exceeding $50M in the last 14 days. Documented events include LOOPSDAO ($0.696M, price manipulation, BSC), MOKE ($0.907M, price manipulation, BSC), COLDCARD ($115.0M, non-random private key generation, Bitcoin), Set Protocol ($0.01M, malicious SetToken & manager contract, Ethere",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-03-19.md",
       "bytes": 7672
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260803_185131.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-03T18:51:31Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: LOOPSDAO $0.696M on ['BSC'] (Price Manipulation Attack) \u00b7 RECENT EXPLOIT: MOKE $0.907M on ['BSC'] (Price Manipulation Attack)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260803_185131.md",
-      "bytes": 16294
     }
   ],
   "broadcasts": [
