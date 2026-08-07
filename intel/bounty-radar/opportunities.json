@@ -20796,7 +20796,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785444320.3799741,
+      "checkedAt": 1786091808.6890144,
       "ok": true
     }
   },
@@ -20824,7 +20824,7 @@
     "bountyFitScore": 50,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785444320.3799741,
+      "checkedAt": 1786091808.6890144,
       "ok": true
     }
   },
@@ -20852,7 +20852,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785444320.3799741,
+      "checkedAt": 1786091808.6890144,
       "ok": true
     }
   },
@@ -20880,7 +20880,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785444320.3799741,
+      "checkedAt": 1786091808.6890144,
       "ok": true
     }
   },
@@ -20909,7 +20909,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785444320.3799741,
+      "checkedAt": 1786091808.6890144,
       "ok": true
     }
   },
@@ -20938,7 +20938,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785444320.3799741,
+      "checkedAt": 1786091808.6890144,
       "ok": true
     }
   },
@@ -20967,7 +20967,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785444320.3799741,
+      "checkedAt": 1786091808.6890144,
       "ok": true
     }
   },
@@ -20995,7 +20995,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785444320.3799741,
+      "checkedAt": 1786091808.6890144,
       "ok": true
     }
   },
@@ -21026,7 +21026,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785444320.3799741,
+      "checkedAt": 1786091808.6890144,
       "ok": true
     }
   },
@@ -21054,7 +21054,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785444320.3799741,
+      "checkedAt": 1786091808.6890144,
       "ok": true
     }
   },
@@ -21082,7 +21082,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785444320.3799741,
+      "checkedAt": 1786091808.6890144,
       "ok": true
     }
   },
@@ -21109,8 +21109,8 @@
     "vapeFitReason": "no smart-contract review scope tagged (web/mobile/other only) \u2014 outside VAPE's current tool coverage",
     "bountyFitScore": 0,
     "liveCheck": {
-      "consecutiveFailures": 2,
-      "checkedAt": 1785444320.3799741,
+      "consecutiveFailures": 3,
+      "checkedAt": 1786091808.6890144,
       "ok": false
     }
   },
@@ -21138,7 +21138,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785444320.3799741,
+      "checkedAt": 1786091808.6890144,
       "ok": true
     }
   },
@@ -21166,7 +21166,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785444320.3799741,
+      "checkedAt": 1786091808.6890144,
       "ok": true
     }
   },
@@ -21195,7 +21195,7 @@
     "bountyFitScore": 0,
     "liveCheck": {
       "consecutiveFailures": 0,
-      "checkedAt": 1785444320.3799741,
+      "checkedAt": 1786091808.6890144,
       "ok": true
     }
   },
