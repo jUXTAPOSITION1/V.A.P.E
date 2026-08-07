@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T07:12:30Z",
+  "generated": "2026-08-07T07:17:10Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 473,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 159,
     "investigations": 814,
-    "news": 80,
+    "news": 81,
     "tools": 16,
     "tools_verified": 16,
     "skills": 25
@@ -12134,6 +12134,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-07-jony-ive-s-moving-parts-donut-inside-openai-s-high-stakes-40.md",
+      "title": "Jony Ive\u2019s 'Moving Parts' Donut: Inside OpenAI\u2019s High-Stakes $400 Smart Speaker Gamble",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-07T07:17:09Z",
+      "published_et": "August 7, 2026 \u00b7 3:17 AM EDT",
+      "topic": "AI",
+      "dek": "A premium metal chassis and an Apple trade secrets lawsuit set the stage for ChatGPT\u2019s physical debut in 2027.",
+      "image": "assets/news-images/jony-ive-s-moving-parts-donut-inside-openai-s-high-stakes-40.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-07-jony-ive-s-moving-parts-donut-inside-openai-s-high-stakes-40.md"
+    },
+    {
       "file": "news-2026-08-07-block-s-bitcoin-margins-collapse-100-basis-points-after-cash.md",
       "title": "Block\u2019s Bitcoin Margins Collapse 100+ Basis Points After Cash App Fee Retreat",
       "byline": "VAPE Reporter",
@@ -12840,18 +12852,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-30-microsoft-onedrive-s-quiet-face-scanning-push-sparks-fresh-b.md"
-    },
-    {
-      "file": "news-2026-07-30-binance-us-plots-regulatory-rehabilitation-with-august-cftc-.md",
-      "title": "BINANCE.US PLOTS REGULATORY REHABILITATION WITH AUGUST CFTC PREDICTION MARKET BID",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-30 05:42 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "The embattled exchange looks to capture a slice of the booming US event-betting market while rebuilding its fractured relationship with federal derivatives regulators.",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-30-binance-us-plots-regulatory-rehabilitation-with-august-cftc-.md"
     }
   ],
   "tools": [

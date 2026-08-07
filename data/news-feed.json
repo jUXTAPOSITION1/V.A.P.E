@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T03:09:34Z",
+  "generated": "2026-08-07T07:15:21Z",
   "count": 60,
   "headlines": [
     {
@@ -75,14 +75,6 @@
       "crypto": true
     },
     {
-      "title": "Tom Lee Sees S&P 500 at 8,000, Names Ethereum the Next Rally Leader",
-      "url": "https://beincrypto.com/tom-lee-ethereum-magnificent-seven-rally/",
-      "source": "BeInCrypto",
-      "published": "Thu, 06 Aug 2026 23:43:00 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "New Zapscape KVM Flaw Could Let Privileged L1 Guest Code Escape to Linux Hosts",
       "url": "https://thehackernews.com/2026/08/new-zapscape-kvm-flaw-could-let.html",
       "source": "The Hacker News",
@@ -91,34 +83,10 @@
       "crypto": true
     },
     {
-      "title": "July Jobs Report Due Today: Will Bitcoin React Like Last Time?",
-      "url": "https://beincrypto.com/july-jobs-report-bitcoin-reaction/",
-      "source": "BeInCrypto",
-      "published": "Thu, 06 Aug 2026 23:13:00 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Block\u2019s total profits jumped 25%, masking a 31% profit drop inside its $1.8 billion Bitcoin arm",
-      "url": "https://cryptoslate.com/blocks-total-profits-jumped-25-last-quarter-masking-a-31-profit-drop-inside-its-1-8-billion-bitcoin-arm/",
-      "source": "CryptoSlate",
-      "published": "Thu, 06 Aug 2026 23:10:28 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Senate delays Clarity Act vote until after August recess, Thune confirms",
       "url": "https://www.theblock.co/post/411083/senate-delays-clarity-act-vote?utm_source=rss&utm_medium=rss",
       "source": "The Block",
       "published": "Thu, 06 Aug 2026 22:55:45 -0400",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Bezos\u2019s $4 Billion Amazon Sale Was Scheduled Before the Earnings Beat",
-      "url": "https://beincrypto.com/bezos-amazon-sale-trading-plan-timing/",
-      "source": "BeInCrypto",
-      "published": "Thu, 06 Aug 2026 22:46:09 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -139,26 +107,10 @@
       "crypto": true
     },
     {
-      "title": "Deutsche Telekom and SphereNet Is Helping Build Payment Rails for AI Agents",
-      "url": "https://beincrypto.com/deutsche-telekom-spherenet-ai-agent-payments/",
-      "source": "BeInCrypto",
-      "published": "Thu, 06 Aug 2026 22:38:01 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Sui to add post-quantum signature schemes for quantum-safe accounts",
       "url": "https://www.theblock.co/post/410968/sui-post-quantum-signature-scheme?utm_source=rss&utm_medium=rss",
       "source": "The Block",
       "published": "Thu, 06 Aug 2026 22:09:29 -0400",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "How a Nasdaq Bitcoin holder diluted investors by 98% without selling a single coin",
-      "url": "https://cryptoslate.com/how-a-nasdaq-bitcoin-holder-diluted-investors-by-98-without-selling-a-single-coin/",
-      "source": "CryptoSlate",
-      "published": "Thu, 06 Aug 2026 22:05:33 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -195,34 +147,10 @@
       "crypto": true
     },
     {
-      "title": "Following primary loss, crypto PACs invest $1.5M in 3 US state races",
-      "url": "https://cointelegraph.com/news/crypto-pac-florida-alaska-wyoming-primary-races?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Thu, 06 Aug 2026 21:11:19 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Galaxy Digital lost $85M on crypto as its projected $80M in AI revenue must offset $3.5B AI investment",
-      "url": "https://cryptoslate.com/galaxy-digital-lost-85m-on-crypto-as-its-projected-80m-in-ai-revenue-must-offset-3-5b-ai-investment/",
-      "source": "CryptoSlate",
-      "published": "Thu, 06 Aug 2026 21:05:24 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Tokyo Tells Trump to Stop Meme-ing Mario",
       "url": "https://decrypt.co/375069/tokyo-trump-mario-naruto-pokemon-memes",
       "source": "Decrypt",
       "published": "Thu, 06 Aug 2026 21:01:03 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Bitcoin Network Warning: Developers Find Nearly 5,000 Vulnerabilities",
-      "url": "https://beincrypto.com/coldcard-bitcoin-security-flaws-red-team/",
-      "source": "BeInCrypto",
-      "published": "Thu, 06 Aug 2026 20:59:00 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -232,14 +160,6 @@
       "source": "The Hacker News",
       "published": "Thu, 06 Aug 2026 20:54:31 +0530",
       "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "Optimism Year 5 Outlook Raises 5 Red Flags for OP Holders",
-      "url": "https://beincrypto.com/optimism-year-5-outlook-op-holders/",
-      "source": "BeInCrypto",
-      "published": "Thu, 06 Aug 2026 20:53:39 +0000",
-      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -271,14 +191,6 @@
       "url": "https://bitcoinmagazine.com/news/barrasso-supports-clarity-act",
       "source": "Bitcoin Magazine",
       "published": "Thu, 06 Aug 2026 19:43:15 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Here\u2019s what happened in crypto today",
-      "url": "https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Thu, 06 Aug 2026 19:31:44 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -319,14 +231,6 @@
       "url": "https://decrypt.co/375058/openai-ai-agents-secretly-coordinated-hugging-face-hack",
       "source": "Decrypt",
       "published": "Thu, 06 Aug 2026 18:26:29 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Bitcoin ETF inflows surge after Coldcard hack, but link is unclear: Bloomberg analyst",
-      "url": "https://cointelegraph.com/news/bitcoin-etf-inflows-coldcard-hack-bloomberg-analyst?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Thu, 06 Aug 2026 18:17:57 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -403,14 +307,6 @@
       "crypto": true
     },
     {
-      "title": "Tether expands tokenization business into Saudi Arabia, starting with real estate",
-      "url": "https://www.coindesk.com/business/2026/08/06/tether-expands-tokenization-business-into-saudi-arabia-starting-with-real-estate",
-      "source": "CoinDesk",
-      "published": "Thu, 06 Aug 2026 16:10:04 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Hedge fund cyberattacks tied to BlackFile-linked UNC6671 extortion group",
       "url": "https://www.bleepingcomputer.com/news/security/hedge-fund-cyberattacks-tied-to-blackfile-linked-unc6671-extortion-group/",
       "source": "BleepingComputer",
@@ -427,14 +323,6 @@
       "crypto": true
     },
     {
-      "title": "Late Ondo founder\u2019s mother seeks control of company and removal of De Bode as CEO",
-      "url": "https://www.theblock.co/post/411006/late-ondo-founders-mother-seeks-control-of-company-and-removal-of-de-bode-as-ceo?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Thu, 06 Aug 2026 15:45:06 -0400",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Bitcoin ETF Inflows Surge Following $130M Coldcard Hack",
       "url": "https://bitcoinmagazine.com/news/bitcoin-etf-inflows-surge-following-hack",
       "source": "Bitcoin Magazine",
@@ -448,14 +336,6 @@
       "source": "TechCrunch AI",
       "published": "Thu, 06 Aug 2026 15:10:32 +0000",
       "topic": "AI",
-      "crypto": true
-    },
-    {
-      "title": "Crypto for Advisors: Europe's crypto rules, U.S. Preview",
-      "url": "https://www.coindesk.com/coindesk-indices/2026/08/06/crypto-for-advisors-europe-s-crypto-rules-u-s-preview",
-      "source": "CoinDesk",
-      "published": "Thu, 06 Aug 2026 15:07:00 +0000",
-      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -480,6 +360,126 @@
       "source": "BleepingComputer",
       "published": "Thu, 06 Aug 2026 14:03:45 -0400",
       "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Amid legal battles, Suno says it will start watermarking songs",
+      "url": "https://techcrunch.com/2026/08/06/amid-legal-battles-suno-says-it-will-start-watermarking-songs/",
+      "source": "TechCrunch AI",
+      "published": "Thu, 06 Aug 2026 13:31:57 +0000",
+      "topic": "AI",
+      "crypto": true
+    },
+    {
+      "title": "Zero-Click AI Browser Hacking: Claude and ChatGPT Atlas Hijacked via Emails, X Posts",
+      "url": "https://www.securityweek.com/zero-click-ai-browser-hacking-claude-and-chatgpt-atlas-hijacked-via-emails-x-posts/",
+      "source": "SecurityWeek",
+      "published": "Thu, 06 Aug 2026 12:54:09 +0000",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Meta AI model hacked a company during misconfigured cyber test",
+      "url": "https://www.bleepingcomputer.com/news/security/meta-ai-model-hacked-a-company-during-misconfigured-cyber-test/",
+      "source": "BleepingComputer",
+      "published": "Thu, 06 Aug 2026 12:11:39 -0400",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Podcast: Compliance Won\u2019t Save You: The Future of Cyber Risk with Edna Conway",
+      "url": "https://www.securityweek.com/podcast-compliance-wont-save-you-the-future-of-cyber-risk-with-edna-conway/",
+      "source": "SecurityWeek",
+      "published": "Thu, 06 Aug 2026 12:00:00 +0000",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Critical Paperclip Flaw Allowed Admin Access, Code Execution",
+      "url": "https://www.securityweek.com/critical-paperclip-flaw-allowed-admin-access-code-execution/",
+      "source": "SecurityWeek",
+      "published": "Thu, 06 Aug 2026 11:09:11 +0000",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Meta AI Hacked External Systems During Cybersecurity Testing",
+      "url": "https://www.securityweek.com/meta-ai-hacked-external-systems-during-cybersecurity-testing/",
+      "source": "SecurityWeek",
+      "published": "Thu, 06 Aug 2026 09:56:26 +0000",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Small Business Forum\u2019s Report to Congress Highlights Recommendations to Improve Capital-Raising Policy",
+      "url": "https://www.sec.gov/newsroom/press-releases/2026-70-small-business-forums-report-congress-highlights-recommendations-improve-capital-raising-policy",
+      "source": "SEC Press Releases",
+      "published": "Mon, 27 Jul 2026 15:59:17 -0400",
+      "topic": "Regulation",
+      "crypto": true
+    },
+    {
+      "title": "Lessons Learned from CISA\u2019s Recent GitHub Leak",
+      "url": "https://krebsonsecurity.com/2026/07/lessons-learned-from-cisas-recent-github-leak/",
+      "source": "Krebs on Security",
+      "published": "Mon, 13 Jul 2026 15:03:28 +0000",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Former OpenAI researcher predicts brain-controlled AI coding agents by 2027",
+      "url": "https://cryptoslate.com/former-openai-researcher-predicts-brain-controlled-ai-coding-agents-by-2027/",
+      "source": "CryptoSlate",
+      "published": "Fri, 07 Aug 2026 07:00:35 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Critical Vulnerabilities Patched With Chrome 151 Update",
+      "url": "https://www.securityweek.com/critical-vulnerabilities-patched-with-chrome-151-update/",
+      "source": "SecurityWeek",
+      "published": "Fri, 07 Aug 2026 06:56:56 +0000",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Real-World Asset Deposits Jump to $7.4 Billion Through DeFi Downturn",
+      "url": "https://beincrypto.com/rwa-deposits-defi-tokenized-assets-growth/",
+      "source": "BeInCrypto",
+      "published": "Fri, 07 Aug 2026 06:55:27 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "CoinDesk owner Bullish volume fell 43%, but a 72% spread jump nearly offset the annual decline",
+      "url": "https://cryptoslate.com/coindesk-owner-bullish-volume-fell-43-but-a-72-spread-jump-nearly-offset-the-annual-decline/",
+      "source": "CryptoSlate",
+      "published": "Fri, 07 Aug 2026 06:00:39 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Government Auditors Question Evidence Behind DOGE\u2019s $110 Billion Savings Claim",
+      "url": "https://beincrypto.com/doge-savings-gao-audit-wall-receipts/",
+      "source": "BeInCrypto",
+      "published": "Fri, 07 Aug 2026 05:46:52 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin whales load up on $1.2 billion in BTC as ETFs attract $750 million",
+      "url": "https://www.coindesk.com/markets/2026/08/07/bitcoin-whales-load-up-on-usd1-2-billion-in-btc-as-etfs-attract-usd750-million",
+      "source": "CoinDesk",
+      "published": "Fri, 07 Aug 2026 05:45:21 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Japan FSA asks crypto exchanges to impose withdrawal delays to fight scams",
+      "url": "https://cointelegraph.com/news/japan-fsa-crypto-exchanges-withdrawal-delays-scams?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Fri, 07 Aug 2026 05:24:38 +0000",
+      "topic": "Crypto Markets",
       "crypto": true
     }
   ]
