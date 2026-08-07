@@ -223,3 +223,4 @@
 {"ts": "2026-08-07T02:13:51.116615Z", "address": "0x1a44233fae8d50f1aeb3a5d58dd426ff4814cb53", "chain": "8453", "symbol": "QUID", "name": "Squid", "source": "base_trending", "offering": "rug_pull_alert"}
 {"ts": "2026-08-07T06:09:54.753127Z", "address": "0x940181a94a35a4569e4529a3cdfb74e38fd98631", "chain": "8453", "symbol": "AERO", "name": "Aerodrome", "source": "base_trending", "offering": "token_chart"}
 {"ts": "2026-08-07T07:12:30.016747Z", "address": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf", "chain": "8453", "symbol": "VVV", "name": "Venice Token", "source": "base_trending", "offering": "token_chart"}
+{"ts": "2026-08-07T08:15:00.842059Z", "address": "0x0b3e328455c4059eeb9e3f84b5543f74e24e7e1b", "chain": "8453", "symbol": "VIRTUAL", "name": "VIRTUAL", "source": "base_trending", "offering": "token_chart"}
