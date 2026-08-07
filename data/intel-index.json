@@ -1,13 +1,13 @@
 {
-  "generated": "2026-08-07T13:06:31Z",
+  "generated": "2026-08-07T13:07:49Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 480,
     "reports_by_type": {
-      "security": 82,
-      "bounty": 140,
+      "bounty": 141,
       "sentiment": 51,
       "base": 95,
+      "security": 81,
       "macro": 24,
       "bug": 5,
       "mainnet": 5,
@@ -37,15 +37,15 @@
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-125923-0x514CaDd2.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-08-07-13.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-08-07T13:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260807_130639.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-07T13:06:39Z",
       "threat": null,
-      "summary": "The current threat landscape shows a HIGH level with 4 incidents in the last 7 days and 1 incident exceeding $50M in the last 14 days. The feed lists 15 total incidents, dominated by smaller losses under $1M on chains such as BSC (price manipulation attacks on LOOPSDAO, MOKE, LULA), Ethereum (flashloan on Projekt, malicious contracts on S",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-07-13.md",
-      "bytes": 6654
+      "summary": "Cycle: 20260807130639 \u00b7 Data timestamp (UTC): 2026-08-07T13:06:44Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260807_130639.md",
+      "bytes": 16027
     }
   },
   "investigations": [
@@ -11470,15 +11470,15 @@
   ],
   "reports": [
     {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-08-07-13.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-08-07T13:00Z",
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260807_130639.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-07T13:06:39Z",
       "threat": null,
-      "summary": "The current threat landscape shows a HIGH level with 4 incidents in the last 7 days and 1 incident exceeding $50M in the last 14 days. The feed lists 15 total incidents, dominated by smaller losses under $1M on chains such as BSC (price manipulation attacks on LOOPSDAO, MOKE, LULA), Ethereum (flashloan on Projekt, malicious contracts on S",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-07-13.md",
-      "bytes": 6654
+      "summary": "Cycle: 20260807130639 \u00b7 Data timestamp (UTC): 2026-08-07T13:06:44Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260807_130639.md",
+      "bytes": 16027
     },
     {
       "kind": "bounty",
