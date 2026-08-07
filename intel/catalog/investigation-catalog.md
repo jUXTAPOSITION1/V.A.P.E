@@ -1447,3 +1447,5 @@
 | 2026-08-07 | auto | 0xC08B04733dBBc92369872000A547954F7449FaB5 (BSB) | deep_investigation | REJECT (32/100) | Low holder count (151) | +7d |
 
 | 2026-08-07 | auto | 0x9EC378b1935c8ceCaA31fe343e4fdb1e2344636C (1F916) | deep_investigation | REJECT (2/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-07 | auto | 0x0dE085831b467D3228d485c5E91C506dF1208e06 (1F916) | deep_investigation | REJECT (32/100) | Upgradeable proxy (verify implementation) | +7d |

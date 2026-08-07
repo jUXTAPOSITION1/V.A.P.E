@@ -749,3 +749,4 @@
 {"ts": "2026-08-07T09:49:29.066157Z", "target": "aave-v3", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-07T10:21:18.582120Z", "target": "arbitrum", "hired": ["chain_fees"], "paid": 1, "cost_usd": 0.01, "daily_target": 63}
 {"ts": "2026-08-07T10:52:30.695257Z", "target": "0xbF927b841994731C573BDF09ceB0c6B0Aa887cDd", "hired": ["dossier_check"], "paid": 1, "cost_usd": 0.1, "daily_target": 63}
+{"ts": "2026-08-07T11:24:38.808078Z", "target": "0x01cA5ACf53D0a18943dAe0dd6C08B88e62ad0BA3", "hired": ["token_chart"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
