@@ -2144,6 +2144,25 @@
     "symbol": "Ferret",
     "times_investigated": 1
   },
+  "1:0x3183214919ee829446fd12695c5e9e09c47bb01d": {
+    "address": "0x3183214919ee829446fD12695c5e9E09C47bb01d",
+    "chain": "1",
+    "creator_address": "0x0b591daceaae21d7688fa8dfddb8672171a9b8cb",
+    "first_investigated": "2026-08-07T14:36:13Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260807-143613-0x31832149.md",
+        "score": 0,
+        "ts": "2026-08-07T14:36:13Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-07T14:36:13Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "MOMO",
+    "times_investigated": 1
+  },
   "1:0x31fcdee0aea658e0f7a3d275fd126f6faf3b6d82": {
     "address": "0x31fcdee0aEa658E0F7A3D275fD126f6faf3b6D82",
     "chain": "1",

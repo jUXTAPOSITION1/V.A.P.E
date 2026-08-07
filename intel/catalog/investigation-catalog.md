@@ -1465,3 +1465,5 @@
 | 2026-08-07 | auto | 0x1884daA51E761519d847E19b367ad1ba164370be (InfiniteMonkey) | deep_investigation | REJECT (35/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
 
 | 2026-08-07 | auto | 0x58e0893DC6d7E875547Bc1f6D034FF443d9F2F52 (AS) | deep_investigation | CAUTION (52/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-07 | auto | 0x3183214919ee829446fD12695c5e9E09C47bb01d (MOMO) | deep_investigation | REJECT (0/100) | Owner can change balances (rug surface) | +7d |
