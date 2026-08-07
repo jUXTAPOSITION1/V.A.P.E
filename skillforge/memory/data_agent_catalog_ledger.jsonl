@@ -778,3 +778,4 @@
 {"ts": "2026-08-07T21:15:48.678542Z", "target": "0x1Bdf71EDe1a4777dB1EebE7232BcdA20d6FC1610", "hired": ["liquidity_check"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-07T21:47:32.058786Z", "target": "gate", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-07T22:02:48.051836Z", "target": "grove-finance", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
+{"ts": "2026-08-07T22:18:26.419189Z", "target": "aerodrome-v1", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
