@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T13:47:37Z",
+  "generated": "2026-08-07T14:04:34Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 481,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 161,
-    "investigations": 831,
+    "investigations": 832,
     "news": 83,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260807-133126-0x1884daA5.md",
-      "title": "Investigation \u2014 InfiniteMonkey",
-      "symbol": "InfiniteMonkey",
-      "name": "Infinite Monkey: POAYFPKWSKCHB",
-      "date": "2026-08-07T13:31:26Z",
-      "target": "0x1884daA51E761519d847E19b367ad1ba164370be",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "35",
-      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $22,787; [-10] Violent 24h move +3244% (volatility/manipulation); [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anon",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-133126-0x1884daA5.md"
+      "file": "investigation-20260807-140425-0x58e0893D.md",
+      "title": "Investigation \u2014 AS",
+      "symbol": "AS",
+      "name": "AS Token",
+      "date": "2026-08-07T14:04:25Z",
+      "target": "0x58e0893DC6d7E875547Bc1f6D034FF443d9F2F52",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "52",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $30,637. Positive evidence: 9807 holders \u2014 reasonably distribut",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-140425-0x58e0893D.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260807-140425-0x58e0893D.md",
+      "title": "Investigation \u2014 AS",
+      "symbol": "AS",
+      "name": "AS Token",
+      "date": "2026-08-07T14:04:25Z",
+      "target": "0x58e0893DC6d7E875547Bc1f6D034FF443d9F2F52",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "52",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $30,637. Positive evidence: 9807 holders \u2014 reasonably distribut",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-140425-0x58e0893D.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260807-133126-0x1884daA5.md",
@@ -13187,7 +13201,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49653133",
+      "version": "49660881",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -13197,7 +13211,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.77 eth_dom 10.07 mcap_chg_24h 0.31",
+      "version": "btc_dom 56.74 eth_dom 10.1 mcap_chg_24h 0.81",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -13217,7 +13231,7 @@
       "name": "wallet_trace",
       "tier": "recon",
       "status": "verified",
-      "version": "0x686edcd5dba1 www.appswebstore.com/earn-solana/ 1000.0 from 0x20ad2b4b to 0x833",
+      "version": "0x5b346ed4d15c Unicorn 4734.19 from 0x009db6fb to 0x833589fc",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": false,
