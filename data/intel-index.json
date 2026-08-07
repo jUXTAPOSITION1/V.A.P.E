@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T09:53:39Z",
+  "generated": "2026-08-07T10:03:39Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 477,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 160,
     "investigations": 822,
-    "news": 81,
+    "news": 82,
     "tools": 16,
     "tools_verified": 16,
     "skills": 25
@@ -12246,6 +12246,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-07-ai-hunters-expose-triple-9-9-critical-flaws-in-cisco-s-enter.md",
+      "title": "AI Hunters Expose Triple 9.9 Critical Flaws in Cisco's Enterprise SD-WAN and IOS XE",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-07T10:03:38Z",
+      "published_et": "August 7, 2026 \u00b7 6:03 AM EDT",
+      "topic": "Cybersecurity",
+      "dek": "A sweeping internal audit powered by frontier AI models uncovers 12 severe vulnerabilities in core routing infrastructure before attackers can weaponize them.",
+      "image": "assets/news-images/ai-hunters-expose-triple-9-9-critical-flaws-in-cisco-s-enter.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-07-ai-hunters-expose-triple-9-9-critical-flaws-in-cisco-s-enter.md"
+    },
+    {
       "file": "news-2026-08-07-jony-ive-s-moving-parts-donut-inside-openai-s-high-stakes-40.md",
       "title": "Jony Ive\u2019s 'Moving Parts' Donut: Inside OpenAI\u2019s High-Stakes $400 Smart Speaker Gamble",
       "byline": "VAPE Reporter",
@@ -12952,18 +12964,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-30-robinhood-posts-best-quarter-ever-as-prediction-market-and-r.md"
-    },
-    {
-      "file": "news-2026-07-30-microsoft-onedrive-s-quiet-face-scanning-push-sparks-fresh-b.md",
-      "title": "Microsoft OneDrive\u2019s Quiet Face-Scanning Push Sparks Fresh Biometric Privacy Backlash",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-30 08:27 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "A newly deployed Windows feature prompting users to scan and group photos by facial recognition reignites the debate over big tech\u2019s biometric data collection.",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-30-microsoft-onedrive-s-quiet-face-scanning-push-sparks-fresh-b.md"
     }
   ],
   "tools": [
