@@ -253,3 +253,84 @@ export async function fulfill(offering: HandlerName, req: Requirement, env: any)
     return { offering, status: "error", error: String(e?.message || e) };
   }
 }
+
+// Shared input schema for all 6 offerings above -- both index.ts's
+// PAID_ROUTES and mcpServer.ts's MCP tool registration use this exact
+// object rather than each keeping their own copy.
+export const ADDRESS_INPUT_SCHEMA = {
+  properties: {
+    address: { type: "string", description: "Base (chain 8453) contract/token address to analyze" },
+    chain: { type: "string", description: "optional chain id override, defaults to 8453" },
+  },
+  required: ["address"],
+};
+
+// Single source of truth for these 6 offerings' price/description/output --
+// index.ts's PAID_ROUTES (HTTP /scan/<name> discovery + x402 gate) and
+// mcpServer.ts's paid MCP tools both import these directly rather than each
+// keeping their own copy, so a price or description change here can never
+// drift between the HTTP and MCP surfaces for the same offering. Prices
+// match data/reputation.json exactly -- this pair of tables is the payment
+// surface's source of truth, not a second one; if prices change there,
+// update here.
+export const OFFERING_PRICES: Record<HandlerName, string> = {
+  exploit_check: "$0.01",
+  token_safety_check: "$0.02",
+  liquidity_check: "$0.02",
+  rug_pull_alert: "$0.03",
+  market_intel: "$0.07",
+  dossier_check: "$0.10",
+};
+
+// Per-offering discovery metadata for the x402 Bazaar (see
+// x402-foundation/x402#2112 — Bazaar indexing has open, unresolved bugs even
+// for correctly-implemented services, and may require a CDP-provisioned
+// payout wallet rather than VAPE's external ACP EOA; this is a best-effort
+// announcement, not a guaranteed listing) and, since this round, the MCP
+// tools' own descriptions in mcpServer.ts. Mirrors the real output shape of
+// each handler above exactly — no invented fields.
+export const OFFERING_DISCOVERY: Record<HandlerName, { description: string; output: Record<string, unknown> }> = {
+  exploit_check: {
+    description: "Contract verification + proxy-swap surface check.",
+    output: { address: "0x...", verified: true, contract_name: "Token", proxy: false },
+  },
+  token_safety_check: {
+    description: "Full token safety + liquidity scan with a weighted 0-100 risk score.",
+    output: { address: "0x...", verdict: "PROCEED", score: 82, flags: [] },
+  },
+  liquidity_check: {
+    description: "Liquidity depth + top pair DEX for a Base token.",
+    output: { address: "0x...", liquidity_usd: 500000, top_pair_dex: "aerodrome", verdict: "PROCEED" },
+  },
+  rug_pull_alert: {
+    description: "Owner-power / rug-risk flags (mint, blacklist, pausable transfers, LP concentration).",
+    output: { address: "0x...", rug_risk: "LOW", owner_powers: [], verdict: "PROCEED" },
+  },
+  dossier_check: {
+    description: "VAPE's deepest instant verdict: weighted 0-100 risk score, meme-factory-template "
+      + "detection, recent-hack correlation, public web-reputation search, a live check of the "
+      + "project's declared socials, and a frontier-LLM quick read of the verified source.",
+    output: { address: "0x...", symbol: "TOKEN", name: "Token Name", score: 82, verdict: "PROCEED", reasons: [], positive_signals: [],
+              categories: { "Contract Security & Controls": { weight: 0.25, score: 90, rationale: "..." } },
+              verified: true, meme_factory_template: false, hack_correlation: [],
+              web_reputation: { checked: true, flagged: false }, social_verification: { declared_count: 2 },
+              ai_review: { available: true, provider: "gemini", summary: "..." } },
+  },
+  market_intel: {
+    description: "Base TVL with 24h/7d change, per-protocol share/category breakdown, "
+      + "concentration risk, 24h DEX volume, top gainers/losers, ETH/BTC prices, "
+      + "Fear & Greed index, global market cap, and a real-data narrative summary.",
+    output: {
+      base_tvl_usd: 4100000000, base_tvl_24h_change_pct: 1.8, dex_volume_24h_usd: 210000000,
+      top_protocols: [{ name: "Morpho", tvl_usd: 900000000, share_of_base_pct: 22.0, category: "Lending", change_24h_pct: 2.1 }],
+      category_breakdown_pct: { Lending: 34.2, Dexes: 21.5 },
+      concentration_risk: "MEDIUM — top 3 protocols hold 48.3% of Base TVL",
+      top_gainers_24h: [{ name: "Morpho", change_24h_pct: 2.1 }],
+      top_losers_24h: [],
+      prices: { ethereum: 3200.5, bitcoin: 97000.0 },
+      fear_greed: 54, fear_greed_classification: "Neutral",
+      global_market_cap_usd: 2500000000000, global_market_cap_change_24h_pct: 0.6,
+      market_overview: "Base TVL sits at $4,100,000,000, up 1.8% over 24h. Lending leads the ecosystem at 34.2% of TVL...",
+    },
+  },
+};

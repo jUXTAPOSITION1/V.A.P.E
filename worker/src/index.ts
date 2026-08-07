@@ -30,7 +30,7 @@ import { ExactSvmScheme } from "@x402/svm/exact/server";
 import { declareDiscoveryExtension, bazaarResourceServerExtension } from "@x402/extensions/bazaar";
 import { buildOpenApiDocument, guidance, type PaidRoute } from "./lib/openapiSpec";
 import { FAVICON_PNG, FAVICON_CONTENT_TYPE } from "./lib/favicon";
-import { fulfill, type HandlerName } from "./handlers";
+import { fulfill, OFFERING_PRICES, OFFERING_DISCOVERY, ADDRESS_INPUT_SCHEMA, type HandlerName } from "./handlers";
 import { DL_OFFERINGS, fulfillData, type DlQuery } from "./dataHandlers";
 import { generateCdpJwt } from "./lib/cdpAuth";
 import { getPortfolio, getNftsForOwner, getNetworkStatus } from "./lib/alchemy";
@@ -45,6 +45,8 @@ import { reviewWebsite } from "./lib/websiteReview";
 import { researchQuery } from "./lib/webSourcer";
 import { logJob, getStats, getSubDailyStats, queryFeed, type KVLike, type JobRecord, type FeedSort } from "./lib/jobLog";
 import { DirectCdpFacilitatorClient } from "./lib/facilitatorClient";
+import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
+import { buildMcpServer } from "./mcpServer";
 import type { Context } from "hono";
 
 // CAIP-2 chain identifier, e.g. "eip155:8453" (Base) or "eip155:84532" (Base Sepolia).
@@ -197,17 +199,6 @@ function buildCreateAuthHeaders(env: Env) {
   });
 }
 
-// Prices match data/reputation.json exactly — this file is the payment
-// surface, not a second source of truth; if prices change there, update here.
-const OFFERING_PRICES: Record<HandlerName, string> = {
-  exploit_check: "$0.01",
-  token_safety_check: "$0.02",
-  liquidity_check: "$0.02",
-  rug_pull_alert: "$0.03",
-  market_intel: "$0.07",
-  dossier_check: "$0.10",
-};
-
 // Same V-mark asset as docs/index.html's <link rel="icon">, but the 512px
 // render rather than the 32px browser-tab favicon: directories like
 // x402scan.com render this iconUrl as a large profile-page avatar (confirmed
@@ -215,59 +206,6 @@ const OFFERING_PRICES: Record<HandlerName, string> = {
 // what made it look fuzzy), not a 16-32px tab icon. icon-512.png is the same
 // V mark at a resolution that stays crisp at avatar size.
 const ICON_URL = "https://juxtaposition1.github.io/V.A.P.E/assets/icon-512.png";
-
-// Per-offering discovery metadata for the x402 Bazaar (see
-// x402-foundation/x402#2112 — Bazaar indexing has open, unresolved bugs even
-// for correctly-implemented services, and may require a CDP-provisioned
-// payout wallet rather than VAPE's external ACP EOA; this is a best-effort
-// announcement, not a guaranteed listing). Mirrors the real output shape of
-// each agents/acp_fulfill.py / worker/src/handlers.ts handler exactly — no
-// invented fields.
-const OFFERING_DISCOVERY: Record<HandlerName, { description: string; output: Record<string, unknown> }> = {
-  exploit_check: {
-    description: "Contract verification + proxy-swap surface check.",
-    output: { address: "0x...", verified: true, contract_name: "Token", proxy: false },
-  },
-  token_safety_check: {
-    description: "Full token safety + liquidity scan with a weighted 0-100 risk score.",
-    output: { address: "0x...", verdict: "PROCEED", score: 82, flags: [] },
-  },
-  liquidity_check: {
-    description: "Liquidity depth + top pair DEX for a Base token.",
-    output: { address: "0x...", liquidity_usd: 500000, top_pair_dex: "aerodrome", verdict: "PROCEED" },
-  },
-  rug_pull_alert: {
-    description: "Owner-power / rug-risk flags (mint, blacklist, pausable transfers, LP concentration).",
-    output: { address: "0x...", rug_risk: "LOW", owner_powers: [], verdict: "PROCEED" },
-  },
-  dossier_check: {
-    description: "VAPE's deepest instant verdict: weighted 0-100 risk score, meme-factory-template "
-      + "detection, recent-hack correlation, public web-reputation search, a live check of the "
-      + "project's declared socials, and a frontier-LLM quick read of the verified source.",
-    output: { address: "0x...", symbol: "TOKEN", name: "Token Name", score: 82, verdict: "PROCEED", reasons: [], positive_signals: [],
-              categories: { "Contract Security & Controls": { weight: 0.25, score: 90, rationale: "..." } },
-              verified: true, meme_factory_template: false, hack_correlation: [],
-              web_reputation: { checked: true, flagged: false }, social_verification: { declared_count: 2 },
-              ai_review: { available: true, provider: "gemini", summary: "..." } },
-  },
-  market_intel: {
-    description: "Base TVL with 24h/7d change, per-protocol share/category breakdown, "
-      + "concentration risk, 24h DEX volume, top gainers/losers, ETH/BTC prices, "
-      + "Fear & Greed index, global market cap, and a real-data narrative summary.",
-    output: {
-      base_tvl_usd: 4100000000, base_tvl_24h_change_pct: 1.8, dex_volume_24h_usd: 210000000,
-      top_protocols: [{ name: "Morpho", tvl_usd: 900000000, share_of_base_pct: 22.0, category: "Lending", change_24h_pct: 2.1 }],
-      category_breakdown_pct: { Lending: 34.2, Dexes: 21.5 },
-      concentration_risk: "MEDIUM — top 3 protocols hold 48.3% of Base TVL",
-      top_gainers_24h: [{ name: "Morpho", change_24h_pct: 2.1 }],
-      top_losers_24h: [],
-      prices: { ethereum: 3200.5, bitcoin: 97000.0 },
-      fear_greed: 54, fear_greed_classification: "Neutral",
-      global_market_cap_usd: 2500000000000, global_market_cap_change_24h_pct: 0.6,
-      market_overview: "Base TVL sits at $4,100,000,000, up 1.8% over 24h. Lending leads the ecosystem at 34.2% of TVL...",
-    },
-  },
-};
 
 // A premium audit tier that genuinely can't complete inside a Worker's request
 // window (real recon + Slither + a frontier-model source review takes minutes,
@@ -406,13 +344,6 @@ type VapeRoute = PaidRoute & {
 };
 
 const SCAN_TAGS = ["security", "on-chain-forensics", "base"];
-const ADDRESS_INPUT_SCHEMA = {
-  properties: {
-    address: { type: "string", description: "Base (chain 8453) contract/token address to analyze" },
-    chain: { type: "string", description: "optional chain id override, defaults to 8453" },
-  },
-  required: ["address"],
-};
 const AUDIT_INPUT_SCHEMA = {
   properties: {
     address: { type: "string", description: "Base (chain 8453) contract/token address to audit" },
@@ -1073,7 +1004,14 @@ app.get("/admin/bazaar-validate", rateLimiter("bazaar-validate", 6, 300), async 
   }
 });
 
-app.use("*", async (c, next) => {
+// Shared by both the HTTP paid-route middleware below and the /mcp route --
+// one construction path for the resource server (facilitator client +
+// registered EVM/Solana schemes + Bazaar discovery extension), so HTTP and
+// MCP settlement can never drift onto two different facilitator configs.
+// Deliberately built fresh per call (never a module-level singleton) --
+// matches both this file's own existing per-request pattern and
+// mcpServer.ts's own stateless-mode requirement (see its docstring).
+function buildBaseResourceServer(env: Env) {
   // A from-scratch client, not @x402/core's own HTTPFacilitatorClient --
   // see DirectCdpFacilitatorClient's own docstring in lib/facilitatorClient.ts
   // for why: two separate live-tested attempts to wrap/monkeypatch
@@ -1088,7 +1026,7 @@ app.use("*", async (c, next) => {
   // CDP's REST API, so there is no wrapped instance to fail to intercept.
   // (Loses withBazaar()'s bazaar-discovery-index metadata -- acceptable,
   // that's not on the real-money verify/settle path this protects.)
-  const facilitatorClient = new DirectCdpFacilitatorClient(c.env.X402_FACILITATOR_URL, buildCreateAuthHeaders(c.env));
+  const facilitatorClient = new DirectCdpFacilitatorClient(env.X402_FACILITATOR_URL, buildCreateAuthHeaders(env));
 
   // CDP is the sole facilitator going forward — VAPOR's hybrid 50/50 split
   // and the isSiteTraffic/isDataAgentCdp/isDataAgentVapor traffic-routing
@@ -1097,16 +1035,23 @@ app.use("*", async (c, next) => {
   // infrastructure failure on CDP now surfaces directly rather than being
   // silently retried against a second facilitator, which stays simpler
   // while CDP's own settle path is what's actively being fixed.
-  const facilitatorUsed = (): "cdp" => "cdp";
-  const solanaNetwork = c.env.SOLANA_NETWORK;
-  const solanaConfigured = Boolean(solanaNetwork && c.env.SOLANA_PAY_TO_ADDRESS);
+  const solanaNetwork = env.SOLANA_NETWORK;
+  const solanaConfigured = Boolean(solanaNetwork && env.SOLANA_PAY_TO_ADDRESS);
   let resourceServer = new x402ResourceServer(facilitatorClient)
-    .register(c.env.X402_NETWORK, new ExactEvmScheme());
+    .register(env.X402_NETWORK, new ExactEvmScheme());
   if (solanaConfigured) {
     resourceServer = resourceServer.register(solanaNetwork as Caip2Network, new ExactSvmScheme());
   }
+  resourceServer = resourceServer.registerExtension(bazaarResourceServerExtension);
+  return resourceServer;
+}
+
+app.use("*", async (c, next) => {
+  const facilitatorUsed = (): "cdp" => "cdp";
+  const solanaNetwork = c.env.SOLANA_NETWORK;
+  const solanaConfigured = Boolean(solanaNetwork && c.env.SOLANA_PAY_TO_ADDRESS);
+  let resourceServer = buildBaseResourceServer(c.env);
   resourceServer = resourceServer
-    .registerExtension(bazaarResourceServerExtension)
     // Fires once the facilitator confirms settlement — AFTER the
     // /scan/:offering handler below has already run and stashed its result
     // via c.set("vapeJobDraft", ...). This is the ONLY place the real
@@ -1162,6 +1107,26 @@ app.use("*", async (c, next) => {
   }
 
   return await paymentMiddleware(routes as any, resourceServer)(c, next);
+});
+
+// VAPE's agent-to-agent MCP surface — the same security/market-data
+// offerings above, reachable as real MCP tools (JSON-RPC over Streamable
+// HTTP) instead of a bespoke REST integration, so any MCP-native agent
+// (an x402MCPClient, a Cloudflare Agent, a Claude/Cursor host with a wallet
+// configured) can discover and pay for them directly. Not in `routes` above
+// -- the middleware's paymentMiddleware() only gates the paths it's given,
+// so this falls through to here untouched; payment happens inside
+// mcpServer.ts's own createPaymentWrapper()-wrapped tools instead, per-tool,
+// via MCP's own 402 JSON-RPC error convention rather than an HTTP 402.
+// Stateless mode (sessionIdGenerator: undefined) + a brand-new McpServer per
+// request -- see mcpServer.ts's docstring for why that's load-bearing, not
+// just convenient, on a shared-nothing runtime like Workers.
+app.all("/mcp", async (c) => {
+  const resourceServer = buildBaseResourceServer(c.env);
+  const server = await buildMcpServer(resourceServer, c.env as any);
+  const transport = new WebStandardStreamableHTTPServerTransport({ sessionIdGenerator: undefined });
+  await server.connect(transport);
+  return transport.handleRequest(c.req.raw);
 });
 
 for (const name of Object.keys(OFFERING_PRICES) as HandlerName[]) {
