@@ -11,10 +11,14 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "1.30.0",
+    "@solana/kit": "5.5.1",
+    "@solana/sysvars": "5.5.1",
     "@x402/core": "2.20.0",
     "@x402/evm": "2.20.0",
     "@x402/extensions": "2.20.0",
     "@x402/hono": "2.20.0",
+    "@x402/mcp": "2.20.0",
     "@x402/svm": "2.20.0",
     "hono": "4.13.0",
     "jose": "^6.2.8"

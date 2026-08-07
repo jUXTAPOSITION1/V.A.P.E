@@ -137,6 +137,38 @@ provider key and the same call silently upgrades from keyless to Tavily/Firecraw
 > blocked) — that is exactly why the keyed providers exist. Keyless **scrape** of
 > known URLs works well via the MCP `fetch` server.
 
+## Paid, agent-to-agent MCP surface (remote, x402)
+
+Added 2026-08-07: `worker/src/mcpServer.ts` exposes the same security suite
+and market-data catalog already sold at `/scan/<name>` and `/data/<name>`
+(see `docs/ACP_PROTOCOL.md`) as **real MCP tools**, reachable over
+Streamable HTTP at `POST /mcp` on the live Cloudflare Worker
+(`https://vape-x402.vapex402.workers.dev/mcp`) — no bespoke REST
+integration needed. Any MCP-native agent with an x402-capable client (e.g.
+`@x402/mcp`'s `x402MCPClient`/`createx402MCPClient`) can `tools/list` for
+free and then `tools/call` a priced tool, paying per call the same way the
+HTTP routes already do — real USDC on Base or Solana, settled through the
+same CDP facilitator, `PAY_TO_ADDRESS`, and `SOLANA_PAY_TO_ADDRESS` as
+every other paid surface on this Worker. Every MCP tool is a thin wrapper
+around the exact same handler the equivalent HTTP route calls
+(`handlers.ts::fulfill()`, `dataHandlers.ts::fulfillData()`) — one
+implementation, two transports, prices/schemas always in sync.
+
+Tools exposed: the 6 security offerings (`token_safety_check`,
+`liquidity_check`, `rug_pull_alert`, `exploit_check`, `market_intel`,
+`dossier_check`) and all 14 `/data/<name>` market-data offerings (see
+`docs/ACP_PROTOCOL.md`'s tables for current prices — MCP pricing always
+matches). Not yet wired: the async/bespoke offerings that don't go through
+`fulfill()`/`fulfillData()` (`bounty_deep_dive`, `deep_contract_audit`,
+`tx_decode`, `bulk_safety_bundle`, `community_intel_broadcast`,
+`website_review`) — a natural follow-up, not started here.
+
+This is a separate surface from the free stdio server above — that one
+stays exactly as-is (zero deps, free, local-first, the discovery/goodwill
+funnel), and requires no wallet to use. The remote MCP surface is the paid
+one, for agents (not humans in an IDE) that can actually sign and settle an
+x402 payment.
+
 ## Relationship to the old MCP layer
 
 `skillforge/mcp.py` (VAPE's original "Modular Connector Protocol" wrappers for

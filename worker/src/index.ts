@@ -45,6 +45,8 @@ import { reviewWebsite } from "./lib/websiteReview";
 import { researchQuery } from "./lib/webSourcer";
 import { logJob, getStats, getSubDailyStats, queryFeed, type KVLike, type JobRecord, type FeedSort } from "./lib/jobLog";
 import { DirectCdpFacilitatorClient } from "./lib/facilitatorClient";
+import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
+import { buildMcpServer } from "./mcpServer";
 import type { Context } from "hono";
 
 // CAIP-2 chain identifier, e.g. "eip155:8453" (Base) or "eip155:84532" (Base Sepolia).
@@ -1073,7 +1075,14 @@ app.get("/admin/bazaar-validate", rateLimiter("bazaar-validate", 6, 300), async 
   }
 });
 
-app.use("*", async (c, next) => {
+// Shared by both the HTTP paid-route middleware below and the /mcp route --
+// one construction path for the resource server (facilitator client +
+// registered EVM/Solana schemes + Bazaar discovery extension), so HTTP and
+// MCP settlement can never drift onto two different facilitator configs.
+// Deliberately built fresh per call (never a module-level singleton) --
+// matches both this file's own existing per-request pattern and
+// mcpServer.ts's own stateless-mode requirement (see its docstring).
+function buildBaseResourceServer(env: Env) {
   // A from-scratch client, not @x402/core's own HTTPFacilitatorClient --
   // see DirectCdpFacilitatorClient's own docstring in lib/facilitatorClient.ts
   // for why: two separate live-tested attempts to wrap/monkeypatch
@@ -1088,7 +1097,7 @@ app.use("*", async (c, next) => {
   // CDP's REST API, so there is no wrapped instance to fail to intercept.
   // (Loses withBazaar()'s bazaar-discovery-index metadata -- acceptable,
   // that's not on the real-money verify/settle path this protects.)
-  const facilitatorClient = new DirectCdpFacilitatorClient(c.env.X402_FACILITATOR_URL, buildCreateAuthHeaders(c.env));
+  const facilitatorClient = new DirectCdpFacilitatorClient(env.X402_FACILITATOR_URL, buildCreateAuthHeaders(env));
 
   // CDP is the sole facilitator going forward — VAPOR's hybrid 50/50 split
   // and the isSiteTraffic/isDataAgentCdp/isDataAgentVapor traffic-routing
@@ -1097,16 +1106,23 @@ app.use("*", async (c, next) => {
   // infrastructure failure on CDP now surfaces directly rather than being
   // silently retried against a second facilitator, which stays simpler
   // while CDP's own settle path is what's actively being fixed.
-  const facilitatorUsed = (): "cdp" => "cdp";
-  const solanaNetwork = c.env.SOLANA_NETWORK;
-  const solanaConfigured = Boolean(solanaNetwork && c.env.SOLANA_PAY_TO_ADDRESS);
+  const solanaNetwork = env.SOLANA_NETWORK;
+  const solanaConfigured = Boolean(solanaNetwork && env.SOLANA_PAY_TO_ADDRESS);
   let resourceServer = new x402ResourceServer(facilitatorClient)
-    .register(c.env.X402_NETWORK, new ExactEvmScheme());
+    .register(env.X402_NETWORK, new ExactEvmScheme());
   if (solanaConfigured) {
     resourceServer = resourceServer.register(solanaNetwork as Caip2Network, new ExactSvmScheme());
   }
+  resourceServer = resourceServer.registerExtension(bazaarResourceServerExtension);
+  return resourceServer;
+}
+
+app.use("*", async (c, next) => {
+  const facilitatorUsed = (): "cdp" => "cdp";
+  const solanaNetwork = c.env.SOLANA_NETWORK;
+  const solanaConfigured = Boolean(solanaNetwork && c.env.SOLANA_PAY_TO_ADDRESS);
+  let resourceServer = buildBaseResourceServer(c.env);
   resourceServer = resourceServer
-    .registerExtension(bazaarResourceServerExtension)
     // Fires once the facilitator confirms settlement — AFTER the
     // /scan/:offering handler below has already run and stashed its result
     // via c.set("vapeJobDraft", ...). This is the ONLY place the real
@@ -1162,6 +1178,26 @@ app.use("*", async (c, next) => {
   }
 
   return await paymentMiddleware(routes as any, resourceServer)(c, next);
+});
+
+// VAPE's agent-to-agent MCP surface — the same security/market-data
+// offerings above, reachable as real MCP tools (JSON-RPC over Streamable
+// HTTP) instead of a bespoke REST integration, so any MCP-native agent
+// (an x402MCPClient, a Cloudflare Agent, a Claude/Cursor host with a wallet
+// configured) can discover and pay for them directly. Not in `routes` above
+// -- the middleware's paymentMiddleware() only gates the paths it's given,
+// so this falls through to here untouched; payment happens inside
+// mcpServer.ts's own createPaymentWrapper()-wrapped tools instead, per-tool,
+// via MCP's own 402 JSON-RPC error convention rather than an HTTP 402.
+// Stateless mode (sessionIdGenerator: undefined) + a brand-new McpServer per
+// request -- see mcpServer.ts's docstring for why that's load-bearing, not
+// just convenient, on a shared-nothing runtime like Workers.
+app.all("/mcp", async (c) => {
+  const resourceServer = buildBaseResourceServer(c.env);
+  const server = await buildMcpServer(resourceServer, c.env as any);
+  const transport = new WebStandardStreamableHTTPServerTransport({ sessionIdGenerator: undefined });
+  await server.connect(transport);
+  return transport.handleRequest(c.req.raw);
 });
 
 for (const name of Object.keys(OFFERING_PRICES) as HandlerName[]) {
