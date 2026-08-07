@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T05:53:34Z",
+  "generated": "2026-08-07T06:09:55Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 473,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 159,
-    "investigations": 811,
+    "investigations": 812,
     "news": 80,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260807-055333-0x91234004.md",
-      "title": "Investigation \u2014 TRADOOR",
-      "symbol": "TRADOOR",
-      "name": "TRADOOR",
-      "date": "2026-08-07T05:53:33Z",
-      "target": "0x9123400446a56176Eb1B6BE9ee5CF703e409F492",
-      "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "70",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 104116 holders \u2014 reasonably distributed; Deep liquidity ($833,660); Trading 338+ days without a known incident in",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-055333-0x91234004.md"
+      "file": "investigation-20260807-060945-0x01cA5ACf.md",
+      "title": "Investigation \u2014 FORGE",
+      "symbol": "FORGE",
+      "name": "Forge",
+      "date": "2026-08-07T06:09:45Z",
+      "target": "0x01cA5ACf53D0a18943dAe0dd6C08B88e62ad0BA3",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "7",
+      "summary": "Risk factors: [-10] Owner not renounced (0xf45930620d727a222826729d4abc08cb2c6162a2) \u2014 can still act on the contract; [-8] Low holder count (141); [-15] Top 10 non-LP/burn holders control 85% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time;",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-060945-0x01cA5ACf.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260807-060945-0x01cA5ACf.md",
+      "title": "Investigation \u2014 FORGE",
+      "symbol": "FORGE",
+      "name": "Forge",
+      "date": "2026-08-07T06:09:45Z",
+      "target": "0x01cA5ACf53D0a18943dAe0dd6C08B88e62ad0BA3",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "7",
+      "summary": "Risk factors: [-10] Owner not renounced (0xf45930620d727a222826729d4abc08cb2c6162a2) \u2014 can still act on the contract; [-8] Low holder count (141); [-15] Top 10 non-LP/burn holders control 85% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time;",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-060945-0x01cA5ACf.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260807-055333-0x91234004.md",
@@ -12907,7 +12921,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49637555",
+      "version": "49646582",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -12917,7 +12931,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.59 eth_dom 10.07 mcap_chg_24h -0.55",
+      "version": "btc_dom 56.67 eth_dom 10.07 mcap_chg_24h -0.82",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,

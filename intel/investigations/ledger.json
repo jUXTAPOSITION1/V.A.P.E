@@ -1367,6 +1367,25 @@
     "symbol": "CTM",
     "times_investigated": 1
   },
+  "1:0x01ca5acf53d0a18943dae0dd6c08b88e62ad0ba3": {
+    "address": "0x01cA5ACf53D0a18943dAe0dd6C08B88e62ad0BA3",
+    "chain": "1",
+    "creator_address": "0xf45930620d727a222826729d4abc08cb2c6162a2",
+    "first_investigated": "2026-08-07T06:09:45Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260807-060945-0x01cA5ACf.md",
+        "score": 7,
+        "ts": "2026-08-07T06:09:45Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-07T06:09:45Z",
+    "last_score": 7,
+    "last_verdict": "REJECT",
+    "symbol": "FORGE",
+    "times_investigated": 1
+  },
   "1:0x02d47b47ec0f0cde925fb57e7a4d22a783717bd2": {
     "address": "0x02D47B47eC0f0cDE925FB57e7A4d22a783717bD2",
     "chain": "1",

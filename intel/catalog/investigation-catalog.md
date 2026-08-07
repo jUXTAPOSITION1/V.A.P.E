@@ -1423,3 +1423,5 @@
 | 2026-08-07 | auto | 0x667A36584De1d725373E07A6Aa3eAdB72fbD3224 (CC) | deep_investigation | CAUTION (70/100) | Top 10 non-LP/burn holders control 100% of supply — concentrated, easily manipul | +7d |
 
 | 2026-08-07 | auto | 0x9123400446a56176Eb1B6BE9ee5CF703e409F492 (TRADOOR) | deep_investigation | CAUTION (70/100) | Top 10 non-LP/burn holders control 89% of supply — concentrated, easily manipula | +7d |
+
+| 2026-08-07 | auto | 0x01cA5ACf53D0a18943dAe0dd6C08B88e62ad0BA3 (FORGE) | deep_investigation | REJECT (7/100) | Owner not renounced (0xf45930620d727a222826729d4abc08cb2c6162a2) — can still act | +7d |
