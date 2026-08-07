@@ -8214,6 +8214,25 @@
     "symbol": "Jesus",
     "times_investigated": 1
   },
+  "56:0xad97d6d4268b26ac08c5c30467faee96e9297777": {
+    "address": "0xAd97D6D4268B26aC08c5c30467FAEe96e9297777",
+    "chain": "56",
+    "creator_address": "0xb8697c1052056194201f2f78ee0d901c5bae6971",
+    "first_investigated": "2026-08-07T12:11:46Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260807-121146-0xAd97D6D4.md",
+        "score": 12,
+        "ts": "2026-08-07T12:11:46Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-07T12:11:46Z",
+    "last_score": 12,
+    "last_verdict": "REJECT",
+    "symbol": "BSB",
+    "times_investigated": 1
+  },
   "56:0xadf48b42be9a927dd35684e86927bb26d1957777": {
     "address": "0xAdf48B42BE9A927dD35684E86927BB26d1957777",
     "chain": "56",

@@ -1451,3 +1451,5 @@
 | 2026-08-07 | auto | 0x0dE085831b467D3228d485c5E91C506dF1208e06 (1F916) | deep_investigation | REJECT (32/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-07 | auto | 0x42907d9F7E3d4291C801BbD1F601066EB1dfA956 (BLEC) | deep_investigation | REJECT (27/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-07 | auto | 0xAd97D6D4268B26aC08c5c30467FAEe96e9297777 (BSB) | deep_investigation | REJECT (12/100) | Upgradeable proxy (verify implementation) | +7d |
