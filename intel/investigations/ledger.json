@@ -1160,6 +1160,25 @@
     "symbol": "EBCC",
     "times_investigated": 1
   },
+  "137:0xd70d796d782173ad35d5bf17b6c9b5517130e4e0": {
+    "address": "0xD70d796d782173aD35D5bF17B6c9b5517130e4E0",
+    "chain": "137",
+    "creator_address": "0x6e26fca1cdb1e5994ed06a2ec72fbcfea5ef2e59",
+    "first_investigated": "2026-08-07T07:59:46Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260807-075946-0xD70d796d.md",
+        "score": 0,
+        "ts": "2026-08-07T07:59:46Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-07T07:59:46Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "RISE",
+    "times_investigated": 1
+  },
   "137:0xd90b9773f9922a34f763087665b3a4649e710326": {
     "address": "0xD90b9773f9922A34F763087665B3A4649E710326",
     "chain": "137",

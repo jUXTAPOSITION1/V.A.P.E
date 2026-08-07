@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T07:50:57Z",
+  "generated": "2026-08-07T07:59:47Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 474,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 160,
-    "investigations": 816,
+    "investigations": 817,
     "news": 81,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260807-074350-0x9E00FC92.md",
-      "title": "Investigation \u2014 1F916",
-      "symbol": "1F916",
-      "name": "A Society For AI Agents",
-      "date": "2026-08-07T07:43:50Z",
-      "target": "0x9E00FC92493451EBA1c63DD3880D68b622037bA3",
-      "chain": "8453 (Base)",
+      "file": "investigation-20260807-075946-0xD70d796d.md",
+      "title": "Investigation \u2014 RISE",
+      "symbol": "RISE",
+      "name": "RISE Token",
+      "date": "2026-08-07T07:59:46Z",
+      "target": "0xD70d796d782173aD35D5bF17B6c9b5517130e4E0",
+      "chain": "137 (Polygon)",
       "verdict": "REJECT",
-      "score": "32",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Owner not renounced (0x660eaaedebc968f8f3694354fa8ec0b4c5ba8d12) \u2014 can still act on the contract; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +113% (volatility/manipulation); [-15] Pair only",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-074350-0x9E00FC92.md"
+      "score": "0",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: EBCC (0xd6a20E0E2d2399c925e315732E76538F3883a1d6) \u2014 REJECT 3/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-075946-0xD70d796d.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260807-075946-0xD70d796d.md",
+      "title": "Investigation \u2014 RISE",
+      "symbol": "RISE",
+      "name": "RISE Token",
+      "date": "2026-08-07T07:59:46Z",
+      "target": "0xD70d796d782173aD35D5bF17B6c9b5517130e4E0",
+      "chain": "137 (Polygon)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: EBCC (0xd6a20E0E2d2399c925e315732E76538F3883a1d6) \u2014 REJECT 3/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-075946-0xD70d796d.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260807-074350-0x9E00FC92.md",
