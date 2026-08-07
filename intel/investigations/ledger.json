@@ -43,6 +43,25 @@
     "symbol": "TAROT",
     "times_investigated": 1
   },
+  "10:0x296f55f8fb28e498b858d0bcda06d955b2cb3f97": {
+    "address": "0x296F55F8Fb28E498B858d0BcDA06D955B2Cb3f97",
+    "chain": "10",
+    "creator_address": "0x1d7c6783328c145393e84fb47a7f7c548f5ee28d",
+    "first_investigated": "2026-08-07T03:16:55Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260807-031655-0x296F55F8.md",
+        "score": 38,
+        "ts": "2026-08-07T03:16:55Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-07T03:16:55Z",
+    "last_score": 38,
+    "last_verdict": "REJECT",
+    "symbol": "STG",
+    "times_investigated": 1
+  },
   "10:0x375488f097176507e39b9653b88fdc52cde736bf": {
     "address": "0x375488F097176507e39B9653b88FDc52cDE736Bf",
     "chain": "10",

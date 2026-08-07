@@ -1413,3 +1413,5 @@
 | 2026-08-07 | auto | 0x03B30Efae20655B1315eD97Ef8c3b92E5667daB0 (SPCXB) | deep_investigation | REJECT (40/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
 
 | 2026-08-07 | auto | 0xd8a9812abbFE7129cE0eeb372a19F1C869fACf45 (SPCXB) | deep_investigation | REJECT (20/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |
+
+| 2026-08-07 | auto | 0x296F55F8Fb28E498B858d0BcDA06D955B2Cb3f97 (STG) | deep_investigation | REJECT (38/100) | Mintable supply (dilution risk) | +7d |
