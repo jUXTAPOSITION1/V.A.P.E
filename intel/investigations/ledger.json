@@ -11628,6 +11628,25 @@
     "symbol": "claude",
     "times_investigated": 2
   },
+  "8453:0x9e00fc92493451eba1c63dd3880d68b622037ba3": {
+    "address": "0x9E00FC92493451EBA1c63DD3880D68b622037bA3",
+    "chain": "8453",
+    "creator_address": "0x6a6fb757b09178de160a39e1d82c9626ebd2be41",
+    "first_investigated": "2026-08-07T07:43:50Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260807-074350-0x9E00FC92.md",
+        "score": 32,
+        "ts": "2026-08-07T07:43:50Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-07T07:43:50Z",
+    "last_score": 32,
+    "last_verdict": "REJECT",
+    "symbol": "1F916",
+    "times_investigated": 1
+  },
   "8453:0xa3d36e8b5ca7a74b95c6427e546da586de5607be": {
     "address": "0xA3d36e8B5cA7A74b95c6427e546dA586DE5607Be",
     "chain": "8453",

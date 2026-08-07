@@ -742,3 +742,4 @@
 {"ts": "2026-08-07T06:09:54.753442Z", "target": "0x940181a94a35a4569e4529a3cdfb74e38fd98631", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01, "daily_target": 63}
 {"ts": "2026-08-07T06:40:48.364525Z", "target": "okx", "hired": ["protocol_fees"], "paid": 1, "cost_usd": 0.01, "daily_target": 63}
 {"ts": "2026-08-07T07:12:30.017037Z", "target": "0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01, "daily_target": 63}
+{"ts": "2026-08-07T07:43:52.813158Z", "target": "ccip", "hired": ["treasury"], "paid": 1, "cost_usd": 0.01, "daily_target": 63}
