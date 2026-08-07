@@ -41,7 +41,11 @@ jobs:
 
       - name: Install worker deps
         working-directory: worker
-        run: npm ci
+        # --legacy-peer-deps: @x402/svm's transitive @solana/kit peer range
+        # doesn't yet recognize this repo's pinned typescript@7.0.2 -- see
+        # worker/README.md's Solana section. Every npm ci/install of this
+        # package.json needs the same flag.
+        run: npm ci --legacy-peer-deps
 
       - name: Run Python scan
         run: |
