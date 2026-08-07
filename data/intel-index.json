@@ -1,13 +1,13 @@
 {
-  "generated": "2026-08-07T00:39:51Z",
+  "generated": "2026-08-07T00:55:07Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 468,
+    "reports": 469,
     "reports_by_type": {
       "bounty": 134,
+      "sentiment": 50,
       "security": 81,
       "base": 92,
-      "sentiment": 49,
       "macro": 24,
       "bug": 5,
       "mainnet": 5,
@@ -11103,6 +11103,17 @@
       "bytes": 16559
     },
     {
+      "kind": "intel",
+      "type": "sentiment",
+      "file": "sentiment-2026-08-07-00.md",
+      "title": "Sentiment Sweep Report \u2014 2026-08-07 00:55 UTC",
+      "date": "2026-08-07T00:00Z",
+      "threat": null,
+      "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-08-07-00.md",
+      "bytes": 1609
+    },
+    {
       "kind": "bounty",
       "type": "bounty",
       "file": "bounty_report_20260806_215737.md",
@@ -11739,17 +11750,6 @@
       "summary": "Base mover: aeon / WETH +172% 24h (liq $992775.0614) \u2014 volatility/rug watch",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260803_162648.md",
       "bytes": 16043
-    },
-    {
-      "kind": "intel",
-      "type": "macro",
-      "file": "macro-2026-08-03-16.md",
-      "title": "Macro & Micro News Sweep Report",
-      "date": "2026-08-03T16:00Z",
-      "threat": null,
-      "summary": "Computed deterministically from real Fear & Greed (28, prior day 27) and global market cap 24h change (0.74%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-08-03-16.md",
-      "bytes": 2086
     }
   ],
   "broadcasts": [
