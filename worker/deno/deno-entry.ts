@@ -18,6 +18,8 @@ const env: Env = {
   GH_DISPATCH_TOKEN: Deno.env.get("GH_DISPATCH_TOKEN"),
   PAY_TO_ADDRESS: Deno.env.get("PAY_TO_ADDRESS") ?? "",
   X402_NETWORK: (Deno.env.get("X402_NETWORK") ?? "eip155:8453") as Env["X402_NETWORK"],
+  SOLANA_PAY_TO_ADDRESS: Deno.env.get("SOLANA_PAY_TO_ADDRESS"),
+  SOLANA_NETWORK: Deno.env.get("SOLANA_NETWORK") as Env["SOLANA_NETWORK"],
   X402_FACILITATOR_URL: Deno.env.get("X402_FACILITATOR_URL") ?? "https://api.cdp.coinbase.com/platform/v2/x402",
 };
 

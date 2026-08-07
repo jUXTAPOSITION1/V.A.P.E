@@ -26,6 +26,7 @@ import { cors } from "hono/cors";
 import { cache } from "hono/cache";
 import { paymentMiddleware, x402ResourceServer } from "@x402/hono";
 import { ExactEvmScheme } from "@x402/evm/exact/server";
+import { ExactSvmScheme } from "@x402/svm/exact/server";
 import { declareDiscoveryExtension, bazaarResourceServerExtension } from "@x402/extensions/bazaar";
 import { buildOpenApiDocument, guidance, type PaidRoute } from "./lib/openapiSpec";
 import { FAVICON_PNG, FAVICON_CONTENT_TYPE } from "./lib/favicon";
@@ -78,6 +79,15 @@ export interface Env {
   GROQ_API_KEY?: string;
   PAY_TO_ADDRESS: string;
   X402_NETWORK: Caip2Network;
+  // Solana settlement rail, added 2026-08-07 — CDP's same facilitator
+  // already settles the exact scheme on Solana (SPL USDC via @x402/svm), so
+  // this is a second real `accepts` option offered alongside Base on every
+  // paid route, not a separate facilitator/payment path. Optional: an unset
+  // SOLANA_PAY_TO_ADDRESS (e.g. a local/preview environment that hasn't
+  // configured it) means Solana is simply not offered that request, same
+  // "degrade gracefully" pattern the optional API-key vars below already use.
+  SOLANA_PAY_TO_ADDRESS?: string;
+  SOLANA_NETWORK?: Caip2Network;
   // CDP's hosted facilitator — the sole facilitator (see
   // lib/facilitatorClient.ts's DirectCdpFacilitatorClient). VAPOR's hybrid
   // 50/50 split was removed 2026-07-27 (explicit decision while diagnosing
@@ -235,6 +245,7 @@ const OFFERING_DISCOVERY: Record<HandlerName, { description: string; output: Rec
       + "detection, recent-hack correlation, public web-reputation search, a live check of the "
       + "project's declared socials, and a frontier-LLM quick read of the verified source.",
     output: { address: "0x...", symbol: "TOKEN", name: "Token Name", score: 82, verdict: "PROCEED", reasons: [], positive_signals: [],
+              categories: { "Contract Security & Controls": { weight: 0.25, score: 90, rationale: "..." } },
               verified: true, meme_factory_template: false, hack_correlation: [],
               web_reputation: { checked: true, flagged: false }, social_verification: { declared_count: 2 },
               ai_review: { available: true, provider: "gemini", summary: "..." } },
@@ -1087,8 +1098,14 @@ app.use("*", async (c, next) => {
   // silently retried against a second facilitator, which stays simpler
   // while CDP's own settle path is what's actively being fixed.
   const facilitatorUsed = (): "cdp" => "cdp";
-  const resourceServer = new x402ResourceServer(facilitatorClient)
-    .register(c.env.X402_NETWORK, new ExactEvmScheme())
+  const solanaNetwork = c.env.SOLANA_NETWORK;
+  const solanaConfigured = Boolean(solanaNetwork && c.env.SOLANA_PAY_TO_ADDRESS);
+  let resourceServer = new x402ResourceServer(facilitatorClient)
+    .register(c.env.X402_NETWORK, new ExactEvmScheme());
+  if (solanaConfigured) {
+    resourceServer = resourceServer.register(solanaNetwork as Caip2Network, new ExactSvmScheme());
+  }
+  resourceServer = resourceServer
     .registerExtension(bazaarResourceServerExtension)
     // Fires once the facilitator confirms settlement — AFTER the
     // /scan/:offering handler below has already run and stashed its result
@@ -1119,10 +1136,19 @@ app.use("*", async (c, next) => {
   // Built from the shared PAID_ROUTES catalog so the x402 gate and the
   // /openapi.json discovery document can never disagree about a route's price
   // or input schema (see PAID_ROUTES' comment for why that matters).
+  // `accepts` is an array (RouteConfig supports PaymentOption | PaymentOption[])
+  // so a buyer can settle via either rail -- Base/EVM stays first (the
+  // existing, proven path), Solana appended only when actually configured.
   const routes: Record<string, unknown> = {};
   for (const r of PAID_ROUTES) {
+    const accepts: Array<{ scheme: string; price: string; network: Caip2Network; payTo: string }> = [
+      { scheme: "exact", price: r.price, network: c.env.X402_NETWORK, payTo: c.env.PAY_TO_ADDRESS },
+    ];
+    if (solanaConfigured) {
+      accepts.push({ scheme: "exact", price: r.price, network: solanaNetwork as Caip2Network, payTo: c.env.SOLANA_PAY_TO_ADDRESS as string });
+    }
     routes[`GET ${r.path}`] = {
-      accepts: { scheme: "exact", price: r.price, network: c.env.X402_NETWORK, payTo: c.env.PAY_TO_ADDRESS },
+      accepts,
       description: r.description,
       serviceName: "VAPE",
       iconUrl: ICON_URL,

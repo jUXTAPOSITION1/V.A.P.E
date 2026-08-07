@@ -275,11 +275,31 @@ def _dossier_check(req):
         return assess
     verif = assess["verif"]
 
+    # Same weighted category breakdown the free investigation report's
+    # Scoring Dashboard renders (investigate._compute_category_scores()) —
+    # real gap this closes: dossier_check used to show only the flat
+    # score/verdict with no category view at all, a structurally different
+    # (and thinner) output than the free report for the exact same
+    # underlying score()/reasons/positive_signals, which is its own kind of
+    # inconsistency between VAPE's two verdict-bearing products. No
+    # project_narrative here (dossier_check has no equivalent of the free
+    # report's separate web-research step, and adding one would blow this
+    # offering's instant-response SLA) — Narrative/Transparency may score
+    # marginally differently than a full investigation report on the same
+    # token as a result, but every other category (Security/Liquidity/
+    # Holders/Longevity) is computed identically since it's the exact same
+    # deterministic reasons/positive_signals list.
+    categories = investigate._compute_category_scores(
+        assess["reasons"], assess["positive_signals"], dex=assess["dex"],
+        web_rep=assess["web_reputation"])
+
     result = {
         "address": a, "chain_id": chain, "symbol": assess["symbol"],
         "name": assess["dex"].get("name"),
         "score": assess["score"], "verdict": assess["verdict"],
         "reasons": assess["reasons"], "positive_signals": assess["positive_signals"],
+        "categories": {name: {"weight": cat["weight"], "score": cat["score"],
+                               "rationale": cat["rationale"]} for name, cat in categories.items()},
         "verified": verif.get("verified"), "contract_name": verif.get("name"),
         "proxy": verif.get("proxy"), "meme_factory_template": assess["meme_factory_template"],
         "hack_correlation": assess["hack_correlation"],

@@ -29,7 +29,17 @@ def _now():
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-GECKOTERMINAL_NETWORK = {8453: "base", 1: "eth", 42161: "arbitrum"}
+# Same 7 chains + GeckoTerminal network ids as agents/investigate.py's
+# EVM_CHAINS[*]["gecko"] (duplicated here rather than imported, same
+# established pattern as agents/data_agent.py's own CHAIN_META — keep both
+# in sync if a chain is ever added/renamed). Real gap this closes: this used
+# to stop at 3 of the 7 EVM chains VAPE otherwise tracks, so a real Polygon/
+# BNB/Optimism/Avalanche token silently got no liquidity/pool data here even
+# though every other part of the pipeline already knew about that chain.
+GECKOTERMINAL_NETWORK = {
+    8453: "base", 1: "eth", 42161: "arbitrum", 10: "optimism",
+    137: "polygon_pos", 56: "bsc", 43114: "avax",
+}
 
 
 def _get(url, timeout=15, retries=1):

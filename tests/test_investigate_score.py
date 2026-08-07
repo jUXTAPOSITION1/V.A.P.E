@@ -6,7 +6,7 @@ A clean-looking but anonymous/young/undistributed token must not earn a
 PROCEED just because nothing tripped a red flag. If a future change (human or
 self-improvement bot) ever regresses that, these tests fail loudly.
 """
-from agents.investigate import score, _stablecoin_context
+from agents.investigate import score, _stablecoin_context, _apply_confidence_gap_cap
 from tests.conftest import clean_gp, clean_dex, days_ago_ms
 
 
@@ -48,6 +48,70 @@ def test_honeypot_is_rejected():
     _s, verdict, reasons, _ = score(gp, clean_dex(), {"is_contract": True}, {})
     assert verdict == "REJECT"
     assert any("HONEYPOT" in r for r in reasons)
+
+
+def test_very_low_liquidity_is_not_double_counted():
+    """Real bug this pins (confirmed against a live report): liquidity < $10k
+    used to trip BOTH "Very low liquidity" (-25) and "Low liquidity" (-10)
+    since the second check's `< 50000` had no lower bound at the first
+    tier's own cutoff -- one real fact (liquidity is very low) penalized
+    twice. Every other tiered check in score() (holders, top-holder
+    concentration, pair age) already uses mutually exclusive bounded
+    ranges; this pins that liquidity now does too."""
+    gp = clean_gp()
+    dex = clean_dex(liquidity_usd=3)
+    _s, _verdict, reasons, _positives = score(gp, dex, {"is_contract": True}, {})
+    liquidity_reasons = [r for r in reasons if "liquidity" in r.lower() and "$3" in r]
+    assert len(liquidity_reasons) == 1, f"expected exactly one liquidity penalty, got {liquidity_reasons}"
+    assert "[-25]" in liquidity_reasons[0]  # the more severe tier wins, not both
+
+
+def test_confidence_gap_caps_proceed_to_caution():
+    """Real bug this pins (confirmed against a live report,
+    investigation-20260807-152512-0x72e4f9F8.md, BITCOIN/HarryPotterObamaSonic10Inu):
+    a 100/100 PROCEED score sat right next to the same report's own Gaps &
+    Confidence section rating independent confirmation of claimed CEX
+    listings/audit at only 30% confidence, and an Expert Assessment that
+    recommended only a small, high-risk speculative position. A low-confidence
+    gap on something material must pull the DISPLAYED score/verdict down, not
+    leave a perfect score standing next to a hedged conclusion."""
+    gaps = [{"description": "Independent confirmation of claimed CEX listings and audit",
+             "confidence": 0.3, "next_action": "Verify listings directly with exchanges"}]
+    s, verdict, reasons = _apply_confidence_gap_cap(100, "PROCEED", ["[+10] some positive signal"], gaps)
+    assert s == 69
+    assert verdict == "CAUTION"
+    assert any("[capped at 69]" in r for r in reasons)
+    assert any("30%" in r for r in reasons)
+
+
+def test_confidence_gap_cap_is_noop_when_confident():
+    """A gap with confidence >= 0.75 is not material enough to cap anything —
+    must be a pure no-op so well-supported reports aren't penalized for
+    routine, low-stakes follow-ups."""
+    gaps = [{"description": "Minor cosmetic detail", "confidence": 0.9, "next_action": "n/a"}]
+    reasons_in = ["[+10] some positive signal"]
+    s, verdict, reasons = _apply_confidence_gap_cap(100, "PROCEED", reasons_in, gaps)
+    assert s == 100
+    assert verdict == "PROCEED"
+    assert reasons == reasons_in
+
+
+def test_confidence_gap_cap_ignores_empty_gaps():
+    reasons_in = ["[+10] some positive signal"]
+    s, verdict, reasons = _apply_confidence_gap_cap(100, "PROCEED", reasons_in, [])
+    assert (s, verdict, reasons) == (100, "PROCEED", reasons_in)
+    s, verdict, reasons = _apply_confidence_gap_cap(100, "PROCEED", reasons_in, None)
+    assert (s, verdict, reasons) == (100, "PROCEED", reasons_in)
+
+
+def test_confidence_gap_cap_never_raises_score():
+    """A low-confidence gap on an already-low score must never push it UP to
+    the cap ceiling -- this is strictly a ceiling, never a floor."""
+    gaps = [{"description": "x", "confidence": 0.3, "next_action": "y"}]
+    s, verdict, reasons = _apply_confidence_gap_cap(40, "REJECT", ["[-40] some red flag"], gaps)
+    assert s == 40
+    assert verdict == "REJECT"
+    assert not any("capped" in r.lower() for r in reasons)
 
 
 def test_clean_but_anonymous_token_is_capped_not_proceed():

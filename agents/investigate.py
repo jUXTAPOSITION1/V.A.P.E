@@ -801,8 +801,16 @@ def score(gp, dex, onchain, verif, web_rep=None, deployer_repeat_offender=None, 
         liq = float(liq)
     except Exception:
         liq = 0
+    # Mutually exclusive tiers (real bug this fixes, confirmed against a live
+    # report: a $3-liquidity token tripped BOTH "Very low liquidity" (-25)
+    # AND "Low liquidity" (-10) since the second check's `< 50000` was never
+    # bounded below at the first tier's own 10000 cutoff — a real double
+    # penalty for the same single fact, not two independent risk signals.
+    # Every other tiered check in this function (holders, top-holder
+    # concentration, pair age below) already uses this same bounded-range
+    # style; this was the one place that didn't.
     flag(liq and liq < 10000, 25, f"Very low liquidity ${liq:,.0f} (rug/illiquid)")
-    flag(liq and liq < 50000, 10, f"Low liquidity ${liq:,.0f}")
+    flag(liq and 10000 <= liq < 50000, 10, f"Low liquidity ${liq:,.0f}")
     signal(liq >= 500000, f"Deep liquidity (${liq:,.0f})")
 
     chg = dex.get("change_24h_pct")
@@ -1070,6 +1078,21 @@ def _categorize_report_reasons(reasons, positive_signals):
 # whole-score adjustment, not attributable to any one category.
 _REASON_WEIGHT_RE = re.compile(r"^\[([+-])(\d+)\]")
 
+# Matches BOTH whole-score ceilings that share this convention: score()'s own
+# legitimacy cap (0/1 positive signals) and _apply_confidence_gap_cap()'s
+# post-assessment ceiling. Used below to keep the Scoring Dashboard's
+# per-category display honest whenever either cap fires — real gap this
+# closes, confirmed against a live report (investigation-20260807-152512-
+# 0x72e4f9F8.md): the overall verdict correctly showed a capped CAUTION, but
+# Narrative/Transparency still displayed 100 next to it since categories are
+# computed from the same reasons list yet this specific reason format was
+# deliberately excluded from _REASON_WEIGHT_RE above (it isn't attributable
+# to one category) — so nothing ever pulled a category DOWN to match a
+# whole-score cap. That's the exact "Critic Self-Audit says no inconsistency
+# but Narrative and numerical score clearly diverge" failure the report's own
+# Expert Assessment flagged.
+_CAP_RE = re.compile(r"^\[capped at (\d+)\]")
+
 
 # ── Scoring Dashboard: weighted, multi-factor category scores ──────────────
 # Replaces the old flat Executive Summary table (100 minus whichever of
@@ -1206,11 +1229,24 @@ def _compute_category_scores(reasons, positive_signals, dex=None, project_narrat
     totals["Narrative Strength & Social Proof"] = narrative_score
     hits["Narrative Strength & Social Proof"] = narrative_hits
 
+    # Whichever whole-score cap is tightest (there's normally at most one,
+    # but take the min defensively) becomes a ceiling on every category too
+    # — see _CAP_RE's comment above for the real inconsistency this closes.
+    cap = None
+    for r in reasons or []:
+        m = _CAP_RE.match(r)
+        if m:
+            cap = int(m.group(1)) if cap is None else min(cap, int(m.group(1)))
+
     result = {}
     for name, weight in _CATEGORY_WEIGHTS:
         score = max(0, min(100, round(totals[name])))
-        result[name] = {"score": score, "weight": weight,
-                         "rationale": _category_rationale(name, score, hits[name])}
+        rationale = _category_rationale(name, score, hits[name])
+        if cap is not None and score > cap:
+            score = cap
+            rationale += (f" (Capped at {cap} in line with the overall verdict's own "
+                          "confidence ceiling — see Verdict Rationale above.)")
+        result[name] = {"score": score, "weight": weight, "rationale": rationale}
     return result
 
 
@@ -2041,6 +2077,61 @@ def _fmt_data_agent_deliverable(d):
     return "; ".join(parts) if parts else "no notable fields"
 
 
+def _apply_confidence_gap_cap(s, verdict, reasons, gaps):
+    """Real, structural ceiling on the DISPLAYED score/verdict when the
+    Expert Assessment's own Gaps & Confidence section flagged something
+    material as low-confidence — confirmed against a live report
+    (investigation-20260807-152512-0x72e4f9F8.md, BITCOIN/
+    HarryPotterObamaSonic10Inu): scored 100/100 PROCEED with every category
+    at 100, while the same report's own Gaps section said "Independent
+    confirmation of claimed CEX listings and audit" was only 30% confidence,
+    and the Expert Assessment's own text recommended "acceptable only as a
+    small, high-risk speculative position sized to total loss." A reader
+    sees a perfect score two sections above a detective's own hedged
+    conclusion — the classic "deterministic score and LLM narrative aren't
+    coupled" failure.
+
+    Deliberately NOT a change to score() itself, which must stay pure
+    deterministic evidence (never mutated by an LLM's own output) — this is
+    a ceiling applied here, after _expert_assessment() has already run,
+    exactly parallel to how score()'s own legitimacy cap is a ceiling on
+    top of its flag/signal tally, never a rewrite of it. Only ever lowers
+    s/verdict, never raises them; gaps=None/empty/all-confident is a no-op.
+    Uses the SAME "[capped at N] ..." reason-string convention as score()'s
+    legitimacy cap, so it renders in Verdict Rationale and is correctly
+    skipped (not attributed to any one category) by
+    _compute_category_scores()'s _REASON_WEIGHT_RE parsing with zero
+    further changes needed there.
+
+    Same 80/50 verdict bands as score()/agents/critic.py::_verdict_for_score()
+    — MUST stay in sync with both if those thresholds ever change (this is a
+    THIRD copy; tests/test_critic.py's drift-detection only covers the other
+    two, so re-verify this one by hand)."""
+    if not gaps:
+        return s, verdict, reasons
+    try:
+        worst = min(gaps, key=lambda g: g.get("confidence", 1.0))
+        worst_confidence = float(worst.get("confidence", 1.0))
+    except Exception:
+        return s, verdict, reasons
+    cap = None
+    if worst_confidence < 0.5:
+        cap = 69
+    elif worst_confidence < 0.75:
+        cap = 89
+    if cap is None or s <= cap:
+        return s, verdict, reasons
+    pct = round(worst_confidence * 100)
+    description = worst.get("description") or "material uncertainty flagged by the Expert Assessment"
+    reasons = reasons + [
+        f"[capped at {cap}] Unresolved gap at only {pct}% confidence: {description} — "
+        "a real residual-risk ceiling on top of the automated flag sweep, not a rewrite of it"
+    ]
+    s = cap
+    verdict = "PROCEED" if s >= 80 else ("CAUTION" if s >= 50 else "REJECT")
+    return s, verdict, reasons
+
+
 def _expert_assessment(target, sym, chain, verdict, s, reasons, positive_signals,
                              gp, dex, onchain, verif, corr, web_rep, defillama,
                              deployer_siblings, data_agent_intel, project_narrative=None):
@@ -2240,9 +2331,10 @@ def _expert_assessment(target, sym, chain, verdict, s, reasons, positive_signals
     # synthesize() itself now — untrusted evidence quoted/echoed earlier in the
     # model's own analysis (or, worse, prompt-injected content) can't hijack it.
     disagrees = synth.get("verdict") == "DISAGREE"
-    gaps_section = research_engine.render_gaps_section(synth.get("gaps") or [])
+    gaps = synth.get("gaps") or []
+    gaps_section = research_engine.render_gaps_section(gaps)
     text = f"{text}\n\n{gaps_section}".strip()
-    return {"text": text, "disagrees": disagrees}
+    return {"text": text, "disagrees": disagrees, "gaps": gaps}
 
 
 def _project_narrative(symbol, name, dex, coingecko_contract, address, chain):
@@ -2559,6 +2651,16 @@ def investigate(address, chain="8453", hint="", force=False):
     if expert_assessment and expert_assessment["disagrees"]:
         print(f"[investigate] EXPERT ASSESSMENT DISAGREES with {verdict} verdict for {address}")
         _log_expert_disagreement(address, chain, prelim_sym, verdict, s, expert_assessment["text"])
+
+    # Applied AFTER the disagreement log above (which must see score()'s own
+    # true, uncapped verdict) but BEFORE write_report()/the ledger/catalog/
+    # pass-fail-caution lists below, so everything a reader or downstream
+    # consumer sees reflects the same, single final number — never a report
+    # showing a capped CAUTION while ledger.json still says the original
+    # PROCEED. See _apply_confidence_gap_cap()'s own docstring for the real
+    # bug this fixes.
+    if expert_assessment:
+        s, verdict, reasons = _apply_confidence_gap_cap(s, verdict, reasons, expert_assessment.get("gaps"))
 
     path, sym, emoji = write_report(address, chain, gp, dex, onchain, verif, corr, s, verdict, reasons,
                                     positive_signals, web_rep, dl_intel, siblings, critic_result,

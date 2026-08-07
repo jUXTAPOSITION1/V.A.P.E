@@ -16,7 +16,22 @@ import { webSearch, webScrape, type ResearchEnv } from "./webResearch";
 import { getContractMarketData, type CoingeckoContractMarket } from "./coingecko";
 
 const UA = { "User-Agent": "VAPE-PrivateEye/1.0" };
-const BASE_RPC = "https://mainnet.base.org";
+
+// Same 7 chains + public RPC URLs as agents/investigate.py's EVM_CHAINS[*]["rpc"]
+// (including the Avalanche C-Chain path fix documented there: /ext/bc/C/rpc,
+// not /ext/bc/C/Chain). Real bug this fixes: onchainPresence() below used to
+// always hit Base's own RPC regardless of the token's actual chain, so
+// dossierCheck() silently checked on-chain presence on the wrong network for
+// every non-Base token.
+const CHAIN_RPC: Record<number, string> = {
+  8453: "https://mainnet.base.org",
+  1: "https://ethereum.publicnode.com",
+  42161: "https://arb1.arbitrum.io/rpc",
+  10: "https://mainnet.optimism.io",
+  137: "https://polygon-rpc.com",
+  56: "https://bsc-dataseed.binance.org",
+  43114: "https://api.avax.network/ext/bc/C/rpc",
+};
 
 // CoinGecko's own "asset platform" id per chain — a distinct slug family
 // from GeckoTerminal's network id or DexScreener's chainId. Mirrors
@@ -98,11 +113,13 @@ export async function dexscreenerFull(address: string): Promise<DexInfo> {
 // penalty.
 export async function onchainPresence(
   address: string,
+  chainId: number = 8453,
 ): Promise<{ is_contract: boolean | null; code_size_bytes: number | null; error?: string }> {
+  const rpc = CHAIN_RPC[chainId] || CHAIN_RPC[8453];
   let lastErr = "RPC call failed";
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
-      const res = await fetch(BASE_RPC, {
+      const res = await fetch(rpc, {
         method: "POST",
         headers: { "Content-Type": "application/json", ...UA },
         body: JSON.stringify({ jsonrpc: "2.0", method: "eth_getCode", params: [address, "latest"], id: 1 }),
@@ -440,9 +457,15 @@ export function score(gp: Record<string, any>, dex: DexInfo, onchain: { is_contr
     signal(lockedPct >= 80, `${lockedPct.toFixed(0)}% of liquidity is locked — reduced rug-pull risk`);
   }
 
+  // Mutually exclusive tiers -- real bug this fixes (found in
+  // agents/investigate.py::score(), the Python side this file must stay in
+  // exact sync with): liquidity < $10k used to trip BOTH "Very low
+  // liquidity" (-25) AND "Low liquidity" (-10) since the second check's
+  // `< 50000` had no lower bound at the first tier's own cutoff -- one real
+  // fact double-penalized. Bounded here the same way the Python fix was.
   const liq = Number(dex.liquidity_usd) || 0;
   flag(Boolean(liq) && liq < 10000, 25, `Very low liquidity $${liq.toLocaleString()} (rug/illiquid)`);
-  flag(Boolean(liq) && liq < 50000, 10, `Low liquidity $${liq.toLocaleString()}`);
+  flag(Boolean(liq) && liq >= 10000 && liq < 50000, 10, `Low liquidity $${liq.toLocaleString()}`);
   signal(liq >= 500000, `Deep liquidity ($${liq.toLocaleString()})`);
 
   const chg = dex.change_24h_pct;
@@ -490,4 +513,146 @@ export function score(gp: Record<string, any>, dex: DexInfo, onchain: { is_contr
   s = Math.max(0, Math.min(100, s));
   const verdict: ScoreResult["verdict"] = s >= 80 ? "PROCEED" : s >= 50 ? "CAUTION" : "REJECT";
   return { score: s, verdict, reasons, positive_signals: positiveSignals };
+}
+
+// ── Scoring Dashboard: weighted, multi-factor category scores ──────────────
+// Field-for-field port of agents/investigate.py's _CATEGORY_WEIGHTS/
+// _CATEGORY_SHORT_LABEL/_CATEGORY_KEYWORDS/_bucket_for_category_dashboard/
+// _category_rationale/_compute_category_scores — real gap this closes:
+// dossierCheck() had no category breakdown at all, a structurally thinner
+// output than the free investigation report's Scoring Dashboard for the
+// exact same underlying score()/reasons/positive_signals, which is its own
+// kind of cross-surface inconsistency. Presentation-layer instrumentation
+// only, same as the Python side — score()'s own number/verdict stays the
+// one authoritative source of truth, never derived FROM these.
+export interface CategoryScore { score: number; weight: number; rationale: string; }
+
+export const CATEGORY_WEIGHTS: ReadonlyArray<readonly [string, number]> = [
+  ["Contract Security & Controls", 0.25],
+  ["Liquidity Health & Lock Quality", 0.20],
+  ["Holder Distribution & Concentration", 0.15],
+  ["Transparency & Provenance", 0.15],
+  ["Narrative Strength & Social Proof", 0.15],
+  ["Longevity & Clean Track Record", 0.10],
+];
+
+const REASON_WEIGHT_RE = /^\[([+-])(\d+)\]/;
+
+// Field-for-field port of agents/investigate.py's _CAP_RE -- matches score()'s
+// own legitimacy-cap reason string ("[capped at N] ..."), the one whole-score
+// ceiling reachable from this file's score(). Keeps every category's display
+// from exceeding a cap that already fired on the overall number -- real
+// inconsistency this closes: dossierCheck() computes categories from the same
+// reasons list as the capped overall score/verdict, so without this a capped
+// CAUTION could still show a category at 100.
+const CAP_RE = /^\[capped at (\d+)\]/;
+
+// Deliberately excludes "Narrative Strength & Social Proof" -- score() has
+// no rule that ever produces a narrative/social reason string, so that
+// category is built entirely from direct signals below instead.
+const CATEGORY_KEYWORDS: ReadonlyArray<readonly [string, readonly string[]]> = [
+  ["Contract Security & Controls", [
+    "honeypot", "cannot sell", "mintable", "mint function",
+    "ownership can be reclaimed", "take back ownership", "change balances",
+    "hidden owner", "proxy", "pausable", "buy tax", "sell tax",
+    "not renounced", "renounced",
+  ]],
+  ["Liquidity Health & Lock Quality", ["liquidity", "locked"]],
+  ["Holder Distribution & Concentration", ["holder", "concentrat", "distribution", "manipulated", "supply"]],
+  ["Transparency & Provenance", [
+    "audit", "verified source", "unverified", "factory", "template",
+    "deployer", "web search", "scam", "rug", "eoa", "no contract code",
+    "peg", "stablecoin", "impersonat", "fdv", "dilution",
+  ]],
+  ["Longevity & Clean Track Record", ["days old", "track record", "violent", "volatility", "24h move", "defillama"]],
+];
+
+function bucketForCategoryDashboard(text: string): string | null {
+  const low = text.toLowerCase();
+  for (const [name, keywords] of CATEGORY_KEYWORDS) {
+    if (keywords.some((k) => low.includes(k))) return name;
+  }
+  return null;
+}
+
+function categoryRationale(score: number, hits: string[]): string {
+  if (!hits.length) return score === 100 ? "No signal either way this cycle." : "Derived from the evidence above.";
+  const joined = hits.slice(0, 3).join("; ");
+  return joined.endsWith(".") ? joined : `${joined}.`;
+}
+
+/** Field-for-field port of agents/investigate.py::_compute_category_scores().
+ * Never throws; missing evidence just leaves a category at its neutral
+ * baseline rather than breaking the paid response. */
+export function computeCategoryScores(
+  reasons: string[], positiveSignals: string[], dex?: DexInfo | null,
+  projectNarrative?: { text?: string; address_identity_verified?: boolean } | null,
+  webRep?: WebReputation | null,
+): Record<string, CategoryScore> {
+  const totals: Record<string, number> = {};
+  const hits: Record<string, string[]> = {};
+  for (const [name] of CATEGORY_WEIGHTS) { totals[name] = 100; hits[name] = []; }
+
+  for (const r of reasons || []) {
+    const m = REASON_WEIGHT_RE.exec(r);
+    if (!m) continue;
+    const name = bucketForCategoryDashboard(r);
+    if (!name) continue;
+    const delta = parseInt(m[2], 10) * (m[1] === "+" ? 1 : -1);
+    totals[name] += delta;
+    if (delta < 0) hits[name].push(r.split("]").slice(1).join("]").trim());
+  }
+  for (const p of positiveSignals || []) {
+    const name = bucketForCategoryDashboard(p);
+    if (name) hits[name].push(`(+) ${p}`);
+  }
+
+  // Narrative Strength & Social Proof -- the one category score() has no
+  // rule for at all. Starts LOW (missing narrative/social surface is
+  // itself a disclosed risk), not neutral at 100 like an untouched
+  // keyword bucket would default to.
+  let narrativeScore = 20;
+  const narrativeHits: string[] = [];
+  const siteLinks = (dex?.websites || []).map((w) => w.url).filter(Boolean);
+  const socialLinks = (dex?.socials || []).filter((s) => s.url);
+  if (siteLinks.length) { narrativeScore += 25; narrativeHits.push("has a declared project website"); }
+  if (socialLinks.length) {
+    narrativeScore += 15 * Math.min(2, socialLinks.length);
+    narrativeHits.push(`${socialLinks.length} declared social link(s)`);
+  }
+  if (projectNarrative?.text) {
+    if (projectNarrative.address_identity_verified) {
+      narrativeScore += 25;
+      narrativeHits.push("a real, address-verified project narrative was established");
+    } else {
+      narrativeScore += 10;
+      narrativeHits.push("a narrative exists but this contract's affiliation with it is unverified");
+    }
+  } else {
+    narrativeHits.push("no coherent project narrative could be established this cycle");
+  }
+  if (webRep?.available && !webRep?.hits?.length) narrativeScore += 5;
+  totals["Narrative Strength & Social Proof"] = narrativeScore;
+  hits["Narrative Strength & Social Proof"] = narrativeHits;
+
+  let cap: number | null = null;
+  for (const r of reasons || []) {
+    const m = CAP_RE.exec(r);
+    if (m) {
+      const n = parseInt(m[1], 10);
+      cap = cap === null ? n : Math.min(cap, n);
+    }
+  }
+
+  const result: Record<string, CategoryScore> = {};
+  for (const [name, weight] of CATEGORY_WEIGHTS) {
+    let score = Math.max(0, Math.min(100, Math.round(totals[name])));
+    let rationale = categoryRationale(score, hits[name]);
+    if (cap !== null && score > cap) {
+      score = cap;
+      rationale += ` (Capped at ${cap} in line with the overall verdict's own confidence ceiling.)`;
+    }
+    result[name] = { score, weight, rationale };
+  }
+  return result;
 }

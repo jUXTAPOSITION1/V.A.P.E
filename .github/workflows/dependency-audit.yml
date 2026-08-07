@@ -69,7 +69,14 @@ jobs:
         id: worker_ci
         continue-on-error: true
         working-directory: worker
-        run: npm ci
+        # --legacy-peer-deps: @x402/svm's transitive @solana/kit declares a
+        # peer range that doesn't yet know about this repo's pinned
+        # typescript@7.0.2 (a very recent compiler version) -- a real,
+        # confirmed ecosystem lag (npm's strict peer resolution rejects it,
+        # legacy resolution doesn't), not a project misconfiguration. Every
+        # `npm ci`/`npm install` invocation of this package.json needs the
+        # same flag for the same reason (see worker/README.md's Solana section).
+        run: npm ci --legacy-peer-deps
 
       - name: npm audit (worker)
         id: worker_audit

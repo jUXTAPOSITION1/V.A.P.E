@@ -55,9 +55,12 @@ always represents the honest daily MINIMUM being aimed for, and this module
 never claims to have hit it if the polls simply weren't frequent enough.
 
 Restricted to offerings that only need a token address, a chain slug, or no
-input at all. Also restricted to Base (chain 8453) for run_for_investigation()/
-run_standalone(), since that's the only chain whose DefiLlama chain-slug
-mapping is confirmed correct for THIS hire path's fixed offering set.
+input at all. run_for_investigation()/run_standalone() now hire against any
+chain in CHAIN_META (all 7 have a confirmed-correct DefiLlama slug — see its
+own comment), not just Base — a real gap fixed 2026-08-07: this hire path
+used to hard-reject every non-Base investigation even though run_catalog_sweep()
+below already proved the same offering set works fine against every chain in
+CHAIN_META via the identical slug convention.
 
 run_catalog_sweep() below is a second, independently-gated stream (own 30m/
 48-per-day cap, own quota/ledger file) added specifically to (a) exercise
@@ -231,6 +234,14 @@ CHAIN_META = {
     "Avalanche": {"id": "43114", "gecko": "avax",       "dex": "avalanche", "defillama_fee_slug": "avax"},
 }
 
+# Reverse lookup (chain id string -> chain name) — every one of CHAIN_META's
+# 7 chains already has a confirmed-correct defillama_fee_slug (see the
+# comment above), which is exactly the mapping _run()/_run_growth() below
+# used to claim was "only confirmed correct for Base" before this fix. Used
+# to resolve run_for_investigation()'s real per-call chain into the right
+# offering params instead of hardcoding Base everywhere.
+CHAIN_BY_ID = {m["id"]: name for name, m in CHAIN_META.items()}
+
 # Every one of VAPE's real x402 offerings priced MAX_OFFERING_PRICE_USD or
 # less (worker/src/index.ts's OFFERING_PRICES + worker/src/dataHandlers.ts's
 # DL_OFFERINGS — see agents/x402_directory_register.py for the same
@@ -301,20 +312,40 @@ EXPECTED_WALLET = "0x52af3E6D13f7C13EC887A2E69058A1432aa5B768"
 # uses for the scan tier — NOT the DefiLlama chain slug token_intel/
 # token_chart take just above. market_intel takes no input at all (Base-wide
 # TVL/market data), same "none" shape as yields/stablecoins/bridges below.
+#
+# Chain-parameterized (real gap this closes: this dict used to hardcode
+# "base"/"Base"/"8453" literally in every lambda, even though CHAIN_META
+# above already has a confirmed-correct DefiLlama slug for 7 chains and
+# run_catalog_sweep()'s CATALOG_OFFERINGS already hires these exact same
+# offering names against non-Base chains via the identical slug convention
+# — the Base-only restriction here was stale, not a real data-availability
+# limit). chain_id defaults to Base's own id so any existing caller that
+# still only ever passes an address keeps its old behavior unchanged.
 OFFERING_PARAMS = {
-    "token_intel":      lambda addr: {"address": addr, "chain": "base"},
-    "token_chart":      lambda addr: {"address": addr, "chain": "base"},
-    "chain_protocols":  lambda addr: {"chain": "Base"},
-    "chain_overview":   lambda addr: {"chain": "Base"},
-    "chain_fees":       lambda addr: {"chain": "base"},
-    "dex_volumes":      lambda addr: {"chain": "base"},
-    "yields":           lambda addr: {},
-    "stablecoins":      lambda addr: {},
-    "bridges":          lambda addr: {},
-    "rug_pull_alert":   lambda addr: {"address": addr, "chain": "8453"},
-    "dossier_check":    lambda addr: {"address": addr, "chain": "8453"},
-    "market_intel":     lambda addr: {},
+    "token_intel":      lambda addr, meta, chain_id: {"address": addr, "chain": meta["defillama_fee_slug"]},
+    "token_chart":      lambda addr, meta, chain_id: {"address": addr, "chain": meta["defillama_fee_slug"]},
+    "chain_protocols":  lambda addr, meta, chain_id: {"chain": meta["name"]},
+    "chain_overview":   lambda addr, meta, chain_id: {"chain": meta["name"]},
+    "chain_fees":       lambda addr, meta, chain_id: {"chain": meta["defillama_fee_slug"]},
+    "dex_volumes":      lambda addr, meta, chain_id: {"chain": meta["defillama_fee_slug"]},
+    "yields":           lambda addr, meta, chain_id: {},
+    "stablecoins":      lambda addr, meta, chain_id: {},
+    "bridges":          lambda addr, meta, chain_id: {},
+    "rug_pull_alert":   lambda addr, meta, chain_id: {"address": addr, "chain": str(chain_id)},
+    "dossier_check":    lambda addr, meta, chain_id: {"address": addr, "chain": str(chain_id)},
+    "market_intel":     lambda addr, meta, chain_id: {},
 }
+
+
+def _offering_params(name, addr, chain_id):
+    """Resolves one OFFERING_PARAMS entry against a real chain id, falling
+    back to Base if the id is somehow unknown by the time this is called
+    (the chain-support gate in _run()/_run_growth() below should already
+    have caught that, so this is defense-in-depth, not the real check)."""
+    chain_name = CHAIN_BY_ID.get(str(chain_id), "Base")
+    meta = dict(CHAIN_META[chain_name])
+    meta["name"] = chain_name
+    return OFFERING_PARAMS[name](addr, meta, chain_id)
 
 
 def _recent_token_db_addresses():
@@ -689,12 +720,13 @@ def _run(address, chain, *, client_tag, state, log_prefix):
     caller (agents/investigate.py's report, or run_standalone() below) can
     fold it in.
 
-    address=None means "pick your own fresh Base candidate" — this is what
-    decouples the cadence from needing a successful auto-investigation to
-    hand it one (see run_standalone()); chain is always "8453" in that case.
+    address=None means "pick a fresh candidate from any known chain" — this
+    is what decouples the cadence from needing a successful auto-investigation
+    to hand it one (see run_standalone()); the candidate's own chain is used
+    in that case, not hardcoded to Base (see _fresh_candidate()).
     """
-    if str(chain) != "8453":
-        return {"hired": [], "note": "data agent only wired for Base (8453) investigations"}
+    if str(chain) not in CHAIN_BY_ID:
+        return {"hired": [], "note": f"data agent has no confirmed chain-slug mapping for chain {chain} — skipped"}
 
     since_last = state.seconds_since_last_attempt()
     if since_last is not None and since_last < MIN_INTERVAL_SECONDS:
@@ -706,10 +738,10 @@ def _run(address, chain, *, client_tag, state, log_prefix):
         return {"hired": [], "note": f"daily cap reached ({DAILY_CAP}/day) — skipped this cycle"}
 
     if address is None:
-        found = _fresh_candidate(only_base=True)
+        found = _fresh_candidate()
         if not found:
-            return {"hired": [], "note": "no fresh Base candidate found this cycle — skipped"}
-        address = found[0]
+            return {"hired": [], "note": "no fresh candidate found across any chain this cycle — skipped"}
+        address, chain = found[0], found[1]
 
     session = _build_session(client_tag)
     if session is None:
@@ -723,7 +755,7 @@ def _run(address, chain, *, client_tag, state, log_prefix):
     paid_count = 0
     cost_usd = 0.0
     for name in picks:
-        params = OFFERING_PARAMS[name](address)
+        params = _offering_params(name, address, chain)
         deliverable, paid = hire(session, name, params, prefix=_prefix_for(name))
         hired.append({"offering": name, "params": params, "deliverable": deliverable, "paid": paid})
         if paid:
@@ -735,11 +767,12 @@ def _run(address, chain, *, client_tag, state, log_prefix):
     state.log_ledger({
         "ts": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "target": address,
+        "chain": str(chain),
         "hired": [h["offering"] for h in hired],
         "paid": paid_count,
         "cost_usd": cost_usd,
     })
-    print(f"[{log_prefix}] {address}: hired {[h['offering'] for h in hired]}, "
+    print(f"[{log_prefix}] {address} (chain {chain}): hired {[h['offering'] for h in hired]}, "
           f"paid {paid_count}, ${cost_usd:.2f}")
     return {"hired": hired, "cost_usd": cost_usd}
 
@@ -753,11 +786,12 @@ def _run_growth(address, chain, *, client_tag, state, log_prefix, target_today):
     logic is left untouched here — this duplicates its hire-and-log body
     with _due_now()'s adaptive gate in place of the fixed interval+cap pair.
 
-    address=None means "pick your own fresh Base candidate" (see _run()'s
-    own docstring for why) — chain is always "8453" in that case.
+    address=None means "pick a fresh candidate from any known chain" (see
+    _run()'s own docstring for why) — the candidate's own chain is used in
+    that case, not hardcoded to Base.
     """
-    if str(chain) != "8453":
-        return {"hired": [], "note": "data agent only wired for Base (8453) investigations"}
+    if str(chain) not in CHAIN_BY_ID:
+        return {"hired": [], "note": f"data agent has no confirmed chain-slug mapping for chain {chain} — skipped"}
 
     due, remaining = _due_now(state, target_today)
     if not due:
@@ -765,10 +799,10 @@ def _run_growth(address, chain, *, client_tag, state, log_prefix, target_today):
                                       "— pacing to the growing minimum, not a fixed cadence)"}
 
     if address is None:
-        found = _fresh_candidate(only_base=True)
+        found = _fresh_candidate()
         if not found:
-            return {"hired": [], "note": "no fresh Base candidate found this cycle — skipped"}
-        address = found[0]
+            return {"hired": [], "note": "no fresh candidate found across any chain this cycle — skipped"}
+        address, chain = found[0], found[1]
 
     session = _build_session(client_tag)
     if session is None:
@@ -782,7 +816,7 @@ def _run_growth(address, chain, *, client_tag, state, log_prefix, target_today):
     paid_count = 0
     cost_usd = 0.0
     for name in picks:
-        params = OFFERING_PARAMS[name](address)
+        params = _offering_params(name, address, chain)
         deliverable, paid = hire(session, name, params, prefix=_prefix_for(name))
         hired.append({"offering": name, "params": params, "deliverable": deliverable, "paid": paid})
         if paid:
@@ -794,12 +828,13 @@ def _run_growth(address, chain, *, client_tag, state, log_prefix, target_today):
     state.log_ledger({
         "ts": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "target": address,
+        "chain": str(chain),
         "hired": [h["offering"] for h in hired],
         "paid": paid_count,
         "cost_usd": cost_usd,
         "daily_target": target_today,
     })
-    print(f"[{log_prefix}] {address}: hired {[h['offering'] for h in hired]}, "
+    print(f"[{log_prefix}] {address} (chain {chain}): hired {[h['offering'] for h in hired]}, "
           f"paid {paid_count}, ${cost_usd:.2f} (day target {target_today}, "
           f"{remaining - paid_count} still owed today)")
     return {"hired": hired, "cost_usd": cost_usd}
@@ -902,10 +937,14 @@ def run_for_investigation(address, chain="8453"):
 
 def run_standalone():
     """CDP-pinned instance, decoupled from investigate.py entirely — self-
-    sources a fresh Base candidate every call. Called on a fixed schedule
-    (see .github/workflows/featured-investigation.yml) regardless of whether
-    that cycle's auto-investigation found anything, per the module docstring.
-    Paced toward the growing daily minimum, not a fixed cap."""
+    sources a fresh candidate from any chain in CHAIN_META every call (see
+    _fresh_candidate()), not just Base. Called on a fixed schedule (see
+    .github/workflows/featured-investigation.yml) regardless of whether that
+    cycle's auto-investigation found anything, per the module docstring.
+    Paced toward the growing daily minimum, not a fixed cap. The "8453"
+    passed here is only a placeholder to clear _run_growth()'s chain-support
+    gate before address=None triggers _fresh_candidate() to pick the real
+    chain — see _run_growth()'s own docstring."""
     main_target, _ = _daily_targets()
     return _run_growth(None, "8453", client_tag="data-agent", state=_CDP_STATE,
                        log_prefix="data_agent", target_today=main_target)

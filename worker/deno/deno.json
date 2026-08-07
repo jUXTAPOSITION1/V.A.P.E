@@ -12,6 +12,7 @@
     "@x402/core/server": "npm:@x402/core@2.18.0/server",
     "@x402/core/types": "npm:@x402/core@2.18.0/types",
     "@x402/evm/exact/server": "npm:@x402/evm@2.18.0/exact/server",
+    "@x402/svm/exact/server": "npm:@x402/svm@2.18.0/exact/server",
     "@x402/extensions/bazaar": "npm:@x402/extensions@2.18.0/bazaar",
     "jose": "npm:jose@6.2.3"
   },

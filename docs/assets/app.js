@@ -470,7 +470,7 @@ const App = {
     // block doesn't misreport real liquidity as $0. Mirrors
     // agents/token_scan.py::_get()/_fetch_liquidity_fallback() and
     // worker/src/scan.ts::safeGet()/fetchLiquidityFallback() — keep in sync.
-    _GECKOTERMINAL_NETWORK: {'8453':'base','1':'eth','42161':'arbitrum'},
+    _GECKOTERMINAL_NETWORK: {'8453':'base','1':'eth','42161':'arbitrum','10':'optimism','137':'polygon_pos','56':'bsc','43114':'avax'},
     async _safeFetchJson(url, retries=1) {
         for (let attempt=0; ; attempt++) {
             try {

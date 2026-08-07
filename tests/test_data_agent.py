@@ -72,11 +72,35 @@ def test_prefix_for_matches_scan_tier_membership():
     assert data_agent._prefix_for("token_intel") == "data"
 
 
-def test_non_base_chain_is_skipped_with_no_network_attempt(monkeypatch):
-    monkeypatch.setenv("DATA_AGENT_PRIVATE_KEY", "0x" + "11" * 32)
+def test_known_evm_chain_is_no_longer_rejected(monkeypatch, tmp_path):
+    """Real bug this pins the fix for: run_for_investigation() used to
+    hard-reject every chain except Base even though CHAIN_META already has a
+    confirmed-correct DefiLlama slug for 7 chains (Ethereum included) and
+    run_catalog_sweep() already proved the same offering set works fine
+    against all of them. Ethereum (chain id "1") must now proceed past the
+    chain gate and actually attempt a hire."""
+    monkeypatch.setattr(data_agent, "_CDP_STATE", _fresh_state(tmp_path))
+
+    def responder(url, params):
+        offering = url.rsplit("/", 1)[-1]
+        return _FakeResponse(200, {"offering": offering, "status": "ok", "deliverable": {"ok": True}})
+
+    monkeypatch.setattr(data_agent, "_build_session", lambda tag: _FakeSession(responder))
+    monkeypatch.setattr(data_agent.random, "sample", lambda seq, k: ["dossier_check"])
+
     result = data_agent.run_for_investigation("0x" + "aa" * 20, chain="1")
+    assert result["hired"][0]["paid"]
+    assert result["hired"][0]["params"] == {"address": "0x" + "aa" * 20, "chain": "1"}
+
+
+def test_unknown_chain_is_skipped_with_no_network_attempt(monkeypatch):
+    monkeypatch.setenv("DATA_AGENT_PRIVATE_KEY", "0x" + "11" * 32)
+    called = {"n": 0}
+    monkeypatch.setattr(data_agent, "_build_session", lambda tag: called.update(n=called["n"] + 1))
+    result = data_agent.run_for_investigation("0x" + "aa" * 20, chain="999999")
     assert result["hired"] == []
-    assert "8453" in result["note"]
+    assert "999999" in result["note"]
+    assert called["n"] == 0  # chain gate rejects before ever touching the session/network
 
 
 def test_missing_key_is_skipped(monkeypatch, tmp_path):
@@ -176,6 +200,18 @@ def test_run_for_investigation_routes_scan_tier_pick_to_scan_prefix(monkeypatch,
     assert "/scan/dossier_check" in seen["url"]
     assert result["hired"][0]["params"] == {"address": "0x" + "bb" * 20, "chain": "8453"}
     assert result["cost_usd"] == 0.10
+
+
+def test_offering_params_resolves_per_chain_defillama_slug():
+    """_offering_params() must resolve each chain's own confirmed-correct
+    DefiLlama slug (CHAIN_META), not hardcode Base's -- e.g. Polygon's fee
+    slug is "polygon", not "base"."""
+    assert data_agent._offering_params("token_intel", "0xabc", "137") == {"address": "0xabc", "chain": "polygon"}
+    assert data_agent._offering_params("chain_overview", "0xabc", "137") == {"chain": "Polygon"}
+    assert data_agent._offering_params("dossier_check", "0xabc", "137") == {"address": "0xabc", "chain": "137"}
+    assert data_agent._offering_params("yields", "0xabc", "137") == {}
+    # Unknown chain id falls back to Base rather than crashing.
+    assert data_agent._offering_params("token_intel", "0xabc", "999999") == {"address": "0xabc", "chain": "base"}
 
 
 def test_hire_reports_unpaid_on_non_200():

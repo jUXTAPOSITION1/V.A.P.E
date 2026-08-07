@@ -10,7 +10,7 @@ import { scan, type ScanResult } from "./scan";
 import { getContractSource } from "./lib/contractSource";
 import { marketIntel } from "./lib/marketIntel";
 import { goplusRaw, dexscreenerFull, onchainPresence, hackCorrelation, webReputationCheck, score,
-         COINGECKO_PLATFORM, type DexInfo } from "./lib/investigateLite";
+         COINGECKO_PLATFORM, computeCategoryScores, type DexInfo } from "./lib/investigateLite";
 import { getContractMarketData } from "./lib/coingecko";
 import { webScrape, type ResearchEnv } from "./lib/webResearch";
 import { askFrontier, type LlmEnv } from "./lib/llm";
@@ -187,7 +187,7 @@ async function dossierCheck(req: Requirement, env: { ETHERSCAN_API_KEY?: string;
   const [gp, dex, onchain, src, cgContract] = await Promise.all([
     goplusRaw(a, chain),
     dexscreenerFull(a),
-    onchainPresence(a),
+    onchainPresence(a, chain),
     getContractSource(a, chain, env.ETHERSCAN_API_KEY),
     cgPlatform ? getContractMarketData(env, a, cgPlatform) : Promise.resolve(null),
   ]);
@@ -201,9 +201,22 @@ async function dossierCheck(req: Requirement, env: { ETHERSCAN_API_KEY?: string;
   const cname = (verif.name || "").toLowerCase();
   const memeFactoryTemplate = ["clanker"].some((p) => cname.includes(p));
 
+  // Same weighted category breakdown the free investigation report's
+  // Scoring Dashboard renders (agents/investigate.py::_compute_category_scores(),
+  // ported field-for-field as computeCategoryScores()) -- real gap this
+  // closes: dossierCheck used to return only the flat score/verdict, a
+  // structurally thinner output than the free report for the exact same
+  // underlying score()/reasons/positive_signals. No projectNarrative here
+  // (no equivalent of the free report's separate web-research step at this
+  // offering's instant-response SLA), so Narrative/Transparency may score
+  // marginally differently than a full investigation report on the same
+  // token -- every other category is computed identically since it's the
+  // exact same deterministic reasons/positive_signals list.
+  const categories = computeCategoryScores(reasons, positive_signals, dex, null, webRep);
+
   const result: Record<string, unknown> = {
     address: a, chain_id: chain, symbol, name: dex.name ?? null,
-    score: s, verdict, reasons, positive_signals,
+    score: s, verdict, reasons, positive_signals, categories,
     verified: verif.verified, contract_name: verif.name, proxy: verif.proxy,
     meme_factory_template: memeFactoryTemplate,
     hack_correlation: corr,
