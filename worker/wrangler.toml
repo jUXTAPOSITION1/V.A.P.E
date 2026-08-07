@@ -25,10 +25,19 @@ workers_dev = true
 # vapex402.base.eth). Deliberately NOT the ACP wallet (see docs/
 # ACP_PROTOCOL.md) -- ACP job-escrow and x402 revenue settle to two
 # separate wallets by design.
+#
+# SOLANA_PAY_TO_ADDRESS/SOLANA_NETWORK (added 2026-08-07): CDP's facilitator
+# already settles the exact scheme on Solana (SPL USDC via @x402/svm), a
+# second real settlement rail alongside Base -- a real, different-format
+# wallet, NOT the same key as PAY_TO_ADDRESS above (Solana uses base58
+# ed25519 pubkeys, not 0x-hex; the two chains cannot share one address).
+# A public receiving address, same as PAY_TO_ADDRESS -- not a secret.
 [vars]
 PAY_TO_ADDRESS = "0x8aAB9a6d28e9AbA2a15a613C90F24f352f0Cce15"
 X402_NETWORK = "eip155:8453"
 X402_FACILITATOR_URL = "https://api.cdp.coinbase.com/platform/v2/x402"
+SOLANA_PAY_TO_ADDRESS = "Aqg4KdrYed89YHvb1mFZaaW1XueS1aEJFsoH3fH67sL1"
+SOLANA_NETWORK = "solana:mainnet"
 
 # The following are SECRETS, not vars — set them with:
 #   wrangler secret put ETHERSCAN_API_KEY
