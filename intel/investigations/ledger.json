@@ -1689,6 +1689,25 @@
     "symbol": "RELICSTR",
     "times_investigated": 1
   },
+  "1:0x1884daa51e761519d847e19b367ad1ba164370be": {
+    "address": "0x1884daA51E761519d847E19b367ad1ba164370be",
+    "chain": "1",
+    "creator_address": "0x248c2fcebac1413fca4da21b675cdaeb4ff20681",
+    "first_investigated": "2026-08-07T13:31:26Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260807-133126-0x1884daA5.md",
+        "score": 35,
+        "ts": "2026-08-07T13:31:26Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-07T13:31:26Z",
+    "last_score": 35,
+    "last_verdict": "REJECT",
+    "symbol": "InfiniteMonkey",
+    "times_investigated": 1
+  },
   "1:0x189140fab49fa6ae98095c22674448e7baf33b45": {
     "address": "0x189140FAb49FA6ae98095C22674448E7BaF33B45",
     "chain": "1",

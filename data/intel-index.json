@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T13:15:02Z",
+  "generated": "2026-08-07T13:31:35Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 481,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 160,
-    "investigations": 830,
+    "investigations": 831,
     "news": 83,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260807-131450-0xF66a9c73.md",
-      "title": "Investigation \u2014 Claude",
-      "symbol": "Claude",
-      "name": "Claude",
-      "date": "2026-08-07T13:14:50Z",
-      "target": "0xF66a9c73F34b56579A9E25e7eC89bca5a9C83b07",
-      "chain": "8453 (Base)",
+      "file": "investigation-20260807-133126-0x1884daA5.md",
+      "title": "Investigation \u2014 InfiniteMonkey",
+      "symbol": "InfiniteMonkey",
+      "name": "Infinite Monkey: POAYFPKWSKCHB",
+      "date": "2026-08-07T13:31:26Z",
+      "target": "0x1884daA51E761519d847E19b367ad1ba164370be",
+      "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (Claude / Claude) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-131450-0xF66a9c73.md"
+      "score": "35",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $22,787; [-10] Violent 24h move +3244% (volatility/manipulation); [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anon",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-133126-0x1884daA5.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260807-133126-0x1884daA5.md",
+      "title": "Investigation \u2014 InfiniteMonkey",
+      "symbol": "InfiniteMonkey",
+      "name": "Infinite Monkey: POAYFPKWSKCHB",
+      "date": "2026-08-07T13:31:26Z",
+      "target": "0x1884daA51E761519d847E19b367ad1ba164370be",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "35",
+      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $22,787; [-10] Violent 24h move +3244% (volatility/manipulation); [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anon",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-133126-0x1884daA5.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260807-131450-0xF66a9c73.md",
