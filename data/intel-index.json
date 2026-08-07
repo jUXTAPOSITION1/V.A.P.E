@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T19:07:34Z",
+  "generated": "2026-08-07T19:23:50Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 488,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 161,
-    "investigations": 838,
+    "investigations": 839,
     "news": 84,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260807-190727-0xe9942e75.md",
-      "title": "Investigation \u2014 ALTR",
-      "symbol": "ALTR",
-      "name": "Alcotraders",
-      "date": "2026-08-07T19:07:27Z",
-      "target": "0xe9942e755b81173d81A220255B2B29beA4A44FAb",
+      "file": "investigation-20260807-192335-0xA70136c6.md",
+      "title": "Investigation \u2014 RedHorseX",
+      "symbol": "RedHorseX",
+      "name": "RedHorseX",
+      "date": "2026-08-07T19:23:35Z",
+      "target": "0xA70136c6AA83cfa85405f552D37453E0ab5e4444",
       "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "5",
-      "summary": "Risk factors: [-20] Very few holders (48) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 98% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $801 (rug/illiquid); [-10] Low liquidi",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-190727-0xe9942e75.md"
+      "verdict": "CAUTION",
+      "score": "50",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $5,096 (rug/illiquid); [-10] Low liquidity $5,096. Positive evidence: Ownership renounced; 1329 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-192335-0xA70136c6.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260807-192335-0xA70136c6.md",
+      "title": "Investigation \u2014 RedHorseX",
+      "symbol": "RedHorseX",
+      "name": "RedHorseX",
+      "date": "2026-08-07T19:23:35Z",
+      "target": "0xA70136c6AA83cfa85405f552D37453E0ab5e4444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "50",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 95% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $5,096 (rug/illiquid); [-10] Low liquidity $5,096. Positive evidence: Ownership renounced; 1329 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Trading",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-192335-0xA70136c6.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260807-190727-0xe9942e75.md",

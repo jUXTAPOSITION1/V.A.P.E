@@ -8214,6 +8214,25 @@
     "symbol": "MEMES",
     "times_investigated": 1
   },
+  "56:0xa70136c6aa83cfa85405f552d37453e0ab5e4444": {
+    "address": "0xA70136c6AA83cfa85405f552D37453E0ab5e4444",
+    "chain": "56",
+    "creator_address": "0x505d95967d8e078a50137ad4dfe395d1c60134d8",
+    "first_investigated": "2026-08-07T19:23:35Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260807-192335-0xA70136c6.md",
+        "score": 50,
+        "ts": "2026-08-07T19:23:35Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-07T19:23:35Z",
+    "last_score": 50,
+    "last_verdict": "CAUTION",
+    "symbol": "RedHorseX",
+    "times_investigated": 1
+  },
   "56:0xa7aee6cb644fcd1cef488f5a901d80d864bb4444": {
     "address": "0xa7Aee6cB644fCD1cef488f5a901d80D864Bb4444",
     "chain": "56",

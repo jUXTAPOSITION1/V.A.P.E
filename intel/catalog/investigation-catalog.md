@@ -1477,3 +1477,5 @@
 | 2026-08-07 | auto | 0x244B112Cf746e62A5DF723cbDe9906a6dEfd7777 (bStocks) | deep_investigation | REJECT (12/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-07 | auto | 0xe9942e755b81173d81A220255B2B29beA4A44FAb (ALTR) | deep_investigation | REJECT (5/100) | Very few holders (48) — thin, easily manipulated distribution | +7d |
+
+| 2026-08-07 | auto | 0xA70136c6AA83cfa85405f552D37453E0ab5e4444 (RedHorseX) | deep_investigation | CAUTION (50/100) | Top 10 non-LP/burn holders control 95% of supply — concentrated, easily manipula | +7d |
