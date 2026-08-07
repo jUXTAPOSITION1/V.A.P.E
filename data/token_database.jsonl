@@ -232,3 +232,4 @@
 {"ts": "2026-08-07T16:12:31.616216Z", "address": "0x3221BAEB0c2745e39A1dbA73CD413361b7f5Fe13", "chain": "8453", "symbol": "ETD", "name": "ETD", "source": "base", "offering": "liquidity_check"}
 {"ts": "2026-08-07T17:32:27.596547Z", "address": "0x1a44233FAe8D50F1AeB3a5d58dd426ff4814Cb53", "chain": "8453", "symbol": "QUID", "name": "QUID", "source": "base", "offering": "token_safety_check"}
 {"ts": "2026-08-07T17:48:44.787987Z", "address": "0x8bFAc1b375bf2894D6F12fb2Eb48B1C1a7916789", "chain": "8453", "symbol": "MEY", "name": "MEY", "source": "base", "offering": "token_intel"}
+{"ts": "2026-08-07T18:04:24.584264Z", "address": "0x54609991482600e1B1552F7243ABBADc137d2b19", "chain": "137", "symbol": "CC", "name": "CC", "source": "evm", "offering": "token_intel"}
