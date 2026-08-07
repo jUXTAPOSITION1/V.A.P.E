@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T01:11:51Z",
+  "generated": "2026-08-07T01:27:32Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 470,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 158,
-    "investigations": 802,
+    "investigations": 803,
     "news": 79,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260807-002427-0xAdf48B42.md",
-      "title": "Investigation \u2014 SPCXB",
-      "symbol": "SPCXB",
-      "name": "SPCXB",
-      "date": "2026-08-07T00:24:27Z",
-      "target": "0xAdf48B42BE9A927dD35684E86927BB26d1957777",
+      "file": "investigation-20260807-012732-0xE747E547.md",
+      "title": "Investigation \u2014 TAKE",
+      "symbol": "TAKE",
+      "name": "TAKE",
+      "date": "2026-08-07T01:27:32Z",
+      "target": "0xE747E54783Ba3F77a8E5251a3cBA19EBe9C0E197",
       "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: \u5e01\u6709 (0xd0bc8Ab397851ECfa58009D03bBc1a41FC764444) \u2014 CAUTION 75/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-002427-0xAdf48B42.md"
+      "verdict": "CAUTION",
+      "score": "62",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 88% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: Ownership renounced; 20831 holders \u2014 reasonably distributed; Trad",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-012732-0xE747E547.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260807-012732-0xE747E547.md",
+      "title": "Investigation \u2014 TAKE",
+      "symbol": "TAKE",
+      "name": "TAKE",
+      "date": "2026-08-07T01:27:32Z",
+      "target": "0xE747E54783Ba3F77a8E5251a3cBA19EBe9C0E197",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "62",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 88% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: Ownership renounced; 20831 holders \u2014 reasonably distributed; Trad",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-012732-0xE747E547.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260807-002427-0xAdf48B42.md",
