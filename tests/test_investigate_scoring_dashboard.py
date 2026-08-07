@@ -41,9 +41,41 @@ def test_category_scores_clamped_at_zero_not_negative():
 
 
 def test_global_cap_line_is_not_parsed_as_a_category_weight():
+    """The "[capped at N] ..." line must never be treated as a per-category
+    +/- delta (it isn't attributable to one category) — but it DOES now clamp
+    every category's ceiling to N, so no category can display above a cap that
+    already fired on the overall score/verdict. Real bug this pins (confirmed
+    against a live report): before this clamp, an overall CAUTION capped down
+    from 100 could still show Narrative/Transparency at a flat 100, exactly
+    the "Critic Self-Audit sees no inconsistency, but Narrative and numerical
+    score clearly diverge" complaint the report's own Expert Assessment
+    flagged."""
     cats = inv._compute_category_scores(["[capped at 55] Only 0 positive legitimacy signal(s) found"], [])
-    assert all(cat["score"] == 100 for name, cat in cats.items()
-               if name != "Narrative Strength & Social Proof")
+    for name, cat in cats.items():
+        if name == "Narrative Strength & Social Proof":
+            continue  # baseline 20 is already below the 55 cap -- nothing to clamp
+        assert cat["score"] == 55, f"{name} should be clamped to the cap, got {cat['score']}"
+        assert "Capped at 55" in cat["rationale"]
+
+
+def test_confidence_gap_cap_line_also_clamps_categories():
+    """The confidence-gap cap (_apply_confidence_gap_cap()) uses the exact
+    same "[capped at N] ..." convention as the legitimacy cap, so it must be
+    clamped here identically with zero extra wiring."""
+    reasons = ["[+10] Some positive signal",
+               "[capped at 69] Unresolved gap at only 30% confidence: X — a real residual-risk ceiling"]
+    cats = inv._compute_category_scores(reasons, [])
+    for name, cat in cats.items():
+        assert cat["score"] <= 69, f"{name} exceeded the confidence-gap cap: {cat['score']}"
+
+
+def test_tightest_of_multiple_cap_lines_wins():
+    reasons = ["[capped at 89] some gap", "[capped at 55] Only 0 positive legitimacy signal(s) found"]
+    cats = inv._compute_category_scores(reasons, [])
+    for name, cat in cats.items():
+        if name == "Narrative Strength & Social Proof":
+            continue
+        assert cat["score"] == 55
 
 
 def test_narrative_category_starts_low_with_no_social_signal_at_all():

@@ -1078,6 +1078,21 @@ def _categorize_report_reasons(reasons, positive_signals):
 # whole-score adjustment, not attributable to any one category.
 _REASON_WEIGHT_RE = re.compile(r"^\[([+-])(\d+)\]")
 
+# Matches BOTH whole-score ceilings that share this convention: score()'s own
+# legitimacy cap (0/1 positive signals) and _apply_confidence_gap_cap()'s
+# post-assessment ceiling. Used below to keep the Scoring Dashboard's
+# per-category display honest whenever either cap fires — real gap this
+# closes, confirmed against a live report (investigation-20260807-152512-
+# 0x72e4f9F8.md): the overall verdict correctly showed a capped CAUTION, but
+# Narrative/Transparency still displayed 100 next to it since categories are
+# computed from the same reasons list yet this specific reason format was
+# deliberately excluded from _REASON_WEIGHT_RE above (it isn't attributable
+# to one category) — so nothing ever pulled a category DOWN to match a
+# whole-score cap. That's the exact "Critic Self-Audit says no inconsistency
+# but Narrative and numerical score clearly diverge" failure the report's own
+# Expert Assessment flagged.
+_CAP_RE = re.compile(r"^\[capped at (\d+)\]")
+
 
 # ── Scoring Dashboard: weighted, multi-factor category scores ──────────────
 # Replaces the old flat Executive Summary table (100 minus whichever of
@@ -1214,11 +1229,24 @@ def _compute_category_scores(reasons, positive_signals, dex=None, project_narrat
     totals["Narrative Strength & Social Proof"] = narrative_score
     hits["Narrative Strength & Social Proof"] = narrative_hits
 
+    # Whichever whole-score cap is tightest (there's normally at most one,
+    # but take the min defensively) becomes a ceiling on every category too
+    # — see _CAP_RE's comment above for the real inconsistency this closes.
+    cap = None
+    for r in reasons or []:
+        m = _CAP_RE.match(r)
+        if m:
+            cap = int(m.group(1)) if cap is None else min(cap, int(m.group(1)))
+
     result = {}
     for name, weight in _CATEGORY_WEIGHTS:
         score = max(0, min(100, round(totals[name])))
-        result[name] = {"score": score, "weight": weight,
-                         "rationale": _category_rationale(name, score, hits[name])}
+        rationale = _category_rationale(name, score, hits[name])
+        if cap is not None and score > cap:
+            score = cap
+            rationale += (f" (Capped at {cap} in line with the overall verdict's own "
+                          "confidence ceiling — see Verdict Rationale above.)")
+        result[name] = {"score": score, "weight": weight, "rationale": rationale}
     return result
 
 

@@ -521,6 +521,15 @@ export const CATEGORY_WEIGHTS: ReadonlyArray<readonly [string, number]> = [
 
 const REASON_WEIGHT_RE = /^\[([+-])(\d+)\]/;
 
+// Field-for-field port of agents/investigate.py's _CAP_RE -- matches score()'s
+// own legitimacy-cap reason string ("[capped at N] ..."), the one whole-score
+// ceiling reachable from this file's score(). Keeps every category's display
+// from exceeding a cap that already fired on the overall number -- real
+// inconsistency this closes: dossierCheck() computes categories from the same
+// reasons list as the capped overall score/verdict, so without this a capped
+// CAUTION could still show a category at 100.
+const CAP_RE = /^\[capped at (\d+)\]/;
+
 // Deliberately excludes "Narrative Strength & Social Proof" -- score() has
 // no rule that ever produces a narrative/social reason string, so that
 // category is built entirely from direct signals below instead.
@@ -609,10 +618,24 @@ export function computeCategoryScores(
   totals["Narrative Strength & Social Proof"] = narrativeScore;
   hits["Narrative Strength & Social Proof"] = narrativeHits;
 
+  let cap: number | null = null;
+  for (const r of reasons || []) {
+    const m = CAP_RE.exec(r);
+    if (m) {
+      const n = parseInt(m[1], 10);
+      cap = cap === null ? n : Math.min(cap, n);
+    }
+  }
+
   const result: Record<string, CategoryScore> = {};
   for (const [name, weight] of CATEGORY_WEIGHTS) {
-    const score = Math.max(0, Math.min(100, Math.round(totals[name])));
-    result[name] = { score, weight, rationale: categoryRationale(score, hits[name]) };
+    let score = Math.max(0, Math.min(100, Math.round(totals[name])));
+    let rationale = categoryRationale(score, hits[name]);
+    if (cap !== null && score > cap) {
+      score = cap;
+      rationale += ` (Capped at ${cap} in line with the overall verdict's own confidence ceiling.)`;
+    }
+    result[name] = { score, weight, rationale };
   }
   return result;
 }
