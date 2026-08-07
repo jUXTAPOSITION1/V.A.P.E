@@ -1439,3 +1439,5 @@
 | 2026-08-07 | auto | 0x59FCe1d4493553fcb1b002F72D6ea0A99b9B0f06 (1F916) | deep_investigation | REJECT (32/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-07 | auto | 0xAA1BBb6D9A375b61DD3Bc5f8AcB09E97F8c4ebBC (1F916) | deep_investigation | REJECT (17/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-07 | auto | 0x080aecD15886219446D2c961C7EfE17b60fBf156 (LGNS) | deep_investigation | REJECT (32/100) | Upgradeable proxy (verify implementation) | +7d |
