@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-06T23:53:23Z",
+  "generated": "2026-08-07T00:00:09Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 467,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 157,
     "investigations": 801,
-    "news": 78,
+    "news": 79,
     "tools": 16,
     "tools_verified": 16,
     "skills": 25
@@ -11952,6 +11952,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-07-zapscape-use-after-free-hands-l1-root-guests-direct-write-ac.md",
+      "title": "Zapscape Use-After-Free Hands L1 Root Guests Direct Write Access to KVM Hosts",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-07T00:00:08Z",
+      "published_et": "August 6, 2026 \u00b7 8:00 PM EDT",
+      "topic": "Cybersecurity",
+      "dek": "The ordering flaw in shadow MMU root validation lets reclaimed pages stay on active lists, enabling a full privilege-escalation chain on AMD and select Intel setups with nested virtualization enabled.",
+      "image": "assets/news-images/zapscape-use-after-free-hands-l1-root-guests-direct-write-ac.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-07-zapscape-use-after-free-hands-l1-root-guests-direct-write-ac.md"
+    },
+    {
       "file": "news-2026-08-06-white-house-scrutinizes-crypto-clarity-act-ethics-text-as-re.md",
       "title": "White House Scrutinizes Crypto Clarity Act Ethics Text as Recess Threatens Bipartisan Breakthrough",
       "byline": "VAPE Reporter",
@@ -12658,18 +12670,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-30-senators-ready-to-send-stricter-ethics-rules-on-trump-s-cryp.md"
-    },
-    {
-      "file": "news-2026-07-29-binance-us-targets-prediction-markets-expansion-with-upcomin.md",
-      "title": "Binance.US Targets Prediction Markets Expansion With Upcoming CFTC Derivatives License Bid",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-29 22:02 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "CEO Steve Gregory reveals plans to apply for a Designated Contract Market license in August, setting up a regulated clash with Kalshi and Robinhood.",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-29-binance-us-targets-prediction-markets-expansion-with-upcomin.md"
     }
   ],
   "tools": [
