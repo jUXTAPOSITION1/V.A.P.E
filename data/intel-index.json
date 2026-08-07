@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T04:49:51Z",
+  "generated": "2026-08-07T05:06:53Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 472,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 159,
-    "investigations": 809,
+    "investigations": 810,
     "news": 80,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260807-043427-0x54609991.md",
+      "file": "investigation-20260807-050645-0x667A3658.md",
       "title": "Investigation \u2014 CC",
       "symbol": "CC",
       "name": "Canton Network",
-      "date": "2026-08-07T04:34:27Z",
-      "target": "0x54609991482600e1B1552F7243ABBADc137d2b19",
+      "date": "2026-08-07T05:06:45Z",
+      "target": "0x667A36584De1d725373E07A6Aa3eAdB72fbD3224",
       "chain": "137 (Polygon)",
-      "verdict": "REJECT",
-      "score": "40",
-      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymo",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-043427-0x54609991.md"
+      "verdict": "CAUTION",
+      "score": "70",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 17021 holders \u2014 reasonably distributed; Deep liquidity ($4,522,824); Trading 394+ days without a known incident ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-050645-0x667A3658.md"
     },
     "report": {
       "kind": "intel",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260807-050645-0x667A3658.md",
+      "title": "Investigation \u2014 CC",
+      "symbol": "CC",
+      "name": "Canton Network",
+      "date": "2026-08-07T05:06:45Z",
+      "target": "0x667A36584De1d725373E07A6Aa3eAdB72fbD3224",
+      "chain": "137 (Polygon)",
+      "verdict": "CAUTION",
+      "score": "70",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 17021 holders \u2014 reasonably distributed; Deep liquidity ($4,522,824); Trading 394+ days without a known incident ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-050645-0x667A3658.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260807-043427-0x54609991.md",

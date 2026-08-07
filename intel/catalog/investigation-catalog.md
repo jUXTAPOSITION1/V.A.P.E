@@ -1419,3 +1419,5 @@
 | 2026-08-07 | auto | 0xEa8CAc26211e1fCD512c8B45f33F30c8Ef4fc76d (LGNS) | deep_investigation | REJECT (37/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-07 | auto | 0x54609991482600e1B1552F7243ABBADc137d2b19 (CC) | deep_investigation | REJECT (40/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
+
+| 2026-08-07 | auto | 0x667A36584De1d725373E07A6Aa3eAdB72fbD3224 (CC) | deep_investigation | CAUTION (70/100) | Top 10 non-LP/burn holders control 100% of supply — concentrated, easily manipul | +7d |
