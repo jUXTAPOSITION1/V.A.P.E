@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T18:51:27Z",
+  "generated": "2026-08-07T18:59:23Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 487,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 161,
     "investigations": 837,
-    "news": 83,
+    "news": 84,
     "tools": 16,
     "tools_verified": 16,
     "skills": 25
@@ -12456,6 +12456,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-07-trustd-impersonator-macos-clickfix-campaign-drains-crypto-wa.md",
+      "title": "Trustd Impersonator: macOS ClickFix Campaign Drains Crypto Wallets With Go-Based Stealer",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-07T18:59:23Z",
+      "published_et": "August 7, 2026 \u00b7 2:59 PM EDT",
+      "topic": "Cybersecurity",
+      "dek": "Huntress traced how the Bash loader evades Gatekeeper by copying a Mach-O payload into a directory named after the system process that validates code signatures.",
+      "image": "assets/news-images/trustd-impersonator-macos-clickfix-campaign-drains-crypto-wa.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-07-trustd-impersonator-macos-clickfix-campaign-drains-crypto-wa.md"
+    },
+    {
       "file": "news-2026-08-07-cuomo-now-okx-director-warns-senate-must-break-ethics-stalem.md",
       "title": "Cuomo, Now OKX Director, Warns Senate Must Break Ethics Stalemate or Lose U.S. Crypto Ground",
       "byline": "VAPE Reporter",
@@ -13162,18 +13174,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-30-researchers-tried-letting-ai-do-science-it-failed.md"
-    },
-    {
-      "file": "news-2026-07-30-triple-demand-stall-strips-bitcoin-of-bullish-catalysts-putt.md",
-      "title": "Triple Demand Stall Strips Bitcoin of Bullish Catalysts, Putting $64,000 Support in the Hands of Long-Term Holders",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-30 14:01 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "A convergence of massive US spot ETF outflows, weakening perpetual futures buying, and flatlining on-chain capital inflows has left Bitcoin without its primary upward drivers, forcing long-term holders to act as the market's final line of defense.",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-30-triple-demand-stall-strips-bitcoin-of-bullish-catalysts-putt.md"
     }
   ],
   "tools": [
