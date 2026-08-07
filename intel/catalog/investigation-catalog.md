@@ -1421,3 +1421,5 @@
 | 2026-08-07 | auto | 0x54609991482600e1B1552F7243ABBADc137d2b19 (CC) | deep_investigation | REJECT (40/100) | Very few holders (0) — thin, easily manipulated distribution | +7d |
 
 | 2026-08-07 | auto | 0x667A36584De1d725373E07A6Aa3eAdB72fbD3224 (CC) | deep_investigation | CAUTION (70/100) | Top 10 non-LP/burn holders control 100% of supply — concentrated, easily manipul | +7d |
+
+| 2026-08-07 | auto | 0x9123400446a56176Eb1B6BE9ee5CF703e409F492 (TRADOOR) | deep_investigation | CAUTION (70/100) | Top 10 non-LP/burn holders control 89% of supply — concentrated, easily manipula | +7d |
