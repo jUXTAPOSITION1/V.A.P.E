@@ -1121,7 +1121,17 @@ app.use("*", async (c, next) => {
 // Stateless mode (sessionIdGenerator: undefined) + a brand-new McpServer per
 // request -- see mcpServer.ts's docstring for why that's load-bearing, not
 // just convenient, on a shared-nothing runtime like Workers.
-app.all("/mcp", async (c) => {
+//
+// Rate-limited (security audit, real finding): unlike every other route in
+// this file, buildMcpServer() unconditionally calls resourceServer.initialize()
+// -- a live CDP GET /supported round-trip -- on EVERY single request,
+// including a bare, unpaid tools/list. Without a limiter here, spamming this
+// endpoint is a real cost-amplification vector: it burns Worker compute on
+// this repo's dime AND hammers CDP's own facilitator, which could trip
+// CDP-side throttling against VAPE's whole facilitator account (every real
+// paid route, not just this one). 60/min/IP is generous for a legitimate MCP
+// client's actual usage pattern (init once per connection, not per call).
+app.all("/mcp", rateLimiter("mcp", 60, 60), async (c) => {
   const resourceServer = buildBaseResourceServer(c.env);
   const server = await buildMcpServer(resourceServer, c.env as any);
   const transport = new WebStandardStreamableHTTPServerTransport({ sessionIdGenerator: undefined });

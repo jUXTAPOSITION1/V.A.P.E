@@ -558,7 +558,7 @@ const X402Feed = {
         const icon = tokenIconByAddress(j.address, j.chain_id);
         const label = j.symbol ? `$${j.symbol}` : (j.address ? j.address.slice(0, 8) + '…' : '…');
         const targetCell = j.address
-            ? `<a href="${basescanAddrUrl(j.address)}" target="_blank" rel="noopener" class="text-zinc-200 hover:text-white flex items-center gap-1.5">${icon ? `<img src="${icon}" alt="" class="w-4 h-4 rounded-full shrink-0" onerror="this.remove()">` : ''}<span class="whitespace-nowrap">${escapeHtml(label)}</span></a>`
+            ? `<a href="${escapeHtml(basescanAddrUrl(j.address))}" target="_blank" rel="noopener" class="text-zinc-200 hover:text-white flex items-center gap-1.5">${icon ? `<img src="${icon}" alt="" class="w-4 h-4 rounded-full shrink-0" onerror="this.remove()">` : ''}<span class="whitespace-nowrap">${escapeHtml(label)}</span></a>`
             : `<span class="text-zinc-500">${escapeHtml(label)}</span>`;
         const statusDot = j.status === 'settled'
             ? '<span class="w-1.5 h-1.5 bg-emerald-500 rounded-full inline-block" title="settled"></span>'
@@ -567,7 +567,7 @@ const X402Feed = {
             ? `<span class="px-1.5 py-0.5 text-[10px] ${verdictClass(j.verdict)}">${escapeHtml(j.verdict)}</span>`
             : '<span class="text-zinc-700 text-[10px]">…</span>';
         const tx = j.tx_hash
-            ? `<a href="${basescanTxUrl(j.tx_hash)}" target="_blank" rel="noopener" title="View settlement tx on block explorer" class="text-zinc-300 hover:text-white underline decoration-zinc-700">${j.tx_hash.slice(0, 6)}…${j.tx_hash.slice(-4)}</a>`
+            ? `<a href="${escapeHtml(basescanTxUrl(j.tx_hash))}" target="_blank" rel="noopener" title="View settlement tx on block explorer" class="text-zinc-300 hover:text-white underline decoration-zinc-700">${escapeHtml(j.tx_hash.slice(0, 6) + '…' + j.tx_hash.slice(-4))}</a>`
             : '<span class="text-zinc-700">unsettled</span>';
         // Each of the 6 auto offerings has a real, verified 402index.io service
         // listing (see agents/publish_reputation.py's _402INDEX_SERVICE_IDS) —
