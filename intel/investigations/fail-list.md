@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-08-07T15:25:12Z — 439 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-08-07T17:48:27Z — 440 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| bStocks | BNB Chain | `0x244B112Cf746e62A5DF723cbDe9906a6dEfd7777` | 12/100 | 1 | 2026-08-07T17:48:27Z |
 | 1F916 | Base | `0x4E2b5225152d5E18fB6A22F972Ff9e90A4E9AF8e` | 0/100 | 1 | 2026-08-07T15:08:44Z |
 | LGNS | Polygon | `0x45E1C92Cb7F0Ff24d9092579014Bab2413B0CD87` | 25/100 | 1 | 2026-08-07T14:52:38Z |
 | MOMO | Ethereum | `0x3183214919ee829446fD12695c5e9E09C47bb01d` | 0/100 | 1 | 2026-08-07T14:36:13Z |

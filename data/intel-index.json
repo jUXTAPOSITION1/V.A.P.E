@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T17:32:28Z",
+  "generated": "2026-08-07T17:48:45Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 486,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 161,
-    "investigations": 836,
+    "investigations": 837,
     "news": 83,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260807-152512-0x72e4f9F8.md",
-      "title": "Investigation \u2014 BITCOIN",
-      "symbol": "BITCOIN",
-      "name": "HarryPotterObamaSonic10Inu",
-      "date": "2026-08-07T15:25:12Z",
-      "target": "0x72e4f9F808C49A2a61dE9C5896298920Dc4EEEa9",
-      "chain": "1 (Ethereum)",
-      "verdict": "PROCEED",
-      "score": "100",
-      "summary": "Risk factors: No risk penalties triggered \u2014 clean across all automated checks.. Positive evidence: Ownership renounced; 25703 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Deep liquidity ($971,424); Trading 1142+ days without a known incident in this scan; Custom verified source",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-152512-0x72e4f9F8.md"
+      "file": "investigation-20260807-174827-0x244B112C.md",
+      "title": "Investigation \u2014 bStocks",
+      "symbol": "bStocks",
+      "name": "bStocks Never Sleep",
+      "date": "2026-08-07T17:48:27Z",
+      "target": "0x244B112Cf746e62A5DF723cbDe9906a6dEfd7777",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "12",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: DCA (0xEd2EE58908eA569A994a1ac77da4A947807A4444) \u2014 CAUTION 55/100 \u2014 likely the same serial campaign; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Vi",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-174827-0x244B112C.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260807-174827-0x244B112C.md",
+      "title": "Investigation \u2014 bStocks",
+      "symbol": "bStocks",
+      "name": "bStocks Never Sleep",
+      "date": "2026-08-07T17:48:27Z",
+      "target": "0x244B112Cf746e62A5DF723cbDe9906a6dEfd7777",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "12",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: DCA (0xEd2EE58908eA569A994a1ac77da4A947807A4444) \u2014 CAUTION 55/100 \u2014 likely the same serial campaign; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Vi",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-174827-0x244B112C.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260807-152512-0x72e4f9F8.md",
@@ -13257,7 +13271,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49660881",
+      "version": "49667307",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -13267,7 +13281,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.74 eth_dom 10.1 mcap_chg_24h 0.81",
+      "version": "btc_dom 56.72 eth_dom 10.07 mcap_chg_24h -0.18",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,

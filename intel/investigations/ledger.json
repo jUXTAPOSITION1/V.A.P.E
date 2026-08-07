@@ -6315,6 +6315,25 @@
     "symbol": "\u5e01\u6709",
     "times_investigated": 1
   },
+  "56:0x244b112cf746e62a5df723cbde9906a6defd7777": {
+    "address": "0x244B112Cf746e62A5DF723cbDe9906a6dEfd7777",
+    "chain": "56",
+    "creator_address": "0x7eaf232fff53499fd3ead3c93924671b149e4837",
+    "first_investigated": "2026-08-07T17:48:27Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260807-174827-0x244B112C.md",
+        "score": 12,
+        "ts": "2026-08-07T17:48:27Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-07T17:48:27Z",
+    "last_score": 12,
+    "last_verdict": "REJECT",
+    "symbol": "bStocks",
+    "times_investigated": 1
+  },
   "56:0x248918d672e5523f9d64c0f3d4511513d7397777": {
     "address": "0x248918D672E5523F9d64C0f3D4511513D7397777",
     "chain": "56",

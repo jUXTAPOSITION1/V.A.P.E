@@ -1473,3 +1473,5 @@
 | 2026-08-07 | auto | 0x4E2b5225152d5E18fB6A22F972Ff9e90A4E9AF8e (1F916) | deep_investigation | REJECT (0/100) | Very few holders (13) — thin, easily manipulated distribution | +7d |
 
 | 2026-08-07 | auto | 0x72e4f9F808C49A2a61dE9C5896298920Dc4EEEa9 (BITCOIN) | deep_investigation | PROCEED (100/100) | clean | +7d |
+
+| 2026-08-07 | auto | 0x244B112Cf746e62A5DF723cbDe9906a6dEfd7777 (bStocks) | deep_investigation | REJECT (12/100) | Upgradeable proxy (verify implementation) | +7d |
