@@ -7076,6 +7076,25 @@
     "symbol": "UAI",
     "times_investigated": 1
   },
+  "56:0x595deaad1eb5476ff1e649fdb7efc36f1e4679cc": {
+    "address": "0x595dEaad1eB5476Ff1E649fDb7EFC36F1E4679cc",
+    "chain": "56",
+    "creator_address": "0x8901d084cafead3fcfd223961ec479181057df68",
+    "first_investigated": "2026-08-07T06:56:43Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260807-065643-0x595dEaad.md",
+        "score": 62,
+        "ts": "2026-08-07T06:56:43Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-07T06:56:43Z",
+    "last_score": 62,
+    "last_verdict": "CAUTION",
+    "symbol": "BSB",
+    "times_investigated": 1
+  },
   "56:0x604448c8f009135e913c7e0e4bef692b0003a02a": {
     "address": "0x604448c8f009135e913C7e0E4Bef692B0003A02A",
     "chain": "56",

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T06:40:49Z",
+  "generated": "2026-08-07T06:56:44Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 473,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 159,
-    "investigations": 812,
+    "investigations": 813,
     "news": 80,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260807-060945-0x01cA5ACf.md",
-      "title": "Investigation \u2014 FORGE",
-      "symbol": "FORGE",
-      "name": "Forge",
-      "date": "2026-08-07T06:09:45Z",
-      "target": "0x01cA5ACf53D0a18943dAe0dd6C08B88e62ad0BA3",
-      "chain": "1 (Ethereum)",
-      "verdict": "REJECT",
-      "score": "7",
-      "summary": "Risk factors: [-10] Owner not renounced (0xf45930620d727a222826729d4abc08cb2c6162a2) \u2014 can still act on the contract; [-8] Low holder count (141); [-15] Top 10 non-LP/burn holders control 85% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time;",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-060945-0x01cA5ACf.md"
+      "file": "investigation-20260807-065643-0x595dEaad.md",
+      "title": "Investigation \u2014 BSB",
+      "symbol": "BSB",
+      "name": "Block Street",
+      "date": "2026-08-07T06:56:43Z",
+      "target": "0x595dEaad1eB5476Ff1E649fDb7EFC36F1E4679cc",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "62",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 90% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 59039 holders \u2014 reasonably distributed; Trading 156+ days without",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-065643-0x595dEaad.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260807-065643-0x595dEaad.md",
+      "title": "Investigation \u2014 BSB",
+      "symbol": "BSB",
+      "name": "Block Street",
+      "date": "2026-08-07T06:56:43Z",
+      "target": "0x595dEaad1eB5476Ff1E649fDb7EFC36F1E4679cc",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "62",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 90% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 59039 holders \u2014 reasonably distributed; Trading 156+ days without",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-065643-0x595dEaad.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260807-060945-0x01cA5ACf.md",

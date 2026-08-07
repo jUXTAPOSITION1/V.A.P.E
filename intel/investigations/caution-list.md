@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-08-07T06:09:45Z — 169 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-08-07T06:56:43Z — 170 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| BSB | BNB Chain | `0x595dEaad1eB5476Ff1E649fDb7EFC36F1E4679cc` | 62/100 | 1 | 2026-08-07T06:56:43Z |
 | TRADOOR | BNB Chain | `0x9123400446a56176Eb1B6BE9ee5CF703e409F492` | 70/100 | 1 | 2026-08-07T05:53:33Z |
 | CC | Polygon | `0x667A36584De1d725373E07A6Aa3eAdB72fbD3224` | 70/100 | 1 | 2026-08-07T05:06:45Z |
 | TAKE | BNB Chain | `0xE747E54783Ba3F77a8E5251a3cBA19EBe9C0E197` | 62/100 | 1 | 2026-08-07T01:27:32Z |
