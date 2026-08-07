@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-07T13:42:46Z",
+  "generated_at": "2026-08-07T19:19:45Z",
   "district_stats": {
     "overall_threat_level": "HIGH",
-    "lanes_passing": 7,
+    "lanes_passing": 6,
     "lanes_total": 10,
     "buildings_total": 19
   },
@@ -15,20 +15,20 @@
       "tier": 3,
       "stat_primary": {
         "label": "tracked",
-        "value": 831
+        "value": 838
       },
       "stat_secondary": [
         {
           "label": "reject",
-          "value": 482
+          "value": 487
         },
         {
           "label": "caution",
-          "value": 216
+          "value": 217
         },
         {
           "label": "proceed",
-          "value": 133
+          "value": 134
         }
       ],
       "link": "investigations.html",
@@ -159,12 +159,12 @@
       "tier": 3,
       "stat_primary": {
         "label": "findings sealed",
-        "value": 1741
+        "value": 1758
       },
       "stat_secondary": [
         {
           "label": "unsealed lines",
-          "value": 6
+          "value": 3
         }
       ],
       "link": "index.html#security-dashboard",
@@ -207,7 +207,7 @@
       "tier": 4,
       "stat_primary": {
         "label": "data calls logged",
-        "value": 2150
+        "value": 2194
       },
       "stat_secondary": [],
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/memory",
@@ -375,14 +375,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-06T14:43:00Z"
+          "value": "2026-08-07T13:45:33Z"
         },
         {
           "label": "critical/high findings",
-          "value": 2
+          "value": 1
         }
       ],
-      "last_run_at": "2026-08-06T14:43:00Z",
+      "last_run_at": "2026-08-07T13:45:33Z",
       "source_workflow": "redteam.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/redteam.yml"
     },
@@ -405,14 +405,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-06T15:09:55Z"
+          "value": "2026-08-07T14:08:53Z"
         },
         {
           "label": "critical/high findings",
-          "value": 2
+          "value": 1
         }
       ],
-      "last_run_at": "2026-08-06T15:09:55Z",
+      "last_run_at": "2026-08-07T14:08:53Z",
       "source_workflow": "redteam-deep.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/redteam-deep.yml"
     },
@@ -435,14 +435,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-07T12:48:08Z"
+          "value": "2026-08-07T18:45:01Z"
         },
         {
           "label": "ledger chain intact",
           "value": "yes"
         }
       ],
-      "last_run_at": "2026-08-07T12:48:08Z",
+      "last_run_at": "2026-08-07T18:45:01Z",
       "source_workflow": "findings-seal.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/findings-seal.yml"
     },
@@ -480,7 +480,7 @@
       "id": "lane-intel-sweeps",
       "kind": "checkpoint",
       "title": "On-Chain Attack Intelligence",
-      "status": "ok",
+      "status": "alert",
       "tier": 1,
       "gridX": 5,
       "gridY": 6,
@@ -495,14 +495,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-07T13:05:23Z"
+          "value": "2026-08-07T18:58:10Z"
         },
         {
           "label": "attack-pattern coverage",
           "value": "23%"
         }
       ],
-      "last_run_at": "2026-08-07T13:05:23Z",
+      "last_run_at": "2026-08-07T18:58:10Z",
       "source_workflow": "intel-sweeps.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/intel-sweeps.yml"
     }
@@ -582,6 +582,61 @@
     ]
   ],
   "recent_events": [
+    {
+      "id": "investigation:0xe9942e755b81173d81A220255B2B29beA4A44FAb",
+      "type": "investigation",
+      "timestamp": "2026-08-07T19:07:27Z",
+      "label": "Alcotraders",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "news:Trustd Impersonator: macOS ClickFix Campaign Drains Crypto Wallets With Go-Based Stealer",
+      "type": "news",
+      "timestamp": "2026-08-07T18:59:23Z",
+      "label": "Trustd Impersonator: macOS ClickFix Campaign Drains Crypto Wallets With Go-Based Stealer"
+    },
+    {
+      "id": "investigation:0x244B112Cf746e62A5DF723cbDe9906a6dEfd7777",
+      "type": "investigation",
+      "timestamp": "2026-08-07T17:48:27Z",
+      "label": "bStocks Never Sleep",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x72e4f9F808C49A2a61dE9C5896298920Dc4EEEa9",
+      "type": "investigation",
+      "timestamp": "2026-08-07T15:25:12Z",
+      "label": "HarryPotterObamaSonic10Inu",
+      "verdict": "PROCEED"
+    },
+    {
+      "id": "investigation:0x4E2b5225152d5E18fB6A22F972Ff9e90A4E9AF8e",
+      "type": "investigation",
+      "timestamp": "2026-08-07T15:08:44Z",
+      "label": "A Society For AI Agents",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x45E1C92Cb7F0Ff24d9092579014Bab2413B0CD87",
+      "type": "investigation",
+      "timestamp": "2026-08-07T14:52:38Z",
+      "label": "Longinus",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x3183214919ee829446fD12695c5e9E09C47bb01d",
+      "type": "investigation",
+      "timestamp": "2026-08-07T14:36:13Z",
+      "label": "Momo",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x58e0893DC6d7E875547Bc1f6D034FF443d9F2F52",
+      "type": "investigation",
+      "timestamp": "2026-08-07T14:04:25Z",
+      "label": "AS Token",
+      "verdict": "CAUTION"
+    },
     {
       "id": "investigation:0x1884daA51E761519d847E19b367ad1ba164370be",
       "type": "investigation",
@@ -691,61 +746,6 @@
       "timestamp": "2026-08-07T08:30:14Z",
       "label": "A Society for AI Agents",
       "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xD70d796d782173aD35D5bF17B6c9b5517130e4E0",
-      "type": "investigation",
-      "timestamp": "2026-08-07T07:59:46Z",
-      "label": "RISE Token",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x9E00FC92493451EBA1c63DD3880D68b622037bA3",
-      "type": "investigation",
-      "timestamp": "2026-08-07T07:43:50Z",
-      "label": "A Society For AI Agents",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x33d71C2dA31Da7F21Bd1805BFc7d1Cd787557777",
-      "type": "investigation",
-      "timestamp": "2026-08-07T07:28:13Z",
-      "label": "\ud55c\uad6d \uc6d0",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "news:Jony Ive\u2019s 'Moving Parts' Donut: Inside OpenAI\u2019s High-Stakes $400 Smart Speaker Gamble",
-      "type": "news",
-      "timestamp": "2026-08-07T07:17:09Z",
-      "label": "Jony Ive\u2019s 'Moving Parts' Donut: Inside OpenAI\u2019s High-Stakes $400 Smart Speaker Gamble"
-    },
-    {
-      "id": "investigation:0x33cd9f873B85d2c2d11791A2CAe5170B82Ac7777",
-      "type": "investigation",
-      "timestamp": "2026-08-07T07:12:22Z",
-      "label": "\ud55c\uad6d \uc6d0",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x595dEaad1eB5476Ff1E649fDb7EFC36F1E4679cc",
-      "type": "investigation",
-      "timestamp": "2026-08-07T06:56:43Z",
-      "label": "Block Street",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0x01cA5ACf53D0a18943dAe0dd6C08B88e62ad0BA3",
-      "type": "investigation",
-      "timestamp": "2026-08-07T06:09:45Z",
-      "label": "Forge",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x9123400446a56176Eb1B6BE9ee5CF703e409F492",
-      "type": "investigation",
-      "timestamp": "2026-08-07T05:53:33Z",
-      "label": "TRADOOR",
-      "verdict": "CAUTION"
     }
   ]
 }
