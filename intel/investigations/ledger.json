@@ -11742,6 +11742,25 @@
     "symbol": "dexcheckai",
     "times_investigated": 1
   },
+  "8453:0xaa1bbb6d9a375b61dd3bc5f8acb09e97f8c4ebbc": {
+    "address": "0xAA1BBb6D9A375b61DD3Bc5f8AcB09E97F8c4ebBC",
+    "chain": "8453",
+    "creator_address": "0xbaac74627afff97ff30a795e5c2708bf75385391",
+    "first_investigated": "2026-08-07T08:45:31Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260807-084531-0xAA1BBb6D.md",
+        "score": 17,
+        "ts": "2026-08-07T08:45:31Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-07T08:45:31Z",
+    "last_score": 17,
+    "last_verdict": "REJECT",
+    "symbol": "1F916",
+    "times_investigated": 1
+  },
   "8453:0xac531eb26ca1d21b85126de8fb87e80e09002dcf": {
     "address": "0xac531Eb26Ca1d21b85126De8FB87E80E09002DcF",
     "chain": "8453",

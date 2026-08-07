@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T08:30:15Z",
+  "generated": "2026-08-07T08:45:34Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 474,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 160,
-    "investigations": 818,
+    "investigations": 819,
     "news": 81,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260807-083014-0x59FCe1d4.md",
+      "file": "investigation-20260807-084531-0xAA1BBb6D.md",
       "title": "Investigation \u2014 1F916",
       "symbol": "1F916",
-      "name": "A Society for AI Agents",
-      "date": "2026-08-07T08:30:14Z",
-      "target": "0x59FCe1d4493553fcb1b002F72D6ea0A99b9B0f06",
+      "name": "A Society for AI Agents (1F916)",
+      "date": "2026-08-07T08:45:31Z",
+      "target": "0xAA1BBb6D9A375b61DD3Bc5f8AcB09E97F8c4ebBC",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "32",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (9) \u2014 thin, easily manipulated distribution; [-15] Top 9 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verif",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-083014-0x59FCe1d4.md"
+      "score": "17",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (11) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Pair onl",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-084531-0xAA1BBb6D.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260807-084531-0xAA1BBb6D.md",
+      "title": "Investigation \u2014 1F916",
+      "symbol": "1F916",
+      "name": "A Society for AI Agents (1F916)",
+      "date": "2026-08-07T08:45:31Z",
+      "target": "0xAA1BBb6D9A375b61DD3Bc5f8AcB09E97F8c4ebBC",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "17",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (11) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-15] Pair onl",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-084531-0xAA1BBb6D.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260807-083014-0x59FCe1d4.md",

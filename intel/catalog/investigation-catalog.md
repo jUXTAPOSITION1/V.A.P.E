@@ -1437,3 +1437,5 @@
 | 2026-08-07 | auto | 0xD70d796d782173aD35D5bF17B6c9b5517130e4E0 (RISE) | deep_investigation | REJECT (0/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-07 | auto | 0x59FCe1d4493553fcb1b002F72D6ea0A99b9B0f06 (1F916) | deep_investigation | REJECT (32/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-07 | auto | 0xAA1BBb6D9A375b61DD3Bc5f8AcB09E97F8c4ebBC (1F916) | deep_investigation | REJECT (17/100) | Upgradeable proxy (verify implementation) | +7d |
