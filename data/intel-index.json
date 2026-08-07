@@ -1,10 +1,10 @@
 {
-  "generated": "2026-08-07T14:52:46Z",
+  "generated": "2026-08-07T14:54:05Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 481,
+    "reports": 482,
     "reports_by_type": {
-      "bounty": 141,
+      "bounty": 142,
       "security": 82,
       "sentiment": 51,
       "base": 95,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 161,
-    "investigations": 834,
+    "investigations": 833,
     "news": 83,
     "tools": 16,
     "tools_verified": 16,
@@ -24,45 +24,31 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260807-145238-0x45E1C92C.md",
-      "title": "Investigation \u2014 LGNS",
-      "symbol": "LGNS",
-      "name": "Longinus",
-      "date": "2026-08-07T14:52:38Z",
-      "target": "0x45E1C92Cb7F0Ff24d9092579014Bab2413B0CD87",
-      "chain": "137 (Polygon)",
+      "file": "investigation-20260807-143613-0x31832149.md",
+      "title": "Investigation \u2014 MOMO",
+      "symbol": "MOMO",
+      "name": "Momo",
+      "date": "2026-08-07T14:36:13Z",
+      "target": "0x3183214919ee829446fD12695c5e9E09C47bb01d",
+      "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "25",
-      "summary": "Risk factors: [-20] Very few holders (7) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity $0; [-10] Violent 24h move +797% (volatility/manipulation); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Po",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-145238-0x45E1C92C.md"
+      "score": "0",
+      "summary": "Risk factors: [-25] Owner can change balances (rug surface); [-20] Very few holders (7) \u2014 thin, easily manipulated distribution; [-15] Top 7 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $2,236 (rug/illiquid); [-10] Low liquidity $2,236; [-10] No known third-par",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-143613-0x31832149.md"
     },
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260807_130639.md",
+      "file": "bounty_report_20260807_145342.md",
       "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-07T13:06:39Z",
+      "date": "2026-08-07T14:53:42Z",
       "threat": null,
-      "summary": "Cycle: 20260807130639 \u00b7 Data timestamp (UTC): 2026-08-07T13:06:44Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260807_130639.md",
-      "bytes": 16027
+      "summary": "Base mover: 1F916 / WETH +714% 24h (liq $177442.2651) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260807_145342.md",
+      "bytes": 17056
     }
   },
   "investigations": [
-    {
-      "source": "report",
-      "file": "investigation-20260807-145238-0x45E1C92C.md",
-      "title": "Investigation \u2014 LGNS",
-      "symbol": "LGNS",
-      "name": "Longinus",
-      "date": "2026-08-07T14:52:38Z",
-      "target": "0x45E1C92Cb7F0Ff24d9092579014Bab2413B0CD87",
-      "chain": "137 (Polygon)",
-      "verdict": "REJECT",
-      "score": "25",
-      "summary": "Risk factors: [-20] Very few holders (7) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $0 (rug/illiquid); [-10] Low liquidity $0; [-10] Violent 24h move +797% (volatility/manipulation); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Po",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-145238-0x45E1C92C.md"
-    },
     {
       "source": "report",
       "file": "investigation-20260807-143613-0x31832149.md",
@@ -11542,6 +11528,17 @@
     {
       "kind": "bounty",
       "type": "bounty",
+      "file": "bounty_report_20260807_145342.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-07T14:53:42Z",
+      "threat": null,
+      "summary": "Base mover: 1F916 / WETH +714% 24h (liq $177442.2651) \u2014 volatility/rug watch",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260807_145342.md",
+      "bytes": 17056
+    },
+    {
+      "kind": "bounty",
+      "type": "bounty",
       "file": "bounty_report_20260807_130639.md",
       "title": "V.A.P.E. Intelligence Report",
       "date": "2026-08-07T13:06:39Z",
@@ -12187,17 +12184,6 @@
       "summary": "Source fidelity: SENTIMENT SCORE below is the real, live Fear & Greed index (objective, keyless, alternative.me/fng) \u2014 not an LLM impression. The narrative sections are an LLM's qualitative read of live web search results (Tavily/Brave-backed, with keyless fallback), clearly separated from the objective score so directional narrative colo",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/sentiment-2026-08-04-10.md",
       "bytes": 1745
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-08-04-08.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-08-04T08:00Z",
-      "threat": null,
-      "summary": "The feed shows 6 incidents in the last 7 days and one incident exceeding $50M in the last 14 days (COLDCARD, $115.0M, Non-Random Private Key Generation on Bitcoin). The remaining incidents cluster around price manipulation attacks (LOOPSDAO $0.696M, MOKE $0.907M, LULA $0.578M, all on BSC), hot-wallet compromise (Triple-A $9.7M across Ethe",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-04-08.md",
-      "bytes": 6686
     }
   ],
   "broadcasts": [
