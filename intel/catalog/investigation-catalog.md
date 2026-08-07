@@ -1429,3 +1429,5 @@
 | 2026-08-07 | auto | 0x595dEaad1eB5476Ff1E649fDb7EFC36F1E4679cc (BSB) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-07 | auto | 0x33cd9f873B85d2c2d11791A2CAe5170B82Ac7777 (BSB) | deep_investigation | REJECT (12/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-07 | auto | 0x33d71C2dA31Da7F21Bd1805BFc7d1Cd787557777 (BSB) | deep_investigation | REJECT (0/100) | Upgradeable proxy (verify implementation) | +7d |

@@ -6430,6 +6430,25 @@
     "symbol": "BSB",
     "times_investigated": 1
   },
+  "56:0x33d71c2da31da7f21bd1805bfc7d1cd787557777": {
+    "address": "0x33d71C2dA31Da7F21Bd1805BFc7d1Cd787557777",
+    "chain": "56",
+    "creator_address": "0x363667434e3133340787f30ca7c25bbbcae729d2",
+    "first_investigated": "2026-08-07T07:28:13Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260807-072813-0x33d71C2d.md",
+        "score": 0,
+        "ts": "2026-08-07T07:28:13Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-07T07:28:13Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "BSB",
+    "times_investigated": 1
+  },
   "56:0x3433a5748bda2f7338bdc600be7bc716d5882b0c": {
     "address": "0x3433a5748Bda2F7338BDC600Be7BC716d5882B0C",
     "chain": "56",
