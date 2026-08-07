@@ -6677,6 +6677,25 @@
     "symbol": "UB",
     "times_investigated": 1
   },
+  "56:0x42907d9f7e3d4291c801bbd1f601066eb1dfa956": {
+    "address": "0x42907d9F7E3d4291C801BbD1F601066EB1dfA956",
+    "chain": "56",
+    "creator_address": "0xfeefbfee4d7aca95aeb302640075fd939944062c",
+    "first_investigated": "2026-08-07T11:40:33Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260807-114033-0x42907d9F.md",
+        "score": 27,
+        "ts": "2026-08-07T11:40:33Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-07T11:40:33Z",
+    "last_score": 27,
+    "last_verdict": "REJECT",
+    "symbol": "BLEC",
+    "times_investigated": 1
+  },
   "56:0x431a3bee82e2ca41e49895cbece5bb0f76a89b7a": {
     "address": "0x431a3BEE82E2ca41e49895CbECE5bB0F76A89b7A",
     "chain": "56",
