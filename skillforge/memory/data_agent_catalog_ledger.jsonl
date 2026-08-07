@@ -758,3 +758,4 @@
 {"ts": "2026-08-07T14:20:29.934936Z", "target": "aave-v2", "hired": ["treasury"], "paid": 1, "cost_usd": 0.01, "daily_target": 63}
 {"ts": "2026-08-07T14:52:46.090845Z", "target": "afi-protocol", "hired": ["protocol"], "paid": 1, "cost_usd": 0.01, "daily_target": 63}
 {"ts": "2026-08-07T15:08:48.298082Z", "target": "none", "hired": ["market_intel"], "paid": 1, "cost_usd": 0.07, "daily_target": 63}
+{"ts": "2026-08-07T15:25:21.768338Z", "target": "0x4200000000000000000000000000000000000006", "hired": ["token_chart"], "paid": 1, "cost_usd": 0.01, "daily_target": 63}

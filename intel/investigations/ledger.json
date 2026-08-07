@@ -3033,6 +3033,25 @@
     "symbol": "CATE",
     "times_investigated": 1
   },
+  "1:0x72e4f9f808c49a2a61de9c5896298920dc4eeea9": {
+    "address": "0x72e4f9F808C49A2a61dE9C5896298920Dc4EEEa9",
+    "chain": "1",
+    "creator_address": "0x41bc04c8639aa3b39dc036900b7d7575301afa88",
+    "first_investigated": "2026-08-07T15:25:12Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260807-152512-0x72e4f9F8.md",
+        "score": 100,
+        "ts": "2026-08-07T15:25:12Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-08-07T15:25:12Z",
+    "last_score": 100,
+    "last_verdict": "PROCEED",
+    "symbol": "BITCOIN",
+    "times_investigated": 1
+  },
   "1:0x73a15fed60bf67631dc6cd7bc5b6e8da8190acf5": {
     "address": "0x73A15FeD60Bf67631dC6cd7Bc5B6e8da8190aCF5",
     "chain": "1",

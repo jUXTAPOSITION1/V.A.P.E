@@ -1471,3 +1471,5 @@
 | 2026-08-07 | auto | 0x45E1C92Cb7F0Ff24d9092579014Bab2413B0CD87 (LGNS) | deep_investigation | REJECT (25/100) | Very few holders (7) — thin, easily manipulated distribution | +7d |
 
 | 2026-08-07 | auto | 0x4E2b5225152d5E18fB6A22F972Ff9e90A4E9AF8e (1F916) | deep_investigation | REJECT (0/100) | Very few holders (13) — thin, easily manipulated distribution | +7d |
+
+| 2026-08-07 | auto | 0x72e4f9F808C49A2a61dE9C5896298920Dc4EEEa9 (BITCOIN) | deep_investigation | PROCEED (100/100) | clean | +7d |

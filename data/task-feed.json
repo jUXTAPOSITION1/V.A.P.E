@@ -1,7 +1,21 @@
 {
-  "generated": "2026-08-07T15:08:49Z",
-  "synthesis": "VAPE's automation performed various scans, reviews, and analyses, including red-team and threat assessments, this cycle.",
+  "generated": "2026-08-07T15:25:23Z",
+  "synthesis": "VAPE's automation performed various scans, reviews, and analyses, including threat and repository checks.",
   "tasks": [
+    {
+      "sha": "0a42334673",
+      "kind": "reputation",
+      "message": "reputation snapshot 2026-08-07T15:10Z",
+      "date": "2026-08-07T15:10:45Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/0a423346731c4b8c69a5cabcd9b7318cf7944d67"
+    },
+    {
+      "sha": "01de84223b",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-08-07T15:08Z",
+      "date": "2026-08-07T15:08:56Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/01de84223b0065fc478ec6b6747754068a8363e7"
+    },
     {
       "sha": "ede66d8b54",
       "kind": "sweep",
@@ -92,20 +106,6 @@
       "message": "VAPE AI red-team cycle 2026-08-07T13:46Z",
       "date": "2026-08-07T13:46:06Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/7ca07694dd7fbd2f7ff5aff42f9cb5815272f6a1"
-    },
-    {
-      "sha": "fe0d93fc9c",
-      "kind": "automation",
-      "message": "security-dashboard 2026-08-07T13:42Z",
-      "date": "2026-08-07T13:42:46Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/fe0d93fc9c0c06e9a66c9372b9e03c6cc0a85784"
-    },
-    {
-      "sha": "a6d4b1e160",
-      "kind": "reputation",
-      "message": "reputation snapshot 2026-08-07T13:41Z",
-      "date": "2026-08-07T13:41:08Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/a6d4b1e16029ee7c7f8da426b87087a7d7f108ab"
     }
   ]
 }
