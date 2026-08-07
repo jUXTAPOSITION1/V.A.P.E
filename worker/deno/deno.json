@@ -14,6 +14,10 @@
     "@x402/evm/exact/server": "npm:@x402/evm@2.18.0/exact/server",
     "@x402/svm/exact/server": "npm:@x402/svm@2.18.0/exact/server",
     "@x402/extensions/bazaar": "npm:@x402/extensions@2.18.0/bazaar",
+    "@x402/mcp": "npm:@x402/mcp@2.18.0",
+    "@modelcontextprotocol/sdk/server/mcp.js": "npm:@modelcontextprotocol/sdk@1.30.0/server/mcp.js",
+    "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js": "npm:@modelcontextprotocol/sdk@1.30.0/server/webStandardStreamableHttp.js",
+    "zod": "npm:zod@3.25.76",
     "jose": "npm:jose@6.2.3"
   },
   "tasks": {

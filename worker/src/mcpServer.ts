@@ -41,9 +41,9 @@
  */
 import { z, type ZodTypeAny } from "zod";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { createPaymentWrapper } from "@x402/mcp";
+import { createPaymentWrapper, type SettlementContext } from "@x402/mcp";
 import type { x402ResourceServer } from "@x402/core/server";
-import { HANDLERS, fulfill, type HandlerName, type Requirement } from "./handlers";
+import { HANDLERS, fulfill, OFFERING_PRICES, OFFERING_DISCOVERY, ADDRESS_INPUT_SCHEMA, type HandlerName, type Requirement } from "./handlers";
 import { DL_OFFERINGS, fulfillData, type DlEnv, type DlQuery } from "./dataHandlers";
 import { logJob, type JobRecord, type KVLike } from "./lib/jobLog";
 
@@ -130,37 +130,6 @@ function toolResult(payload: unknown) {
   return { content: [{ type: "text" as const, text: JSON.stringify(payload) }] };
 }
 
-// Same 6 offerings + prices/descriptions as index.ts's OFFERING_PRICES/
-// OFFERING_DISCOVERY (not imported directly -- importing from index.ts here
-// would create a circular import back into this file, since index.ts is the
-// one that calls buildMcpServer()). Kept in sync by hand, same as every
-// other place in this repo that duplicates a small constant table across a
-// would-be circular import boundary (e.g. investigateLite.ts's own
-// CATEGORY_WEIGHTS mirroring investigate.py's).
-const SECURITY_PRICES: Record<HandlerName, string> = {
-  exploit_check: "$0.01",
-  token_safety_check: "$0.02",
-  liquidity_check: "$0.02",
-  rug_pull_alert: "$0.03",
-  market_intel: "$0.07",
-  dossier_check: "$0.10",
-};
-const SECURITY_DESCRIPTIONS: Record<HandlerName, string> = {
-  token_safety_check: "Fast honeypot/tax/owner-power + liquidity safety scan for a token.",
-  liquidity_check: "Liquidity depth, lock status, and rug/illiquidity risk for a token.",
-  rug_pull_alert: "Mint/owner-power rug-pull risk flags for a token.",
-  exploit_check: "Contract-recon-based exploit/vulnerability risk flags.",
-  market_intel: "Base TVL/DEX-volume/price narrative: per-protocol share, concentration risk, sentiment.",
-  dossier_check: "Full weighted-score investigation (security/liquidity/holders/transparency/narrative/longevity) with verdict.",
-};
-const SECURITY_INPUT_SCHEMA: JsonInputSchema = {
-  properties: {
-    address: { type: "string", description: "contract/token address to analyze" },
-    chain: { type: "string", description: "optional chain id override, defaults to 8453 (Base)" },
-  },
-  required: ["address"],
-};
-
 /**
  * Builds a fresh McpServer wired to VAPE's real offerings. Call once per
  * request (see index.ts's /mcp route) -- never cache/reuse across requests.
@@ -179,19 +148,23 @@ export async function buildMcpServer(resourceServer: x402ResourceServer, env: Mc
   const server = new McpServer({ name: "vape-detective", version: "1.0.0" });
 
   // ── Security suite (6 offerings, same fulfill() dispatch the /scan/<name>
-  // routes use) ───────────────────────────────────────────────────────────
+  // routes use -- price/description read from handlers.ts's OFFERING_PRICES/
+  // OFFERING_DISCOVERY, the same tables index.ts's PAID_ROUTES build from,
+  // so the HTTP and MCP surfaces can never quote a different price for the
+  // same offering) ────────────────────────────────────────────────────────
   for (const name of Object.keys(HANDLERS) as HandlerName[]) {
-    const price = SECURITY_PRICES[name];
+    const price = OFFERING_PRICES[name];
+    const description = OFFERING_DISCOVERY[name].description;
     const accepts = await buildAccepts(resourceServer, env, price);
     const paid = createPaymentWrapper(resourceServer, {
       accepts,
       resource: {
         url: `mcp://vape-detective/tool/${name}`,
-        description: SECURITY_DESCRIPTIONS[name],
+        description,
         serviceName: "VAPE",
       },
       hooks: {
-        onAfterSettlement: async (ctx) => {
+        onAfterSettlement: async (ctx: SettlementContext) => {
           await logMcpSettlement(env, name, Number(price.replace("$", "")), ctx.arguments, ctx.settlement as any);
         },
       },
@@ -199,8 +172,8 @@ export async function buildMcpServer(resourceServer: x402ResourceServer, env: Mc
     server.registerTool(
       name,
       {
-        description: `VAPE ${name} ($${price.replace("$", "")} USDC) — ${SECURITY_DESCRIPTIONS[name]} Real on-chain/market data, no simulation.`,
-        inputSchema: zodShapeFor(SECURITY_INPUT_SCHEMA),
+        description: `VAPE ${name} ($${price.replace("$", "")} USDC) — ${description} Real on-chain/market data, no simulation.`,
+        inputSchema: zodShapeFor(ADDRESS_INPUT_SCHEMA),
       },
       paid(async (args: Requirement) => {
         const result = await fulfill(name, args, env);
@@ -223,7 +196,7 @@ export async function buildMcpServer(resourceServer: x402ResourceServer, env: Mc
         tags: off.tags,
       },
       hooks: {
-        onAfterSettlement: async (ctx) => {
+        onAfterSettlement: async (ctx: SettlementContext) => {
           await logMcpSettlement(env, off.name, Number(off.price.replace("$", "")), ctx.arguments, ctx.settlement as any);
         },
       },
