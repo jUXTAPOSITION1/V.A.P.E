@@ -1,6 +1,6 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-08-07T12:27:11Z — 170 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-08-07T12:43:04Z — 170 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|

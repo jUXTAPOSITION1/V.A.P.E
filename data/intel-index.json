@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07T12:27:30Z",
+  "generated": "2026-08-07T12:43:09Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 479,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 160,
-    "investigations": 827,
+    "investigations": 828,
     "news": 82,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260807-122711-0x0f8F9E85.md",
+      "file": "investigation-20260807-124304-0xe3395e13.md",
       "title": "Investigation \u2014 jobless",
       "symbol": "jobless",
       "name": "bsc\u7684useless",
-      "date": "2026-08-07T12:27:11Z",
-      "target": "0x0f8F9E859178FAefba50A106fD6B3C90445B7777",
+      "date": "2026-08-07T12:43:04Z",
+      "target": "0xe3395e137E04a07590821b8aEd4AE24B97657777",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "20",
-      "summary": "Risk factors: [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $7,933 (rug/illiquid); [-10] Low liquidity $7,933; [-15] Pair only 0.0 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by d",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-122711-0x0f8F9E85.md"
+      "score": "2",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Owner not renounced (0xe2ce6ab80874fa9fa2aae65d277dd6b8e65c9de0) \u2014 can still act on the contract; [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $7,281 (rug/illiquid); [-10] Low liquidity $7,281; [-15] Pair",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-124304-0xe3395e13.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260807-124304-0xe3395e13.md",
+      "title": "Investigation \u2014 jobless",
+      "symbol": "jobless",
+      "name": "bsc\u7684useless",
+      "date": "2026-08-07T12:43:04Z",
+      "target": "0xe3395e137E04a07590821b8aEd4AE24B97657777",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "2",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-10] Owner not renounced (0xe2ce6ab80874fa9fa2aae65d277dd6b8e65c9de0) \u2014 can still act on the contract; [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $7,281 (rug/illiquid); [-10] Low liquidity $7,281; [-15] Pair",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-124304-0xe3395e13.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260807-122711-0x0f8F9E85.md",
