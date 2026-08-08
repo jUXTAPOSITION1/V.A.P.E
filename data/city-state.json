@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-08T07:18:24Z",
+  "generated_at": "2026-08-08T13:15:26Z",
   "district_stats": {
     "overall_threat_level": "HIGH",
     "lanes_passing": 6,
@@ -15,16 +15,16 @@
       "tier": 3,
       "stat_primary": {
         "label": "tracked",
-        "value": 856
+        "value": 872
       },
       "stat_secondary": [
         {
           "label": "reject",
-          "value": 497
+          "value": 509
         },
         {
           "label": "caution",
-          "value": 225
+          "value": 229
         },
         {
           "label": "proceed",
@@ -159,12 +159,12 @@
       "tier": 3,
       "stat_primary": {
         "label": "findings sealed",
-        "value": 1804
+        "value": 1831
       },
       "stat_secondary": [
         {
           "label": "unsealed lines",
-          "value": 1
+          "value": 5
         }
       ],
       "link": "index.html#security-dashboard",
@@ -207,7 +207,7 @@
       "tier": 4,
       "stat_primary": {
         "label": "data calls logged",
-        "value": 2271
+        "value": 2324
       },
       "stat_secondary": [],
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/memory",
@@ -435,14 +435,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-08T06:40:16Z"
+          "value": "2026-08-08T12:34:08Z"
         },
         {
           "label": "ledger chain intact",
           "value": "yes"
         }
       ],
-      "last_run_at": "2026-08-08T06:40:16Z",
+      "last_run_at": "2026-08-08T12:34:08Z",
       "source_workflow": "findings-seal.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/findings-seal.yml"
     },
@@ -495,14 +495,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-08T06:54:46Z"
+          "value": "2026-08-08T12:49:58Z"
         },
         {
           "label": "attack-pattern coverage",
           "value": "23%"
         }
       ],
-      "last_run_at": "2026-08-08T06:54:46Z",
+      "last_run_at": "2026-08-08T12:49:58Z",
       "source_workflow": "intel-sweeps.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/intel-sweeps.yml"
     }
@@ -583,6 +583,130 @@
   ],
   "recent_events": [
     {
+      "id": "investigation:0x1b2107667462671b00674bE7af23475FBDfd2B07",
+      "type": "investigation",
+      "timestamp": "2026-08-08T13:12:53Z",
+      "label": "OpenAI",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x7Db2F0c15f74aB0Dc0D4f49650dD60C45FFB7777",
+      "type": "investigation",
+      "timestamp": "2026-08-08T12:57:54Z",
+      "label": "UrAnus",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "news:Black Hat CSS Chains Let Malicious Emails Hijack Outlook Sign-In Screens and Steal Slack Tokens",
+      "type": "news",
+      "timestamp": "2026-08-08T12:48:36Z",
+      "label": "Black Hat CSS Chains Let Malicious Emails Hijack Outlook Sign-In Screens and Steal Slack Tokens"
+    },
+    {
+      "id": "investigation:0xea792CD9AA844fC85a379f8e6F21960D166C3719",
+      "type": "investigation",
+      "timestamp": "2026-08-08T12:42:24Z",
+      "label": "SpaceX",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xCbB7a124e49c3b14d25758330843De6C56D8FfFf",
+      "type": "investigation",
+      "timestamp": "2026-08-08T12:27:18Z",
+      "label": "Beatcoin",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "investigation:0x58cDeAbFC02cD19aBdecbe3993F3b91C54517777",
+      "type": "investigation",
+      "timestamp": "2026-08-08T12:12:05Z",
+      "label": "SPCXB\u8d28\u62bc\u5206\u7ea2\u6d4b\u8bd5",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xe419C3BB09F7386f40e0c0Ed3f4b84749682b49f",
+      "type": "investigation",
+      "timestamp": "2026-08-08T11:57:06Z",
+      "label": "vLGNS",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x30c17190Dc61A61051Eb59450378F2aB11502772",
+      "type": "investigation",
+      "timestamp": "2026-08-08T10:56:46Z",
+      "label": "MICHAELSAYLOR",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x364515F2F8AC2feCdC44AaBc124d69893f7aA9c0",
+      "type": "investigation",
+      "timestamp": "2026-08-08T10:41:30Z",
+      "label": "HEX",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39",
+      "type": "investigation",
+      "timestamp": "2026-08-08T10:26:06Z",
+      "label": "HEX",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "investigation:0x1d1dD64C58518c6727A308a5216a5701afAe5B07",
+      "type": "investigation",
+      "timestamp": "2026-08-08T10:10:21Z",
+      "label": "OpenAI",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xC72449E066d0a853d85A8C9b2b09a1463911dF5f",
+      "type": "investigation",
+      "timestamp": "2026-08-08T09:55:13Z",
+      "label": "GlueHook",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "news:Poisoned Files and Malicious Links Turn Atlassian's Rovo AI Into a Silent Corporate Spy",
+      "type": "news",
+      "timestamp": "2026-08-08T09:38:40Z",
+      "label": "Poisoned Files and Malicious Links Turn Atlassian's Rovo AI Into a Silent Corporate Spy"
+    },
+    {
+      "id": "investigation:0x0B9FEE99f32d64e13845228EAe1C552782377777",
+      "type": "investigation",
+      "timestamp": "2026-08-08T09:23:59Z",
+      "label": "SPCXB\u8d28\u62bc\u5206\u7ea2\u6d4b\u8bd5",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x12d5a0C58eF299BEDd309ec4964ffA3145827777",
+      "type": "investigation",
+      "timestamp": "2026-08-08T08:53:44Z",
+      "label": "Racoonzilla",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x335868de22E077E9ffBe991c9Dc60dc83B934444",
+      "type": "investigation",
+      "timestamp": "2026-08-08T08:38:21Z",
+      "label": "bStocks Never Sleep",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "investigation:0xCC1f172003a3653740f6Fc316d196eadb00d4444",
+      "type": "investigation",
+      "timestamp": "2026-08-08T08:08:06Z",
+      "label": "bStock",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "investigation:0xD796118D6545692206CA9dA2007BBa531c86FB5e",
+      "type": "investigation",
+      "timestamp": "2026-08-08T07:37:50Z",
+      "label": "Abby Inu",
+      "verdict": "REJECT"
+    },
+    {
       "id": "investigation:0x9C0FA3B56A3B40dEAd7680d0837e9219d7C2Ab07",
       "type": "investigation",
       "timestamp": "2026-08-08T06:37:49Z",
@@ -623,128 +747,6 @@
       "timestamp": "2026-08-08T05:05:59Z",
       "label": "Binance Stocks",
       "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0x3F0B0BFA0418C2a050340bc01347E7343F9a1bA3",
-      "type": "investigation",
-      "timestamp": "2026-08-08T04:18:58Z",
-      "label": "OPEN AI",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "news:Wall Street Privacy Upgrade: XRP Ledger Validators Vote to Encrypt $530M in Tokenized Assets",
-      "type": "news",
-      "timestamp": "2026-08-08T04:13:02Z",
-      "label": "Wall Street Privacy Upgrade: XRP Ledger Validators Vote to Encrypt $530M in Tokenized Assets"
-    },
-    {
-      "id": "investigation:0xC6d2a58D16f5B43332CaCc4045eB959B5be97777",
-      "type": "investigation",
-      "timestamp": "2026-08-08T04:03:33Z",
-      "label": "SPCXB\u8d28\u62bc\u5206\u7ea2\u6d4b\u8bd5",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x6c249f420F487372d9B96A15AE8D86E6Ad16810a",
-      "type": "investigation",
-      "timestamp": "2026-08-08T03:01:52Z",
-      "label": "Epic dog",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x94314a14Df63779c99C0764a30e0CD22fA78fC0E",
-      "type": "investigation",
-      "timestamp": "2026-08-08T02:45:31Z",
-      "label": "Epic Chain",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0x4abC07E05f6e4467f467f5a00EDAbD04a2057777",
-      "type": "investigation",
-      "timestamp": "2026-08-08T02:12:54Z",
-      "label": "SpaceX",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x15a9E76cd69A71cd485372a51C131E245ef09B07",
-      "type": "investigation",
-      "timestamp": "2026-08-08T01:57:07Z",
-      "label": "OpenAI",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x18c82b2b8C94ec37CBF27e42374882FfBADc7777",
-      "type": "investigation",
-      "timestamp": "2026-08-08T01:41:24Z",
-      "label": "SPCXB",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "news:AI Slop and DNS Fallbacks: Inside the 800-Package npm Supply Chain Siege",
-      "type": "news",
-      "timestamp": "2026-08-08T01:38:47Z",
-      "label": "AI Slop and DNS Fallbacks: Inside the 800-Package npm Supply Chain Siege"
-    },
-    {
-      "id": "investigation:0x3C321Ce0a1a9A358734385427c1Fee77Fd207777",
-      "type": "investigation",
-      "timestamp": "2026-08-08T01:25:26Z",
-      "label": "SPCXB",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x431051C6824F9746243Bdb42786Ca8bC62834444",
-      "type": "investigation",
-      "timestamp": "2026-08-08T01:09:06Z",
-      "label": "Bitway",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "news:Unmasking 'Judische': Canadian Hacker Behind Snowflake and AT&T Mega-Breaches Pleads Guilty",
-      "type": "news",
-      "timestamp": "2026-08-07T21:41:19Z",
-      "label": "Unmasking 'Judische': Canadian Hacker Behind Snowflake and AT&T Mega-Breaches Pleads Guilty"
-    },
-    {
-      "id": "investigation:0x480AE57d90fFb90A0400877c52eb633BE23CFFFF",
-      "type": "investigation",
-      "timestamp": "2026-08-07T20:29:06Z",
-      "label": "bStocks Never Sleep",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0xE9d12f8e2A4136E5F2F0f4ff585924FBe8aBb395",
-      "type": "investigation",
-      "timestamp": "2026-08-07T20:12:07Z",
-      "label": "A Society For AI Agents",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0xA70136c6AA83cfa85405f552D37453E0ab5e4444",
-      "type": "investigation",
-      "timestamp": "2026-08-07T19:23:35Z",
-      "label": "RedHorseX",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0xe9942e755b81173d81A220255B2B29beA4A44FAb",
-      "type": "investigation",
-      "timestamp": "2026-08-07T19:07:27Z",
-      "label": "Alcotraders",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "news:Trustd Impersonator: macOS ClickFix Campaign Drains Crypto Wallets With Go-Based Stealer",
-      "type": "news",
-      "timestamp": "2026-08-07T18:59:23Z",
-      "label": "Trustd Impersonator: macOS ClickFix Campaign Drains Crypto Wallets With Go-Based Stealer"
-    },
-    {
-      "id": "investigation:0x244B112Cf746e62A5DF723cbDe9906a6dEfd7777",
-      "type": "investigation",
-      "timestamp": "2026-08-07T17:48:27Z",
-      "label": "bStocks Never Sleep",
-      "verdict": "REJECT"
     }
   ]
 }
