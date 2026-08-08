@@ -1527,3 +1527,5 @@
 | 2026-08-08 | auto | 0xC72449E066d0a853d85A8C9b2b09a1463911dF5f (GOOK) | deep_investigation | REJECT (40/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |
 
 | 2026-08-08 | auto | 0x1d1dD64C58518c6727A308a5216a5701afAe5B07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
+
+| 2026-08-08 | auto | 0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39 (HEX) | deep_investigation | CAUTION (65/100) | Mintable supply (dilution risk) | +7d |

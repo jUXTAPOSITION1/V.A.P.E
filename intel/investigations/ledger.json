@@ -2030,6 +2030,25 @@
     "symbol": "CTM",
     "times_investigated": 1
   },
+  "1:0x2b591e99afe9f32eaa6214f7b7629768c40eeb39": {
+    "address": "0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39",
+    "chain": "1",
+    "creator_address": "0x896f23373667274e8647b99033c2a8461ddd98cc",
+    "first_investigated": "2026-08-08T10:26:06Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-102606-0x2b591e99.md",
+        "score": 65,
+        "ts": "2026-08-08T10:26:06Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-08T10:26:06Z",
+    "last_score": 65,
+    "last_verdict": "CAUTION",
+    "symbol": "HEX",
+    "times_investigated": 1
+  },
   "1:0x2c974b2d0ba1716e644c1fc59982a89ddd2ff724": {
     "address": "0x2C974B2d0BA1716E644c1FC59982a89DDD2fF724",
     "chain": "1",

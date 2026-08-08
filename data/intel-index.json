@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T10:10:23Z",
+  "generated": "2026-08-08T10:26:08Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 507,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 164,
-    "investigations": 863,
+    "investigations": 864,
     "news": 88,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-101021-0x1d1dD64C.md",
-      "title": "Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-08-08T10:10:21Z",
-      "target": "0x1d1dD64C58518c6727A308a5216a5701afAe5B07",
-      "chain": "8453 (Base)",
-      "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-101021-0x1d1dD64C.md"
+      "file": "investigation-20260808-102606-0x2b591e99.md",
+      "title": "Investigation \u2014 HEX",
+      "symbol": "HEX",
+      "name": "HEX",
+      "date": "2026-08-08T10:26:06Z",
+      "target": "0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "65",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 9049672 holders \u2014 reasonably distributed; Custom verified source (not a mass-produc",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-102606-0x2b591e99.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-102606-0x2b591e99.md",
+      "title": "Investigation \u2014 HEX",
+      "symbol": "HEX",
+      "name": "HEX",
+      "date": "2026-08-08T10:26:06Z",
+      "target": "0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "65",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 9049672 holders \u2014 reasonably distributed; Custom verified source (not a mass-produc",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-102606-0x2b591e99.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260808-101021-0x1d1dD64C.md",
