@@ -268,15 +268,27 @@ export async function fulfill(offering: HandlerName, req: Requirement, env: any)
   }
 }
 
-// Shared input schema for all 6 offerings above -- both index.ts's
-// PAID_ROUTES and mcpServer.ts's MCP tool registration use this exact
-// object rather than each keeping their own copy.
+// Shared input schema for the 5 offerings below that actually take an
+// address -- both index.ts's PAID_ROUTES and mcpServer.ts's MCP tool
+// registration use this exact object rather than each keeping their own
+// copy. market_intel does NOT use this -- see EMPTY_INPUT_SCHEMA below;
+// it used to be wrongly given this same schema (declaring "address" as
+// required input on a tool that ignores its whole Requirement argument),
+// which told callers on both the HTTP OpenAPI doc and the MCP tool listing
+// they had to pass an address market_intel never reads.
 export const ADDRESS_INPUT_SCHEMA = {
   properties: {
     address: { type: "string", description: "Base (chain 8453) contract/token address to analyze" },
     chain: { type: "string", description: "optional chain id override, defaults to 8453" },
   },
   required: ["address"],
+};
+
+// market_intel takes no input at all -- a real, standalone Base-market
+// snapshot, not a per-address lookup.
+export const EMPTY_INPUT_SCHEMA = {
+  properties: {},
+  required: [] as string[],
 };
 
 // Single source of truth for these 6 offerings' price/description/output --
@@ -300,30 +312,55 @@ export const OFFERING_PRICES: Record<HandlerName, string> = {
 // x402-foundation/x402#2112 — Bazaar indexing has open, unresolved bugs even
 // for correctly-implemented services, and may require a CDP-provisioned
 // payout wallet rather than VAPE's external ACP EOA; this is a best-effort
-// announcement, not a guaranteed listing) and, since this round, the MCP
-// tools' own descriptions in mcpServer.ts. Mirrors the real output shape of
-// each handler above exactly — no invented fields.
-export const OFFERING_DISCOVERY: Record<HandlerName, { description: string; output: Record<string, unknown> }> = {
+// announcement, not a guaranteed listing), index.ts's HTTP OpenAPI doc, and
+// the MCP tools' own descriptions in mcpServer.ts. `title`/`inputSchema`/
+// `inputExample` are per-offering here (not the old single shared
+// ADDRESS_INPUT_SCHEMA applied uniformly to all 6) specifically so a
+// no-input offering like market_intel can't be told to callers as needing
+// an "address" it never reads. Mirrors the real output shape of each
+// handler above exactly — no invented fields.
+export const OFFERING_DISCOVERY: Record<HandlerName, {
+  title: string;
+  description: string;
+  inputSchema: { properties: Record<string, unknown>; required: string[] };
+  inputExample: Record<string, unknown>;
+  output: Record<string, unknown>;
+}> = {
   exploit_check: {
+    title: "Contract Exploit Check",
     description: "Contract verification + proxy-swap surface check.",
+    inputSchema: ADDRESS_INPUT_SCHEMA,
+    inputExample: { address: "0x0000000000000000000000000000000000dEaD" },
     output: { address: "0x...", verified: true, contract_name: "Token", proxy: false },
   },
   token_safety_check: {
+    title: "Token Safety Check",
     description: "Full token safety + liquidity scan with a weighted 0-100 risk score.",
+    inputSchema: ADDRESS_INPUT_SCHEMA,
+    inputExample: { address: "0x0000000000000000000000000000000000dEaD" },
     output: { address: "0x...", verdict: "PROCEED", score: 82, flags: [] },
   },
   liquidity_check: {
+    title: "Liquidity Depth Check",
     description: "Liquidity depth + top pair DEX for a Base token.",
+    inputSchema: ADDRESS_INPUT_SCHEMA,
+    inputExample: { address: "0x0000000000000000000000000000000000dEaD" },
     output: { address: "0x...", liquidity_usd: 500000, top_pair_dex: "aerodrome", verdict: "PROCEED" },
   },
   rug_pull_alert: {
+    title: "Rug Pull Alert",
     description: "Owner-power / rug-risk flags (mint, blacklist, pausable transfers, LP concentration).",
+    inputSchema: ADDRESS_INPUT_SCHEMA,
+    inputExample: { address: "0x0000000000000000000000000000000000dEaD" },
     output: { address: "0x...", rug_risk: "LOW", owner_powers: [], verdict: "PROCEED" },
   },
   dossier_check: {
+    title: "Deep Dossier Check",
     description: "VAPE's deepest instant verdict: weighted 0-100 risk score, meme-factory-template "
       + "detection, recent-hack correlation, public web-reputation search, a live check of the "
       + "project's declared socials, and a frontier-LLM quick read of the verified source.",
+    inputSchema: ADDRESS_INPUT_SCHEMA,
+    inputExample: { address: "0x0000000000000000000000000000000000dEaD" },
     output: { address: "0x...", symbol: "TOKEN", name: "Token Name", score: 82, verdict: "PROCEED", reasons: [], positive_signals: [],
               categories: { "Contract Security & Controls": { weight: 0.25, score: 90, rationale: "..." } },
               verified: true, meme_factory_template: false, hack_correlation: [],
@@ -331,9 +368,13 @@ export const OFFERING_DISCOVERY: Record<HandlerName, { description: string; outp
               ai_review: { available: true, provider: "gemini", summary: "..." } },
   },
   market_intel: {
+    title: "Base Market Intelligence",
     description: "Base TVL with 24h/7d change, per-protocol share/category breakdown, "
       + "concentration risk, 24h DEX volume, top gainers/losers, ETH/BTC prices, "
-      + "Fear & Greed index, global market cap, and a real-data narrative summary.",
+      + "Fear & Greed index, global market cap, and a real-data narrative summary. "
+      + "Takes no input -- always a whole-of-Base snapshot, not a per-token lookup.",
+    inputSchema: EMPTY_INPUT_SCHEMA,
+    inputExample: {},
     output: {
       base_tvl_usd: 4100000000, base_tvl_24h_change_pct: 1.8, dex_volume_24h_usd: 210000000,
       top_protocols: [{ name: "Morpho", tvl_usd: 900000000, share_of_base_pct: 22.0, category: "Lending", change_24h_pct: 2.1 }],

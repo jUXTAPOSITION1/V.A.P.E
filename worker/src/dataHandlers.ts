@@ -72,6 +72,8 @@ function requireSlug(q: DlQuery): string {
 
 export interface DlOffering {
   name: string;
+  /** Short human-readable display name -- MCP's ToolAnnotations.title, distinct from the snake_case `name`. */
+  title: string;
   price: string;
   description: string;
   tags: string[];
@@ -88,6 +90,7 @@ export interface DlOffering {
 export const DL_OFFERINGS: DlOffering[] = [
   {
     name: "token_intel",
+    title: "Token Market Intel",
     price: "$0.01",
     description: "A full independent read on one token: current price + a 0-1 confidence "
       + "score, first-ever-recorded price (an oracle-derived age signal harder to spoof than "
@@ -116,6 +119,7 @@ export const DL_OFFERINGS: DlOffering[] = [
   },
   {
     name: "token_chart",
+    title: "Token Price Chart",
     price: "$0.01",
     description: "Daily price series for a token (default 30d), plus the token's real logo — "
       + "feeds sparklines and a rule-based volatility read.",
@@ -138,6 +142,7 @@ export const DL_OFFERINGS: DlOffering[] = [
   },
   {
     name: "protocol",
+    title: "Protocol Overview",
     price: "$0.01",
     description: "Full protocol record: per-chain TVL, category, audits, the official logo, "
       + "Twitter, and description — the 'who is this protocol' snapshot.",
@@ -149,6 +154,7 @@ export const DL_OFFERINGS: DlOffering[] = [
   },
   {
     name: "protocol_fees",
+    title: "Protocol Fees & Revenue",
     price: "$0.01",
     description: "A protocol's real earned fees + revenue (24h/7d/30d/1y/all-time) with its logo — 'does this "
       + "actually make money, or is it just parked TVL?', a legitimacy signal raw TVL misses.",
@@ -160,6 +166,7 @@ export const DL_OFFERINGS: DlOffering[] = [
   },
   {
     name: "unlocks",
+    title: "Token Unlock Schedule",
     price: "$0.01",
     description: "Token unlock / emission schedule for a protocol — surfaces the next upcoming "
       + "unlock event (a concrete dump-risk an investigator must flag) and how many days out it is.",
@@ -180,6 +187,7 @@ export const DL_OFFERINGS: DlOffering[] = [
   },
   {
     name: "treasury",
+    title: "Protocol Treasury Composition",
     price: "$0.01",
     description: "A protocol's on-chain treasury composition — total USD, own-token USD, and the "
       + "own-token share (a treasury that's ~all its own token is a fragility signal).",
@@ -191,6 +199,7 @@ export const DL_OFFERINGS: DlOffering[] = [
   },
   {
     name: "chain_protocols",
+    title: "Chain Protocol Rankings",
     price: "$0.01",
     description: "Top protocols on a chain by TVL (default Base), each with its real logo, category, "
       + "and 24h/7d change — the chain-ecosystem view.",
@@ -208,6 +217,7 @@ export const DL_OFFERINGS: DlOffering[] = [
   },
   {
     name: "chain_overview",
+    title: "Chain TVL Overview",
     price: "$0.01",
     description: "A chain's headline TVL and its rank among all tracked chains (default Base).",
     tags: ["tvl", "chain", "base"],
@@ -218,6 +228,7 @@ export const DL_OFFERINGS: DlOffering[] = [
   },
   {
     name: "chain_fees",
+    title: "Chain Fee Leaders",
     price: "$0.01",
     description: "Fee-earning protocols on a chain, ranked, each with its logo (default Base) — the "
       + "chain's real economic activity, not just parked capital.",
@@ -229,6 +240,7 @@ export const DL_OFFERINGS: DlOffering[] = [
   },
   {
     name: "dex_volumes",
+    title: "DEX Volume Leaders",
     price: "$0.01",
     description: "DEX trading volume on a chain by venue, each with its logo (default Base) — real "
       + "trading activity across the chain's exchanges.",
@@ -240,6 +252,7 @@ export const DL_OFFERINGS: DlOffering[] = [
   },
   {
     name: "yields",
+    title: "Yield Pool Scanner",
     price: "$0.01",
     description: "Yield pools filtered by chain/project/symbol, ranked by TVL, with apy/apyBase/"
       + "ilRisk/exposure — enough to tell a real yield venue from a trap (huge APY + tiny TVL = red flag).",
@@ -258,6 +271,7 @@ export const DL_OFFERINGS: DlOffering[] = [
   },
   {
     name: "stablecoins",
+    title: "Stablecoin Peg Monitor",
     price: "$0.01",
     description: "Stablecoins by circulating supply with live peg price and a computed depeg amount "
       + "— a de-pegging stablecoin is a live systemic threat signal.",
@@ -269,6 +283,7 @@ export const DL_OFFERINGS: DlOffering[] = [
   },
   {
     name: "bridges",
+    title: "Bridge Volume Tracker",
     price: "$0.01",
     description: "Tracked bridges ranked by recent daily volume — bridge exploits are a top attack "
       + "class, and this is the capital-flow data that category needs a source for.",
@@ -303,6 +318,7 @@ export const DL_OFFERINGS: DlOffering[] = [
     // than Codex's realizedProfitUsd would have been, stated honestly rather
     // than implied. Base mainnet only (Alchemy's setup here is Base-only).
     name: "wallet_pnl_deepdive",
+    title: "Wallet Holdings & P&L",
     price: "$0.25",
     description: "A real wallet holdings + P&L estimate: current token "
       + "balances with USD values, and an unrealized-P&L estimate per holding (current value vs. "

@@ -43,7 +43,7 @@ import { z, type ZodTypeAny } from "zod";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { createPaymentWrapper, createToolResourceUrl, type SettlementContext } from "@x402/mcp";
 import type { x402ResourceServer } from "@x402/core/server";
-import { HANDLERS, fulfill, OFFERING_PRICES, OFFERING_DISCOVERY, ADDRESS_INPUT_SCHEMA, type HandlerName, type Requirement } from "./handlers";
+import { HANDLERS, fulfill, OFFERING_PRICES, OFFERING_DISCOVERY, type HandlerName, type Requirement } from "./handlers";
 import { DL_OFFERINGS, fulfillData, type DlEnv, type DlQuery } from "./dataHandlers";
 import { logJob, type JobRecord, type KVLike } from "./lib/jobLog";
 
@@ -144,6 +144,33 @@ function toolResult(payload: { status?: string } & Record<string, unknown>) {
   };
 }
 
+// Every VAPE tool is read-only (never signs/spends/mutates chain state --
+// see vape_mcp.py's/this file's own docstrings; the x402 payment itself
+// moving funds is orthogonal to what the TOOL does) and every one consults
+// live external data (on-chain state, DeFiLlama, Etherscan, ...). These are
+// advisory hints only -- the MCP spec is explicit that a client must never
+// make tool-use decisions based on them ("NOTE: all properties in
+// ToolAnnotations are hints"), and this SDK never validates or enforces
+// them -- so this can only help an agent's tool-selection reasoning, never
+// break or block a real call.
+const READ_ONLY_TOOL_ANNOTATIONS = { readOnlyHint: true, openWorldHint: true } as const;
+
+// Appends a concrete worked example (a real call + the real response shape)
+// to a tool's prose description. Deliberately plain text in the
+// description, NOT MCP's outputSchema/structuredContent mechanism: that
+// mechanism has the SDK throw an McpError the instant a real response
+// doesn't exactly match the declared shape (e.g. dossier_check's
+// verification_note, which is only present on some responses) -- for an
+// x402 tool that only throws this deep into an already-settled call, that
+// would mean a buyer gets charged and then still receives a protocol-level
+// error instead of their paid result. A worked example in the description
+// gives an LLM tool-caller the same "how do I call this / what do I get
+// back" grounding with zero settlement risk -- see this file's own
+// docstring and handlers.ts's OFFERING_DISCOVERY for the example data.
+function agentDescription(base: string, inputExample: Record<string, unknown>, output: Record<string, unknown>): string {
+  return `${base}\n\nExample call: ${JSON.stringify(inputExample)}\nExample response shape: ${JSON.stringify(output)}`;
+}
+
 /**
  * Builds a fresh McpServer wired to VAPE's real offerings. Call once per
  * request (see index.ts's /mcp route) -- never cache/reuse across requests.
@@ -168,7 +195,7 @@ export async function buildMcpServer(resourceServer: x402ResourceServer, env: Mc
   // same offering) ────────────────────────────────────────────────────────
   for (const name of Object.keys(HANDLERS) as HandlerName[]) {
     const price = OFFERING_PRICES[name];
-    const description = OFFERING_DISCOVERY[name].description;
+    const meta = OFFERING_DISCOVERY[name];
     const accepts = await buildAccepts(resourceServer, env, price, includeSolana);
     const paid = createPaymentWrapper(resourceServer, {
       accepts,
@@ -183,7 +210,7 @@ export async function buildMcpServer(resourceServer: x402ResourceServer, env: Mc
         // correctly scoped per tool regardless), but do use the library's
         // real convention rather than inventing one it doesn't expect.
         url: createToolResourceUrl(name),
-        description,
+        description: meta.description,
         serviceName: "VAPE",
       },
       hooks: {
@@ -195,8 +222,18 @@ export async function buildMcpServer(resourceServer: x402ResourceServer, env: Mc
     server.registerTool(
       name,
       {
-        description: `VAPE ${name} ($${price.replace("$", "")} USDC) — ${description} Real on-chain/market data, no simulation.`,
-        inputSchema: zodShapeFor(ADDRESS_INPUT_SCHEMA),
+        title: meta.title,
+        description: agentDescription(
+          `VAPE ${meta.title} ($${price.replace("$", "")} USDC) — ${meta.description} Real on-chain/market data, no simulation.`,
+          meta.inputExample,
+          meta.output,
+        ),
+        // Per-offering, not the old single ADDRESS_INPUT_SCHEMA applied to
+        // all 6 uniformly -- market_intel takes no input and was wrongly
+        // declaring "address" as required. See handlers.ts's
+        // OFFERING_DISCOVERY / EMPTY_INPUT_SCHEMA.
+        inputSchema: zodShapeFor(meta.inputSchema),
+        annotations: READ_ONLY_TOOL_ANNOTATIONS,
       },
       paid(async (args: Requirement) => {
         const result = await fulfill(name, args, env);
@@ -227,8 +264,10 @@ export async function buildMcpServer(resourceServer: x402ResourceServer, env: Mc
     server.registerTool(
       off.name,
       {
-        description: `VAPE ${off.name} (${off.price} USDC) — ${off.description}`,
+        title: off.title,
+        description: agentDescription(`VAPE ${off.title} (${off.price} USDC) — ${off.description}`, off.inputExample, off.output),
         inputSchema: zodShapeFor(off.inputSchema),
+        annotations: READ_ONLY_TOOL_ANNOTATIONS,
       },
       paid(async (args: DlQuery) => {
         const result = await fulfillData(off.name, args, env);
