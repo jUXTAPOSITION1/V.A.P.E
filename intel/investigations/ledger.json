@@ -2391,6 +2391,25 @@
     "symbol": "DEXE",
     "times_investigated": 1
   },
+  "1:0x370a366f402e2e41cdbbe54ecec12aae0cce1955": {
+    "address": "0x370a366f402e2e41CDBbE54EcEC12aaE0cce1955",
+    "chain": "1",
+    "creator_address": "0xbe1517856c26af6e4ea4dc25e3bfb777652eba12",
+    "first_investigated": "2026-08-08T18:02:48Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-180248-0x370a366f.md",
+        "score": 89,
+        "ts": "2026-08-08T18:02:48Z",
+        "verdict": "PROCEED"
+      }
+    ],
+    "last_investigated": "2026-08-08T18:02:48Z",
+    "last_score": 89,
+    "last_verdict": "PROCEED",
+    "symbol": "TOAD",
+    "times_investigated": 1
+  },
   "1:0x3bf4118f8862857872e6c13f87743ab05a52bc7d": {
     "address": "0x3Bf4118F8862857872e6c13f87743Ab05a52Bc7D",
     "chain": "1",

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T17:47:32Z",
+  "generated": "2026-08-08T18:02:52Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 517,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 165,
-    "investigations": 882,
+    "investigations": 883,
     "news": 90,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-170124-0xB839A289.md",
-      "title": "Investigation \u2014 SPCXB",
-      "symbol": "SPCXB",
-      "name": "SPCXB\u8774\u8776\u6258\u5e95\u91d1\u5e93\u6d4b\u8bd5",
-      "date": "2026-08-08T17:01:24Z",
-      "target": "0xB839A28955C0EF7969CB757B65A57910aD2A7777",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "22",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $9,149 (rug/illiquid); [-15] Pair only 0.1 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unau",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-170124-0xB839A289.md"
+      "file": "investigation-20260808-180248-0x370a366f.md",
+      "title": "Investigation \u2014 TOAD",
+      "symbol": "TOAD",
+      "name": "TOAD KILLER",
+      "date": "2026-08-08T18:02:48Z",
+      "target": "0x370a366f402e2e41CDBbE54EcEC12aaE0cce1955",
+      "chain": "1 (Ethereum)",
+      "verdict": "PROCEED",
+      "score": "89",
+      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 53% of supply \u2014 meaningful concentration; [capped at 89] Unresolved gap at only 60% confidence: weak social media presence \u2014 a real residual-risk ceiling on top of the automated flag sweep, not a rewrite of it. Positive evidence: 1960 holders \u2014 reasonably distribute",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-180248-0x370a366f.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-180248-0x370a366f.md",
+      "title": "Investigation \u2014 TOAD",
+      "symbol": "TOAD",
+      "name": "TOAD KILLER",
+      "date": "2026-08-08T18:02:48Z",
+      "target": "0x370a366f402e2e41CDBbE54EcEC12aaE0cce1955",
+      "chain": "1 (Ethereum)",
+      "verdict": "PROCEED",
+      "score": "89",
+      "summary": "Risk factors: [-8] Top 10 non-LP/burn holders control 53% of supply \u2014 meaningful concentration; [capped at 89] Unresolved gap at only 60% confidence: weak social media presence \u2014 a real residual-risk ceiling on top of the automated flag sweep, not a rewrite of it. Positive evidence: 1960 holders \u2014 reasonably distribute",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-180248-0x370a366f.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260808-170124-0xB839A289.md",
