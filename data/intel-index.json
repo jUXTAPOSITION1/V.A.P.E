@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T05:21:37Z",
+  "generated": "2026-08-08T05:36:37Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 500,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 163,
-    "investigations": 851,
+    "investigations": 852,
     "news": 87,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-050559-0x0a906b55.md",
-      "title": "Investigation \u2014 BStocks",
-      "symbol": "BStocks",
-      "name": "Binance Stocks",
-      "date": "2026-08-08T05:05:59Z",
-      "target": "0x0a906b55D4982a3382f0ddA882F2FD9907cA4444",
-      "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "60",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 101% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $6,830 (rug/illiquid). Positive evidence: Ownership renounced; 703 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Custom verified source (not a mass-",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-050559-0x0a906b55.md"
+      "file": "investigation-20260808-053636-0xb32a0416.md",
+      "title": "Investigation \u2014 QUID",
+      "symbol": "QUID",
+      "name": "Squid",
+      "date": "2026-08-08T05:36:36Z",
+      "target": "0xb32a0416FDF9D97a40ccce4b8ADf6FC127320473",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xedb43ebf3306dce578d24b0555240d07e4778afc) \u2014 can still act on the contract; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ASTEROID (0x5a0CF2dBbAA6541F4B8173bA6759e19885293c63) \u2014 REJECT 0/100 \u2014 likely the same serial cam",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-053636-0xb32a0416.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-053636-0xb32a0416.md",
+      "title": "Investigation \u2014 QUID",
+      "symbol": "QUID",
+      "name": "Squid",
+      "date": "2026-08-08T05:36:36Z",
+      "target": "0xb32a0416FDF9D97a40ccce4b8ADf6FC127320473",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xedb43ebf3306dce578d24b0555240d07e4778afc) \u2014 can still act on the contract; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ASTEROID (0x5a0CF2dBbAA6541F4B8173bA6759e19885293c63) \u2014 REJECT 0/100 \u2014 likely the same serial cam",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-053636-0xb32a0416.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260808-050559-0x0a906b55.md",
@@ -13467,7 +13481,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49683592",
+      "version": "49688684",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -13477,7 +13491,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.78 eth_dom 10.06 mcap_chg_24h 0.57",
+      "version": "btc_dom 56.77 eth_dom 10.06 mcap_chg_24h 0.87",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -13497,7 +13511,7 @@
       "name": "wallet_trace",
       "tier": "recon",
       "status": "verified",
-      "version": "0x5b346ed4d15c Unicorn 4734.19 from 0x009db6fb to 0x833589fc",
+      "version": "0x3dac6bbc6a6c AC0R 50.0 from 0x27365c43 to 0x833589fc",
       "purpose": "Wallet/address forensics via Alchemy's Transfers API (VAPE_TRACE_ALCHEMY_API) \u2014 switched from Etherscan V2, whose txlist/tokentx account-module endpoints gate Base behind a paid tier. Base=8453 default; Eth/Arb/Op also supported.",
       "repo": "(local)",
       "known_limitation": false,

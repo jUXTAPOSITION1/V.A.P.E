@@ -12713,6 +12713,25 @@
     "symbol": "BRIAN",
     "times_investigated": 1
   },
+  "8453:0xb32a0416fdf9d97a40ccce4b8adf6fc127320473": {
+    "address": "0xb32a0416FDF9D97a40ccce4b8ADf6FC127320473",
+    "chain": "8453",
+    "creator_address": "0xedb43ebf3306dce578d24b0555240d07e4778afc",
+    "first_investigated": "2026-08-08T05:36:36Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-053636-0xb32a0416.md",
+        "score": 0,
+        "ts": "2026-08-08T05:36:36Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-08T05:36:36Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "QUID",
+    "times_investigated": 1
+  },
   "8453:0xb6bb786056c690e41b20a587573fd77aade2eb07": {
     "address": "0xB6bB786056c690e41b20a587573Fd77aade2eb07",
     "chain": "8453",
