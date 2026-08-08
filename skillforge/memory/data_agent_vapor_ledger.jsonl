@@ -620,3 +620,4 @@
 {"ts": "2026-08-08T13:27:59.133562Z", "target": "0x44C2e79eB64D744C13bE604672C20ee5a17dafE7", "chain": "137", "hired": ["bridges"], "paid": 0, "cost_usd": 0.0}
 {"ts": "2026-08-08T13:58:18.268473Z", "target": "0xf98B40f90C18A291B3D6f6f84aDcF1b3e87D7777", "chain": "56", "hired": ["yields"], "paid": 0, "cost_usd": 0.0}
 {"ts": "2026-08-08T14:29:14.849938Z", "target": "0x1066daa8714f731d7a97AEAa016c16de9617c559", "chain": "56", "hired": ["bridges"], "paid": 0, "cost_usd": 0.0}
+{"ts": "2026-08-08T14:59:42.315896Z", "target": "0xC72449E066d0a853d85A8C9b2b09a1463911dF5f", "chain": "1", "hired": ["market_intel"], "paid": 0, "cost_usd": 0.0}
