@@ -1515,3 +1515,5 @@
 | 2026-08-08 | auto | 0x9C0FA3B56A3B40dEAd7680d0837e9219d7C2Ab07 (OpenAI) | deep_investigation | REJECT (0/100) | Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain | +7d |
 
 | 2026-08-08 | auto | 0xD796118D6545692206CA9dA2007BBa531c86FB5e (ABBY) | deep_investigation | REJECT (32/100) | Owner not renounced (0x3edeb9a55c336981bf8e60806f633bbaff7781ca) — can still act | +7d |
+
+| 2026-08-08 | auto | 0xCC1f172003a3653740f6Fc316d196eadb00d4444 (bStocks) | deep_investigation | CAUTION (57/100) | Low holder count (50) | +7d |
