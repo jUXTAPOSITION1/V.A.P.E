@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-07T19:19:45Z",
+  "generated_at": "2026-08-08T02:24:21Z",
   "district_stats": {
     "overall_threat_level": "HIGH",
-    "lanes_passing": 6,
+    "lanes_passing": 9,
     "lanes_total": 10,
     "buildings_total": 19
   },
@@ -15,16 +15,16 @@
       "tier": 3,
       "stat_primary": {
         "label": "tracked",
-        "value": 838
+        "value": 846
       },
       "stat_secondary": [
         {
           "label": "reject",
-          "value": 487
+          "value": 491
         },
         {
           "label": "caution",
-          "value": 217
+          "value": 221
         },
         {
           "label": "proceed",
@@ -159,12 +159,12 @@
       "tier": 3,
       "stat_primary": {
         "label": "findings sealed",
-        "value": 1758
+        "value": 1784
       },
       "stat_secondary": [
         {
           "label": "unsealed lines",
-          "value": 3
+          "value": 8
         }
       ],
       "link": "index.html#security-dashboard",
@@ -183,7 +183,7 @@
       "tier": 1,
       "stat_primary": {
         "label": "skills codified",
-        "value": 25
+        "value": 26
       },
       "stat_secondary": [
         {
@@ -207,7 +207,7 @@
       "tier": 4,
       "stat_primary": {
         "label": "data calls logged",
-        "value": 2194
+        "value": 2244
       },
       "stat_secondary": [],
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/memory",
@@ -222,7 +222,7 @@
       "id": "lane-codeql",
       "kind": "checkpoint",
       "title": "Static Analysis (CodeQL)",
-      "status": "alert",
+      "status": "ok",
       "tier": 1,
       "gridX": 8,
       "gridY": 4,
@@ -237,7 +237,7 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-07T07:22:11Z"
+          "value": "2026-08-07T23:50:55Z"
         },
         {
           "label": "open alerts",
@@ -248,7 +248,7 @@
           "value": 0
         }
       ],
-      "last_run_at": "2026-08-07T07:22:11Z",
+      "last_run_at": "2026-08-07T23:50:55Z",
       "source_workflow": "codeql.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/codeql.yml"
     },
@@ -271,10 +271,10 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-06T02:14:48Z"
+          "value": "2026-08-07T22:05:11Z"
         }
       ],
-      "last_run_at": "2026-08-06T02:14:48Z",
+      "last_run_at": "2026-08-07T22:05:11Z",
       "source_workflow": "security-lint.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/security-lint.yml"
     },
@@ -282,7 +282,7 @@
       "id": "lane-vape-reviewer",
       "kind": "checkpoint",
       "title": "Code Review (VAPE Reviewer)",
-      "status": "alert",
+      "status": "ok",
       "tier": 1,
       "gridX": 14,
       "gridY": 4,
@@ -292,15 +292,15 @@
       ],
       "stat_primary": {
         "label": "last run",
-        "value": "action_required"
+        "value": "success"
       },
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-07T07:22:11Z"
+          "value": "2026-08-07T22:05:09Z"
         }
       ],
-      "last_run_at": "2026-08-07T07:22:11Z",
+      "last_run_at": "2026-08-07T22:05:09Z",
       "source_workflow": "vape-reviewer.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/vape-reviewer.yml"
     },
@@ -323,10 +323,10 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-06T19:15:54Z"
+          "value": "2026-08-07T21:07:35Z"
         }
       ],
-      "last_run_at": "2026-08-06T19:15:54Z",
+      "last_run_at": "2026-08-07T21:07:35Z",
       "source_workflow": "dependency-audit.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/dependency-audit.yml"
     },
@@ -349,10 +349,10 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-07-26T15:39:58Z"
+          "value": "2026-08-07T21:43:39Z"
         }
       ],
-      "last_run_at": "2026-07-26T15:39:58Z",
+      "last_run_at": "2026-08-07T21:43:39Z",
       "source_workflow": "scan-parity.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/scan-parity.yml"
     },
@@ -435,14 +435,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-07T18:45:01Z"
+          "value": "2026-08-08T01:07:21Z"
         },
         {
           "label": "ledger chain intact",
           "value": "yes"
         }
       ],
-      "last_run_at": "2026-08-07T18:45:01Z",
+      "last_run_at": "2026-08-08T01:07:21Z",
       "source_workflow": "findings-seal.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/findings-seal.yml"
     },
@@ -480,7 +480,7 @@
       "id": "lane-intel-sweeps",
       "kind": "checkpoint",
       "title": "On-Chain Attack Intelligence",
-      "status": "alert",
+      "status": "ok",
       "tier": 1,
       "gridX": 5,
       "gridY": 6,
@@ -495,14 +495,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-07T18:58:10Z"
+          "value": "2026-08-08T01:42:33Z"
         },
         {
           "label": "attack-pattern coverage",
           "value": "23%"
         }
       ],
-      "last_run_at": "2026-08-07T18:58:10Z",
+      "last_run_at": "2026-08-08T01:42:33Z",
       "source_workflow": "intel-sweeps.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/intel-sweeps.yml"
     }
@@ -582,6 +582,74 @@
     ]
   ],
   "recent_events": [
+    {
+      "id": "investigation:0x4abC07E05f6e4467f467f5a00EDAbD04a2057777",
+      "type": "investigation",
+      "timestamp": "2026-08-08T02:12:54Z",
+      "label": "SpaceX",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x15a9E76cd69A71cd485372a51C131E245ef09B07",
+      "type": "investigation",
+      "timestamp": "2026-08-08T01:57:07Z",
+      "label": "OpenAI",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x18c82b2b8C94ec37CBF27e42374882FfBADc7777",
+      "type": "investigation",
+      "timestamp": "2026-08-08T01:41:24Z",
+      "label": "SPCXB",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "news:AI Slop and DNS Fallbacks: Inside the 800-Package npm Supply Chain Siege",
+      "type": "news",
+      "timestamp": "2026-08-08T01:38:47Z",
+      "label": "AI Slop and DNS Fallbacks: Inside the 800-Package npm Supply Chain Siege"
+    },
+    {
+      "id": "investigation:0x3C321Ce0a1a9A358734385427c1Fee77Fd207777",
+      "type": "investigation",
+      "timestamp": "2026-08-08T01:25:26Z",
+      "label": "SPCXB",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x431051C6824F9746243Bdb42786Ca8bC62834444",
+      "type": "investigation",
+      "timestamp": "2026-08-08T01:09:06Z",
+      "label": "Bitway",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "news:Unmasking 'Judische': Canadian Hacker Behind Snowflake and AT&T Mega-Breaches Pleads Guilty",
+      "type": "news",
+      "timestamp": "2026-08-07T21:41:19Z",
+      "label": "Unmasking 'Judische': Canadian Hacker Behind Snowflake and AT&T Mega-Breaches Pleads Guilty"
+    },
+    {
+      "id": "investigation:0x480AE57d90fFb90A0400877c52eb633BE23CFFFF",
+      "type": "investigation",
+      "timestamp": "2026-08-07T20:29:06Z",
+      "label": "bStocks Never Sleep",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "investigation:0xE9d12f8e2A4136E5F2F0f4ff585924FBe8aBb395",
+      "type": "investigation",
+      "timestamp": "2026-08-07T20:12:07Z",
+      "label": "A Society For AI Agents",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "investigation:0xA70136c6AA83cfa85405f552D37453E0ab5e4444",
+      "type": "investigation",
+      "timestamp": "2026-08-07T19:23:35Z",
+      "label": "RedHorseX",
+      "verdict": "CAUTION"
+    },
     {
       "id": "investigation:0xe9942e755b81173d81A220255B2B29beA4A44FAb",
       "type": "investigation",
@@ -676,75 +744,6 @@
       "type": "investigation",
       "timestamp": "2026-08-07T12:27:11Z",
       "label": "bsc\u7684useless",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xAd97D6D4268B26aC08c5c30467FAEe96e9297777",
-      "type": "investigation",
-      "timestamp": "2026-08-07T12:11:46Z",
-      "label": "\ud55c\uad6d \uc6d0",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x42907d9F7E3d4291C801BbD1F601066EB1dfA956",
-      "type": "investigation",
-      "timestamp": "2026-08-07T11:40:33Z",
-      "label": "Bless Global Credit",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x0dE085831b467D3228d485c5E91C506dF1208e06",
-      "type": "investigation",
-      "timestamp": "2026-08-07T11:24:26Z",
-      "label": "A Society of AI Agents",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x9EC378b1935c8ceCaA31fe343e4fdb1e2344636C",
-      "type": "investigation",
-      "timestamp": "2026-08-07T11:08:18Z",
-      "label": "A Society for AI Agents",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "news:AI Hunters Expose Triple 9.9 Critical Flaws in Cisco's Enterprise SD-WAN and IOS XE",
-      "type": "news",
-      "timestamp": "2026-08-07T10:03:38Z",
-      "label": "AI Hunters Expose Triple 9.9 Critical Flaws in Cisco's Enterprise SD-WAN and IOS XE"
-    },
-    {
-      "id": "investigation:0xC08B04733dBBc92369872000A547954F7449FaB5",
-      "type": "investigation",
-      "timestamp": "2026-08-07T09:49:10Z",
-      "label": "Binance Street Bets",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xbF1a80CAAa62Bf7a24f04305164aFF668f30AafB",
-      "type": "investigation",
-      "timestamp": "2026-08-07T09:32:33Z",
-      "label": "Forge",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x080aecD15886219446D2c961C7EfE17b60fBf156",
-      "type": "investigation",
-      "timestamp": "2026-08-07T09:16:53Z",
-      "label": "Stalked LGNS.",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xAA1BBb6D9A375b61DD3Bc5f8AcB09E97F8c4ebBC",
-      "type": "investigation",
-      "timestamp": "2026-08-07T08:45:31Z",
-      "label": "A Society for AI Agents (1F916)",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x59FCe1d4493553fcb1b002F72D6ea0A99b9B0f06",
-      "type": "investigation",
-      "timestamp": "2026-08-07T08:30:14Z",
-      "label": "A Society for AI Agents",
       "verdict": "REJECT"
     }
   ]
