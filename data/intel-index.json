@@ -1,21 +1,21 @@
 {
-  "generated": "2026-08-08T01:43:57Z",
+  "generated": "2026-08-08T01:57:09Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 496,
+    "reports": 497,
     "reports_by_type": {
       "bounty": 152,
+      "security": 83,
       "base": 97,
       "sentiment": 52,
       "macro": 25,
-      "security": 82,
       "bug": 5,
       "mainnet": 5,
       "virtuals": 74,
       "skillforge": 4
     },
     "broadcasts": 162,
-    "investigations": 844,
+    "investigations": 845,
     "news": 86,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-014124-0x18c82b2b.md",
-      "title": "Investigation \u2014 SPCXB",
-      "symbol": "SPCXB",
-      "name": "SPCXB",
-      "date": "2026-08-08T01:41:24Z",
-      "target": "0x18c82b2b8C94ec37CBF27e42374882FfBADc7777",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260808-015707-0x15a9E76c.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "name": "OpenAI",
+      "date": "2026-08-08T01:57:07Z",
+      "target": "0x15a9E76cd69A71cd485372a51C131E245ef09B07",
+      "chain": "8453 (Base)",
       "verdict": "REJECT",
       "score": "0",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: BSB (0x33d71C2dA31Da7F21Bd1805BFc7d1Cd787557777) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn h",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-014124-0x18c82b2b.md"
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-015707-0x15a9E76c.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-015707-0x15a9E76c.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "name": "OpenAI",
+      "date": "2026-08-08T01:57:07Z",
+      "target": "0x15a9E76cd69A71cd485372a51C131E245ef09B07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-015707-0x15a9E76c.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260808-014124-0x18c82b2b.md",
@@ -11691,6 +11705,17 @@
       "bytes": 15691
     },
     {
+      "kind": "intel",
+      "type": "security",
+      "file": "security-2026-08-08-01.md",
+      "title": "VAPE Security Sweep Report",
+      "date": "2026-08-08T01:00Z",
+      "threat": null,
+      "summary": "The feed shows 3 incidents in the last 7 days and 1 incident exceeding $50M in the last 14 days. The $115.0M COLDCARD event on 2026-07-31 was classified as Non-Random Private Key Generation on Bitcoin. Other recent entries include RISEx ($0.673M, Access Control Exploit on RISE, 2026-08-03), LOOPSDAO ($0.696M, Price Manipulation Attack on ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-08-01.md",
+      "bytes": 6603
+    },
+    {
       "kind": "bounty",
       "type": "bounty",
       "file": "bounty_report_20260807_233500.md",
@@ -12327,17 +12352,6 @@
       "summary": "RECENT EXPLOIT: RISEx $0.673M on ['RISE'] (Access Control Exploit) \u00b7 Base mover: OpenAI / USDC 0.01% +10118% 24h (liq $0.002826083889) \u2014 volatility/rug watch \u00b7 Base mover: HOME / WETH 0.3% +41% 24h (liq $72497.9967) \u2014 volatility/rug watch",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260805_041338.md",
       "bytes": 16190
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-08-05-02.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-08-05T02:00Z",
-      "threat": null,
-      "summary": "The feed shows 6 incidents in the last 7 days and one incident exceeding $50M in the prior 14 days. Reported events include a $115.0M non-random private key generation loss on Bitcoin (COLDCARD), a $9.7M hot wallet compromise spanning Ethereum/Tron/Arbitrum (Triple-A), an $8.2M loss on BSC (Crypto DAO), and smaller events such as access-c",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-05-02.md",
-      "bytes": 6724
     }
   ],
   "broadcasts": [

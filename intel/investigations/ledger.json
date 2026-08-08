@@ -10038,6 +10038,25 @@
     "symbol": "CTR",
     "times_investigated": 2
   },
+  "8453:0x15a9e76cd69a71cd485372a51c131e245ef09b07": {
+    "address": "0x15a9E76cd69A71cd485372a51C131E245ef09B07",
+    "chain": "8453",
+    "creator_address": "0x00aae02dc0aab6b7bee1fe9f301649bbd46bce61",
+    "first_investigated": "2026-08-08T01:57:07Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-015707-0x15a9E76c.md",
+        "score": 0,
+        "ts": "2026-08-08T01:57:07Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-08T01:57:07Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "OpenAI",
+    "times_investigated": 1
+  },
   "8453:0x18cd0ef93be7f3bb052885bc2d66947ac7799b07": {
     "address": "0x18cD0eF93Be7F3bB052885Bc2d66947aC7799b07",
     "chain": "8453",
