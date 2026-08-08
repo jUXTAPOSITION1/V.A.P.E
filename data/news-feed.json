@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T04:11:40Z",
+  "generated": "2026-08-08T09:37:27Z",
   "count": 60,
   "headlines": [
     {
@@ -91,6 +91,102 @@
       "crypto": true
     },
     {
+      "title": "Atlassian Rovo Can Be Tricked Into Sending Jira and Confluence Data to Attackers",
+      "url": "https://thehackernews.com/2026/08/atlassian-rovo-can-be-tricked-into.html",
+      "source": "The Hacker News",
+      "published": "Sat, 08 Aug 2026 14:24:50 +0530",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "New CSS Attacks Can Break Webmail Defenses to Steal Passwords and Tokens",
+      "url": "https://thehackernews.com/2026/08/new-css-attacks-can-break-webmail.html",
+      "source": "The Hacker News",
+      "published": "Sat, 08 Aug 2026 13:33:57 +0530",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Metabase Zero-Day Exploited in Wild Allows Admin Access Without Authentication",
+      "url": "https://thehackernews.com/2026/08/metabase-zero-day-exploited-in-wild.html",
+      "source": "The Hacker News",
+      "published": "Sat, 08 Aug 2026 12:28:31 +0530",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "N-able Issues N-central Hotfix 2 as Attackers Reach Managed Systems and Persist",
+      "url": "https://thehackernews.com/2026/08/n-central-attackers-reach-managed.html",
+      "source": "The Hacker News",
+      "published": "Sat, 08 Aug 2026 12:27:43 +0530",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Progress Kemp LoadMaster Flaw Hits CISA KEV After 792 Reported Exploit Attempts",
+      "url": "https://thehackernews.com/2026/08/progress-kemp-loadmaster-flaw-hits-cisa.html",
+      "source": "The Hacker News",
+      "published": "Sat, 08 Aug 2026 12:22:16 +0530",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Jim Cramer Names 5 Investing Themes and 13 Stocks to Buy for 2026",
+      "url": "https://beincrypto.com/jim-cramer-stock-picks-2026/",
+      "source": "BeInCrypto",
+      "published": "Sat, 08 Aug 2026 09:19:53 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "U.S. Senate opens first stage of crypto Clarity Act voting to give bill a chance next month",
+      "url": "https://www.coindesk.com/policy/2026/08/08/u-s-senate-opens-first-stage-of-crypto-clarity-act-voting-to-give-bill-a-chance-next-month",
+      "source": "CoinDesk",
+      "published": "Sat, 08 Aug 2026 09:07:24 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "US Treasury Sanctions Two Iranian Crypto Exchanges Over IRGC Money Laundering",
+      "url": "https://beincrypto.com/iran-crypto-sanctions-shelbit-aban-tether/",
+      "source": "BeInCrypto",
+      "published": "Sat, 08 Aug 2026 08:52:02 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Another Bitcoin infrastructure exploit hits, this time draining Lightning payment servers",
+      "url": "https://www.coindesk.com/tech/2026/08/08/another-bitcoin-infrastructure-exploit-hits-this-time-draining-merchant-lightning-nodes",
+      "source": "CoinDesk",
+      "published": "Sat, 08 Aug 2026 07:46:04 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Domestic stablecoins could boost demand for dollar-backed tokens: IMF",
+      "url": "https://cointelegraph.com/news/imf-domestic-stablecoins-dollar-token-demand?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Sat, 08 Aug 2026 06:21:08 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Solana Meme Coin Jimothy Jumps 331% on Elon Musk Raccoon Post",
+      "url": "https://beincrypto.com/jimothy-meme-coin-musk-raccoon-rally/",
+      "source": "BeInCrypto",
+      "published": "Sat, 08 Aug 2026 05:00:09 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "US court backs Bybit\u2019s bid to trace funds from $1.5B North Korea hack",
+      "url": "https://cointelegraph.com/news/bybit-us-court-trace-funds-north-korea-hack?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Sat, 08 Aug 2026 04:11:53 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
       "title": "New XRP Ledger amendments target $530 million in tokenized Wall Street assets",
       "url": "https://www.coindesk.com/tech/2026/08/07/new-xrp-ledger-amendments-target-usd530-million-in-tokenized-wall-street-assets",
       "source": "CoinDesk",
@@ -127,22 +223,6 @@
       "url": "https://krebsonsecurity.com/2026/07/lessons-learned-from-cisas-recent-github-leak/",
       "source": "Krebs on Security",
       "published": "Mon, 13 Jul 2026 15:03:28 +0000",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "ClickFix Attacks Deliver macOS Stealer That Can Drain Crypto Wallets",
-      "url": "https://thehackernews.com/2026/08/clickfix-attacks-deliver-macos-stealer.html",
-      "source": "The Hacker News",
-      "published": "Fri, 07 Aug 2026 23:59:08 +0530",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "UNC6671 Vishing Attacks Target Personal Phones to Steal SaaS Data",
-      "url": "https://thehackernews.com/2026/08/unc6671-vishing-attacks-target-personal.html",
-      "source": "The Hacker News",
-      "published": "Fri, 07 Aug 2026 23:46:13 +0530",
       "topic": "Cybersecurity",
       "crypto": true
     },
@@ -283,14 +363,6 @@
       "crypto": true
     },
     {
-      "title": "Thune Still Plans Clarity Act Cloture: What a Weekend Surprise Could Mean for Bitcoin",
-      "url": "https://beincrypto.com/thune-clarity-act-cloture-september-vote/",
-      "source": "BeInCrypto",
-      "published": "Fri, 07 Aug 2026 19:46:10 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Bitcoin has 185 blocks left before BIP-110 rules begin rejecting blocks",
       "url": "https://cryptoslate.com/bitcoin-has-185-blocks-left-before-bip-110-rules-begin-rejecting-blocks/",
       "source": "CryptoSlate",
@@ -299,34 +371,10 @@
       "crypto": true
     },
     {
-      "title": "One American Stock Benefits as Smartphones, MRI, and AI Servers Want the Same Chip",
-      "url": "https://beincrypto.com/micron-stock-ai-memory-shortage-forecast/",
-      "source": "BeInCrypto",
-      "published": "Fri, 07 Aug 2026 19:26:58 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Flock Wanted to Turn 350,000 Uber Drivers Into a Nationwide Plate-Scanning Fleet",
       "url": "https://decrypt.co/375149/flock-cameras-uber-drivers-nationwide-plate-scanning-fleet",
       "source": "Decrypt",
       "published": "Fri, 07 Aug 2026 19:18:41 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Nvidia Stock Forecast: NVDA Targets Record-High After New $2 Billion AI Deal",
-      "url": "https://beincrypto.com/nvidia-stock-price-forecast-ai-deal/",
-      "source": "BeInCrypto",
-      "published": "Fri, 07 Aug 2026 19:09:17 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "U.S. widens Iran crypto crackdown with sanctions on two exchanges",
-      "url": "https://www.coindesk.com/policy/2026/08/07/u-s-widens-iran-crypto-crackdown-with-sanctions-on-two-exchanges",
-      "source": "CoinDesk",
-      "published": "Fri, 07 Aug 2026 18:42:44 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -344,14 +392,6 @@
       "source": "Cointelegraph",
       "published": "Fri, 07 Aug 2026 18:36:10 +0000",
       "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "New WordPress Pre-Auth XSS Could Lead to PHP Code Execution - Patch ASAP",
-      "url": "https://thehackernews.com/2026/08/new-wordpress-pre-auth-xss-could-lead.html",
-      "source": "The Hacker News",
-      "published": "Fri, 07 Aug 2026 18:26:23 +0530",
-      "topic": "Cybersecurity",
       "crypto": true
     },
     {
@@ -387,43 +427,11 @@
       "crypto": true
     },
     {
-      "title": "Growing Up The Hard Way",
-      "url": "https://thehackernews.com/2026/08/growing-up-hard-way.html",
-      "source": "The Hacker News",
-      "published": "Fri, 07 Aug 2026 17:25:26 +0530",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "Reform UK chair calls for probe into SBF-linked donation: Report",
-      "url": "https://cointelegraph.com/news/reform-uk-probe-ftx-sam-bankman-fried-donation?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Fri, 07 Aug 2026 17:03:50 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Trump Media and Crypto.com end partnerships as companies shift priorities",
       "url": "https://www.theblock.co/news/deals/2026-08-07-trump-media-crypto-com-end-partnerships-as-companies-shifts-priorities-411198?utm_source=rss&utm_medium=rss",
       "source": "The Block",
       "published": "Fri, 07 Aug 2026 17:01:36 -0400",
       "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "BitMEX sale collapsed as buyers balked at founder ownership and shrinking business",
-      "url": "https://www.coindesk.com/business/2026/07/31/bitmex-sale-collapsed-as-buyers-balked-at-founder-ownership-and-shrinking-business",
-      "source": "CoinDesk",
-      "published": "Fri, 07 Aug 2026 16:53:56 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "18-Year-Old Linux SCTP Flaw Could Let Local Users Gain Root and Escape Containers",
-      "url": "https://thehackernews.com/2026/08/18-year-old-linux-sctp-flaw-could-let.html",
-      "source": "The Hacker News",
-      "published": "Fri, 07 Aug 2026 16:40:33 +0530",
-      "topic": "Cybersecurity",
       "crypto": true
     },
     {
@@ -471,14 +479,6 @@
       "url": "https://www.theblock.co/news/regulation/2026-08-07-us-sanctions-two-more-iranian-crypto-exchanges-under-economic-fury-campaign-411184?utm_source=rss&utm_medium=rss",
       "source": "The Block",
       "published": "Fri, 07 Aug 2026 15:49:33 -0400",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "SharpLink CEO warns EIP-8363 could kill ETH\u2019s biggest advantage over Bitcoin",
-      "url": "https://www.theblock.co/news/defi/2026-08-07-sharplink-ceo-warns-eip-8363-could-kill-eths-biggest-advantage-over-bitcoin-411186?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Fri, 07 Aug 2026 15:37:14 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     }

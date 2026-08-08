@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T09:29:17Z",
+  "generated": "2026-08-08T09:38:41Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 506,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 164,
     "investigations": 861,
-    "news": 87,
+    "news": 88,
     "tools": 16,
     "tools_verified": 16,
     "skills": 26
@@ -12792,6 +12792,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-08-poisoned-files-and-malicious-links-turn-atlassian-s-rovo-ai-.md",
+      "title": "Poisoned Files and Malicious Links Turn Atlassian's Rovo AI Into a Silent Corporate Spy",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-08T09:38:40Z",
+      "published_et": "August 8, 2026 \u00b7 5:38 AM EDT",
+      "topic": "Cybersecurity",
+      "dek": "Dual security investigations reveal how attackers can hijack Atlassian's new enterprise assistant to silently exfiltrate Jira and Confluence secrets.",
+      "image": "assets/news-images/poisoned-files-and-malicious-links-turn-atlassian-s-rovo-ai-.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-08-poisoned-files-and-malicious-links-turn-atlassian-s-rovo-ai-.md"
+    },
+    {
       "file": "news-2026-08-08-wall-street-privacy-upgrade-xrp-ledger-validators-vote-to-en.md",
       "title": "Wall Street Privacy Upgrade: XRP Ledger Validators Vote to Encrypt $530M in Tokenized Assets",
       "byline": "VAPE Reporter",
@@ -13498,18 +13510,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-31-stablecoin-reserve-requirements-the-regulatory-battleground-.md"
-    },
-    {
-      "file": "news-2026-07-31-funds-may-be-at-risk-coinkite-issues-warning-for-coldcard-mk.md",
-      "title": "\u2018Funds may be at risk\u2019: Coinkite issues warning for Coldcard Mk3 users amid 594 BTC theft reports",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-31 06:14 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "Agency: VAPE Wire Byline: VAPE Reporter Date: 2026-07-31 06:14 UTC Topic: Crypto Markets Dek: Image: assets/logo-v-256.png Image source: VAPE brand mark (no AI image available this cycle) Fact-checked",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-31-funds-may-be-at-risk-coinkite-issues-warning-for-coldcard-mk.md"
     }
   ],
   "tools": [
