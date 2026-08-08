@@ -9159,6 +9159,25 @@
     "symbol": "DCA",
     "times_investigated": 1
   },
+  "56:0xcbb7a124e49c3b14d25758330843de6c56d8ffff": {
+    "address": "0xCbB7a124e49c3b14d25758330843De6C56D8FfFf",
+    "chain": "56",
+    "creator_address": "0x6d28796d359d37d27b339d9790fa3fe1dda27842",
+    "first_investigated": "2026-08-08T12:27:18Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-122718-0xCbB7a124.md",
+        "score": 55,
+        "ts": "2026-08-08T12:27:18Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-08T12:27:18Z",
+    "last_score": 55,
+    "last_verdict": "CAUTION",
+    "symbol": "Beat",
+    "times_investigated": 1
+  },
   "56:0xcbc5b4b1a171fc4f86106e3e36853592ac16aaaa": {
     "address": "0xCBc5b4b1a171fc4f86106e3E36853592AC16aaaa",
     "chain": "56",

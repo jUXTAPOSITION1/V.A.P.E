@@ -1537,3 +1537,5 @@
 | 2026-08-08 | auto | 0xe419C3BB09F7386f40e0c0Ed3f4b84749682b49f (VLGNS) | deep_investigation | REJECT (40/100) | Very few holders (11) — thin, easily manipulated distribution | +7d |
 
 | 2026-08-08 | auto | 0x58cDeAbFC02cD19aBdecbe3993F3b91C54517777 (SPCXB) | deep_investigation | REJECT (7/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-08 | auto | 0xCbB7a124e49c3b14d25758330843De6C56D8FfFf (Beat) | deep_investigation | CAUTION (55/100) | Very few holders (3) — thin, easily manipulated distribution | +7d |
