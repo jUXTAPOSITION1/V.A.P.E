@@ -1545,3 +1545,5 @@
 | 2026-08-08 | auto | 0x7Db2F0c15f74aB0Dc0D4f49650dD60C45FFB7777 (UrAnus) | deep_investigation | REJECT (47/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-08 | auto | 0x1b2107667462671b00674bE7af23475FBDfd2B07 (OpenAI) | deep_investigation | REJECT (0/100) | Owner not renounced (0x00aae02dc0aab6b7bee1fe9f301649bbd46bce61) — can still act | +7d |
+
+| 2026-08-08 | auto | 0x44C2e79eB64D744C13bE604672C20ee5a17dafE7 (WPOL) | deep_investigation | REJECT (10/100) | Same deployer has a prior CAUTION/REJECT verdict on record: WMATIC (0xDbE20ADb60 | +7d |
