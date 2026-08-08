@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T18:33:35Z",
+  "generated": "2026-08-08T18:38:39Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 517,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 165,
     "investigations": 884,
-    "news": 90,
+    "news": 91,
     "tools": 16,
     "tools_verified": 16,
     "skills": 27
@@ -13114,6 +13114,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-08-russia-s-crypto-self-custody-push-sends-hardware-wallet-sale.md",
+      "title": "Russia's Crypto Self-Custody Push Sends Hardware Wallet Sales Soaring Ahead of September Rules",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-08T18:38:38Z",
+      "published_et": "August 8, 2026 \u00b7 2:38 PM EDT",
+      "topic": "Crypto Markets",
+      "dek": "M.Video logged a 107% quarter-on-quarter jump in units while Wildberries saw an 84% year-over-year rise, with average prices dropping 13% to 7,900 rubles even as the country readies regulated exchanges and a 300,000-ruble retail cap.",
+      "image": "assets/news-images/russia-s-crypto-self-custody-push-sends-hardware-wallet-sale.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-08-russia-s-crypto-self-custody-push-sends-hardware-wallet-sale.md"
+    },
+    {
       "file": "news-2026-08-08-crypto-s-post-ftx-safety-net-still-leaves-debts-and-ownershi.md",
       "title": "Crypto's Post-FTX Safety Net Still Leaves Debts and Ownership in the Dark",
       "byline": "VAPE Reporter",
@@ -13820,18 +13832,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-31-aave-eyes-wind-down-of-v3-markets-on-six-low-volume-chains-h.md"
-    },
-    {
-      "file": "news-2026-07-31-vesting-cutoff-pump-fun-layoffs-cost-fired-staff-millions-in.md",
-      "title": "Vesting Cutoff: Pump.fun Layoffs Cost Fired Staff Millions in Unvested PUMP Tokens",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-31 19:25 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "Employees were reportedly let go just two months before a major one-year cliff unlock, raising sharp questions about the memecoin launchpad's corporate governance.",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-31-vesting-cutoff-pump-fun-layoffs-cost-fired-staff-millions-in.md"
     }
   ],
   "tools": [

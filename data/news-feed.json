@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T17:29:43Z",
+  "generated": "2026-08-08T18:37:04Z",
   "count": 60,
   "headlines": [
     {
@@ -80,6 +80,22 @@
       "source": "Krebs on Security",
       "published": "Thu, 06 Aug 2026 17:00:56 +0000",
       "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Hardware wallet sales in Russia more than double as new crypto rules near",
+      "url": "https://www.coindesk.com/business/2026/08/08/hardware-wallet-sales-in-russia-more-than-double-as-new-crypto-rules-near",
+      "source": "CoinDesk",
+      "published": "Sat, 08 Aug 2026 17:48:02 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin Red Team Says AI Is Finding Critical Exploits Across Core Projects",
+      "url": "https://decrypt.co/375169/bitcoin-red-team-ai-finding-critical-vulnerabilities",
+      "source": "Decrypt",
+      "published": "Sat, 08 Aug 2026 17:31:03 +0000",
+      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -347,14 +363,6 @@
       "crypto": true
     },
     {
-      "title": "New XRP Ledger amendments target $530 million in tokenized Wall Street assets",
-      "url": "https://www.coindesk.com/tech/2026/08/07/new-xrp-ledger-amendments-target-usd530-million-in-tokenized-wall-street-assets",
-      "source": "CoinDesk",
-      "published": "Sat, 08 Aug 2026 03:30:00 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Nearly 800 Malicious npm Packages Deliver Cross-Platform RAT and Infostealer",
       "url": "https://thehackernews.com/2026/08/nearly-800-malicious-npm-packages.html",
       "source": "The Hacker News",
@@ -431,14 +439,6 @@
       "url": "https://decrypt.co/375159/bitcoin-payment-service-btcpay-critical-flaw-active-attack",
       "source": "Decrypt",
       "published": "Fri, 07 Aug 2026 20:00:34 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Flock Wanted to Turn 350,000 Uber Drivers Into a Nationwide Plate-Scanning Fleet",
-      "url": "https://decrypt.co/375149/flock-cameras-uber-drivers-nationwide-plate-scanning-fleet",
-      "source": "Decrypt",
-      "published": "Fri, 07 Aug 2026 19:18:41 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
