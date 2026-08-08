@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T17:31:51Z",
+  "generated": "2026-08-08T17:47:32Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 517,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 165,
     "investigations": 882,
-    "news": 89,
+    "news": 90,
     "tools": 16,
     "tools_verified": 16,
     "skills": 27
@@ -13086,6 +13086,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-08-crypto-s-post-ftx-safety-net-still-leaves-debts-and-ownershi.md",
+      "title": "Crypto's Post-FTX Safety Net Still Leaves Debts and Ownership in the Dark",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-08T17:30:59Z",
+      "published_et": "August 8, 2026 \u00b7 1:30 PM EDT",
+      "topic": "Crypto Markets",
+      "dek": "Merkle-tree checks confirm wallet control at a snapshot but expose none of the loans, affiliate claims, or legal obligations that determine whether an exchange can actually pay customers.",
+      "image": "assets/news-images/crypto-s-post-ftx-safety-net-still-leaves-debts-and-ownershi.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-08-crypto-s-post-ftx-safety-net-still-leaves-debts-and-ownershi.md"
+    },
+    {
       "file": "news-2026-08-08-black-hat-css-chains-let-malicious-emails-hijack-outlook-sig.md",
       "title": "Black Hat CSS Chains Let Malicious Emails Hijack Outlook Sign-In Screens and Steal Slack Tokens",
       "byline": "VAPE Reporter",
@@ -13792,18 +13804,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-31-vesting-cutoff-pump-fun-layoffs-cost-fired-staff-millions-in.md"
-    },
-    {
-      "file": "news-2026-07-31-ai-company-sues-town-for-trying-to-block-data-center-near-na.md",
-      "title": "AI Company Sues Town for Trying to Block Data Center Near National Park",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-31 14:06 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "Agency: VAPE Wire Byline: VAPE Reporter Date: 2026-07-31 14:06 UTC Topic: Crypto Markets Dek: Image: assets/logo-v-256.png Image source: VAPE brand mark (no AI image available this cycle) Fact-checked",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-31-ai-company-sues-town-for-trying-to-block-data-center-near-na.md"
     }
   ],
   "tools": [
