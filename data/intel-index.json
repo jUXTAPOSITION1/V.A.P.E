@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T04:07:48Z",
+  "generated": "2026-08-08T04:13:02Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 499,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 163,
     "investigations": 849,
-    "news": 86,
+    "news": 87,
     "tools": 16,
     "tools_verified": 16,
     "skills": 26
@@ -12624,6 +12624,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-08-wall-street-privacy-upgrade-xrp-ledger-validators-vote-to-en.md",
+      "title": "Wall Street Privacy Upgrade: XRP Ledger Validators Vote to Encrypt $530M in Tokenized Assets",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-08T04:13:02Z",
+      "published_et": "August 8, 2026 \u00b7 12:13 AM EDT",
+      "topic": "Crypto Markets",
+      "dek": "A new \"Confidential Transfers\" proposal in XRPL v3.3.0 aims to hide institutional balances and transaction sizes while preserving regulatory audit access.",
+      "image": "assets/news-images/wall-street-privacy-upgrade-xrp-ledger-validators-vote-to-en.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-08-wall-street-privacy-upgrade-xrp-ledger-validators-vote-to-en.md"
+    },
+    {
       "file": "news-2026-08-08-ai-slop-and-dns-fallbacks-inside-the-800-package-npm-supply-.md",
       "title": "AI Slop and DNS Fallbacks: Inside the 800-Package npm Supply Chain Siege",
       "byline": "VAPE Reporter",
@@ -13330,18 +13342,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-31-funds-may-be-at-risk-coinkite-issues-warning-for-coldcard-mk.md"
-    },
-    {
-      "file": "news-2026-07-31-solana-treasury-trap-inside-supernova-s-high-stakes-gamble-t.md",
-      "title": "Solana Treasury Trap: Inside Supernova\u2019s High-Stakes Gamble to Borrow Against $2.5M in Crypto with Just $4,000 Cash Left",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-31 02:48 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "A UK crypto firm is scrambling for replacement financing to avoid liquidating its millions in Solana and Bittensor to cover looming short-term liabilities.",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-31-solana-treasury-trap-inside-supernova-s-high-stakes-gamble-t.md"
     }
   ],
   "tools": [

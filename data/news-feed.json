@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T01:37:36Z",
+  "generated": "2026-08-08T04:11:40Z",
   "count": 60,
   "headlines": [
     {
@@ -88,6 +88,22 @@
       "source": "Krebs on Security",
       "published": "Thu, 06 Aug 2026 17:00:56 +0000",
       "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "New XRP Ledger amendments target $530 million in tokenized Wall Street assets",
+      "url": "https://www.coindesk.com/tech/2026/08/07/new-xrp-ledger-amendments-target-usd530-million-in-tokenized-wall-street-assets",
+      "source": "CoinDesk",
+      "published": "Sat, 08 Aug 2026 03:30:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin holders risk losing real BTC if they sell coins from BIP-110 fork, says developer",
+      "url": "https://www.coindesk.com/tech/2026/08/08/bitcoin-holders-risk-losing-real-btc-if-they-sell-coins-from-bip-110-fork-says-developer",
+      "source": "CoinDesk",
+      "published": "Sat, 08 Aug 2026 02:30:00 +0000",
+      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -419,14 +435,6 @@
       "crypto": true
     },
     {
-      "title": "Bybit sues North Korea and Lazarus Group over $1.5 billion hack, secures asset freeze",
-      "url": "https://www.coindesk.com/policy/2026/08/07/bybit-sues-north-korea-and-lazarus-group-over-usd1-5-billion-hack-secures-asset-freeze",
-      "source": "CoinDesk",
-      "published": "Fri, 07 Aug 2026 16:32:41 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Bitcoin Shrugs off Coldcard Hack and Clarity Act Delays, Price Chops Higher as Investors Buy ETFs",
       "url": "https://bitcoinmagazine.com/news/bitcoin-price-shrugs-off-coldcard-hack",
       "source": "Bitcoin Magazine",
@@ -472,14 +480,6 @@
       "source": "The Block",
       "published": "Fri, 07 Aug 2026 15:37:14 -0400",
       "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Unlimited Technology Systems breach impacts 3.8 million people",
-      "url": "https://www.bleepingcomputer.com/news/security/unlimited-technology-systems-breach-impacts-38-million-people/",
-      "source": "BleepingComputer",
-      "published": "Fri, 07 Aug 2026 15:30:41 -0400",
-      "topic": "Cybersecurity",
       "crypto": true
     }
   ]
