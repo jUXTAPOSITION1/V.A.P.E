@@ -6069,6 +6069,25 @@
     "symbol": "BStocks",
     "times_investigated": 1
   },
+  "56:0x0b9fee99f32d64e13845228eae1c552782377777": {
+    "address": "0x0B9FEE99f32d64e13845228EAe1C552782377777",
+    "chain": "56",
+    "creator_address": "0xf2f00f970787117697f984d02bd5722af1edf652",
+    "first_investigated": "2026-08-08T09:23:59Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-092359-0x0B9FEE99.md",
+        "score": 22,
+        "ts": "2026-08-08T09:23:59Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-08T09:23:59Z",
+    "last_score": 22,
+    "last_verdict": "REJECT",
+    "symbol": "SPCXB",
+    "times_investigated": 1
+  },
   "56:0x0c69199c1562233640e0db5ce2c399a88eb507c7": {
     "address": "0x0C69199C1562233640e0Db5Ce2c399A88eB507C7",
     "chain": "56",

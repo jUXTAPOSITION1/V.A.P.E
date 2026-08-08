@@ -1521,3 +1521,5 @@
 | 2026-08-08 | auto | 0x335868de22E077E9ffBe991c9Dc60dc83B934444 (bStocks) | deep_investigation | CAUTION (65/100) | Violent 24h move +17196% (volatility/manipulation) | +7d |
 
 | 2026-08-08 | auto | 0x12d5a0C58eF299BEDd309ec4964ffA3145827777 (Racoonzilla) | deep_investigation | REJECT (42/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-08 | auto | 0x0B9FEE99f32d64e13845228EAe1C552782377777 (SPCXB) | deep_investigation | REJECT (22/100) | Upgradeable proxy (verify implementation) | +7d |

@@ -869,3 +869,4 @@
 {"ts": "2026-08-08T08:38:13.011630Z", "target": "0x335868de22E077E9ffBe991c9Dc60dc83B934444", "chain": "56", "hired": ["rug_pull_alert"], "paid": 0, "cost_usd": 0.0, "daily_target": 64}
 {"ts": "2026-08-08T08:53:26.552813Z", "target": "0x12d5a0C58eF299BEDd309ec4964ffA3145827777", "chain": "56", "hired": ["dex_volumes"], "paid": 0, "cost_usd": 0.0, "daily_target": 64}
 {"ts": "2026-08-08T09:08:43.237256Z", "target": "0x9C0FA3B56A3B40dEAd7680d0837e9219d7C2Ab07", "chain": "8453", "hired": ["token_chart"], "paid": 0, "cost_usd": 0.0, "daily_target": 64}
+{"ts": "2026-08-08T09:23:51.015039Z", "target": "0x0B9FEE99f32d64e13845228EAe1C552782377777", "chain": "56", "hired": ["market_intel"], "paid": 0, "cost_usd": 0.0, "daily_target": 64}

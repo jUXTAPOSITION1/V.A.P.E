@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T09:08:45Z",
+  "generated": "2026-08-08T09:24:01Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 505,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 164,
-    "investigations": 860,
+    "investigations": 861,
     "news": 87,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-085344-0x12d5a0C5.md",
-      "title": "Investigation \u2014 Racoonzilla",
-      "symbol": "Racoonzilla",
-      "name": "Racoonzilla",
-      "date": "2026-08-08T08:53:44Z",
-      "target": "0x12d5a0C58eF299BEDd309ec4964ffA3145827777",
+      "file": "investigation-20260808-092359-0x0B9FEE99.md",
+      "title": "Investigation \u2014 SPCXB",
+      "symbol": "SPCXB",
+      "name": "SPCXB\u8d28\u62bc\u5206\u7ea2\u6d4b\u8bd5",
+      "date": "2026-08-08T09:23:59Z",
+      "target": "0x0B9FEE99f32d64e13845228EAe1C552782377777",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "42",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +759% (volatility/manipulation); [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-085344-0x12d5a0C5.md"
+      "score": "22",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $7,285 (rug/illiquid); [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unau",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-092359-0x0B9FEE99.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-092359-0x0B9FEE99.md",
+      "title": "Investigation \u2014 SPCXB",
+      "symbol": "SPCXB",
+      "name": "SPCXB\u8d28\u62bc\u5206\u7ea2\u6d4b\u8bd5",
+      "date": "2026-08-08T09:23:59Z",
+      "target": "0x0B9FEE99f32d64e13845228EAe1C552782377777",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "22",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $7,285 (rug/illiquid); [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unau",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-092359-0x0B9FEE99.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260808-085344-0x12d5a0C5.md",
