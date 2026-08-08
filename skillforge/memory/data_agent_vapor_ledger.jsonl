@@ -618,3 +618,4 @@
 {"ts": "2026-08-08T12:27:09.508148Z", "target": "0xCbB7a124e49c3b14d25758330843De6C56D8FfFf", "chain": "56", "hired": ["market_intel"], "paid": 0, "cost_usd": 0.0}
 {"ts": "2026-08-08T12:57:22.514063Z", "target": "0x7Db2F0c15f74aB0Dc0D4f49650dD60C45FFB7777", "chain": "56", "hired": ["token_intel"], "paid": 0, "cost_usd": 0.0}
 {"ts": "2026-08-08T13:27:59.133562Z", "target": "0x44C2e79eB64D744C13bE604672C20ee5a17dafE7", "chain": "137", "hired": ["bridges"], "paid": 0, "cost_usd": 0.0}
+{"ts": "2026-08-08T13:58:18.268473Z", "target": "0xf98B40f90C18A291B3D6f6f84aDcF1b3e87D7777", "chain": "56", "hired": ["yields"], "paid": 0, "cost_usd": 0.0}

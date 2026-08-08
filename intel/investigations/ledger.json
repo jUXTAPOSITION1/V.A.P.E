@@ -9956,6 +9956,25 @@
     "symbol": "SAFU",
     "times_investigated": 1
   },
+  "56:0xf98b40f90c18a291b3d6f6f84adcf1b3e87d7777": {
+    "address": "0xf98B40f90C18A291B3D6f6f84aDcF1b3e87D7777",
+    "chain": "56",
+    "creator_address": "0x599195aefafb24f21478713e1a11d8a57274c4a4",
+    "first_investigated": "2026-08-08T13:58:51Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-135851-0xf98B40f9.md",
+        "score": 42,
+        "ts": "2026-08-08T13:58:51Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-08T13:58:51Z",
+    "last_score": 42,
+    "last_verdict": "REJECT",
+    "symbol": "SaturnCoin",
+    "times_investigated": 1
+  },
   "56:0xfab99fcf605fd8f4593edb70a43ba56542777777": {
     "address": "0xfAB99fCF605fD8f4593EDb70A43bA56542777777",
     "chain": "56",

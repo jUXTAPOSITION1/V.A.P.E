@@ -1547,3 +1547,5 @@
 | 2026-08-08 | auto | 0x1b2107667462671b00674bE7af23475FBDfd2B07 (OpenAI) | deep_investigation | REJECT (0/100) | Owner not renounced (0x00aae02dc0aab6b7bee1fe9f301649bbd46bce61) — can still act | +7d |
 
 | 2026-08-08 | auto | 0x44C2e79eB64D744C13bE604672C20ee5a17dafE7 (WPOL) | deep_investigation | REJECT (10/100) | Same deployer has a prior CAUTION/REJECT verdict on record: WMATIC (0xDbE20ADb60 | +7d |
+
+| 2026-08-08 | auto | 0xf98B40f90C18A291B3D6f6f84aDcF1b3e87D7777 (SaturnCoin) | deep_investigation | REJECT (42/100) | Upgradeable proxy (verify implementation) | +7d |
