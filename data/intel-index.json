@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T02:27:41Z",
+  "generated": "2026-08-08T02:45:33Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 497,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 163,
-    "investigations": 846,
+    "investigations": 847,
     "news": 86,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-021254-0x4abC07E0.md",
-      "title": "Investigation \u2014 SPCXB",
-      "symbol": "SPCXB",
-      "name": "SpaceX",
-      "date": "2026-08-08T02:12:54Z",
-      "target": "0x4abC07E05f6e4467f467f5a00EDAbD04a2057777",
-      "chain": "56 (BNB Chain)",
-      "verdict": "REJECT",
-      "score": "7",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $7,207 (rug/illiquid); [-15] Pair only 0.8 days old (extreme fresh-launch ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-021254-0x4abC07E0.md"
+      "file": "investigation-20260808-024531-0x94314a14.md",
+      "title": "Investigation \u2014 EPIC",
+      "symbol": "EPIC",
+      "name": "Epic Chain",
+      "date": "2026-08-08T02:45:31Z",
+      "target": "0x94314a14Df63779c99C0764a30e0CD22fA78fC0E",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "60",
+      "summary": "Risk factors: [-10] Owner not renounced (0x32f14956d707b624026d9fdfcfc63956ea683140) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 74% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 9458 hold",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-024531-0x94314a14.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-024531-0x94314a14.md",
+      "title": "Investigation \u2014 EPIC",
+      "symbol": "EPIC",
+      "name": "Epic Chain",
+      "date": "2026-08-08T02:45:31Z",
+      "target": "0x94314a14Df63779c99C0764a30e0CD22fA78fC0E",
+      "chain": "1 (Ethereum)",
+      "verdict": "CAUTION",
+      "score": "60",
+      "summary": "Risk factors: [-10] Owner not renounced (0x32f14956d707b624026d9fdfcfc63956ea683140) \u2014 can still act on the contract; [-15] Top 10 non-LP/burn holders control 74% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 9458 hold",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-024531-0x94314a14.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260808-021254-0x4abC07E0.md",
@@ -13397,7 +13411,7 @@
       "name": "base_rpc",
       "tier": "recon",
       "status": "verified",
-      "version": "49674219",
+      "version": "49683592",
       "purpose": "Query Base mainnet via public JSON-RPC: balance, nonce, gas, block. No key, no LLM.",
       "repo": "(local)",
       "known_limitation": false,
@@ -13407,7 +13421,7 @@
       "name": "market_data",
       "tier": "recon",
       "status": "verified",
-      "version": "btc_dom 56.79 eth_dom 10.06 mcap_chg_24h 0.59",
+      "version": "btc_dom 56.78 eth_dom 10.06 mcap_chg_24h 0.57",
       "purpose": "Free crypto market data via CoinGecko + DeFiLlama: price/chg/vol/mcap, dominance, chain TVL.",
       "repo": "(local)",
       "known_limitation": false,
@@ -13457,7 +13471,7 @@
       "name": "fear_greed",
       "tier": "recon",
       "status": "verified",
-      "version": "29 Fear",
+      "version": "30 Fear",
       "purpose": "Keyless Crypto Fear & Greed Index (alternative.me): single 0-100 sentiment gauge + classification + history. Scripts the sentiment-sweep vertical.",
       "repo": "(local)",
       "known_limitation": false,

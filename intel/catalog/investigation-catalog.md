@@ -1493,3 +1493,5 @@
 | 2026-08-08 | auto | 0x15a9E76cd69A71cd485372a51C131E245ef09B07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
 
 | 2026-08-08 | auto | 0x4abC07E05f6e4467f467f5a00EDAbD04a2057777 (SPCXB) | deep_investigation | REJECT (7/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-08 | auto | 0x94314a14Df63779c99C0764a30e0CD22fA78fC0E (EPIC) | deep_investigation | CAUTION (60/100) | Owner not renounced (0x32f14956d707b624026d9fdfcfc63956ea683140) — can still act | +7d |
