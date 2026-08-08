@@ -6144,6 +6144,25 @@
     "symbol": "jobless",
     "times_investigated": 1
   },
+  "56:0x12d5a0c58ef299bedd309ec4964ffa3145827777": {
+    "address": "0x12d5a0C58eF299BEDd309ec4964ffA3145827777",
+    "chain": "56",
+    "creator_address": "0x212fffb5ed4660b5460262d38fe5e04df246d5c0",
+    "first_investigated": "2026-08-08T08:53:44Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-085344-0x12d5a0C5.md",
+        "score": 42,
+        "ts": "2026-08-08T08:53:44Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-08T08:53:44Z",
+    "last_score": 42,
+    "last_verdict": "REJECT",
+    "symbol": "Racoonzilla",
+    "times_investigated": 1
+  },
   "56:0x143e73837fd47cc9477c694b37123ccbd4c0eb93": {
     "address": "0x143E73837FD47cC9477c694B37123ccbd4C0eB93",
     "chain": "56",

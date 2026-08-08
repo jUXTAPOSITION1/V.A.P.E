@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-08-08T08:38:21Z — 452 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-08-08T08:53:44Z — 453 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| Racoonzilla | BNB Chain | `0x12d5a0C58eF299BEDd309ec4964ffA3145827777` | 42/100 | 1 | 2026-08-08T08:53:44Z |
 | ABBY | Ethereum | `0xD796118D6545692206CA9dA2007BBa531c86FB5e` | 32/100 | 1 | 2026-08-08T07:37:50Z |
 | OpenAI | Base | `0x9C0FA3B56A3B40dEAd7680d0837e9219d7C2Ab07` | 0/100 | 1 | 2026-08-08T06:37:49Z |
 | 🤡 | Base | `0xe2c6D87C468a62c5b554a7266ae62522228B26F6` | 12/100 | 1 | 2026-08-08T05:51:32Z |
