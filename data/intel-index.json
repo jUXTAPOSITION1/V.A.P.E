@@ -1,14 +1,14 @@
 {
-  "generated": "2026-08-08T14:33:17Z",
+  "generated": "2026-08-08T14:39:12Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 512,
+    "reports": 513,
     "reports_by_type": {
       "bounty": 164,
+      "macro": 26,
       "base": 99,
       "sentiment": 53,
       "security": 83,
-      "macro": 25,
       "bug": 5,
       "mainnet": 5,
       "virtuals": 74,
@@ -12125,6 +12125,17 @@
       "bytes": 16275
     },
     {
+      "kind": "intel",
+      "type": "macro",
+      "file": "macro-2026-08-08-14.md",
+      "title": "Macro & Micro News Sweep Report",
+      "date": "2026-08-08T14:00Z",
+      "threat": null,
+      "summary": "Computed deterministically from real Fear & Greed (30, prior day 29) and global market cap 24h change (0.35%). A sharp day-over-day Fear & Greed swing (15+ points) can also tip an otherwise-ambiguous reading toward RISK-OFF/RISK-ON \u2014 see the function docstring in agents/macrosweep.py for the exact thresholds.",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/macro-2026-08-08-14.md",
+      "bytes": 2341
+    },
+    {
       "kind": "bounty",
       "type": "bounty",
       "file": "bounty_report_20260808_134646.md",
@@ -12761,17 +12772,6 @@
       "summary": "Date: 2026-08-05 22:06 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-05-22.md",
       "bytes": 7601
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260805_211029.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-05T21:10:29Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: RISEx $0.673M on ['RISE'] (Access Control Exploit) \u00b7 Base mover: OpenAI / USDC +9947% 24h (liq $9442530.9733) \u2014 volatility/rug watch \u00b7 Base mover: OpenAI / USDC -28% 24h (liq $0.004055609983) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260805_211029.md",
-      "bytes": 16276
     }
   ],
   "broadcasts": [
