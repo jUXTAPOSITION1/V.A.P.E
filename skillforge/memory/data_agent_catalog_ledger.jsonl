@@ -820,3 +820,4 @@
 {"ts": "2026-08-08T13:28:10.540113Z", "target": "0x7297968FFb753dd12e4f6B1f18d9865c76707FC2", "hired": ["token_chart"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-08T13:43:14.133134Z", "target": "BNB Chain", "hired": ["chain_overview"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-08T13:58:52.601851Z", "target": "Base", "hired": ["chain_overview"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
+{"ts": "2026-08-08T14:14:00.600165Z", "target": "eigencloud", "hired": ["treasury"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
