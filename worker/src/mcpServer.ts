@@ -79,11 +79,11 @@ function zodShapeFor(schema: JsonInputSchema): Record<string, ZodTypeAny> {
   return shape;
 }
 
-async function buildAccepts(resourceServer: x402ResourceServer, env: McpWorkerEnv, price: string) {
+async function buildAccepts(resourceServer: x402ResourceServer, env: McpWorkerEnv, price: string, includeSolana: boolean) {
   const options: Array<{ scheme: string; payTo: string; price: string; network: Caip2Network }> = [
     { scheme: "exact", payTo: env.PAY_TO_ADDRESS, price, network: env.X402_NETWORK },
   ];
-  if (env.SOLANA_PAY_TO_ADDRESS && env.SOLANA_NETWORK) {
+  if (includeSolana && env.SOLANA_PAY_TO_ADDRESS && env.SOLANA_NETWORK) {
     options.push({ scheme: "exact", payTo: env.SOLANA_PAY_TO_ADDRESS, price, network: env.SOLANA_NETWORK });
   }
   return resourceServer.buildPaymentRequirementsFromOptions(options as any, {});
@@ -148,7 +148,7 @@ function toolResult(payload: { status?: string } & Record<string, unknown>) {
  * Builds a fresh McpServer wired to VAPE's real offerings. Call once per
  * request (see index.ts's /mcp route) -- never cache/reuse across requests.
  */
-export async function buildMcpServer(resourceServer: x402ResourceServer, env: McpWorkerEnv): Promise<McpServer> {
+export async function buildMcpServer(resourceServer: x402ResourceServer, env: McpWorkerEnv, includeSolana: boolean = true): Promise<McpServer> {
   // Real, confirmed requirement (not optional/best-effort): buildPaymentRequirementsFromOptions()
   // below throws "Facilitator does not support exact on <network>... call
   // initialize()" without this -- unlike index.ts's own HTTP routes, which
@@ -169,7 +169,7 @@ export async function buildMcpServer(resourceServer: x402ResourceServer, env: Mc
   for (const name of Object.keys(HANDLERS) as HandlerName[]) {
     const price = OFFERING_PRICES[name];
     const description = OFFERING_DISCOVERY[name].description;
-    const accepts = await buildAccepts(resourceServer, env, price);
+    const accepts = await buildAccepts(resourceServer, env, price, includeSolana);
     const paid = createPaymentWrapper(resourceServer, {
       accepts,
       resource: {
@@ -209,7 +209,7 @@ export async function buildMcpServer(resourceServer: x402ResourceServer, env: Mc
   // /data/<name> routes use — driven directly off DL_OFFERINGS so a future
   // offering added there needs zero changes here) ───────────────────────
   for (const off of DL_OFFERINGS) {
-    const accepts = await buildAccepts(resourceServer, env, off.price);
+    const accepts = await buildAccepts(resourceServer, env, off.price, includeSolana);
     const paid = createPaymentWrapper(resourceServer, {
       accepts,
       resource: {
