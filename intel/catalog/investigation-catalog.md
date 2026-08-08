@@ -1507,3 +1507,5 @@
 | 2026-08-08 | auto | 0xb32a0416FDF9D97a40ccce4b8ADf6FC127320473 (QUID) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-08-08 | auto | 0xe2c6D87C468a62c5b554a7266ae62522228B26F6 (🤡) | deep_investigation | REJECT (12/100) | Low holder count (70) | +7d |
+
+| 2026-08-08 | auto | 0x3c8Db7d7387331945Ba72eCf61463DFB11E17777 (bStocks) | deep_investigation | CAUTION (52/100) | Upgradeable proxy (verify implementation) | +7d |

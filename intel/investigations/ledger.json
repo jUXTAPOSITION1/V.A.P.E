@@ -6828,6 +6828,25 @@
     "symbol": "SPCXB",
     "times_investigated": 1
   },
+  "56:0x3c8db7d7387331945ba72ecf61463dfb11e17777": {
+    "address": "0x3c8Db7d7387331945Ba72eCf61463DFB11E17777",
+    "chain": "56",
+    "creator_address": "0xda217d672de75a2e101790ec0f00199d8bc68c7e",
+    "first_investigated": "2026-08-08T06:06:58Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-060658-0x3c8Db7d7.md",
+        "score": 52,
+        "ts": "2026-08-08T06:06:58Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-08T06:06:58Z",
+    "last_score": 52,
+    "last_verdict": "CAUTION",
+    "symbol": "bStocks",
+    "times_investigated": 1
+  },
   "56:0x3e5d4f8aee0d9b3082d5f6da5d6e225d17ba9ea0": {
     "address": "0x3E5d4f8aee0D9B3082d5f6DA5D6e225D17ba9ea0",
     "chain": "56",
