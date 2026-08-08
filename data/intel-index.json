@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T01:57:09Z",
+  "generated": "2026-08-08T02:12:55Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 497,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 162,
-    "investigations": 845,
+    "investigations": 846,
     "news": 86,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-015707-0x15a9E76c.md",
-      "title": "Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-08-08T01:57:07Z",
-      "target": "0x15a9E76cd69A71cd485372a51C131E245ef09B07",
-      "chain": "8453 (Base)",
+      "file": "investigation-20260808-021254-0x4abC07E0.md",
+      "title": "Investigation \u2014 SPCXB",
+      "symbol": "SPCXB",
+      "name": "SpaceX",
+      "date": "2026-08-08T02:12:54Z",
+      "target": "0x4abC07E05f6e4467f467f5a00EDAbD04a2057777",
+      "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation patter",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-015707-0x15a9E76c.md"
+      "score": "7",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $7,207 (rug/illiquid); [-15] Pair only 0.8 days old (extreme fresh-launch ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-021254-0x4abC07E0.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-021254-0x4abC07E0.md",
+      "title": "Investigation \u2014 SPCXB",
+      "symbol": "SPCXB",
+      "name": "SpaceX",
+      "date": "2026-08-08T02:12:54Z",
+      "target": "0x4abC07E05f6e4467f467f5a00EDAbD04a2057777",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "7",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $7,207 (rug/illiquid); [-15] Pair only 0.8 days old (extreme fresh-launch ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-021254-0x4abC07E0.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260808-015707-0x15a9E76c.md",
