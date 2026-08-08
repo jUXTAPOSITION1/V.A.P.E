@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T12:27:20Z",
+  "generated": "2026-08-08T12:42:25Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 509,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 164,
-    "investigations": 869,
+    "investigations": 870,
     "news": 88,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-122718-0xCbB7a124.md",
-      "title": "Investigation \u2014 Beat",
-      "symbol": "Beat",
-      "name": "Beatcoin",
-      "date": "2026-08-08T12:27:18Z",
-      "target": "0xCbB7a124e49c3b14d25758330843De6C56D8FfFf",
+      "file": "investigation-20260808-124224-0xea792CD9.md",
+      "title": "Investigation \u2014 SPCXB",
+      "symbol": "SPCXB",
+      "name": "SpaceX",
+      "date": "2026-08-08T12:42:24Z",
+      "target": "0xea792CD9AA844fC85a379f8e6F21960D166C3719",
       "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "55",
-      "summary": "Risk factors: [-20] Very few holders (3) \u2014 thin, easily manipulated distribution; [-15] Top 3 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renoun",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-122718-0xCbB7a124.md"
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x143E73837FD47cC9477c694B37123ccbd4C0eB93) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (5) \u2014 thin, easily manipulated distribution; [-15] Top 4 non-LP/burn holders con",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-124224-0xea792CD9.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-124224-0xea792CD9.md",
+      "title": "Investigation \u2014 SPCXB",
+      "symbol": "SPCXB",
+      "name": "SpaceX",
+      "date": "2026-08-08T12:42:24Z",
+      "target": "0xea792CD9AA844fC85a379f8e6F21960D166C3719",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x143E73837FD47cC9477c694B37123ccbd4C0eB93) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (5) \u2014 thin, easily manipulated distribution; [-15] Top 4 non-LP/burn holders con",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-124224-0xea792CD9.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260808-122718-0xCbB7a124.md",
