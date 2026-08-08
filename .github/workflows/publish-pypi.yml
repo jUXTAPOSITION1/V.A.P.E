@@ -1,0 +1,62 @@
+name: Publish vape-mcp-server to PyPI
+
+# Trusted publishing (PyPI's own recommended flow, no long-lived secret):
+# this workflow authenticates to PyPI via short-lived OIDC tokens
+# (permissions.id-token: write below), not an API token stored as a repo
+# secret. One-time human setup required before the first real publish:
+#   1. https://pypi.org/manage/account/publishing/ -> "Add a new pending
+#      publisher" -> project name "vape-mcp-server", owner
+#      "jUXTAPOSITION1", repo "V.A.P.E", workflow "publish-pypi.yml",
+#      environment "pypi" (matching the `environment:` key below).
+#   2. Push a tag matching vape-mcp-v* (e.g. `git tag vape-mcp-v1.1.0 &&
+#      git push origin vape-mcp-v1.1.0`), or run this workflow manually.
+# Until step 1 is done, PyPI will reject the upload -- this workflow can't
+# accidentally publish anything on its own.
+on:
+  push:
+    tags:
+      - 'vape-mcp-v*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.11'
+      - run: pip install build
+      - run: python -m build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      # OIDC token for PyPI trusted publishing -- this is the only
+      # elevated permission this job needs; no PYPI_API_TOKEN secret
+      # exists in this repo, by design.
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      # pypa/gh-action-pypi-publish is PyPI's own official trusted-
+      # publishing action (github.com/pypa/gh-action-pypi-publish),
+      # referenced here by its documented `release/v1` tag rather than a
+      # pinned commit SHA -- this session's GitHub access is scoped to
+      # jUXTAPOSITION1/V.A.P.E only, so a SHA for a third-party repo could
+      # not be fetched/verified here the way this repo's other pinned
+      # actions were. Pin to a real commit SHA when convenient.
+      - uses: pypa/gh-action-pypi-publish@release/v1
