@@ -6828,6 +6828,25 @@
     "symbol": "BLEC",
     "times_investigated": 1
   },
+  "56:0x431051c6824f9746243bdb42786ca8bc62834444": {
+    "address": "0x431051C6824F9746243Bdb42786Ca8bC62834444",
+    "chain": "56",
+    "creator_address": "0x75b4e2f7884338b680f86b8e2da86cccf73dbeb1",
+    "first_investigated": "2026-08-08T01:09:06Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-010906-0x431051C6.md",
+        "score": 55,
+        "ts": "2026-08-08T01:09:06Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-08T01:09:06Z",
+    "last_score": 55,
+    "last_verdict": "CAUTION",
+    "symbol": "BTW",
+    "times_investigated": 1
+  },
   "56:0x431a3bee82e2ca41e49895cbece5bb0f76a89b7a": {
     "address": "0x431a3BEE82E2ca41e49895CbECE5bB0F76A89b7A",
     "chain": "56",

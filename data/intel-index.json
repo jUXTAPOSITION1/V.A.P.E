@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T00:53:32Z",
+  "generated": "2026-08-08T01:09:06Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 495,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 162,
-    "investigations": 841,
+    "investigations": 842,
     "news": 85,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260807-202906-0x480AE57d.md",
-      "title": "Investigation \u2014 bStocks",
-      "symbol": "bStocks",
-      "name": "bStocks Never Sleep",
-      "date": "2026-08-07T20:29:06Z",
-      "target": "0x480AE57d90fFb90A0400877c52eb633BE23CFFFF",
+      "file": "investigation-20260808-010906-0x431051C6.md",
+      "title": "Investigation \u2014 BTW",
+      "symbol": "BTW",
+      "name": "Bitway",
+      "date": "2026-08-08T01:09:06Z",
+      "target": "0x431051C6824F9746243Bdb42786Ca8bC62834444",
       "chain": "56 (BNB Chain)",
       "verdict": "CAUTION",
-      "score": "52",
-      "summary": "Risk factors: [-8] Low holder count (83); [-15] Top 10 non-LP/burn holders control 89% of supply \u2014 concentrated, easily manipulated; [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260807-202906-0x480AE57d.md"
+      "score": "55",
+      "summary": "Risk factors: [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renoun",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-010906-0x431051C6.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-010906-0x431051C6.md",
+      "title": "Investigation \u2014 BTW",
+      "symbol": "BTW",
+      "name": "Bitway",
+      "date": "2026-08-08T01:09:06Z",
+      "target": "0x431051C6824F9746243Bdb42786Ca8bC62834444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "55",
+      "summary": "Risk factors: [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renoun",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-010906-0x431051C6.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260807-202906-0x480AE57d.md",
