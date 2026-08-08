@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T08:23:00Z",
+  "generated": "2026-08-08T08:38:23Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 503,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 164,
-    "investigations": 858,
+    "investigations": 859,
     "news": 87,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-080806-0xCC1f1720.md",
+      "file": "investigation-20260808-083821-0x335868de.md",
       "title": "Investigation \u2014 bStocks",
       "symbol": "bStocks",
-      "name": "bStock",
-      "date": "2026-08-08T08:08:06Z",
-      "target": "0xCC1f172003a3653740f6Fc316d196eadb00d4444",
+      "name": "bStocks Never Sleep",
+      "date": "2026-08-08T08:38:21Z",
+      "target": "0x335868de22E077E9ffBe991c9Dc60dc83B934444",
       "chain": "56 (BNB Chain)",
       "verdict": "CAUTION",
-      "score": "57",
-      "summary": "Risk factors: [-8] Low holder count (50); [-15] Top 10 non-LP/burn holders control 81% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $10,515; [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 100% o",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-080806-0xCC1f1720.md"
+      "score": "65",
+      "summary": "Risk factors: [-10] Violent 24h move +17196% (volatility/manipulation); [-15] Pair only 0.8 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 797 holders \u2014 reasonably distributed; ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-083821-0x335868de.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-083821-0x335868de.md",
+      "title": "Investigation \u2014 bStocks",
+      "symbol": "bStocks",
+      "name": "bStocks Never Sleep",
+      "date": "2026-08-08T08:38:21Z",
+      "target": "0x335868de22E077E9ffBe991c9Dc60dc83B934444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "65",
+      "summary": "Risk factors: [-10] Violent 24h move +17196% (volatility/manipulation); [-15] Pair only 0.8 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymous by default. Positive evidence: Ownership renounced; 797 holders \u2014 reasonably distributed; ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-083821-0x335868de.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260808-080806-0xCC1f1720.md",
