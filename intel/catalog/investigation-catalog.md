@@ -1529,3 +1529,5 @@
 | 2026-08-08 | auto | 0x1d1dD64C58518c6727A308a5216a5701afAe5B07 (OpenAI) | deep_investigation | REJECT (0/100) | Deployed via a permissionless meme-token factory template (ClankerToken) — no te | +7d |
 
 | 2026-08-08 | auto | 0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39 (HEX) | deep_investigation | CAUTION (65/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-08-08 | auto | 0x364515F2F8AC2feCdC44AaBc124d69893f7aA9c0 (HEX) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |

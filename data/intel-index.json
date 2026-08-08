@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T10:35:30Z",
+  "generated": "2026-08-08T10:41:32Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 508,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 164,
-    "investigations": 864,
+    "investigations": 865,
     "news": 88,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-102606-0x2b591e99.md",
+      "file": "investigation-20260808-104130-0x364515F2.md",
       "title": "Investigation \u2014 HEX",
       "symbol": "HEX",
       "name": "HEX",
-      "date": "2026-08-08T10:26:06Z",
-      "target": "0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39",
+      "date": "2026-08-08T10:41:30Z",
+      "target": "0x364515F2F8AC2feCdC44AaBc124d69893f7aA9c0",
       "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "65",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Positive evidence: 9049672 holders \u2014 reasonably distributed; Custom verified source (not a mass-produc",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-102606-0x2b591e99.md"
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CTM (0x279a9C40151bfe9AFEFf5530c5F32bc6ecea652a) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders co",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-104130-0x364515F2.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-104130-0x364515F2.md",
+      "title": "Investigation \u2014 HEX",
+      "symbol": "HEX",
+      "name": "HEX",
+      "date": "2026-08-08T10:41:30Z",
+      "target": "0x364515F2F8AC2feCdC44AaBc124d69893f7aA9c0",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CTM (0x279a9C40151bfe9AFEFf5530c5F32bc6ecea652a) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders co",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-104130-0x364515F2.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260808-102606-0x2b591e99.md",

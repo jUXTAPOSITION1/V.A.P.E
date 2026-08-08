@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-08-08T10:26:06Z — 456 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-08-08T10:41:30Z — 457 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| HEX | Ethereum | `0x364515F2F8AC2feCdC44AaBc124d69893f7aA9c0` | 0/100 | 1 | 2026-08-08T10:41:30Z |
 | OpenAI | Base | `0x1d1dD64C58518c6727A308a5216a5701afAe5B07` | 0/100 | 1 | 2026-08-08T10:10:21Z |
 | GOOK | Ethereum | `0xC72449E066d0a853d85A8C9b2b09a1463911dF5f` | 40/100 | 1 | 2026-08-08T09:55:13Z |
 | SPCXB | BNB Chain | `0x0B9FEE99f32d64e13845228EAe1C552782377777` | 22/100 | 1 | 2026-08-08T09:23:59Z |

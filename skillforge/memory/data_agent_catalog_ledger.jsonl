@@ -807,3 +807,4 @@
 {"ts": "2026-08-08T09:55:14.264775Z", "target": "binance-cex", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-08T10:10:22.983945Z", "target": "none", "hired": ["market_intel"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-08T10:26:07.357231Z", "target": "bsc", "hired": ["dex_volumes"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
+{"ts": "2026-08-08T10:41:31.402980Z", "target": "BNB Chain", "hired": ["chain_protocols"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
