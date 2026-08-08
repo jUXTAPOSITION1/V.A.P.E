@@ -1,10 +1,10 @@
 {
-  "generated": "2026-08-08T11:26:47Z",
+  "generated": "2026-08-08T11:30:48Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 508,
+    "reports": 509,
     "reports_by_type": {
-      "bounty": 160,
+      "bounty": 161,
       "base": 99,
       "sentiment": 53,
       "security": 83,
@@ -39,13 +39,13 @@
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260808_103446.md",
+      "file": "bounty_report_20260808_113012.md",
       "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-08T10:34:46Z",
+      "date": "2026-08-08T11:30:12Z",
       "threat": null,
-      "summary": "Cycle: 20260808103446 \u00b7 Data timestamp (UTC): 2026-08-08T10:34:52Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260808_103446.md",
-      "bytes": 15720
+      "summary": "Cycle: 20260808113012 \u00b7 Data timestamp (UTC): 2026-08-08T11:30:27Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260808_113012.md",
+      "bytes": 16503
     }
   },
   "investigations": [
@@ -11990,6 +11990,17 @@
     {
       "kind": "bounty",
       "type": "bounty",
+      "file": "bounty_report_20260808_113012.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-08T11:30:12Z",
+      "threat": null,
+      "summary": "Cycle: 20260808113012 \u00b7 Data timestamp (UTC): 2026-08-08T11:30:27Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260808_113012.md",
+      "bytes": 16503
+    },
+    {
+      "kind": "bounty",
+      "type": "bounty",
       "file": "bounty_report_20260808_103446.md",
       "title": "V.A.P.E. Intelligence Report",
       "date": "2026-08-08T10:34:46Z",
@@ -12635,17 +12646,6 @@
       "summary": "The current threat landscape indicates a HIGH threat level, with 6 incidents reported in the last 7 days and 1 incident exceeding $50M in the last 14 days. The incidents involve various exploit types, including Access Control Exploit, Price Manipulation Attack, Non-Random Private Key Generation, Private Key Compromised, and Malicious SetT",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-05-19.md",
       "bytes": 6956
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260805_173908.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-05T17:39:08Z",
-      "threat": null,
-      "summary": "RECENT EXPLOIT: RISEx $0.673M on ['RISE'] (Access Control Exploit)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260805_173908.md",
-      "bytes": 16240
     }
   ],
   "broadcasts": [
