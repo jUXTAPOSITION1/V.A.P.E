@@ -598,3 +598,4 @@
 {"ts": "2026-08-08T01:25:15.969320Z", "target": "0x3C321Ce0a1a9A358734385427c1Fee77Fd207777", "chain": "56", "hired": ["rug_pull_alert"], "paid": 0, "cost_usd": 0.0}
 {"ts": "2026-08-08T01:56:55.034990Z", "target": "0x15a9E76cd69A71cd485372a51C131E245ef09B07", "chain": "8453", "hired": ["chain_fees"], "paid": 0, "cost_usd": 0.0}
 {"ts": "2026-08-08T02:44:53.639320Z", "target": "0x94314a14Df63779c99C0764a30e0CD22fA78fC0E", "chain": "1", "hired": ["chain_overview"], "paid": 0, "cost_usd": 0.0}
+{"ts": "2026-08-08T03:17:22.726006Z", "target": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf", "chain": "8453", "hired": ["yields"], "paid": 0, "cost_usd": 0.0}

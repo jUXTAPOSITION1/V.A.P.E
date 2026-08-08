@@ -789,3 +789,4 @@
 {"ts": "2026-08-08T01:25:27.487612Z", "target": "ether.fi-stake", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-08T01:57:08.742964Z", "target": "ethereum", "hired": ["chain_fees"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-08T02:45:32.325288Z", "target": "none", "hired": ["yields"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
+{"ts": "2026-08-08T03:17:23.320031Z", "target": "base", "hired": ["chain_fees"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
