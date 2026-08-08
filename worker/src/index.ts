@@ -31,7 +31,7 @@ import { ExactSvmScheme } from "@x402/svm/exact/server";
 import { declareDiscoveryExtension, bazaarResourceServerExtension } from "@x402/extensions/bazaar";
 import { buildOpenApiDocument, guidance, type PaidRoute } from "./lib/openapiSpec";
 import { FAVICON_PNG, FAVICON_CONTENT_TYPE } from "./lib/favicon";
-import { fulfill, OFFERING_PRICES, OFFERING_DISCOVERY, ADDRESS_INPUT_SCHEMA, type HandlerName } from "./handlers";
+import { fulfill, OFFERING_PRICES, OFFERING_DISCOVERY, type HandlerName } from "./handlers";
 import { DL_OFFERINGS, fulfillData, type DlQuery } from "./dataHandlers";
 import { generateCdpJwt } from "./lib/cdpAuth";
 import { getPortfolio, getNftsForOwner, getNetworkStatus } from "./lib/alchemy";
@@ -362,8 +362,11 @@ const PAID_ROUTES: VapeRoute[] = [
     price,
     description: `VAPE ${name} — ${OFFERING_DISCOVERY[name].description} Real on-chain/market data, no simulation.`,
     tags: SCAN_TAGS,
-    inputSchema: ADDRESS_INPUT_SCHEMA,
-    inputExample: { address: DEAD_ADDRESS },
+    // Per-offering, not the old single ADDRESS_INPUT_SCHEMA/DEAD_ADDRESS pair
+    // applied to all 6 uniformly -- that told callers market_intel needed an
+    // "address" it never reads. See handlers.ts's OFFERING_DISCOVERY.
+    inputSchema: OFFERING_DISCOVERY[name].inputSchema,
+    inputExample: OFFERING_DISCOVERY[name].inputExample,
     output: OFFERING_DISCOVERY[name].output,
   })),
   {
