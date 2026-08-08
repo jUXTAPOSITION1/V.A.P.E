@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-08T15:30:22Z",
+  "generated": "2026-08-08T15:30:42Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 514,
+    "reports": 515,
     "reports_by_type": {
+      "bounty": 165,
       "base": 100,
-      "bounty": 164,
       "macro": 26,
       "sentiment": 53,
       "security": 83,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 165,
-    "investigations": 877,
+    "investigations": 876,
     "news": 89,
     "tools": 16,
     "tools_verified": 16,
@@ -24,45 +24,31 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-153020-0xBD0346cb.md",
+      "file": "investigation-20260808-151500-0x6c14c189.md",
       "title": "Investigation \u2014 ORNG",
       "symbol": "ORNG",
-      "name": "ORANGE",
-      "date": "2026-08-08T15:30:20Z",
-      "target": "0xBD0346cb3bbA8adC5Cf4BAa3106462f816a322B7",
+      "name": "Orange",
+      "date": "2026-08-08T15:15:00Z",
+      "target": "0x6c14c1898C843FF66cA51e87244690bBc28DF215",
       "chain": "43114 (Avalanche)",
-      "verdict": "REJECT",
-      "score": "5",
-      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $653 (rug/illiquid); [-10] Pair 13.3 days old \u2014 under two weeks, no track record yet; [-15] Contract source UNVERIFIED; [-",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-153020-0xBD0346cb.md"
+      "verdict": "CAUTION",
+      "score": "60",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 81% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $16,498. Positive evidence: 3576 holders \u2014 reasonably distributed; Trading 771+ days without a known incident in",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-151500-0x6c14c189.md"
     },
     "report": {
-      "kind": "intel",
-      "type": "base",
-      "file": "base-2026-08-08-15.md",
-      "title": "Base Blockchain Sweep Report",
-      "date": "2026-08-08T15:00Z",
-      "threat": null,
-      "summary": "Date: 2026-08-08 15:21 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-08-15.md",
-      "bytes": 7836
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260808_153023.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-08T15:30:23Z",
+      "threat": "CAUTION",
+      "summary": "Cycle: 20260808153023 \u00b7 Data timestamp (UTC): 2026-08-08T15:30:25Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260808_153023.md",
+      "bytes": 16794
     }
   },
   "investigations": [
-    {
-      "source": "report",
-      "file": "investigation-20260808-153020-0xBD0346cb.md",
-      "title": "Investigation \u2014 ORNG",
-      "symbol": "ORNG",
-      "name": "ORANGE",
-      "date": "2026-08-08T15:30:20Z",
-      "target": "0xBD0346cb3bbA8adC5Cf4BAa3106462f816a322B7",
-      "chain": "43114 (Avalanche)",
-      "verdict": "REJECT",
-      "score": "5",
-      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $653 (rug/illiquid); [-10] Pair 13.3 days old \u2014 under two weeks, no track record yet; [-15] Contract source UNVERIFIED; [-",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-153020-0xBD0346cb.md"
-    },
     {
       "source": "report",
       "file": "investigation-20260808-151500-0x6c14c189.md",
@@ -12142,6 +12128,17 @@
   ],
   "reports": [
     {
+      "kind": "bounty",
+      "type": "bounty",
+      "file": "bounty_report_20260808_153023.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-08T15:30:23Z",
+      "threat": "CAUTION",
+      "summary": "Cycle: 20260808153023 \u00b7 Data timestamp (UTC): 2026-08-08T15:30:25Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260808_153023.md",
+      "bytes": 16794
+    },
+    {
       "kind": "intel",
       "type": "base",
       "file": "base-2026-08-08-15.md",
@@ -12789,17 +12786,6 @@
       "summary": "Base mover: OpenAI / USDC +10009% 24h (liq $9503545.0554) \u2014 volatility/rug watch \u00b7 Base mover: OpenAI / USDC -27% 24h (liq $0.004055609983) \u2014 volatility/rug watch",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260806_000716.md",
       "bytes": 16896
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260805_230019.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-05T23:00:19Z",
-      "threat": "REJECT",
-      "summary": "RECENT EXPLOIT: RISEx $0.673M on ['RISE'] (Access Control Exploit) \u00b7 Base mover: OpenAI / USDC +10016% 24h (liq $9493075.3781) \u2014 volatility/rug watch \u00b7 Base mover: OpenAI / USDC -28% 24h (liq $0.004055609983) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260805_230019.md",
-      "bytes": 16506
     }
   ],
   "broadcasts": [
