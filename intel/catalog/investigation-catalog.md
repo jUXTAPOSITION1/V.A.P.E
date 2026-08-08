@@ -1553,3 +1553,5 @@
 | 2026-08-08 | auto | 0x1066daa8714f731d7a97AEAa016c16de9617c559 (UB) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-08-08 | auto | 0x6c14c1898C843FF66cA51e87244690bBc28DF215 (ORNG) | deep_investigation | CAUTION (60/100) | Top 10 non-LP/burn holders control 81% of supply — concentrated, easily manipula | +7d |
+
+| 2026-08-08 | auto | 0xBD0346cb3bbA8adC5Cf4BAa3106462f816a322B7 (ORNG) | deep_investigation | REJECT (5/100) | Very few holders (1) — thin, easily manipulated distribution | +7d |

@@ -5994,6 +5994,25 @@
     "symbol": "OX",
     "times_investigated": 1
   },
+  "43114:0xbd0346cb3bba8adc5cf4baa3106462f816a322b7": {
+    "address": "0xBD0346cb3bbA8adC5Cf4BAa3106462f816a322B7",
+    "chain": "43114",
+    "creator_address": "0x5874ea2abffe92dca27ad9f12bd33d056c7822b7",
+    "first_investigated": "2026-08-08T15:30:20Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-153020-0xBD0346cb.md",
+        "score": 5,
+        "ts": "2026-08-08T15:30:20Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-08T15:30:20Z",
+    "last_score": 5,
+    "last_verdict": "REJECT",
+    "symbol": "ORNG",
+    "times_investigated": 1
+  },
   "43114:0xd5d0a9b3f2c264b955ae7161cfa6d38a7aea60a7": {
     "address": "0xd5d0A9b3f2C264b955Ae7161cfA6D38A7aEa60a7",
     "chain": "43114",
