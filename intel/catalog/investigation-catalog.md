@@ -1485,3 +1485,5 @@
 | 2026-08-07 | auto | 0x480AE57d90fFb90A0400877c52eb633BE23CFFFF (bStocks) | deep_investigation | CAUTION (52/100) | Low holder count (83) | +7d |
 
 | 2026-08-08 | auto | 0x431051C6824F9746243Bdb42786Ca8bC62834444 (BTW) | deep_investigation | CAUTION (55/100) | Very few holders (2) — thin, easily manipulated distribution | +7d |
+
+| 2026-08-08 | auto | 0x3C321Ce0a1a9A358734385427c1Fee77Fd207777 (SPCXB) | deep_investigation | REJECT (7/100) | Upgradeable proxy (verify implementation) | +7d |
