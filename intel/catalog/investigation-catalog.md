@@ -1567,3 +1567,5 @@
 | 2026-08-08 | auto | 0xB839A28955C0EF7969CB757B65A57910aD2A7777 (SPCXB) | deep_investigation | REJECT (22/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-08 | auto | 0x370a366f402e2e41CDBbE54EcEC12aaE0cce1955 (TOAD) | deep_investigation | PROCEED (89/100) | Top 10 non-LP/burn holders control 53% of supply — meaningful concentration | +7d |
+
+| 2026-08-08 | auto | 0x1e9DB31f7CbEcCd6D5C6129eCC78C83d1eBc7777 (SPCXB) | deep_investigation | REJECT (22/100) | Upgradeable proxy (verify implementation) | +7d |
