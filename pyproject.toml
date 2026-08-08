@@ -1,0 +1,71 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vape-mcp-server"
+version = "1.1.0"
+description = "V.A.P.E. (Virtual Ape Private Eye) — an autonomous on-chain security detective for Base, exposed over the standard Model Context Protocol (MCP)."
+readme = "docs/MCP_SERVER.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "jUXTAPOSITION1" }]
+keywords = ["mcp", "model-context-protocol", "blockchain", "base", "ethereum", "security", "on-chain", "crypto", "x402"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Security",
+    "Topic :: Internet",
+    "Intended Audience :: Developers",
+]
+# Only the transitive dependencies of the tools mcp_servers/vape_mcp.py
+# actually calls (agents.investigate/token_scan/data_fetchers/web_sourcer/
+# defillama, skillforge.research/mcp_client/memory.*) -- matches
+# agents/requirements.txt exactly, since that's the same real import graph.
+# All are optional in practice per-tool (e.g. memory_search/bounty_radar/
+# fear_greed need none of these), but declared unconditionally since a
+# missing transitive import inside a lazily-imported handler would surface
+# as an ugly ImportError deep in a `tools/call` response rather than a
+# clean `pip install` failure up front.
+dependencies = [
+    "web3>=7.16.0",
+    "python-dotenv>=1.2.2",
+    "requests>=2.34.2",
+    "groq>=1.6.0",
+    "eth-account>=0.13.7",
+    "x402>=2.17.0",
+    "Pillow>=12.3.0",
+    "PyYAML>=6.0.3",
+]
+
+[project.urls]
+Homepage = "https://github.com/jUXTAPOSITION1/V.A.P.E"
+Repository = "https://github.com/jUXTAPOSITION1/V.A.P.E"
+Documentation = "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/docs/MCP_SERVER.md"
+
+[project.scripts]
+vape-mcp = "mcp_servers.vape_mcp:main"
+
+# Scoped to exactly the packages mcp_servers/vape_mcp.py's tools import --
+# NOT agents.proposals (auto-generated self-improvement proposal snapshots,
+# not part of any tool's real import graph) or skillforge.tools/skills
+# (security-tool wrappers and skill definitions for VAPE's own autonomous
+# operation, unrelated to these 18 MCP tools). Deliberately does NOT
+# include this repo's data/, intel/, or config/ directories -- those hold
+# VAPE's own live operational history and are not sample/redistributable
+# data; every code path that touches them already degrades to an honest
+# empty/error result when absent (see the OSError guards added alongside
+# this file, and the pre-existing try/excepts in web_sourcer.py's
+# load_sources_from_yaml() and vape_mcp.py's _bounty_radar()).
+[tool.setuptools.packages.find]
+include = ["mcp_servers", "agents", "skillforge", "skillforge.memory"]
+
+# wallet_trace.sh lives inside the skillforge package's own directory tree
+# but under a non-package subdirectory (skillforge/tools/recon/ has no
+# __init__.py, since nothing imports it as Python -- vape_mcp.py's
+# _wallet_trace() invokes it as a subprocess by file path) -- package-data
+# bundles it into the wheel without declaring skillforge.tools.recon as an
+# importable package.
+[tool.setuptools.package-data]
+skillforge = ["tools/recon/wallet_trace.sh"]

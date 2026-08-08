@@ -48,7 +48,16 @@ def _fts_available(conn):
 
 
 def _connect():
-    os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
+    # This index is explicitly a derived, rebuildable projection (see module
+    # docstring) -- the JSONL files remain the real source of truth. A
+    # read-only DB_PATH parent (e.g. this package installed into
+    # site-packages, as mcp_servers/vape_mcp.py's PyPI distribution now is)
+    # must degrade to "no Memory index available here", not crash query()/
+    # stats()/build() outright over a directory that's pure convenience.
+    try:
+        os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
+    except OSError as e:
+        raise RuntimeError(f"memory index unavailable: cannot create {os.path.dirname(DB_PATH)!r}: {e}") from e
     return sqlite3.connect(DB_PATH)
 
 
