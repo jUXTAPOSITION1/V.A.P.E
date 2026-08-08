@@ -1,10 +1,10 @@
 {
-  "generated": "2026-08-08T17:31:00Z",
+  "generated": "2026-08-08T17:31:51Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 516,
+    "reports": 517,
     "reports_by_type": {
-      "bounty": 166,
+      "bounty": 167,
       "base": 100,
       "macro": 26,
       "sentiment": 53,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 165,
     "investigations": 882,
-    "news": 90,
+    "news": 89,
     "tools": 16,
     "tools_verified": 16,
     "skills": 27
@@ -39,13 +39,13 @@
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260808_163428.md",
+      "file": "bounty_report_20260808_173113.md",
       "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-08T16:34:28Z",
+      "date": "2026-08-08T17:31:13Z",
       "threat": null,
-      "summary": "Cycle: 20260808163428 \u00b7 Data timestamp (UTC): 2026-08-08T16:34:31Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260808_163428.md",
-      "bytes": 16126
+      "summary": "Cycle: 20260808173113 \u00b7 Data timestamp (UTC): 2026-08-08T17:31:16Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260808_173113.md",
+      "bytes": 16333
     }
   },
   "investigations": [
@@ -12214,6 +12214,17 @@
     {
       "kind": "bounty",
       "type": "bounty",
+      "file": "bounty_report_20260808_173113.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-08T17:31:13Z",
+      "threat": null,
+      "summary": "Cycle: 20260808173113 \u00b7 Data timestamp (UTC): 2026-08-08T17:31:16Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260808_173113.md",
+      "bytes": 16333
+    },
+    {
+      "kind": "bounty",
+      "type": "bounty",
       "file": "bounty_report_20260808_163428.md",
       "title": "V.A.P.E. Intelligence Report",
       "date": "2026-08-08T16:34:28Z",
@@ -12859,17 +12870,6 @@
       "summary": "Base mover: OpenAI / USDC +10013% 24h (liq $0.003343531981) \u2014 volatility/rug watch",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260806_041340.md",
       "bytes": 16650
-    },
-    {
-      "kind": "intel",
-      "type": "security",
-      "file": "security-2026-08-06-02.md",
-      "title": "VAPE Security Sweep Report",
-      "date": "2026-08-06T02:00Z",
-      "threat": null,
-      "summary": "The feed shows 6 incidents in the last 7 days and 1 incident exceeding $50M in the prior 14 days. Confirmed events include a $115.0M Bitcoin loss from non-random private key generation on 2026-07-31, multiple BSC price-manipulation attacks (LOOPSDAO $0.696M, MOKE $0.907M, LULA $0.578M), access-control exploits on RISEx ($0.673M) and WEMIX",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/security-2026-08-06-02.md",
-      "bytes": 6804
     }
   ],
   "broadcasts": [
@@ -13085,18 +13085,6 @@
     }
   ],
   "news": [
-    {
-      "file": "news-2026-08-08-crypto-s-post-ftx-safety-net-still-leaves-debts-and-ownershi.md",
-      "title": "Crypto's Post-FTX Safety Net Still Leaves Debts and Ownership in the Dark",
-      "byline": "VAPE Reporter",
-      "date": "2026-08-08T17:30:59Z",
-      "published_et": "August 8, 2026 \u00b7 1:30 PM EDT",
-      "topic": "Crypto Markets",
-      "dek": "Merkle-tree checks confirm wallet control at a snapshot but expose none of the loans, affiliate claims, or legal obligations that determine whether an exchange can actually pay customers.",
-      "image": "assets/news-images/crypto-s-post-ftx-safety-net-still-leaves-debts-and-ownershi.jpg",
-      "image_source": "AI-generated \u2014 VAPE Wire branded",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-08-crypto-s-post-ftx-safety-net-still-leaves-debts-and-ownershi.md"
-    },
     {
       "file": "news-2026-08-08-black-hat-css-chains-let-malicious-emails-hijack-outlook-sig.md",
       "title": "Black Hat CSS Chains Let Malicious Emails Hijack Outlook Sign-In Screens and Steal Slack Tokens",
@@ -13804,6 +13792,18 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-31-vesting-cutoff-pump-fun-layoffs-cost-fired-staff-millions-in.md"
+    },
+    {
+      "file": "news-2026-07-31-ai-company-sues-town-for-trying-to-block-data-center-near-na.md",
+      "title": "AI Company Sues Town for Trying to Block Data Center Near National Park",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-31 14:06 UTC",
+      "published_et": null,
+      "topic": "Crypto Markets",
+      "dek": "Agency: VAPE Wire Byline: VAPE Reporter Date: 2026-07-31 14:06 UTC Topic: Crypto Markets Dek: Image: assets/logo-v-256.png Image source: VAPE brand mark (no AI image available this cycle) Fact-checked",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-31-ai-company-sues-town-for-trying-to-block-data-center-near-na.md"
     }
   ],
   "tools": [
