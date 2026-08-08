@@ -482,8 +482,16 @@ def selftest():
     print("selftest OK")
 
 
-if __name__ == "__main__":
+def main():
+    """Console-script entry point (see pyproject.toml's `vape-mcp` script) --
+    same dispatch as running this file directly, factored out so `pip
+    install vape-mcp-server` gets a real `vape-mcp` command, not just a
+    `python path/to/vape_mcp.py` invocation."""
     if "--selftest" in sys.argv:
         selftest()
     else:
         serve()
+
+
+if __name__ == "__main__":
+    main()

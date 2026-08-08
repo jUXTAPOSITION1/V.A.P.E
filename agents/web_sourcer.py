@@ -167,7 +167,15 @@ class WebSourcer:
         self.cache_dir = cache_dir or CACHE_DIR
         self.cache_ttl = cache_ttl
         self.llm_call = llm_call  # override hook for tests / alternate providers
-        os.makedirs(self.cache_dir, exist_ok=True)
+        # Same best-effort convention as save_seen() below -- a read-only
+        # cache_dir (e.g. this package installed into site-packages, as
+        # mcp_servers/vape_mcp.py's PyPI distribution now is) must degrade
+        # to "no persistent cache/dedup this run", not take down the whole
+        # research() call over a directory it was only ever an optimization.
+        try:
+            os.makedirs(self.cache_dir, exist_ok=True)
+        except OSError:
+            pass
         self._robots_cache = {}  # domain -> RobotFileParser | True (unreachable-sentinel), per-process only
         self.seen_urls = self._load_seen()
 
