@@ -1563,3 +1563,5 @@
 | 2026-08-08 | auto | 0x2E67FecEFb6C2adaEfB4FfE8b8499107a8090c32 (ZILO) | deep_investigation | REJECT (20/100) | Top 10 non-LP/burn holders control 93% of supply — concentrated, easily manipula | +7d |
 
 | 2026-08-08 | auto | 0x54bd7A8d2015cF88754c8b06F91390Ab4906DDF3 (GBAC) | deep_investigation | REJECT (12/100) | Owner not renounced (0x18c3577f3fed47c6fa5f99ad1178e9a6aaf163a3) — can still act | +7d |
+
+| 2026-08-08 | auto | 0xB839A28955C0EF7969CB757B65A57910aD2A7777 (SPCXB) | deep_investigation | REJECT (22/100) | Upgradeable proxy (verify implementation) | +7d |
