@@ -1551,3 +1551,5 @@
 | 2026-08-08 | auto | 0xf98B40f90C18A291B3D6f6f84aDcF1b3e87D7777 (SaturnCoin) | deep_investigation | REJECT (42/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-08 | auto | 0x1066daa8714f731d7a97AEAa016c16de9617c559 (UB) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-08-08 | auto | 0x6c14c1898C843FF66cA51e87244690bBc28DF215 (ORNG) | deep_investigation | CAUTION (60/100) | Top 10 non-LP/burn holders control 81% of supply — concentrated, easily manipula | +7d |

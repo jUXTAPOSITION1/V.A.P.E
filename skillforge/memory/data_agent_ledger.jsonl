@@ -891,3 +891,4 @@
 {"ts": "2026-08-08T14:29:14.169631Z", "target": "0x1066daa8714f731d7a97AEAa016c16de9617c559", "chain": "56", "hired": ["bridges"], "paid": 0, "cost_usd": 0.0, "daily_target": 64}
 {"ts": "2026-08-08T14:44:34.894750Z", "target": "0x7297968FFb753dd12e4f6B1f18d9865c76707FC2", "chain": "8453", "hired": ["rug_pull_alert"], "paid": 0, "cost_usd": 0.0, "daily_target": 64}
 {"ts": "2026-08-08T14:59:41.564704Z", "target": "0x4200000000000000000000000000000000000006", "chain": "8453", "hired": ["rug_pull_alert"], "paid": 0, "cost_usd": 0.0, "daily_target": 64}
+{"ts": "2026-08-08T15:14:38.186862Z", "target": "0x6c14c1898C843FF66cA51e87244690bBc28DF215", "chain": "43114", "hired": ["rug_pull_alert"], "paid": 0, "cost_usd": 0.0, "daily_target": 64}
