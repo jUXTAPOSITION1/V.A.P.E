@@ -7151,6 +7151,25 @@
     "symbol": "IDOL",
     "times_investigated": 1
   },
+  "56:0x3b8bfbbf8f7094a7c510ddc212f05ae1acfa0f67": {
+    "address": "0x3B8BfbbF8F7094A7c510dDC212F05Ae1AcFa0f67",
+    "chain": "56",
+    "creator_address": "0x1cf63a87e5a9f5b460e4a0d2869ed90721804329",
+    "first_investigated": "2026-08-08T20:05:37Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-200537-0x3B8BfbbF.md",
+        "score": 0,
+        "ts": "2026-08-08T20:05:37Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-08T20:05:37Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "BLUAI",
+    "times_investigated": 1
+  },
   "56:0x3c0541e68ce0f1f9073e4ba3db81b730eb614444": {
     "address": "0x3C0541e68CE0F1F9073E4BA3Db81b730Eb614444",
     "chain": "56",

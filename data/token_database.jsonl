@@ -237,3 +237,4 @@
 {"ts": "2026-08-07T19:23:49.764532Z", "address": "0x4200000000000000000000000000000000000042", "chain": "10", "symbol": "OP", "name": "OP", "source": "evm", "offering": "token_chart"}
 {"ts": "2026-08-08T18:33:34.927146Z", "address": "0x4200000000000000000000000000000000000006", "chain": "8453", "symbol": "WETH", "name": "Wrapped ETH", "source": "base_trending", "offering": "token_chart"}
 {"ts": "2026-08-08T19:04:03.202073Z", "address": "0x7297968FFb753dd12e4f6B1f18d9865c76707FC2", "chain": "8453", "symbol": "ZEST", "name": "ZEST", "source": "base", "offering": "liquidity_check"}
+{"ts": "2026-08-08T20:05:41.518801Z", "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913", "chain": "8453", "symbol": "USDC", "name": "USDC", "source": "base_trending", "offering": "token_intel"}

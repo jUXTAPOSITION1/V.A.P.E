@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T19:50:18Z",
+  "generated": "2026-08-08T20:05:42Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 519,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 166,
-    "investigations": 887,
+    "investigations": 888,
     "news": 91,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-195015-0x96419929.md",
-      "title": "Investigation \u2014 SPEC",
-      "symbol": "SPEC",
-      "name": "Spectral Token",
-      "date": "2026-08-08T19:50:15Z",
-      "target": "0x96419929d7949D6A801A6909c145C8EEf6A40431",
-      "chain": "8453 (Base)",
-      "verdict": "CAUTION",
-      "score": "62",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 71% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 90853 holders \u2014 reasonably distributed; Trading 297+ days without",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-195015-0x96419929.md"
+      "file": "investigation-20260808-200537-0x3B8BfbbF.md",
+      "title": "Investigation \u2014 BLUAI",
+      "symbol": "BLUAI",
+      "name": "Bluwhale",
+      "date": "2026-08-08T20:05:37Z",
+      "target": "0x3B8BfbbF8F7094A7c510dDC212F05Ae1AcFa0f67",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: BLUAI (0x0727F084FB2Af68af3f650F2cf516682f3228802) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $30,988; [-10] Violent 24h move +6433891112614% (vo",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-200537-0x3B8BfbbF.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-200537-0x3B8BfbbF.md",
+      "title": "Investigation \u2014 BLUAI",
+      "symbol": "BLUAI",
+      "name": "Bluwhale",
+      "date": "2026-08-08T20:05:37Z",
+      "target": "0x3B8BfbbF8F7094A7c510dDC212F05Ae1AcFa0f67",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-30] Same deployer has a prior CAUTION/REJECT verdict on record: BLUAI (0x0727F084FB2Af68af3f650F2cf516682f3228802) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-10] Low liquidity $30,988; [-10] Violent 24h move +6433891112614% (vo",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-200537-0x3B8BfbbF.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260808-195015-0x96419929.md",
