@@ -1501,3 +1501,5 @@
 | 2026-08-08 | auto | 0xC6d2a58D16f5B43332CaCc4045eB959B5be97777 (SPCXB) | deep_investigation | REJECT (12/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-08 | auto | 0x3F0B0BFA0418C2a050340bc01347E7343F9a1bA3 (OPENAI) | deep_investigation | REJECT (0/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-08 | auto | 0x0a906b55D4982a3382f0ddA882F2FD9907cA4444 (BStocks) | deep_investigation | CAUTION (60/100) | Top 10 non-LP/burn holders control 101% of supply — concentrated, easily manipul | +7d |
