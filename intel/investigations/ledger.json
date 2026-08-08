@@ -2976,6 +2976,25 @@
     "symbol": "SLOP",
     "times_investigated": 1
   },
+  "1:0x6c249f420f487372d9b96a15ae8d86e6ad16810a": {
+    "address": "0x6c249f420F487372d9B96A15AE8D86E6Ad16810a",
+    "chain": "1",
+    "creator_address": "0xab0f472f4296b47e9e853913182e5eb48b40e35b",
+    "first_investigated": "2026-08-08T03:01:52Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-030152-0x6c249f42.md",
+        "score": 30,
+        "ts": "2026-08-08T03:01:52Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-08T03:01:52Z",
+    "last_score": 30,
+    "last_verdict": "REJECT",
+    "symbol": "Peke",
+    "times_investigated": 1
+  },
   "1:0x6d7ae59eb1fbef5bcb7d52064279b1e003caba1a": {
     "address": "0x6D7AE59Eb1FbeF5BcB7d52064279B1e003CabA1a",
     "chain": "1",
