@@ -24,11 +24,14 @@ on:
 
 permissions:
   contents: read
-  id-token: write # OIDC token for the registry's github-oidc auth method
 
 jobs:
   publish:
     runs-on: ubuntu-latest
+    # Scoped here (not at workflow level) per zizmor's least-privilege
+    # check -- only this one job actually needs the OIDC token.
+    permissions:
+      id-token: write # OIDC token for the registry's github-oidc auth method
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
