@@ -1,10 +1,10 @@
 {
-  "generated": "2026-08-08T18:38:39Z",
+  "generated": "2026-08-08T18:39:06Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
-    "reports": 517,
+    "reports": 518,
     "reports_by_type": {
-      "bounty": 167,
+      "bounty": 168,
       "base": 100,
       "macro": 26,
       "sentiment": 53,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 165,
     "investigations": 884,
-    "news": 91,
+    "news": 90,
     "tools": 16,
     "tools_verified": 16,
     "skills": 27
@@ -39,13 +39,13 @@
     "report": {
       "kind": "bounty",
       "type": "bounty",
-      "file": "bounty_report_20260808_173113.md",
+      "file": "bounty_report_20260808_183826.md",
       "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-08T17:31:13Z",
+      "date": "2026-08-08T18:38:26Z",
       "threat": null,
-      "summary": "Cycle: 20260808173113 \u00b7 Data timestamp (UTC): 2026-08-08T17:31:16Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260808_173113.md",
-      "bytes": 16333
+      "summary": "Cycle: 20260808183826 \u00b7 Data timestamp (UTC): 2026-08-08T18:38:29Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260808_183826.md",
+      "bytes": 15682
     }
   },
   "investigations": [
@@ -12242,6 +12242,17 @@
     {
       "kind": "bounty",
       "type": "bounty",
+      "file": "bounty_report_20260808_183826.md",
+      "title": "V.A.P.E. Intelligence Report",
+      "date": "2026-08-08T18:38:26Z",
+      "threat": null,
+      "summary": "Cycle: 20260808183826 \u00b7 Data timestamp (UTC): 2026-08-08T18:38:29Z Coverage: Investigations \u00b7 Tool Gaps \u00b7 Security \u00b7 Base \u00b7 Macro \u00b7 Virtuals",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260808_183826.md",
+      "bytes": 15682
+    },
+    {
+      "kind": "bounty",
+      "type": "bounty",
       "file": "bounty_report_20260808_173113.md",
       "title": "V.A.P.E. Intelligence Report",
       "date": "2026-08-08T17:31:13Z",
@@ -12887,17 +12898,6 @@
       "summary": "Date: 2026-08-06 05:40 UTC Chain: Base (Coinbase Ethereum L2, Chain ID 8453) Wallet: 0xa1420293a7df49bc8380f543a1fe7b8d6f582879",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/reports/base-2026-08-06-05.md",
       "bytes": 7991
-    },
-    {
-      "kind": "bounty",
-      "type": "bounty",
-      "file": "bounty_report_20260806_041340.md",
-      "title": "V.A.P.E. Intelligence Report",
-      "date": "2026-08-06T04:13:40Z",
-      "threat": null,
-      "summary": "Base mover: OpenAI / USDC +10013% 24h (liq $0.003343531981) \u2014 volatility/rug watch",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/reports/bounty_report_20260806_041340.md",
-      "bytes": 16650
     }
   ],
   "broadcasts": [
@@ -13113,18 +13113,6 @@
     }
   ],
   "news": [
-    {
-      "file": "news-2026-08-08-russia-s-crypto-self-custody-push-sends-hardware-wallet-sale.md",
-      "title": "Russia's Crypto Self-Custody Push Sends Hardware Wallet Sales Soaring Ahead of September Rules",
-      "byline": "VAPE Reporter",
-      "date": "2026-08-08T18:38:38Z",
-      "published_et": "August 8, 2026 \u00b7 2:38 PM EDT",
-      "topic": "Crypto Markets",
-      "dek": "M.Video logged a 107% quarter-on-quarter jump in units while Wildberries saw an 84% year-over-year rise, with average prices dropping 13% to 7,900 rubles even as the country readies regulated exchanges and a 300,000-ruble retail cap.",
-      "image": "assets/news-images/russia-s-crypto-self-custody-push-sends-hardware-wallet-sale.jpg",
-      "image_source": "AI-generated \u2014 VAPE Wire branded",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-08-russia-s-crypto-self-custody-push-sends-hardware-wallet-sale.md"
-    },
     {
       "file": "news-2026-08-08-crypto-s-post-ftx-safety-net-still-leaves-debts-and-ownershi.md",
       "title": "Crypto's Post-FTX Safety Net Still Leaves Debts and Ownership in the Dark",
@@ -13832,6 +13820,18 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-31-aave-eyes-wind-down-of-v3-markets-on-six-low-volume-chains-h.md"
+    },
+    {
+      "file": "news-2026-07-31-vesting-cutoff-pump-fun-layoffs-cost-fired-staff-millions-in.md",
+      "title": "Vesting Cutoff: Pump.fun Layoffs Cost Fired Staff Millions in Unvested PUMP Tokens",
+      "byline": "VAPE Reporter",
+      "date": "2026-07-31 19:25 UTC",
+      "published_et": null,
+      "topic": "Crypto Markets",
+      "dek": "Employees were reportedly let go just two months before a major one-year cliff unlock, raising sharp questions about the memecoin launchpad's corporate governance.",
+      "image": "assets/logo-v-256.png",
+      "image_source": "VAPE brand mark (no AI image available this cycle)",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-31-vesting-cutoff-pump-fun-layoffs-cost-fired-staff-millions-in.md"
     }
   ],
   "tools": [
