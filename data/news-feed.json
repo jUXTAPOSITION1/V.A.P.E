@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T09:37:27Z",
+  "generated": "2026-08-08T12:46:59Z",
   "count": 60,
   "headlines": [
     {
@@ -128,6 +128,38 @@
       "source": "The Hacker News",
       "published": "Sat, 08 Aug 2026 12:22:16 +0530",
       "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Trump Media\u2019s $6.4 billion crypto venture canceled amid escalating Trump ethics concerns",
+      "url": "https://cryptoslate.com/trump-medias-6-4-billion-crypto-venture-canceled-amid-escalating-trump-ethics-concerns/",
+      "source": "CryptoSlate",
+      "published": "Sat, 08 Aug 2026 12:05:04 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Critical One-Click Vulnerability in Atlassian\u2019s Rovo AI Exposed Enterprise Data",
+      "url": "https://www.securityweek.com/critical-one-click-vulnerability-in-atlassians-rovo-ai-exposed-enterprise-data/",
+      "source": "SecurityWeek",
+      "published": "Sat, 08 Aug 2026 11:30:00 +0000",
+      "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin faces $70,000 breakout or $60,000 drop this weekend as Hormuz tensions rise",
+      "url": "https://cryptoslate.com/bitcoin-faces-70000-breakout-or-60000-drop-this-weekend-as-hormuz-tensions-rise/",
+      "source": "CryptoSlate",
+      "published": "Sat, 08 Aug 2026 10:59:31 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin Payment Tool BTCPay Urges Update After Attackers Steal Funds",
+      "url": "https://beincrypto.com/bitcoin-btcpay-server-exploit-funds-stolen/",
+      "source": "BeInCrypto",
+      "published": "Sat, 08 Aug 2026 10:40:16 +0000",
+      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -331,14 +363,6 @@
       "crypto": true
     },
     {
-      "title": "Trump Media Pulls Back From Crypto Deals Under Interim CEO McGurn",
-      "url": "https://beincrypto.com/trump-media-rethinks-crypto-ambitions-mcgurn/",
-      "source": "BeInCrypto",
-      "published": "Fri, 07 Aug 2026 20:22:37 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Trump-Backed American Bitcoin director Justin Mateen buys nearly $2 million of ABTC stock",
       "url": "https://www.coindesk.com/business/2026/08/07/trump-backed-american-bitcoin-director-justin-mateen-buys-nearly-usd2-million-of-abtc-stock",
       "source": "CoinDesk",
@@ -379,14 +403,6 @@
       "crypto": true
     },
     {
-      "title": "BitGo investors face flood of Aug. 7 class-action deadline warnings",
-      "url": "https://cryptoslate.com/bitgo-investors-face-flood-of-aug-7-class-action-deadline-warnings/",
-      "source": "CryptoSlate",
-      "published": "Fri, 07 Aug 2026 18:40:50 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Here\u2019s what happened in crypto today",
       "url": "https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
       "source": "Cointelegraph",
@@ -415,14 +431,6 @@
       "url": "https://decrypt.co/375136/xrp-price-crossroads-senate-punts-clarity-act",
       "source": "Decrypt",
       "published": "Fri, 07 Aug 2026 17:36:41 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Senate abandons August CLARITY Act vote \u2013 leaving 14 \u2018work days\u2019 until midterm election season kills it",
-      "url": "https://cryptoslate.com/senate-abandons-august-clarity-act-vote-leaving-14-work-days-until-midterm-election-season-kills-it/",
-      "source": "CryptoSlate",
-      "published": "Fri, 07 Aug 2026 17:30:45 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -471,14 +479,6 @@
       "url": "https://bitcoinmagazine.com/news/bitcoin-etfs-800-million-coldcard",
       "source": "Bitcoin Magazine",
       "published": "Fri, 07 Aug 2026 16:00:50 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "US sanctions two more Iranian crypto exchanges under \u2018Economic Fury\u2019 campaign",
-      "url": "https://www.theblock.co/news/regulation/2026-08-07-us-sanctions-two-more-iranian-crypto-exchanges-under-economic-fury-campaign-411184?utm_source=rss&utm_medium=rss",
-      "source": "The Block",
-      "published": "Fri, 07 Aug 2026 15:49:33 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     }

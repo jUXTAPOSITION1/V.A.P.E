@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T12:42:25Z",
+  "generated": "2026-08-08T12:48:37Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 509,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 164,
     "investigations": 870,
-    "news": 88,
+    "news": 89,
     "tools": 16,
     "tools_verified": 16,
     "skills": 26
@@ -12918,6 +12918,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-08-black-hat-css-chains-let-malicious-emails-hijack-outlook-sig.md",
+      "title": "Black Hat CSS Chains Let Malicious Emails Hijack Outlook Sign-In Screens and Steal Slack Tokens",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-08T12:48:36Z",
+      "published_et": "August 8, 2026 \u00b7 8:48 AM EDT",
+      "topic": "Cybersecurity",
+      "dek": "PortSwigger's Gareth Heyes showed working attacks on Outlook, Gmail, Yahoo and others that abuse allowed HTML and sanitizer gaps, with some vendor fixes already confirmed and public PoCs still live.",
+      "image": "assets/news-images/black-hat-css-chains-let-malicious-emails-hijack-outlook-sig.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-08-black-hat-css-chains-let-malicious-emails-hijack-outlook-sig.md"
+    },
+    {
       "file": "news-2026-08-08-poisoned-files-and-malicious-links-turn-atlassian-s-rovo-ai-.md",
       "title": "Poisoned Files and Malicious Links Turn Atlassian's Rovo AI Into a Silent Corporate Spy",
       "byline": "VAPE Reporter",
@@ -13624,18 +13636,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-31-ai-company-sues-town-for-trying-to-block-data-center-near-na.md"
-    },
-    {
-      "file": "news-2026-07-31-stablecoin-reserve-requirements-the-regulatory-battleground-.md",
-      "title": "STABLECOIN RESERVE REQUIREMENTS: THE REGULATORY BATTLEGROUND SHAPING CRYPTO'S LIQUIDITY BACKBONE",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-31 11:30 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "As global regulators tighten the screws on fiat-pegged digital assets, the battle over what constitutes a \"safe\" reserve is redrawing the lines between compliance and decentralization.",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-31-stablecoin-reserve-requirements-the-regulatory-battleground-.md"
     }
   ],
   "tools": [
