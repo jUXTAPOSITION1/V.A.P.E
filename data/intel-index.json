@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T01:25:28Z",
+  "generated": "2026-08-08T01:38:48Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 495,
@@ -16,7 +16,7 @@
     },
     "broadcasts": 162,
     "investigations": 843,
-    "news": 85,
+    "news": 86,
     "tools": 16,
     "tools_verified": 16,
     "skills": 26
@@ -12540,6 +12540,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-08-ai-slop-and-dns-fallbacks-inside-the-800-package-npm-supply-.md",
+      "title": "AI Slop and DNS Fallbacks: Inside the 800-Package npm Supply Chain Siege",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-08T01:38:47Z",
+      "published_et": "August 7, 2026 \u00b7 9:38 PM EDT",
+      "topic": "Cybersecurity",
+      "dek": "Attackers bypass automated registry scanners by ditching install hooks for malicious 'require' instructions, deploying cross-platform RATs via Cloudflare and Russian DNS records.",
+      "image": "assets/news-images/ai-slop-and-dns-fallbacks-inside-the-800-package-npm-supply-.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-08-ai-slop-and-dns-fallbacks-inside-the-800-package-npm-supply-.md"
+    },
+    {
       "file": "news-2026-08-07-unmasking-judische-canadian-hacker-behind-snowflake-and-at-t.md",
       "title": "Unmasking 'Judische': Canadian Hacker Behind Snowflake and AT&T Mega-Breaches Pleads Guilty",
       "byline": "VAPE Reporter",
@@ -13246,18 +13258,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-31-solana-treasury-trap-inside-supernova-s-high-stakes-gamble-t.md"
-    },
-    {
-      "file": "news-2026-07-30-bipartisan-senate-coalition-presses-white-house-on-strict-cr.md",
-      "title": "Bipartisan Senate Coalition Presses White House on Strict Crypto Ethics Rules Under CLARITY Act",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-30 22:06 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "Lawmakers demand executive branch alignment on digital asset disclosures and foreign blockchain restrictions to safeguard national security.",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-30-bipartisan-senate-coalition-presses-white-house-on-strict-cr.md"
     }
   ],
   "tools": [
