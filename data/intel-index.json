@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T15:30:42Z",
+  "generated": "2026-08-08T15:45:22Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 515,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 165,
-    "investigations": 876,
+    "investigations": 878,
     "news": 89,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-151500-0x6c14c189.md",
-      "title": "Investigation \u2014 ORNG",
-      "symbol": "ORNG",
-      "name": "Orange",
-      "date": "2026-08-08T15:15:00Z",
-      "target": "0x6c14c1898C843FF66cA51e87244690bBc28DF215",
+      "file": "investigation-20260808-154520-0x64E6518a.md",
+      "title": "Investigation \u2014 YOU",
+      "symbol": "YOU",
+      "name": "Upload1983",
+      "date": "2026-08-08T15:45:20Z",
+      "target": "0x64E6518ad501E5F2F3e3335726d4c2188be36A48",
       "chain": "43114 (Avalanche)",
-      "verdict": "CAUTION",
-      "score": "60",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 81% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $16,498. Positive evidence: 3576 holders \u2014 reasonably distributed; Trading 771+ days without a known incident in",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-151500-0x6c14c189.md"
+      "verdict": "REJECT",
+      "score": "30",
+      "summary": "Risk factors: [-20] Very few holders (17) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 143% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $2,606 (rug/illiquid); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymo",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-154520-0x64E6518a.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,34 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-154520-0x64E6518a.md",
+      "title": "Investigation \u2014 YOU",
+      "symbol": "YOU",
+      "name": "Upload1983",
+      "date": "2026-08-08T15:45:20Z",
+      "target": "0x64E6518ad501E5F2F3e3335726d4c2188be36A48",
+      "chain": "43114 (Avalanche)",
+      "verdict": "REJECT",
+      "score": "30",
+      "summary": "Risk factors: [-20] Very few holders (17) \u2014 thin, easily manipulated distribution; [-15] Top 10 non-LP/burn holders control 143% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $2,606 (rug/illiquid); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unaudited/anonymo",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-154520-0x64E6518a.md"
+    },
+    {
+      "source": "report",
+      "file": "investigation-20260808-153020-0xBD0346cb.md",
+      "title": "Investigation \u2014 ORNG",
+      "symbol": "ORNG",
+      "name": "ORANGE",
+      "date": "2026-08-08T15:30:20Z",
+      "target": "0xBD0346cb3bbA8adC5Cf4BAa3106462f816a322B7",
+      "chain": "43114 (Avalanche)",
+      "verdict": "REJECT",
+      "score": "5",
+      "summary": "Risk factors: [-20] Very few holders (1) \u2014 thin, easily manipulated distribution; [-15] Top 1 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $653 (rug/illiquid); [-10] Pair 13.3 days old \u2014 under two weeks, no track record yet; [-15] Contract source UNVERIFIED; [-",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-153020-0xBD0346cb.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260808-151500-0x6c14c189.md",

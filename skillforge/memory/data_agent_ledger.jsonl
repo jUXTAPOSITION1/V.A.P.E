@@ -893,3 +893,4 @@
 {"ts": "2026-08-08T14:59:41.564704Z", "target": "0x4200000000000000000000000000000000000006", "chain": "8453", "hired": ["rug_pull_alert"], "paid": 0, "cost_usd": 0.0, "daily_target": 64}
 {"ts": "2026-08-08T15:14:38.186862Z", "target": "0x6c14c1898C843FF66cA51e87244690bBc28DF215", "chain": "43114", "hired": ["rug_pull_alert"], "paid": 0, "cost_usd": 0.0, "daily_target": 64}
 {"ts": "2026-08-08T15:29:59.284577Z", "target": "0xBD0346cb3bbA8adC5Cf4BAa3106462f816a322B7", "chain": "43114", "hired": ["chain_fees"], "paid": 0, "cost_usd": 0.0, "daily_target": 64}
+{"ts": "2026-08-08T15:45:09.847850Z", "target": "0x64E6518ad501E5F2F3e3335726d4c2188be36A48", "chain": "43114", "hired": ["yields"], "paid": 0, "cost_usd": 0.0, "daily_target": 64}

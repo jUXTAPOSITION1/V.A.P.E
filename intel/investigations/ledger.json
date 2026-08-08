@@ -5766,6 +5766,25 @@
     "symbol": "ZUM",
     "times_investigated": 1
   },
+  "43114:0x64e6518ad501e5f2f3e3335726d4c2188be36a48": {
+    "address": "0x64E6518ad501E5F2F3e3335726d4c2188be36A48",
+    "chain": "43114",
+    "creator_address": "0xd4e4430044ffd0f9d1d51dd16fbe543d5ecf9026",
+    "first_investigated": "2026-08-08T15:45:20Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-154520-0x64E6518a.md",
+        "score": 30,
+        "ts": "2026-08-08T15:45:20Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-08T15:45:20Z",
+    "last_score": 30,
+    "last_verdict": "REJECT",
+    "symbol": "YOU",
+    "times_investigated": 1
+  },
   "43114:0x6c14c1898c843ff66ca51e87244690bbc28df215": {
     "address": "0x6c14c1898C843FF66cA51e87244690bBc28DF215",
     "chain": "43114",
