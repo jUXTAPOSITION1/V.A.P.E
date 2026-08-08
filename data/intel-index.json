@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T19:35:00Z",
+  "generated": "2026-08-08T19:50:18Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 519,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 166,
-    "investigations": 886,
+    "investigations": 887,
     "news": 91,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-193457-0x4dA9A0f3.md",
-      "title": "Investigation \u2014 LCAP",
-      "symbol": "LCAP",
-      "name": "CF Large Cap Index",
-      "date": "2026-08-08T19:34:57Z",
-      "target": "0x4dA9A0f397dB1397902070f93a4D6ddBC0E0E6e8",
+      "file": "investigation-20260808-195015-0x96419929.md",
+      "title": "Investigation \u2014 SPEC",
+      "symbol": "SPEC",
+      "name": "Spectral Token",
+      "date": "2026-08-08T19:50:15Z",
+      "target": "0x96419929d7949D6A801A6909c145C8EEf6A40431",
       "chain": "8453 (Base)",
       "verdict": "CAUTION",
-      "score": "54",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 94% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-8] No pair-creation timestamp available \u2014 cannot establish track record length. Po",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-193457-0x4dA9A0f3.md"
+      "score": "62",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 71% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 90853 holders \u2014 reasonably distributed; Trading 297+ days without",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-195015-0x96419929.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-195015-0x96419929.md",
+      "title": "Investigation \u2014 SPEC",
+      "symbol": "SPEC",
+      "name": "Spectral Token",
+      "date": "2026-08-08T19:50:15Z",
+      "target": "0x96419929d7949D6A801A6909c145C8EEf6A40431",
+      "chain": "8453 (Base)",
+      "verdict": "CAUTION",
+      "score": "62",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 71% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time. Positive evidence: 90853 holders \u2014 reasonably distributed; Trading 297+ days without",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-195015-0x96419929.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260808-193457-0x4dA9A0f3.md",

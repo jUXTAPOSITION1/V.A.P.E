@@ -12722,6 +12722,25 @@
     "symbol": "AERO",
     "times_investigated": 2
   },
+  "8453:0x96419929d7949d6a801a6909c145c8eef6a40431": {
+    "address": "0x96419929d7949D6A801A6909c145C8EEf6A40431",
+    "chain": "8453",
+    "creator_address": "0x0fea3e5840334fc758a3decf14546bfdfbef5cd3",
+    "first_investigated": "2026-08-08T19:50:15Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-195015-0x96419929.md",
+        "score": 62,
+        "ts": "2026-08-08T19:50:15Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-08T19:50:15Z",
+    "last_score": 62,
+    "last_verdict": "CAUTION",
+    "symbol": "SPEC",
+    "times_investigated": 1
+  },
   "8453:0x97fbf25645a67a78ce9cb49498b281928518dcf0": {
     "address": "0x97Fbf25645a67A78ce9cb49498b281928518DCF0",
     "chain": "8453",

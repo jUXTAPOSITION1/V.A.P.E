@@ -1573,3 +1573,5 @@
 | 2026-08-08 | auto | 0x0727F084FB2Af68af3f650F2cf516682f3228802 (BLUAI) | deep_investigation | REJECT (0/100) | Same deployer has a prior CAUTION/REJECT verdict on record: UB (0x1066daa8714f73 | +7d |
 
 | 2026-08-08 | auto | 0x4dA9A0f397dB1397902070f93a4D6ddBC0E0E6e8 (LCAP) | deep_investigation | CAUTION (54/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-08 | auto | 0x96419929d7949D6A801A6909c145C8EEf6A40431 (SPEC) | deep_investigation | CAUTION (62/100) | Upgradeable proxy (verify implementation) | +7d |

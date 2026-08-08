@@ -1,9 +1,10 @@
 # VAPE Caution List (CAUTION)
 
-_Regenerated 2026-08-08T19:34:57Z — 187 address(es) currently on record with a last verdict of CAUTION._
+_Regenerated 2026-08-08T19:50:15Z — 188 address(es) currently on record with a last verdict of CAUTION._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| SPEC | Base | `0x96419929d7949D6A801A6909c145C8EEf6A40431` | 62/100 | 1 | 2026-08-08T19:50:15Z |
 | LCAP | Base | `0x4dA9A0f397dB1397902070f93a4D6ddBC0E0E6e8` | 54/100 | 1 | 2026-08-08T19:34:57Z |
 | CRAB | Ethereum | `0x6096b8765Eb48cd2193F840a977f3727e7800356` | 75/100 | 1 | 2026-08-08T16:00:43Z |
 | ORNG | Avalanche | `0x6c14c1898C843FF66cA51e87244690bBc28DF215` | 60/100 | 1 | 2026-08-08T15:15:00Z |
