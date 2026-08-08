@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T05:49:02Z",
+  "generated": "2026-08-08T05:51:34Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 501,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 163,
-    "investigations": 852,
+    "investigations": 853,
     "news": 87,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-053636-0xb32a0416.md",
-      "title": "Investigation \u2014 QUID",
-      "symbol": "QUID",
-      "name": "Squid",
-      "date": "2026-08-08T05:36:36Z",
-      "target": "0xb32a0416FDF9D97a40ccce4b8ADf6FC127320473",
+      "file": "investigation-20260808-055132-0xe2c6D87C.md",
+      "title": "Investigation \u2014 \ud83e\udd21",
+      "symbol": "\ud83e\udd21",
+      "name": "TRUMP'S DECISION",
+      "date": "2026-08-08T05:51:32Z",
+      "target": "0xe2c6D87C468a62c5b554a7266ae62522228B26F6",
       "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-10] Owner not renounced (0xedb43ebf3306dce578d24b0555240d07e4778afc) \u2014 can still act on the contract; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ASTEROID (0x5a0CF2dBbAA6541F4B8173bA6759e19885293c63) \u2014 REJECT 0/100 \u2014 likely the same serial cam",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-053636-0xb32a0416.md"
+      "score": "12",
+      "summary": "Risk factors: [-8] Low holder count (70); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $1 (rug/illiquid); [-15] Contract source UNVERIFIED; [-10] No known third-part",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-055132-0xe2c6D87C.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-055132-0xe2c6D87C.md",
+      "title": "Investigation \u2014 \ud83e\udd21",
+      "symbol": "\ud83e\udd21",
+      "name": "TRUMP'S DECISION",
+      "date": "2026-08-08T05:51:32Z",
+      "target": "0xe2c6D87C468a62c5b554a7266ae62522228B26F6",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "12",
+      "summary": "Risk factors: [-8] Low holder count (70); [-15] Top 10 non-LP/burn holders control 100% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-25] Very low liquidity $1 (rug/illiquid); [-15] Contract source UNVERIFIED; [-10] No known third-part",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-055132-0xe2c6D87C.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260808-053636-0xb32a0416.md",

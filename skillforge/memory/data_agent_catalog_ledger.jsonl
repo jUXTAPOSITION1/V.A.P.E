@@ -794,3 +794,4 @@
 {"ts": "2026-08-08T04:18:59.289925Z", "target": "0xB6bB786056c690e41b20a587573Fd77aade2eb07", "hired": ["exploit_check"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-08T04:50:18.201571Z", "target": "none", "hired": ["yields"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-08T05:21:37.195592Z", "target": "Avalanche", "hired": ["chain_protocols"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
+{"ts": "2026-08-08T05:51:33.704104Z", "target": "ethereum", "hired": ["dex_volumes"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}

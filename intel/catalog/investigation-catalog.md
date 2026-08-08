@@ -1505,3 +1505,5 @@
 | 2026-08-08 | auto | 0x0a906b55D4982a3382f0ddA882F2FD9907cA4444 (BStocks) | deep_investigation | CAUTION (60/100) | Top 10 non-LP/burn holders control 101% of supply — concentrated, easily manipul | +7d |
 
 | 2026-08-08 | auto | 0xb32a0416FDF9D97a40ccce4b8ADf6FC127320473 (QUID) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
+
+| 2026-08-08 | auto | 0xe2c6D87C468a62c5b554a7266ae62522228B26F6 (🤡) | deep_investigation | REJECT (12/100) | Low holder count (70) | +7d |
