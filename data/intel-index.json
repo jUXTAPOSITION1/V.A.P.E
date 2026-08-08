@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T06:22:22Z",
+  "generated": "2026-08-08T06:37:50Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 501,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 163,
-    "investigations": 855,
+    "investigations": 856,
     "news": 87,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-062220-0x2F701b10.md",
-      "title": "Investigation \u2014 bStocks",
-      "symbol": "bStocks",
-      "name": "Binance Stocks",
-      "date": "2026-08-08T06:22:20Z",
-      "target": "0x2F701b108a9aF5558960325A0239D0a13c2C4444",
-      "chain": "56 (BNB Chain)",
-      "verdict": "CAUTION",
-      "score": "75",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 73% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $13,213. Positive evidence: Ownership renounced; 1540 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Custom verified source (not a mass-produced factory te",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-062220-0x2F701b10.md"
+      "file": "investigation-20260808-063749-0x9C0FA3B5.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "name": "OpenAI",
+      "date": "2026-08-08T06:37:49Z",
+      "target": "0x9C0FA3B56A3B40dEAd7680d0837e9219d7C2Ab07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation pattern, not coincidence; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: OpenAI (0x15a9E76cd69A71cd485372a51C131E245ef09B07) \u2014 REJECT 0/100 \u2014 likely the same ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-063749-0x9C0FA3B5.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-063749-0x9C0FA3B5.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "name": "OpenAI",
+      "date": "2026-08-08T06:37:49Z",
+      "target": "0x9C0FA3B56A3B40dEAd7680d0837e9219d7C2Ab07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation pattern, not coincidence; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: OpenAI (0x15a9E76cd69A71cd485372a51C131E245ef09B07) \u2014 REJECT 0/100 \u2014 likely the same ",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-063749-0x9C0FA3B5.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260808-062220-0x2F701b10.md",
