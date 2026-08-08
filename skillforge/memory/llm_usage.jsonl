@@ -3554,3 +3554,4 @@
 {"ts": "2026-08-08T08:23:06Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1185, "completion_tokens": 28, "total_tokens": 1837}
 {"ts": "2026-08-08T08:38:21Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "frontier", "prompt_tokens": 1468, "completion_tokens": 262, "total_tokens": 2339}
 {"ts": "2026-08-08T08:38:27Z", "provider": "groq", "model": "llama-3.3-70b-versatile", "tier": "frontier", "prompt_tokens": 1036, "completion_tokens": 24, "total_tokens": 1060}
+{"ts": "2026-08-08T08:42:34Z", "provider": "oci_grok", "model": "xai.grok-4.3", "tier": "deep", "prompt_tokens": 2702, "completion_tokens": 7, "total_tokens": 3211}
