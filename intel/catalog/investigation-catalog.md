@@ -1499,3 +1499,5 @@
 | 2026-08-08 | auto | 0x6c249f420F487372d9B96A15AE8D86E6Ad16810a (Peke) | deep_investigation | REJECT (30/100) | Very few holders (40) — thin, easily manipulated distribution | +7d |
 
 | 2026-08-08 | auto | 0xC6d2a58D16f5B43332CaCc4045eB959B5be97777 (SPCXB) | deep_investigation | REJECT (12/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-08 | auto | 0x3F0B0BFA0418C2a050340bc01347E7343F9a1bA3 (OPENAI) | deep_investigation | REJECT (0/100) | Upgradeable proxy (verify implementation) | +7d |
