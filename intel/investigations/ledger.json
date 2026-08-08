@@ -11629,6 +11629,25 @@
     "symbol": "play",
     "times_investigated": 1
   },
+  "8453:0x4da9a0f397db1397902070f93a4d6ddbc0e0e6e8": {
+    "address": "0x4dA9A0f397dB1397902070f93a4D6ddBC0E0E6e8",
+    "chain": "8453",
+    "creator_address": "0x5e6ef4cfd64e29981fb3a8703a584dde407032d2",
+    "first_investigated": "2026-08-08T19:34:57Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-193457-0x4dA9A0f3.md",
+        "score": 54,
+        "ts": "2026-08-08T19:34:57Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-08T19:34:57Z",
+    "last_score": 54,
+    "last_verdict": "CAUTION",
+    "symbol": "LCAP",
+    "times_investigated": 1
+  },
   "8453:0x4e2b5225152d5e18fb6a22f972ff9e90a4e9af8e": {
     "address": "0x4E2b5225152d5E18fB6A22F972Ff9e90A4E9AF8e",
     "chain": "8453",
