@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-08-08T13:58:51Z — 465 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-08-08T14:29:25Z — 466 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| UB | BNB Chain | `0x1066daa8714f731d7a97AEAa016c16de9617c559` | 0/100 | 1 | 2026-08-08T14:29:25Z |
 | SaturnCoin | BNB Chain | `0xf98B40f90C18A291B3D6f6f84aDcF1b3e87D7777` | 42/100 | 1 | 2026-08-08T13:58:51Z |
 | WPOL | Polygon | `0x44C2e79eB64D744C13bE604672C20ee5a17dafE7` | 10/100 | 1 | 2026-08-08T13:28:09Z |
 | OpenAI | Base | `0x1b2107667462671b00674bE7af23475FBDfd2B07` | 0/100 | 1 | 2026-08-08T13:12:54Z |

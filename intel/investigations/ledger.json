@@ -6258,6 +6258,25 @@
     "symbol": "jobless",
     "times_investigated": 1
   },
+  "56:0x1066daa8714f731d7a97aeaa016c16de9617c559": {
+    "address": "0x1066daa8714f731d7a97AEAa016c16de9617c559",
+    "chain": "56",
+    "creator_address": "0x1cf63a87e5a9f5b460e4a0d2869ed90721804329",
+    "first_investigated": "2026-08-08T14:29:25Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-142925-0x1066daa8.md",
+        "score": 0,
+        "ts": "2026-08-08T14:29:25Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-08T14:29:25Z",
+    "last_score": 0,
+    "last_verdict": "REJECT",
+    "symbol": "UB",
+    "times_investigated": 1
+  },
   "56:0x12d5a0c58ef299bedd309ec4964ffa3145827777": {
     "address": "0x12d5a0C58eF299BEDd309ec4964ffA3145827777",
     "chain": "56",
