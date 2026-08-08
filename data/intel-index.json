@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T12:57:56Z",
+  "generated": "2026-08-08T13:12:55Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 510,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 164,
-    "investigations": 871,
+    "investigations": 872,
     "news": 89,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-125754-0x7Db2F0c1.md",
-      "title": "Investigation \u2014 UrAnus",
-      "symbol": "UrAnus",
-      "name": "UrAnus",
-      "date": "2026-08-08T12:57:54Z",
-      "target": "0x7Db2F0c15f74aB0Dc0D4f49650dD60C45FFB7777",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260808-131253-0x1b210766.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "name": "OpenAI",
+      "date": "2026-08-08T13:12:53Z",
+      "target": "0x1b2107667462671b00674bE7af23475FBDfd2B07",
+      "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "47",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +320% (volatility/manipulation); [-10] Pair 9.0 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team ide",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-125754-0x7Db2F0c1.md"
+      "score": "0",
+      "summary": "Risk factors: [-10] Owner not renounced (0x00aae02dc0aab6b7bee1fe9f301649bbd46bce61) \u2014 can still act on the contract; [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-131253-0x1b210766.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-131253-0x1b210766.md",
+      "title": "Investigation \u2014 OpenAI",
+      "symbol": "OpenAI",
+      "name": "OpenAI",
+      "date": "2026-08-08T13:12:53Z",
+      "target": "0x1b2107667462671b00674bE7af23475FBDfd2B07",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "0",
+      "summary": "Risk factors: [-10] Owner not renounced (0x00aae02dc0aab6b7bee1fe9f301649bbd46bce61) \u2014 can still act on the contract; [-20] Deployed via a permissionless meme-token factory template (ClankerToken) \u2014 no team vetting by design; this pattern strongly correlates with abandoned/rugged tokens; [-35] Token name/symbol (OpenAI",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-131253-0x1b210766.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260808-125754-0x7Db2F0c1.md",
