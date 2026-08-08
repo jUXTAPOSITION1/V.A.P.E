@@ -1523,3 +1523,5 @@
 | 2026-08-08 | auto | 0x12d5a0C58eF299BEDd309ec4964ffA3145827777 (Racoonzilla) | deep_investigation | REJECT (42/100) | Upgradeable proxy (verify implementation) | +7d |
 
 | 2026-08-08 | auto | 0x0B9FEE99f32d64e13845228EAe1C552782377777 (SPCXB) | deep_investigation | REJECT (22/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-08 | auto | 0xC72449E066d0a853d85A8C9b2b09a1463911dF5f (GOOK) | deep_investigation | REJECT (40/100) | Only 0% of liquidity is locked — the deployer can pull the rest at any time | +7d |

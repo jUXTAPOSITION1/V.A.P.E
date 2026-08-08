@@ -804,3 +804,4 @@
 {"ts": "2026-08-08T08:53:45.279665Z", "target": "none", "hired": ["yields"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-08T09:08:44.768012Z", "target": "Optimism", "hired": ["chain_protocols"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-08T09:24:00.905269Z", "target": "0x4200000000000000000000000000000000000006", "hired": ["token_intel"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
+{"ts": "2026-08-08T09:55:14.264775Z", "target": "binance-cex", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}

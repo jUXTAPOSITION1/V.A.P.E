@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T09:39:09Z",
+  "generated": "2026-08-08T09:55:14Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 507,
@@ -15,8 +15,8 @@
       "skillforge": 4
     },
     "broadcasts": 164,
-    "investigations": 861,
-    "news": 87,
+    "investigations": 862,
+    "news": 88,
     "tools": 16,
     "tools_verified": 16,
     "skills": 26
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-092359-0x0B9FEE99.md",
-      "title": "Investigation \u2014 SPCXB",
-      "symbol": "SPCXB",
-      "name": "SPCXB\u8d28\u62bc\u5206\u7ea2\u6d4b\u8bd5",
-      "date": "2026-08-08T09:23:59Z",
-      "target": "0x0B9FEE99f32d64e13845228EAe1C552782377777",
-      "chain": "56 (BNB Chain)",
+      "file": "investigation-20260808-095513-0xC72449E0.md",
+      "title": "Investigation \u2014 GOOK",
+      "symbol": "GOOK",
+      "name": "GlueHook",
+      "date": "2026-08-08T09:55:13Z",
+      "target": "0xC72449E066d0a853d85A8C9b2b09a1463911dF5f",
+      "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "22",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-20] Very few holders (0) \u2014 thin, easily manipulated distribution; [-25] Very low liquidity $7,285 (rug/illiquid); [-15] Pair only 0.2 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated as unau",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-092359-0x0B9FEE99.md"
+      "score": "40",
+      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $29,530; [-10] Violent 24h move +12922% (volatility/manipulation); [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated a",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-095513-0xC72449E0.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-095513-0xC72449E0.md",
+      "title": "Investigation \u2014 GOOK",
+      "symbol": "GOOK",
+      "name": "GlueHook",
+      "date": "2026-08-08T09:55:13Z",
+      "target": "0xC72449E066d0a853d85A8C9b2b09a1463911dF5f",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "40",
+      "summary": "Risk factors: [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Low liquidity $29,530; [-10] Violent 24h move +12922% (volatility/manipulation); [-15] Pair only 0.5 days old (extreme fresh-launch risk); [-10] No known third-party audit or verifiable team identity found \u2014 treated a",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-095513-0xC72449E0.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260808-092359-0x0B9FEE99.md",
@@ -12792,6 +12806,18 @@
   ],
   "news": [
     {
+      "file": "news-2026-08-08-poisoned-files-and-malicious-links-turn-atlassian-s-rovo-ai-.md",
+      "title": "Poisoned Files and Malicious Links Turn Atlassian's Rovo AI Into a Silent Corporate Spy",
+      "byline": "VAPE Reporter",
+      "date": "2026-08-08T09:38:40Z",
+      "published_et": "August 8, 2026 \u00b7 5:38 AM EDT",
+      "topic": "Cybersecurity",
+      "dek": "Dual security investigations reveal how attackers can hijack Atlassian's new enterprise assistant to silently exfiltrate Jira and Confluence secrets.",
+      "image": "assets/news-images/poisoned-files-and-malicious-links-turn-atlassian-s-rovo-ai-.jpg",
+      "image_source": "AI-generated \u2014 VAPE Wire branded",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-08-08-poisoned-files-and-malicious-links-turn-atlassian-s-rovo-ai-.md"
+    },
+    {
       "file": "news-2026-08-08-wall-street-privacy-upgrade-xrp-ledger-validators-vote-to-en.md",
       "title": "Wall Street Privacy Upgrade: XRP Ledger Validators Vote to Encrypt $530M in Tokenized Assets",
       "byline": "VAPE Reporter",
@@ -13498,18 +13524,6 @@
       "image": "assets/logo-v-256.png",
       "image_source": "VAPE brand mark (no AI image available this cycle)",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-31-stablecoin-reserve-requirements-the-regulatory-battleground-.md"
-    },
-    {
-      "file": "news-2026-07-31-funds-may-be-at-risk-coinkite-issues-warning-for-coldcard-mk.md",
-      "title": "\u2018Funds may be at risk\u2019: Coinkite issues warning for Coldcard Mk3 users amid 594 BTC theft reports",
-      "byline": "VAPE Reporter",
-      "date": "2026-07-31 06:14 UTC",
-      "published_et": null,
-      "topic": "Crypto Markets",
-      "dek": "Agency: VAPE Wire Byline: VAPE Reporter Date: 2026-07-31 06:14 UTC Topic: Crypto Markets Dek: Image: assets/logo-v-256.png Image source: VAPE brand mark (no AI image available this cycle) Fact-checked",
-      "image": "assets/logo-v-256.png",
-      "image_source": "VAPE brand mark (no AI image available this cycle)",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/news/news-2026-07-31-funds-may-be-at-risk-coinkite-issues-warning-for-coldcard-mk.md"
     }
   ],
   "tools": [
