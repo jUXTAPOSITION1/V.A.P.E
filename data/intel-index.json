@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T16:00:45Z",
+  "generated": "2026-08-08T16:15:45Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 515,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 165,
-    "investigations": 879,
+    "investigations": 880,
     "news": 89,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-160043-0x6096b876.md",
-      "title": "Investigation \u2014 CRAB",
-      "symbol": "CRAB",
-      "name": "CRABBY",
-      "date": "2026-08-08T16:00:43Z",
-      "target": "0x6096b8765Eb48cd2193F840a977f3727e7800356",
-      "chain": "1 (Ethereum)",
-      "verdict": "CAUTION",
-      "score": "75",
-      "summary": "Risk factors: [-25] Very low liquidity $9,093 (rug/illiquid). Positive evidence: Ownership renounced; 564 holders \u2014 reasonably distributed; Top holders control only 0% of supply \u2014 broad distribution; 99% of liquidity is locked \u2014 reduced rug-pull risk; Trading 772+ days without a known incident in this scan; Custom veri",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-160043-0x6096b876.md"
+      "file": "investigation-20260808-161543-0x2E67FecE.md",
+      "title": "Investigation \u2014 ZILO",
+      "symbol": "ZILO",
+      "name": "ZILO",
+      "date": "2026-08-08T16:15:43Z",
+      "target": "0x2E67FecEFb6C2adaEfB4FfE8b8499107a8090c32",
+      "chain": "42161 (Arbitrum)",
+      "verdict": "REJECT",
+      "score": "20",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 93% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +2173% (volatility/manipulation); [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-15] Contract so",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-161543-0x2E67FecE.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-161543-0x2E67FecE.md",
+      "title": "Investigation \u2014 ZILO",
+      "symbol": "ZILO",
+      "name": "ZILO",
+      "date": "2026-08-08T16:15:43Z",
+      "target": "0x2E67FecEFb6C2adaEfB4FfE8b8499107a8090c32",
+      "chain": "42161 (Arbitrum)",
+      "verdict": "REJECT",
+      "score": "20",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 93% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +2173% (volatility/manipulation); [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-15] Contract so",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-161543-0x2E67FecE.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260808-160043-0x6096b876.md",

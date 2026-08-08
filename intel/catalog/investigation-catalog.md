@@ -1559,3 +1559,5 @@
 | 2026-08-08 | auto | 0x64E6518ad501E5F2F3e3335726d4c2188be36A48 (YOU) | deep_investigation | REJECT (30/100) | Very few holders (17) — thin, easily manipulated distribution | +7d |
 
 | 2026-08-08 | auto | 0x6096b8765Eb48cd2193F840a977f3727e7800356 (CRAB) | deep_investigation | CAUTION (75/100) | Very low liquidity $9,093 (rug/illiquid) | +7d |
+
+| 2026-08-08 | auto | 0x2E67FecEFb6C2adaEfB4FfE8b8499107a8090c32 (ZILO) | deep_investigation | REJECT (20/100) | Top 10 non-LP/burn holders control 93% of supply — concentrated, easily manipula | +7d |

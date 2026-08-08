@@ -5342,6 +5342,25 @@
     "symbol": "LPT",
     "times_investigated": 1
   },
+  "42161:0x2e67fecefb6c2adaefb4ffe8b8499107a8090c32": {
+    "address": "0x2E67FecEFb6C2adaEfB4FfE8b8499107a8090c32",
+    "chain": "42161",
+    "creator_address": "0x077dac6d426c024a3c05098b27679456f3bcae8d",
+    "first_investigated": "2026-08-08T16:15:43Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-161543-0x2E67FecE.md",
+        "score": 20,
+        "ts": "2026-08-08T16:15:43Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-08T16:15:43Z",
+    "last_score": 20,
+    "last_verdict": "REJECT",
+    "symbol": "ZILO",
+    "times_investigated": 1
+  },
   "42161:0x3b8db18e69d6686ad9371a423afe3dd1065c94f1": {
     "address": "0x3b8db18e69d6686Ad9371A423aFe3Dd1065C94f1",
     "chain": "42161",

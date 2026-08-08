@@ -1,9 +1,10 @@
 # VAPE Fail List (REJECT)
 
-_Regenerated 2026-08-08T16:00:43Z — 468 address(es) currently on record with a last verdict of REJECT._
+_Regenerated 2026-08-08T16:15:43Z — 469 address(es) currently on record with a last verdict of REJECT._
 
 | Symbol | Chain | Address | Score | Times Checked | Last Investigated |
 |--------|-------|---------|-------|----------------|--------------------|
+| ZILO | Arbitrum | `0x2E67FecEFb6C2adaEfB4FfE8b8499107a8090c32` | 20/100 | 1 | 2026-08-08T16:15:43Z |
 | YOU | Avalanche | `0x64E6518ad501E5F2F3e3335726d4c2188be36A48` | 30/100 | 1 | 2026-08-08T15:45:20Z |
 | ORNG | Avalanche | `0xBD0346cb3bbA8adC5Cf4BAa3106462f816a322B7` | 5/100 | 1 | 2026-08-08T15:30:20Z |
 | UB | BNB Chain | `0x1066daa8714f731d7a97AEAa016c16de9617c559` | 0/100 | 1 | 2026-08-08T14:29:25Z |
