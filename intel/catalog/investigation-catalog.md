@@ -1497,3 +1497,5 @@
 | 2026-08-08 | auto | 0x94314a14Df63779c99C0764a30e0CD22fA78fC0E (EPIC) | deep_investigation | CAUTION (60/100) | Owner not renounced (0x32f14956d707b624026d9fdfcfc63956ea683140) — can still act | +7d |
 
 | 2026-08-08 | auto | 0x6c249f420F487372d9B96A15AE8D86E6Ad16810a (Peke) | deep_investigation | REJECT (30/100) | Very few holders (40) — thin, easily manipulated distribution | +7d |
+
+| 2026-08-08 | auto | 0xC6d2a58D16f5B43332CaCc4045eB959B5be97777 (SPCXB) | deep_investigation | REJECT (12/100) | Upgradeable proxy (verify implementation) | +7d |

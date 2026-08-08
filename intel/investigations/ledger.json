@@ -8875,6 +8875,24 @@
     "symbol": "ON",
     "times_investigated": 1
   },
+  "56:0xc6d2a58d16f5b43332cacc4045eb959b5be97777": {
+    "address": "0xC6d2a58D16f5B43332CaCc4045eB959B5be97777",
+    "chain": "56",
+    "first_investigated": "2026-08-08T04:03:33Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-040333-0xC6d2a58D.md",
+        "score": 12,
+        "ts": "2026-08-08T04:03:33Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-08T04:03:33Z",
+    "last_score": 12,
+    "last_verdict": "REJECT",
+    "symbol": "SPCXB",
+    "times_investigated": 1
+  },
   "56:0xcaae2a2f939f51d97cdfa9a86e79e3f085b799f3": {
     "address": "0xCAAE2A2F939F51d97CdFa9A86e79e3F085b799f3",
     "chain": "56",
