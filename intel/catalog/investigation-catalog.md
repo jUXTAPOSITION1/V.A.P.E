@@ -1533,3 +1533,5 @@
 | 2026-08-08 | auto | 0x364515F2F8AC2feCdC44AaBc124d69893f7aA9c0 (HEX) | deep_investigation | REJECT (0/100) | Mintable supply (dilution risk) | +7d |
 
 | 2026-08-08 | auto | 0x30c17190Dc61A61051Eb59450378F2aB11502772 (MICHAELSAYLOR) | deep_investigation | REJECT (22/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-08 | auto | 0xe419C3BB09F7386f40e0c0Ed3f4b84749682b49f (VLGNS) | deep_investigation | REJECT (40/100) | Very few holders (11) — thin, easily manipulated distribution | +7d |

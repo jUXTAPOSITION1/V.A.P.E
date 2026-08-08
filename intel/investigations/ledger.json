@@ -1274,6 +1274,25 @@
     "symbol": "WMATIC",
     "times_investigated": 1
   },
+  "137:0xe419c3bb09f7386f40e0c0ed3f4b84749682b49f": {
+    "address": "0xe419C3BB09F7386f40e0c0Ed3f4b84749682b49f",
+    "chain": "137",
+    "creator_address": "0x1111111dd38a3739119bea9fb2211a13e0306a8c",
+    "first_investigated": "2026-08-08T11:57:06Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-115706-0xe419C3BB.md",
+        "score": 40,
+        "ts": "2026-08-08T11:57:06Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-08T11:57:06Z",
+    "last_score": 40,
+    "last_verdict": "REJECT",
+    "symbol": "VLGNS",
+    "times_investigated": 1
+  },
   "137:0xe441e2e14b0a2704d73f9d34fab479682a22a897": {
     "address": "0xE441E2e14b0A2704D73F9d34FAB479682a22A897",
     "chain": "137",
