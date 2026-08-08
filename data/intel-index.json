@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T07:27:58Z",
+  "generated": "2026-08-08T07:37:52Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 502,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 164,
-    "investigations": 856,
+    "investigations": 857,
     "news": 87,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-063749-0x9C0FA3B5.md",
-      "title": "Investigation \u2014 OpenAI",
-      "symbol": "OpenAI",
-      "name": "OpenAI",
-      "date": "2026-08-08T06:37:49Z",
-      "target": "0x9C0FA3B56A3B40dEAd7680d0837e9219d7C2Ab07",
-      "chain": "8453 (Base)",
+      "file": "investigation-20260808-073750-0xD796118D.md",
+      "title": "Investigation \u2014 ABBY",
+      "symbol": "ABBY",
+      "name": "Abby Inu",
+      "date": "2026-08-08T07:37:50Z",
+      "target": "0xD796118D6545692206CA9dA2007BBa531c86FB5e",
+      "chain": "1 (Ethereum)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-35] Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain affiliation \u2014 a hype-riding impersonation pattern, not coincidence; [-30] Same deployer has a prior CAUTION/REJECT verdict on record: OpenAI (0x15a9E76cd69A71cd485372a51C131E245ef09B07) \u2014 REJECT 0/100 \u2014 likely the same ",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-063749-0x9C0FA3B5.md"
+      "score": "32",
+      "summary": "Risk factors: [-10] Owner not renounced (0x3edeb9a55c336981bf8e60806f633bbaff7781ca) \u2014 can still act on the contract; [-8] Low holder count (166); [-15] Top 10 non-LP/burn holders control 86% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $46 (rug/illiquid); [-10] No known third-party audit or v",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-073750-0xD796118D.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-073750-0xD796118D.md",
+      "title": "Investigation \u2014 ABBY",
+      "symbol": "ABBY",
+      "name": "Abby Inu",
+      "date": "2026-08-08T07:37:50Z",
+      "target": "0xD796118D6545692206CA9dA2007BBa531c86FB5e",
+      "chain": "1 (Ethereum)",
+      "verdict": "REJECT",
+      "score": "32",
+      "summary": "Risk factors: [-10] Owner not renounced (0x3edeb9a55c336981bf8e60806f633bbaff7781ca) \u2014 can still act on the contract; [-8] Low holder count (166); [-15] Top 10 non-LP/burn holders control 86% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $46 (rug/illiquid); [-10] No known third-party audit or v",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-073750-0xD796118D.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260808-063749-0x9C0FA3B5.md",

@@ -1513,3 +1513,5 @@
 | 2026-08-08 | auto | 0x2F701b108a9aF5558960325A0239D0a13c2C4444 (bStocks) | deep_investigation | CAUTION (75/100) | Top 10 non-LP/burn holders control 73% of supply — concentrated, easily manipula | +7d |
 
 | 2026-08-08 | auto | 0x9C0FA3B56A3B40dEAd7680d0837e9219d7C2Ab07 (OpenAI) | deep_investigation | REJECT (0/100) | Token name/symbol (OpenAI / OpenAI) impersonates a real company with no on-chain | +7d |
+
+| 2026-08-08 | auto | 0xD796118D6545692206CA9dA2007BBa531c86FB5e (ABBY) | deep_investigation | REJECT (32/100) | Owner not renounced (0x3edeb9a55c336981bf8e60806f633bbaff7781ca) — can still act | +7d |

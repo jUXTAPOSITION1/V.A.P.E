@@ -1,7 +1,28 @@
 {
-  "generated": "2026-08-08T07:22:51Z",
-  "synthesis": "VAPE automation repeatedly featured investigations, generated bounty reports and reputation snapshots, and ran security, repo, and bounty-radar tasks on 2026-08-08.",
+  "generated": "2026-08-08T07:37:53Z",
+  "synthesis": "VAPE's automation has been running various reports and sweeps, including bounty radar and reputation snapshots, at frequent intervals.",
   "tasks": [
+    {
+      "sha": "1719e044b3",
+      "kind": "bounty-radar",
+      "message": "SCOUT bounty radar sweep 2026-08-08T07:32Z",
+      "date": "2026-08-08T07:32:11Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/1719e044b33353e2b269f1380d5ad20e62ea07f6"
+    },
+    {
+      "sha": "f311cf5d7b",
+      "kind": "broadcast",
+      "message": "community broadcast 2026-08-08T07:27Z",
+      "date": "2026-08-08T07:27:59Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f311cf5d7bac05561b8697521cdcfdbe24c3b4ce"
+    },
+    {
+      "sha": "d3b463881e",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-08-08T07:22Z",
+      "date": "2026-08-08T07:22:55Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/d3b463881e90b2ebd9bb6b7100799a6b0202421a"
+    },
     {
       "sha": "35bf90d335",
       "kind": "automation",
@@ -85,27 +106,6 @@
       "message": "reputation snapshot 2026-08-08T05:58Z",
       "date": "2026-08-08T05:58:58Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/21d9476c94433fa1b57638b631af50082e0c28dd"
-    },
-    {
-      "sha": "a117a370ce",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-08-08T05:51Z",
-      "date": "2026-08-08T05:51:37Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/a117a370ce28d9f15d1a8431f92538f67ef8ea4d"
-    },
-    {
-      "sha": "b3c2a4482a",
-      "kind": "automation",
-      "message": "Auto-generated bounty report 2026-08-08T05:49Z",
-      "date": "2026-08-08T05:49:02Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/b3c2a4482a2030a7c791d7e12fe5ca460443c3f7"
-    },
-    {
-      "sha": "9485304d10",
-      "kind": "automation",
-      "message": "VAPE repo review 2026-08-08T05:48Z",
-      "date": "2026-08-08T05:48:35Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/9485304d10ae58f807f22c58534eceae3b35c747"
     }
   ]
 }

@@ -4566,6 +4566,25 @@
     "symbol": "DOGE1",
     "times_investigated": 1
   },
+  "1:0xd796118d6545692206ca9da2007bba531c86fb5e": {
+    "address": "0xD796118D6545692206CA9dA2007BBa531c86FB5e",
+    "chain": "1",
+    "creator_address": "0x3edeb9a55c336981bf8e60806f633bbaff7781ca",
+    "first_investigated": "2026-08-08T07:37:50Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-073750-0xD796118D.md",
+        "score": 32,
+        "ts": "2026-08-08T07:37:50Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-08T07:37:50Z",
+    "last_score": 32,
+    "last_verdict": "REJECT",
+    "symbol": "ABBY",
+    "times_investigated": 1
+  },
   "1:0xd7a7394294f4687966c60a1f68920f29688bf546": {
     "address": "0xd7A7394294f4687966C60A1F68920f29688BF546",
     "chain": "1",
