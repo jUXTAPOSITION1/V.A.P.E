@@ -795,3 +795,4 @@
 {"ts": "2026-08-08T04:50:18.201571Z", "target": "none", "hired": ["yields"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-08T05:21:37.195592Z", "target": "Avalanche", "hired": ["chain_protocols"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-08T05:51:33.704104Z", "target": "ethereum", "hired": ["dex_volumes"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
+{"ts": "2026-08-08T06:22:22.116123Z", "target": "binaryx-platform", "hired": ["protocol"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}

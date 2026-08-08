@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T06:06:59Z",
+  "generated": "2026-08-08T06:22:22Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 501,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 163,
-    "investigations": 854,
+    "investigations": 855,
     "news": 87,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-060658-0x3c8Db7d7.md",
+      "file": "investigation-20260808-062220-0x2F701b10.md",
       "title": "Investigation \u2014 bStocks",
       "symbol": "bStocks",
-      "name": "bStocks",
-      "date": "2026-08-08T06:06:58Z",
-      "target": "0x3c8Db7d7387331945Ba72eCf61463DFB11E17777",
+      "name": "Binance Stocks",
+      "date": "2026-08-08T06:22:20Z",
+      "target": "0x2F701b108a9aF5558960325A0239D0a13c2C4444",
       "chain": "56 (BNB Chain)",
       "verdict": "CAUTION",
-      "score": "52",
-      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Top 10 non-LP/burn holders control 96% of supply \u2014 concentrated, easily manipulated; [-25] Very low liquidity $4,385 (rug/illiquid). Positive evidence: Ownership renounced; 9795 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced ru",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-060658-0x3c8Db7d7.md"
+      "score": "75",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 73% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $13,213. Positive evidence: Ownership renounced; 1540 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Custom verified source (not a mass-produced factory te",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-062220-0x2F701b10.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-062220-0x2F701b10.md",
+      "title": "Investigation \u2014 bStocks",
+      "symbol": "bStocks",
+      "name": "Binance Stocks",
+      "date": "2026-08-08T06:22:20Z",
+      "target": "0x2F701b108a9aF5558960325A0239D0a13c2C4444",
+      "chain": "56 (BNB Chain)",
+      "verdict": "CAUTION",
+      "score": "75",
+      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 73% of supply \u2014 concentrated, easily manipulated; [-10] Low liquidity $13,213. Positive evidence: Ownership renounced; 1540 holders \u2014 reasonably distributed; 100% of liquidity is locked \u2014 reduced rug-pull risk; Custom verified source (not a mass-produced factory te",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-062220-0x2F701b10.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260808-060658-0x3c8Db7d7.md",

@@ -1509,3 +1509,5 @@
 | 2026-08-08 | auto | 0xe2c6D87C468a62c5b554a7266ae62522228B26F6 (🤡) | deep_investigation | REJECT (12/100) | Low holder count (70) | +7d |
 
 | 2026-08-08 | auto | 0x3c8Db7d7387331945Ba72eCf61463DFB11E17777 (bStocks) | deep_investigation | CAUTION (52/100) | Upgradeable proxy (verify implementation) | +7d |
+
+| 2026-08-08 | auto | 0x2F701b108a9aF5558960325A0239D0a13c2C4444 (bStocks) | deep_investigation | CAUTION (75/100) | Top 10 non-LP/burn holders control 73% of supply — concentrated, easily manipula | +7d |

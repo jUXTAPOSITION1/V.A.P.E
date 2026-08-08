@@ -6619,6 +6619,25 @@
     "symbol": "ON",
     "times_investigated": 1
   },
+  "56:0x2f701b108a9af5558960325a0239d0a13c2c4444": {
+    "address": "0x2F701b108a9aF5558960325A0239D0a13c2C4444",
+    "chain": "56",
+    "creator_address": "0x5d348cc3c84c4e8f628e50d2140c69fd801b38ad",
+    "first_investigated": "2026-08-08T06:22:20Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-062220-0x2F701b10.md",
+        "score": 75,
+        "ts": "2026-08-08T06:22:20Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-08T06:22:20Z",
+    "last_score": 75,
+    "last_verdict": "CAUTION",
+    "symbol": "bStocks",
+    "times_investigated": 1
+  },
   "56:0x2fcb6f3d1be8f16002b101ee3182ed9668797777": {
     "address": "0x2FcB6f3d1Be8F16002B101ee3182eD9668797777",
     "chain": "56",
