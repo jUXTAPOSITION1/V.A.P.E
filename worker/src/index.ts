@@ -25,6 +25,7 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { cache } from "hono/cache";
 import { paymentMiddleware, x402ResourceServer } from "@x402/hono";
+import { RouteConfigurationError } from "@x402/core/server";
 import { ExactEvmScheme } from "@x402/evm/exact/server";
 import { ExactSvmScheme } from "@x402/svm/exact/server";
 import { declareDiscoveryExtension, bazaarResourceServerExtension } from "@x402/extensions/bazaar";
@@ -1011,7 +1012,15 @@ app.get("/admin/bazaar-validate", rateLimiter("bazaar-validate", 6, 300), async 
 // Deliberately built fresh per call (never a module-level singleton) --
 // matches both this file's own existing per-request pattern and
 // mcpServer.ts's own stateless-mode requirement (see its docstring).
-function buildBaseResourceServer(env: Env) {
+// Set once a live request proves CDP's facilitator rejects the Solana
+// PaymentOption via @x402/core's own route-config validation (see the
+// catch block in the "*" middleware below) -- best-effort, resets on
+// isolate recycle, never load-bearing: purely avoids paying the doomed
+// EVM+Solana attempt's failed CDP round-trip on every subsequent request
+// in this isolate once we already know it fails.
+let solanaKnownUnsupported = false;
+
+function buildBaseResourceServer(env: Env, includeSolana: boolean) {
   // A from-scratch client, not @x402/core's own HTTPFacilitatorClient --
   // see DirectCdpFacilitatorClient's own docstring in lib/facilitatorClient.ts
   // for why: two separate live-tested attempts to wrap/monkeypatch
@@ -1036,7 +1045,7 @@ function buildBaseResourceServer(env: Env) {
   // silently retried against a second facilitator, which stays simpler
   // while CDP's own settle path is what's actively being fixed.
   const solanaNetwork = env.SOLANA_NETWORK;
-  const solanaConfigured = Boolean(solanaNetwork && env.SOLANA_PAY_TO_ADDRESS);
+  const solanaConfigured = includeSolana && Boolean(solanaNetwork && env.SOLANA_PAY_TO_ADDRESS);
   let resourceServer = new x402ResourceServer(facilitatorClient)
     .register(env.X402_NETWORK, new ExactEvmScheme());
   if (solanaConfigured) {
@@ -1046,12 +1055,41 @@ function buildBaseResourceServer(env: Env) {
   return resourceServer;
 }
 
+// Split out from the "*" middleware below so the same PAID_ROUTES ->
+// RoutesConfig construction can be re-run with Solana excluded on the
+// fallback path (see that middleware's catch block).
+function buildPaidRoutes(env: Env, includeSolana: boolean) {
+  const solanaNetwork = env.SOLANA_NETWORK;
+  const solanaConfigured = includeSolana && Boolean(solanaNetwork && env.SOLANA_PAY_TO_ADDRESS);
+  const routes: Record<string, unknown> = {};
+  for (const r of PAID_ROUTES) {
+    const accepts: Array<{ scheme: string; price: string; network: Caip2Network; payTo: string }> = [
+      { scheme: "exact", price: r.price, network: env.X402_NETWORK, payTo: env.PAY_TO_ADDRESS },
+    ];
+    if (solanaConfigured) {
+      accepts.push({ scheme: "exact", price: r.price, network: solanaNetwork as Caip2Network, payTo: env.SOLANA_PAY_TO_ADDRESS as string });
+    }
+    routes[`GET ${r.path}`] = {
+      accepts,
+      description: r.description,
+      serviceName: "VAPE",
+      iconUrl: ICON_URL,
+      tags: r.tags,
+      extensions: declareDiscoveryExtension({
+        input: r.inputExample,
+        inputSchema: r.inputSchema,
+        output: { example: r.output },
+      }),
+    };
+  }
+  return routes;
+}
+
 app.use("*", async (c, next) => {
   const facilitatorUsed = (): "cdp" => "cdp";
-  const solanaNetwork = c.env.SOLANA_NETWORK;
-  const solanaConfigured = Boolean(solanaNetwork && c.env.SOLANA_PAY_TO_ADDRESS);
-  let resourceServer = buildBaseResourceServer(c.env);
-  resourceServer = resourceServer
+  const solanaRequested = Boolean(c.env.SOLANA_NETWORK && c.env.SOLANA_PAY_TO_ADDRESS) && !solanaKnownUnsupported;
+
+  const attachSettleLogging = (rs: ReturnType<typeof buildBaseResourceServer>) => rs
     // Fires once the facilitator confirms settlement — AFTER the
     // /scan/:offering handler below has already run and stashed its result
     // via c.set("vapeJobDraft", ...). This is the ONLY place the real
@@ -1084,29 +1122,31 @@ app.use("*", async (c, next) => {
   // `accepts` is an array (RouteConfig supports PaymentOption | PaymentOption[])
   // so a buyer can settle via either rail -- Base/EVM stays first (the
   // existing, proven path), Solana appended only when actually configured.
-  const routes: Record<string, unknown> = {};
-  for (const r of PAID_ROUTES) {
-    const accepts: Array<{ scheme: string; price: string; network: Caip2Network; payTo: string }> = [
-      { scheme: "exact", price: r.price, network: c.env.X402_NETWORK, payTo: c.env.PAY_TO_ADDRESS },
-    ];
-    if (solanaConfigured) {
-      accepts.push({ scheme: "exact", price: r.price, network: solanaNetwork as Caip2Network, payTo: c.env.SOLANA_PAY_TO_ADDRESS as string });
+  try {
+    const resourceServer = attachSettleLogging(buildBaseResourceServer(c.env, solanaRequested));
+    return await paymentMiddleware(buildPaidRoutes(c.env, solanaRequested) as any, resourceServer)(c, next);
+  } catch (err) {
+    // Real, confirmed production incident (2026-08-08): CDP's facilitator
+    // doesn't actually list "solana:mainnet"/"exact" as supported the way
+    // Coinbase's docs implied when this rail was added, so @x402/core's own
+    // route-config validation (x402HTTPResourceServer#initialize(), which
+    // paymentMiddleware() runs before processing ANY protected request)
+    // rejects it with a RouteConfigurationError. Because the Solana
+    // PaymentOption gets appended onto EVERY route's `accepts` -- not just
+    // a Solana-specific one -- that uncaught error took down 100% of x402
+    // transactions, Base/EVM included, for ~20 hours: every single paid
+    // route 500'd before a buyer ever got as far as a 402 challenge.
+    // Fail open onto the proven Base-only path instead of hard-failing
+    // every real payment attempt whenever a newly-added rail's assumed
+    // facilitator support doesn't match reality.
+    if (solanaRequested && err instanceof RouteConfigurationError) {
+      solanaKnownUnsupported = true;
+      console.error("[x402] Solana route validation failed; falling back to Base-only:", err.errors);
+      const resourceServer = attachSettleLogging(buildBaseResourceServer(c.env, false));
+      return await paymentMiddleware(buildPaidRoutes(c.env, false) as any, resourceServer)(c, next);
     }
-    routes[`GET ${r.path}`] = {
-      accepts,
-      description: r.description,
-      serviceName: "VAPE",
-      iconUrl: ICON_URL,
-      tags: r.tags,
-      extensions: declareDiscoveryExtension({
-        input: r.inputExample,
-        inputSchema: r.inputSchema,
-        output: { example: r.output },
-      }),
-    };
+    throw err;
   }
-
-  return await paymentMiddleware(routes as any, resourceServer)(c, next);
 });
 
 // VAPE's agent-to-agent MCP surface — the same security/market-data
@@ -1132,11 +1172,31 @@ app.use("*", async (c, next) => {
 // paid route, not just this one). 60/min/IP is generous for a legitimate MCP
 // client's actual usage pattern (init once per connection, not per call).
 app.all("/mcp", rateLimiter("mcp", 60, 60), async (c) => {
-  const resourceServer = buildBaseResourceServer(c.env);
-  const server = await buildMcpServer(resourceServer, c.env as any);
-  const transport = new WebStandardStreamableHTTPServerTransport({ sessionIdGenerator: undefined });
-  await server.connect(transport);
-  return transport.handleRequest(c.req.raw);
+  const solanaRequested = !solanaKnownUnsupported;
+  try {
+    const resourceServer = buildBaseResourceServer(c.env, solanaRequested);
+    const server = await buildMcpServer(resourceServer, c.env as any, solanaRequested);
+    const transport = new WebStandardStreamableHTTPServerTransport({ sessionIdGenerator: undefined });
+    await server.connect(transport);
+    return transport.handleRequest(c.req.raw);
+  } catch (err) {
+    // Same fallback as the "*" middleware above, and for the same reason:
+    // buildAccepts()/buildPaymentRequirementsFromOptions() in mcpServer.ts
+    // throws if the facilitator doesn't actually support the Solana option
+    // this builds into every tool's `accepts`, which would otherwise take
+    // down the entire /mcp surface (every tool, EVM ones included) the same
+    // way it took down every HTTP /scan and /data route.
+    if (solanaRequested) {
+      solanaKnownUnsupported = true;
+      console.error("[x402] /mcp Solana route validation failed; falling back to Base-only:", err);
+      const resourceServer = buildBaseResourceServer(c.env, false);
+      const server = await buildMcpServer(resourceServer, c.env as any, false);
+      const transport = new WebStandardStreamableHTTPServerTransport({ sessionIdGenerator: undefined });
+      await server.connect(transport);
+      return transport.handleRequest(c.req.raw);
+    }
+    throw err;
+  }
 });
 
 for (const name of Object.keys(OFFERING_PRICES) as HandlerName[]) {
