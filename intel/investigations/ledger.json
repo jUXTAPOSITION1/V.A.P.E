@@ -8044,6 +8044,25 @@
     "symbol": "BLESS",
     "times_investigated": 1
   },
+  "56:0x7db2f0c15f74ab0dc0d4f49650dd60c45ffb7777": {
+    "address": "0x7Db2F0c15f74aB0Dc0D4f49650dD60C45FFB7777",
+    "chain": "56",
+    "creator_address": "0x434a85a98bcfdd9fa1fe8ef0ddb337787b2de3ba",
+    "first_investigated": "2026-08-08T12:57:54Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-125754-0x7Db2F0c1.md",
+        "score": 47,
+        "ts": "2026-08-08T12:57:54Z",
+        "verdict": "REJECT"
+      }
+    ],
+    "last_investigated": "2026-08-08T12:57:54Z",
+    "last_score": 47,
+    "last_verdict": "REJECT",
+    "symbol": "UrAnus",
+    "times_investigated": 1
+  },
   "56:0x7db662f5728ed008d60cabae098e88aea8fca36c": {
     "address": "0x7DB662F5728Ed008d60caBae098E88AeA8fCa36C",
     "chain": "56",

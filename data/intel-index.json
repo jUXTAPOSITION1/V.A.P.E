@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T12:51:00Z",
+  "generated": "2026-08-08T12:57:56Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 510,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 164,
-    "investigations": 870,
+    "investigations": 871,
     "news": 89,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-124224-0xea792CD9.md",
-      "title": "Investigation \u2014 SPCXB",
-      "symbol": "SPCXB",
-      "name": "SpaceX",
-      "date": "2026-08-08T12:42:24Z",
-      "target": "0xea792CD9AA844fC85a379f8e6F21960D166C3719",
+      "file": "investigation-20260808-125754-0x7Db2F0c1.md",
+      "title": "Investigation \u2014 UrAnus",
+      "symbol": "UrAnus",
+      "name": "UrAnus",
+      "date": "2026-08-08T12:57:54Z",
+      "target": "0x7Db2F0c15f74aB0Dc0D4f49650dD60C45FFB7777",
       "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: ON (0x143E73837FD47cC9477c694B37123ccbd4C0eB93) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (5) \u2014 thin, easily manipulated distribution; [-15] Top 4 non-LP/burn holders con",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-124224-0xea792CD9.md"
+      "score": "47",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +320% (volatility/manipulation); [-10] Pair 9.0 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team ide",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-125754-0x7Db2F0c1.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-125754-0x7Db2F0c1.md",
+      "title": "Investigation \u2014 UrAnus",
+      "symbol": "UrAnus",
+      "name": "UrAnus",
+      "date": "2026-08-08T12:57:54Z",
+      "target": "0x7Db2F0c15f74aB0Dc0D4f49650dD60C45FFB7777",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "47",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +320% (volatility/manipulation); [-10] Pair 9.0 days old \u2014 under two weeks, no track record yet; [-10] No known third-party audit or verifiable team ide",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-125754-0x7Db2F0c1.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260808-124224-0xea792CD9.md",
