@@ -1,7 +1,28 @@
 {
-  "generated": "2026-08-08T15:45:22Z",
-  "synthesis": "VAPE's automation performed repository reviews, bounty reports, and various sweeps and investigations.",
+  "generated": "2026-08-08T16:00:45Z",
+  "synthesis": "VAPE's automation generated reports and performed repository reviews and sweeps.",
   "tasks": [
+    {
+      "sha": "f6241617e7",
+      "kind": "bounty-radar",
+      "message": "SCOUT bounty radar sweep 2026-08-08T15:59Z",
+      "date": "2026-08-08T15:59:04Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/f6241617e742deae9d62181324c4221db0324af6"
+    },
+    {
+      "sha": "1da136c3d9",
+      "kind": "reputation",
+      "message": "reputation snapshot 2026-08-08T15:48Z",
+      "date": "2026-08-08T15:48:33Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/1da136c3d9151c6c089414e763e0c5eb4dce0ec0"
+    },
+    {
+      "sha": "4f1287ea9b",
+      "kind": "investigation",
+      "message": "Featured investigation 2026-08-08T15:45Z",
+      "date": "2026-08-08T15:45:26Z",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/4f1287ea9b078c630422f05ee06824b20bacea2e"
+    },
     {
       "sha": "ab581472c5",
       "kind": "automation",
@@ -85,27 +106,6 @@
       "message": "Auto-generated bounty report 2026-08-08T14:33Z",
       "date": "2026-08-08T14:33:17Z",
       "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/bbcfb03ee8c5a753a130d94444425ea1bac0416e"
-    },
-    {
-      "sha": "3f2eb743fc",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-08-08T14:29Z",
-      "date": "2026-08-08T14:29:42Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/3f2eb743fc89e3ea1f5b9d0965097fdcde1d94ca"
-    },
-    {
-      "sha": "377221735d",
-      "kind": "automation",
-      "message": "VAPE AI red-team deep scan 2026-08-08T14:29Z",
-      "date": "2026-08-08T14:29:20Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/377221735d29cb3d1404c613b73f4bfb12cdea20"
-    },
-    {
-      "sha": "34bf2212fb",
-      "kind": "investigation",
-      "message": "Featured investigation 2026-08-08T14:14Z",
-      "date": "2026-08-08T14:14:08Z",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/commit/34bf2212fb1491fbedb8f2f9e84982725e6cc1f7"
     }
   ]
 }

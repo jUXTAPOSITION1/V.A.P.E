@@ -2807,6 +2807,25 @@
     "symbol": "DPUNK",
     "times_investigated": 1
   },
+  "1:0x6096b8765eb48cd2193f840a977f3727e7800356": {
+    "address": "0x6096b8765Eb48cd2193F840a977f3727e7800356",
+    "chain": "1",
+    "creator_address": "0x586c7cffffcd968933550808bcbec2b9070b8285",
+    "first_investigated": "2026-08-08T16:00:43Z",
+    "history": [
+      {
+        "report": "intel/investigations/investigation-20260808-160043-0x6096b876.md",
+        "score": 75,
+        "ts": "2026-08-08T16:00:43Z",
+        "verdict": "CAUTION"
+      }
+    ],
+    "last_investigated": "2026-08-08T16:00:43Z",
+    "last_score": 75,
+    "last_verdict": "CAUTION",
+    "symbol": "CRAB",
+    "times_investigated": 1
+  },
   "1:0x61900eb95db9fee1910c58cbc4e9b510b4032d3c": {
     "address": "0x61900eb95Db9feE1910C58cbC4e9b510b4032D3c",
     "chain": "1",
