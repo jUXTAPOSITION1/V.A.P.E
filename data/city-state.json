@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-08T13:15:26Z",
+  "generated_at": "2026-08-08T19:02:28Z",
   "district_stats": {
     "overall_threat_level": "HIGH",
-    "lanes_passing": 6,
+    "lanes_passing": 8,
     "lanes_total": 10,
     "buildings_total": 19
   },
@@ -15,20 +15,20 @@
       "tier": 3,
       "stat_primary": {
         "label": "tracked",
-        "value": 872
+        "value": 884
       },
       "stat_secondary": [
         {
           "label": "reject",
-          "value": 509
+          "value": 518
         },
         {
           "label": "caution",
-          "value": 229
+          "value": 231
         },
         {
           "label": "proceed",
-          "value": 134
+          "value": 135
         }
       ],
       "link": "investigations.html",
@@ -159,12 +159,12 @@
       "tier": 3,
       "stat_primary": {
         "label": "findings sealed",
-        "value": 1831
+        "value": 1856
       },
       "stat_secondary": [
         {
           "label": "unsealed lines",
-          "value": 5
+          "value": 2
         }
       ],
       "link": "index.html#security-dashboard",
@@ -183,7 +183,7 @@
       "tier": 1,
       "stat_primary": {
         "label": "skills codified",
-        "value": 26
+        "value": 27
       },
       "stat_secondary": [
         {
@@ -207,7 +207,7 @@
       "tier": 4,
       "stat_primary": {
         "label": "data calls logged",
-        "value": 2324
+        "value": 2377
       },
       "stat_secondary": [],
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/tree/main/skillforge/memory",
@@ -222,7 +222,7 @@
       "id": "lane-codeql",
       "kind": "checkpoint",
       "title": "Static Analysis (CodeQL)",
-      "status": "alert",
+      "status": "ok",
       "tier": 1,
       "gridX": 8,
       "gridY": 4,
@@ -237,7 +237,7 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-08T06:59:30Z"
+          "value": "2026-08-08T18:10:30Z"
         },
         {
           "label": "open alerts",
@@ -248,7 +248,7 @@
           "value": 0
         }
       ],
-      "last_run_at": "2026-08-08T06:59:30Z",
+      "last_run_at": "2026-08-08T18:10:30Z",
       "source_workflow": "codeql.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/codeql.yml"
     },
@@ -271,10 +271,10 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-07T22:05:11Z"
+          "value": "2026-08-08T18:10:30Z"
         }
       ],
-      "last_run_at": "2026-08-07T22:05:11Z",
+      "last_run_at": "2026-08-08T18:10:30Z",
       "source_workflow": "security-lint.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/security-lint.yml"
     },
@@ -282,7 +282,7 @@
       "id": "lane-vape-reviewer",
       "kind": "checkpoint",
       "title": "Code Review (VAPE Reviewer)",
-      "status": "alert",
+      "status": "ok",
       "tier": 1,
       "gridX": 14,
       "gridY": 4,
@@ -292,15 +292,15 @@
       ],
       "stat_primary": {
         "label": "last run",
-        "value": "action_required"
+        "value": "success"
       },
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-08T06:59:30Z"
+          "value": "2026-08-08T18:10:29Z"
         }
       ],
-      "last_run_at": "2026-08-08T06:59:30Z",
+      "last_run_at": "2026-08-08T18:10:29Z",
       "source_workflow": "vape-reviewer.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/vape-reviewer.yml"
     },
@@ -349,10 +349,10 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-07T21:43:39Z"
+          "value": "2026-08-08T17:34:42Z"
         }
       ],
-      "last_run_at": "2026-08-07T21:43:39Z",
+      "last_run_at": "2026-08-08T17:34:42Z",
       "source_workflow": "scan-parity.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/scan-parity.yml"
     },
@@ -370,19 +370,19 @@
       ],
       "stat_primary": {
         "label": "last run",
-        "value": "22 finding(s), 30d"
+        "value": "24 finding(s), 30d"
       },
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-07T13:45:33Z"
+          "value": "2026-08-08T13:24:42Z"
         },
         {
           "label": "critical/high findings",
           "value": 1
         }
       ],
-      "last_run_at": "2026-08-07T13:45:33Z",
+      "last_run_at": "2026-08-08T13:24:42Z",
       "source_workflow": "redteam.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/redteam.yml"
     },
@@ -400,19 +400,19 @@
       ],
       "stat_primary": {
         "label": "last run",
-        "value": "22 finding(s), 30d"
+        "value": "24 finding(s), 30d"
       },
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-07T14:08:53Z"
+          "value": "2026-08-08T13:40:52Z"
         },
         {
           "label": "critical/high findings",
           "value": 1
         }
       ],
-      "last_run_at": "2026-08-07T14:08:53Z",
+      "last_run_at": "2026-08-08T13:40:52Z",
       "source_workflow": "redteam-deep.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/redteam-deep.yml"
     },
@@ -435,14 +435,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-08T12:34:08Z"
+          "value": "2026-08-08T18:27:07Z"
         },
         {
           "label": "ledger chain intact",
           "value": "yes"
         }
       ],
-      "last_run_at": "2026-08-08T12:34:08Z",
+      "last_run_at": "2026-08-08T18:27:07Z",
       "source_workflow": "findings-seal.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/findings-seal.yml"
     },
@@ -495,14 +495,14 @@
       "stat_secondary": [
         {
           "label": "last run at",
-          "value": "2026-08-08T12:49:58Z"
+          "value": "2026-08-08T18:38:11Z"
         },
         {
           "label": "attack-pattern coverage",
           "value": "23%"
         }
       ],
-      "last_run_at": "2026-08-08T12:49:58Z",
+      "last_run_at": "2026-08-08T18:38:11Z",
       "source_workflow": "intel-sweeps.yml",
       "link": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/.github/workflows/intel-sweeps.yml"
     }
@@ -583,6 +583,102 @@
   ],
   "recent_events": [
     {
+      "id": "news:Russia's Crypto Self-Custody Push Sends Hardware Wallet Sales Soaring Ahead of September Rules",
+      "type": "news",
+      "timestamp": "2026-08-08T18:38:38Z",
+      "label": "Russia's Crypto Self-Custody Push Sends Hardware Wallet Sales Soaring Ahead of September Rules"
+    },
+    {
+      "id": "investigation:0x1e9DB31f7CbEcCd6D5C6129eCC78C83d1eBc7777",
+      "type": "investigation",
+      "timestamp": "2026-08-08T18:18:30Z",
+      "label": "SPCXB\u8774\u8776\u6258\u5e95\u91d1\u5e93\u6d4b\u8bd5",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x370a366f402e2e41CDBbE54EcEC12aaE0cce1955",
+      "type": "investigation",
+      "timestamp": "2026-08-08T18:02:48Z",
+      "label": "TOAD KILLER",
+      "verdict": "PROCEED"
+    },
+    {
+      "id": "news:Crypto's Post-FTX Safety Net Still Leaves Debts and Ownership in the Dark",
+      "type": "news",
+      "timestamp": "2026-08-08T17:30:59Z",
+      "label": "Crypto's Post-FTX Safety Net Still Leaves Debts and Ownership in the Dark"
+    },
+    {
+      "id": "investigation:0xB839A28955C0EF7969CB757B65A57910aD2A7777",
+      "type": "investigation",
+      "timestamp": "2026-08-08T17:01:24Z",
+      "label": "SPCXB\u8774\u8776\u6258\u5e95\u91d1\u5e93\u6d4b\u8bd5",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x54bd7A8d2015cF88754c8b06F91390Ab4906DDF3",
+      "type": "investigation",
+      "timestamp": "2026-08-08T16:46:06Z",
+      "label": "God Bless Art coin",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x2E67FecEFb6C2adaEfB4FfE8b8499107a8090c32",
+      "type": "investigation",
+      "timestamp": "2026-08-08T16:15:43Z",
+      "label": "ZILO",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x6096b8765Eb48cd2193F840a977f3727e7800356",
+      "type": "investigation",
+      "timestamp": "2026-08-08T16:00:43Z",
+      "label": "CRABBY",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "investigation:0x64E6518ad501E5F2F3e3335726d4c2188be36A48",
+      "type": "investigation",
+      "timestamp": "2026-08-08T15:45:20Z",
+      "label": "Upload1983",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xBD0346cb3bbA8adC5Cf4BAa3106462f816a322B7",
+      "type": "investigation",
+      "timestamp": "2026-08-08T15:30:20Z",
+      "label": "ORANGE",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x6c14c1898C843FF66cA51e87244690bBc28DF215",
+      "type": "investigation",
+      "timestamp": "2026-08-08T15:15:00Z",
+      "label": "Orange",
+      "verdict": "CAUTION"
+    },
+    {
+      "id": "investigation:0x1066daa8714f731d7a97AEAa016c16de9617c559",
+      "type": "investigation",
+      "timestamp": "2026-08-08T14:29:25Z",
+      "label": "Unibase",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0xf98B40f90C18A291B3D6f6f84aDcF1b3e87D7777",
+      "type": "investigation",
+      "timestamp": "2026-08-08T13:58:51Z",
+      "label": "SaturnCoin",
+      "verdict": "REJECT"
+    },
+    {
+      "id": "investigation:0x44C2e79eB64D744C13bE604672C20ee5a17dafE7",
+      "type": "investigation",
+      "timestamp": "2026-08-08T13:28:09Z",
+      "label": "Wrapped Matic",
+      "verdict": "REJECT"
+    },
+    {
       "id": "investigation:0x1b2107667462671b00674bE7af23475FBDfd2B07",
       "type": "investigation",
       "timestamp": "2026-08-08T13:12:53Z",
@@ -649,103 +745,6 @@
       "type": "investigation",
       "timestamp": "2026-08-08T10:26:06Z",
       "label": "HEX",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0x1d1dD64C58518c6727A308a5216a5701afAe5B07",
-      "type": "investigation",
-      "timestamp": "2026-08-08T10:10:21Z",
-      "label": "OpenAI",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xC72449E066d0a853d85A8C9b2b09a1463911dF5f",
-      "type": "investigation",
-      "timestamp": "2026-08-08T09:55:13Z",
-      "label": "GlueHook",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "news:Poisoned Files and Malicious Links Turn Atlassian's Rovo AI Into a Silent Corporate Spy",
-      "type": "news",
-      "timestamp": "2026-08-08T09:38:40Z",
-      "label": "Poisoned Files and Malicious Links Turn Atlassian's Rovo AI Into a Silent Corporate Spy"
-    },
-    {
-      "id": "investigation:0x0B9FEE99f32d64e13845228EAe1C552782377777",
-      "type": "investigation",
-      "timestamp": "2026-08-08T09:23:59Z",
-      "label": "SPCXB\u8d28\u62bc\u5206\u7ea2\u6d4b\u8bd5",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x12d5a0C58eF299BEDd309ec4964ffA3145827777",
-      "type": "investigation",
-      "timestamp": "2026-08-08T08:53:44Z",
-      "label": "Racoonzilla",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x335868de22E077E9ffBe991c9Dc60dc83B934444",
-      "type": "investigation",
-      "timestamp": "2026-08-08T08:38:21Z",
-      "label": "bStocks Never Sleep",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0xCC1f172003a3653740f6Fc316d196eadb00d4444",
-      "type": "investigation",
-      "timestamp": "2026-08-08T08:08:06Z",
-      "label": "bStock",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0xD796118D6545692206CA9dA2007BBa531c86FB5e",
-      "type": "investigation",
-      "timestamp": "2026-08-08T07:37:50Z",
-      "label": "Abby Inu",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x9C0FA3B56A3B40dEAd7680d0837e9219d7C2Ab07",
-      "type": "investigation",
-      "timestamp": "2026-08-08T06:37:49Z",
-      "label": "OpenAI",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x2F701b108a9aF5558960325A0239D0a13c2C4444",
-      "type": "investigation",
-      "timestamp": "2026-08-08T06:22:20Z",
-      "label": "Binance Stocks",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0x3c8Db7d7387331945Ba72eCf61463DFB11E17777",
-      "type": "investigation",
-      "timestamp": "2026-08-08T06:06:58Z",
-      "label": "bStocks",
-      "verdict": "CAUTION"
-    },
-    {
-      "id": "investigation:0xe2c6D87C468a62c5b554a7266ae62522228B26F6",
-      "type": "investigation",
-      "timestamp": "2026-08-08T05:51:32Z",
-      "label": "TRUMP'S DECISION",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0xb32a0416FDF9D97a40ccce4b8ADf6FC127320473",
-      "type": "investigation",
-      "timestamp": "2026-08-08T05:36:36Z",
-      "label": "Squid",
-      "verdict": "REJECT"
-    },
-    {
-      "id": "investigation:0x0a906b55D4982a3382f0ddA882F2FD9907cA4444",
-      "type": "investigation",
-      "timestamp": "2026-08-08T05:05:59Z",
-      "label": "Binance Stocks",
       "verdict": "CAUTION"
     }
   ]
