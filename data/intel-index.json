@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T10:41:32Z",
+  "generated": "2026-08-08T10:56:48Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 508,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 164,
-    "investigations": 865,
+    "investigations": 866,
     "news": 88,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-104130-0x364515F2.md",
-      "title": "Investigation \u2014 HEX",
-      "symbol": "HEX",
-      "name": "HEX",
-      "date": "2026-08-08T10:41:30Z",
-      "target": "0x364515F2F8AC2feCdC44AaBc124d69893f7aA9c0",
-      "chain": "1 (Ethereum)",
+      "file": "investigation-20260808-105646-0x30c17190.md",
+      "title": "Investigation \u2014 MICHAELSAYLOR",
+      "symbol": "MICHAELSAYLOR",
+      "name": "MICHAELSAYLOR",
+      "date": "2026-08-08T10:56:46Z",
+      "target": "0x30c17190Dc61A61051Eb59450378F2aB11502772",
+      "chain": "8453 (Base)",
       "verdict": "REJECT",
-      "score": "0",
-      "summary": "Risk factors: [-12] Mintable supply (dilution risk); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CTM (0x279a9C40151bfe9AFEFf5530c5F32bc6ecea652a) \u2014 REJECT 0/100 \u2014 likely the same serial campaign; [-20] Very few holders (2) \u2014 thin, easily manipulated distribution; [-15] Top 2 non-LP/burn holders co",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-104130-0x364515F2.md"
+      "score": "22",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CHECK (0x1E674153229Dc206C681f5De6b2d9aaa21687Ba5) \u2014 REJECT 12/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated;",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-105646-0x30c17190.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-105646-0x30c17190.md",
+      "title": "Investigation \u2014 MICHAELSAYLOR",
+      "symbol": "MICHAELSAYLOR",
+      "name": "MICHAELSAYLOR",
+      "date": "2026-08-08T10:56:46Z",
+      "target": "0x30c17190Dc61A61051Eb59450378F2aB11502772",
+      "chain": "8453 (Base)",
+      "verdict": "REJECT",
+      "score": "22",
+      "summary": "Risk factors: [-8] Upgradeable proxy (verify implementation); [-30] Same deployer has a prior CAUTION/REJECT verdict on record: CHECK (0x1E674153229Dc206C681f5De6b2d9aaa21687Ba5) \u2014 REJECT 12/100 \u2014 likely the same serial campaign; [-15] Top 10 non-LP/burn holders control 99% of supply \u2014 concentrated, easily manipulated;",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-105646-0x30c17190.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260808-104130-0x364515F2.md",
