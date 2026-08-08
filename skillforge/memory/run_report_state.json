@@ -1,10 +1,5 @@
 {
   "narrated_investigations": [
-    "investigation-20260730-013623-0x279ed3c4.md",
-    "investigation-20260730-033629-0x67b47971.md",
-    "investigation-20260730-032114-0x91BC9DA0.md",
-    "investigation-20260730-023616-0x2C974B2d.md",
-    "investigation-20260730-005122-0x70c62947.md",
     "investigation-20260730-003616-0x1f946780.md",
     "investigation-20260730-050644-0xd9D3dAd2.md",
     "investigation-20260728-150906-0x26e9dbe7.md",
@@ -499,6 +494,11 @@
     "investigation-20260808-115706-0xe419C3BB.md",
     "investigation-20260808-121205-0x58cDeAbF.md",
     "investigation-20260808-122718-0xCbB7a124.md",
-    "investigation-20260729-204917-0x4879d5c0.md"
+    "investigation-20260729-204917-0x4879d5c0.md",
+    "investigation-20260808-132809-0x44C2e79e.md",
+    "investigation-20260808-125754-0x7Db2F0c1.md",
+    "investigation-20260808-131253-0x1b210766.md",
+    "investigation-20260729-220538-0x9a303557.md",
+    "investigation-20260729-232113-0xabAe909c.md"
   ]
 }
