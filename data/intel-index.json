@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T16:34:49Z",
+  "generated": "2026-08-08T16:46:08Z",
   "repo": "jUXTAPOSITION1/V.A.P.E",
   "counts": {
     "reports": 516,
@@ -15,7 +15,7 @@
       "skillforge": 4
     },
     "broadcasts": 165,
-    "investigations": 880,
+    "investigations": 881,
     "news": 89,
     "tools": 16,
     "tools_verified": 16,
@@ -24,17 +24,17 @@
   "latest_summary": {
     "investigation": {
       "source": "report",
-      "file": "investigation-20260808-161543-0x2E67FecE.md",
-      "title": "Investigation \u2014 ZILO",
-      "symbol": "ZILO",
-      "name": "ZILO",
-      "date": "2026-08-08T16:15:43Z",
-      "target": "0x2E67FecEFb6C2adaEfB4FfE8b8499107a8090c32",
-      "chain": "42161 (Arbitrum)",
+      "file": "investigation-20260808-164606-0x54bd7A8d.md",
+      "title": "Investigation \u2014 GBAC",
+      "symbol": "GBAC",
+      "name": "God Bless Art coin",
+      "date": "2026-08-08T16:46:06Z",
+      "target": "0x54bd7A8d2015cF88754c8b06F91390Ab4906DDF3",
+      "chain": "56 (BNB Chain)",
       "verdict": "REJECT",
-      "score": "20",
-      "summary": "Risk factors: [-15] Top 10 non-LP/burn holders control 93% of supply \u2014 concentrated, easily manipulated; [-15] Only 0% of liquidity is locked \u2014 the deployer can pull the rest at any time; [-10] Violent 24h move +2173% (volatility/manipulation); [-15] Pair only 0.4 days old (extreme fresh-launch risk); [-15] Contract so",
-      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-161543-0x2E67FecE.md"
+      "score": "12",
+      "summary": "Risk factors: [-10] Owner not renounced (0x18c3577f3fed47c6fa5f99ad1178e9a6aaf163a3) \u2014 can still act on the contract; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-8] Top 4 non-LP/burn holders control 50% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer c",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-164606-0x54bd7A8d.md"
     },
     "report": {
       "kind": "bounty",
@@ -49,6 +49,20 @@
     }
   },
   "investigations": [
+    {
+      "source": "report",
+      "file": "investigation-20260808-164606-0x54bd7A8d.md",
+      "title": "Investigation \u2014 GBAC",
+      "symbol": "GBAC",
+      "name": "God Bless Art coin",
+      "date": "2026-08-08T16:46:06Z",
+      "target": "0x54bd7A8d2015cF88754c8b06F91390Ab4906DDF3",
+      "chain": "56 (BNB Chain)",
+      "verdict": "REJECT",
+      "score": "12",
+      "summary": "Risk factors: [-10] Owner not renounced (0x18c3577f3fed47c6fa5f99ad1178e9a6aaf163a3) \u2014 can still act on the contract; [-20] Very few holders (4) \u2014 thin, easily manipulated distribution; [-8] Top 4 non-LP/burn holders control 50% of supply \u2014 meaningful concentration; [-15] Only 0% of liquidity is locked \u2014 the deployer c",
+      "url": "https://github.com/jUXTAPOSITION1/V.A.P.E/blob/main/intel/investigations/investigation-20260808-164606-0x54bd7A8d.md"
+    },
     {
       "source": "report",
       "file": "investigation-20260808-161543-0x2E67FecE.md",

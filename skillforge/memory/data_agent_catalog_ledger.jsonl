@@ -830,3 +830,4 @@
 {"ts": "2026-08-08T16:00:44.685472Z", "target": "sparklend", "hired": ["protocol_fees"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-08T16:15:44.477918Z", "target": "none", "hired": ["stablecoins"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-08T16:30:44.491146Z", "target": "avax", "hired": ["chain_fees"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
+{"ts": "2026-08-08T16:46:07.354782Z", "target": "0x7297968FFb753dd12e4f6B1f18d9865c76707FC2", "hired": ["rug_pull_alert"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
