@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T12:46:59Z",
+  "generated": "2026-08-08T17:29:43Z",
   "count": 60,
   "headlines": [
     {
@@ -75,19 +75,83 @@
       "crypto": true
     },
     {
-      "title": "OpenAI rolls out a major ChatGPT upgrade, even if you don\u2019t pay for it",
-      "url": "https://www.bleepingcomputer.com/news/artificial-intelligence/openai-rolls-out-a-major-chatgpt-upgrade-even-if-you-dont-pay-for-it/",
-      "source": "BleepingComputer",
-      "published": "Thu, 06 Aug 2026 18:48:22 -0400",
-      "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
       "title": "Canadian Man Pleads Guilty in Snowflake Extortions",
       "url": "https://krebsonsecurity.com/2026/08/canadian-man-pleads-guilty-in-snowflake-extortions/",
       "source": "Krebs on Security",
       "published": "Thu, 06 Aug 2026 17:00:56 +0000",
       "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Four years after FTX, crypto exchanges still prove assets without proving solvency",
+      "url": "https://cryptoslate.com/four-years-after-ftx-crypto-exchanges-still-prove-assets-without-proving-solvency/",
+      "source": "CryptoSlate",
+      "published": "Sat, 08 Aug 2026 17:20:31 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Here\u2019s what happened in crypto today",
+      "url": "https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Sat, 08 Aug 2026 17:19:56 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Hyperliquid ETFs Turn Green After Bleeding $30 Million in Three Weeks",
+      "url": "https://beincrypto.com/hyperliquid-etf-inflows-return-outflow-streak/",
+      "source": "BeInCrypto",
+      "published": "Sat, 08 Aug 2026 16:38:40 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Senate Keeps Clarity Act Alive With Crypto Bill Vote Set for September",
+      "url": "https://decrypt.co/375174/senate-keeps-clarity-act-alive-with-crypto-bill-vote-set-for-september",
+      "source": "Decrypt",
+      "published": "Sat, 08 Aug 2026 16:33:02 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "US spot Bitcoin ETFs post best week since April with $1B inflows",
+      "url": "https://cointelegraph.com/news/us-bitcoin-etfs-best-weekly-inflows-april-coldcard-hack?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Sat, 08 Aug 2026 16:20:17 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "No More Instant Crypto Transfers in Brazil? Central Bank Introduces New Law",
+      "url": "https://beincrypto.com/brazil-central-bank-crypto-transfer-delay/",
+      "source": "BeInCrypto",
+      "published": "Sat, 08 Aug 2026 15:26:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Brazil's central bank orders exchanges to delay large crypto transfers abroad",
+      "url": "https://www.coindesk.com/business/2026/08/08/brazil-s-central-bank-orders-exchanges-to-delay-large-crypto-transfers-abroad",
+      "source": "CoinDesk",
+      "published": "Sat, 08 Aug 2026 15:25:38 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "US Senate to vote on advancing CLARITY Act in September after Thune files cloture",
+      "url": "https://cointelegraph.com/news/us-senate-clarity-act-september-vote-thune-cloture?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Sat, 08 Aug 2026 15:08:06 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin\u2019s first institutional bear market is starting to take shape and draining liquidity",
+      "url": "https://cryptoslate.com/bitcoins-first-institutional-bear-market-is-starting-to-take-shape-and-draining-liquidity/",
+      "source": "CryptoSlate",
+      "published": "Sat, 08 Aug 2026 15:05:54 +0000",
+      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -99,11 +163,83 @@
       "crypto": true
     },
     {
+      "title": "This $1.5 billion hack is exposing just how \u2018irreversible\u2019 stolen crypto really is",
+      "url": "https://cryptoslate.com/this-1-5-billion-hack-is-exposing-just-how-irreversible-stolen-crypto-really-is/",
+      "source": "CryptoSlate",
+      "published": "Sat, 08 Aug 2026 14:10:51 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Robinhood Crypto Chief Explains Why There Are 'Two Wolves' Inside Robinhood Chain",
+      "url": "https://decrypt.co/375158/robinhood-crypto-two-wolves-robinhood-chain-rwa-meme-coins",
+      "source": "Decrypt",
+      "published": "Sat, 08 Aug 2026 14:01:05 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Trillions in institutional money to flow into bitcoin, says Bitwise's Matt Hougan",
+      "url": "https://www.coindesk.com/business/2026/08/08/trillions-in-institutional-money-to-flow-into-bitcoin-says-bitwise-s-matt-hougan",
+      "source": "CoinDesk",
+      "published": "Sat, 08 Aug 2026 14:00:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "CLARITY Act is finally headed for a 60-vote Senate showdown in September",
+      "url": "https://cryptoslate.com/clarity-act-is-finally-headed-for-a-60-vote-senate-showdown-in-september/",
+      "source": "CryptoSlate",
+      "published": "Sat, 08 Aug 2026 13:35:56 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
       "title": "New CSS Attacks Can Break Webmail Defenses to Steal Passwords and Tokens",
       "url": "https://thehackernews.com/2026/08/new-css-attacks-can-break-webmail.html",
       "source": "The Hacker News",
       "published": "Sat, 08 Aug 2026 13:33:57 +0530",
       "topic": "Cybersecurity",
+      "crypto": true
+    },
+    {
+      "title": "Bitcoin will never fall below $60K again: Nansen founder",
+      "url": "https://cointelegraph.com/magazine/bitcoin-will-never-fall-below-60k-again-nansen-founder?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+      "source": "Cointelegraph",
+      "published": "Sat, 08 Aug 2026 13:30:00 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Majority Leader Thune files cloture on Clarity Act, setting up Sept. 15 Senate vote",
+      "url": "https://www.theblock.co/news/regulation/2026-08-08-majority-leader-thune-files-cloture-on-clarity-act-setting-up-sept-15-senate-vote-411211?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Sat, 08 Aug 2026 13:27:45 -0400",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Why One Top Economist Says the Fed\u2019s Inflation Fight Can\u2019t Be Won With Rate Hikes",
+      "url": "https://beincrypto.com/wells-fargo-economist-fed-rate-hike/",
+      "source": "BeInCrypto",
+      "published": "Sat, 08 Aug 2026 13:17:15 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "The US says it has a Bitcoin reserve, but nobody can agree on how much it owns",
+      "url": "https://cryptoslate.com/the-us-says-it-has-a-bitcoin-reserve-but-nobody-can-agree-on-how-much-it-owns/",
+      "source": "CryptoSlate",
+      "published": "Sat, 08 Aug 2026 13:05:36 +0000",
+      "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Why trillion-dollar asset manager T. Rowe Price put memecoins in its crypto ETF",
+      "url": "https://www.coindesk.com/markets/2026/08/06/why-trillion-dollar-asset-manager-t-rowe-price-put-memecoins-in-its-crypto-etf",
+      "source": "CoinDesk",
+      "published": "Sat, 08 Aug 2026 13:00:00 +0000",
+      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -131,10 +267,10 @@
       "crypto": true
     },
     {
-      "title": "Trump Media\u2019s $6.4 billion crypto venture canceled amid escalating Trump ethics concerns",
-      "url": "https://cryptoslate.com/trump-medias-6-4-billion-crypto-venture-canceled-amid-escalating-trump-ethics-concerns/",
-      "source": "CryptoSlate",
-      "published": "Sat, 08 Aug 2026 12:05:04 +0000",
+      "title": "Can XRP Hold Above $1 in August 2026?",
+      "url": "https://beincrypto.com/xrp-price-dollar-support-risk/",
+      "source": "BeInCrypto",
+      "published": "Sat, 08 Aug 2026 12:10:08 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -147,10 +283,10 @@
       "crypto": true
     },
     {
-      "title": "Bitcoin faces $70,000 breakout or $60,000 drop this weekend as Hormuz tensions rise",
-      "url": "https://cryptoslate.com/bitcoin-faces-70000-breakout-or-60000-drop-this-weekend-as-hormuz-tensions-rise/",
-      "source": "CryptoSlate",
-      "published": "Sat, 08 Aug 2026 10:59:31 +0000",
+      "title": "Bitcoin, ether ETFs draw $1.1 billion in best inflow week since April, despite low volume",
+      "url": "https://www.theblock.co/news/markets/2026-08-08-bitcoin-ether-etfs-draw-1-1-billion-in-best-inflow-week-since-april-despite-low-volume-411204?utm_source=rss&utm_medium=rss",
+      "source": "The Block",
+      "published": "Sat, 08 Aug 2026 10:52:11 -0400",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -160,6 +296,14 @@
       "source": "BeInCrypto",
       "published": "Sat, 08 Aug 2026 10:40:16 +0000",
       "topic": "Crypto Markets",
+      "crypto": true
+    },
+    {
+      "title": "Hackers breach TrueConf to trojanize client installers with backdoors",
+      "url": "https://www.bleepingcomputer.com/news/security/hackers-breach-trueconf-to-trojanize-client-installers-with-backdoors/",
+      "source": "BleepingComputer",
+      "published": "Sat, 08 Aug 2026 10:16:23 -0400",
+      "topic": "Cybersecurity",
       "crypto": true
     },
     {
@@ -175,14 +319,6 @@
       "url": "https://www.coindesk.com/policy/2026/08/08/u-s-senate-opens-first-stage-of-crypto-clarity-act-voting-to-give-bill-a-chance-next-month",
       "source": "CoinDesk",
       "published": "Sat, 08 Aug 2026 09:07:24 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "US Treasury Sanctions Two Iranian Crypto Exchanges Over IRGC Money Laundering",
-      "url": "https://beincrypto.com/iran-crypto-sanctions-shelbit-aban-tether/",
-      "source": "BeInCrypto",
-      "published": "Sat, 08 Aug 2026 08:52:02 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -203,14 +339,6 @@
       "crypto": true
     },
     {
-      "title": "Solana Meme Coin Jimothy Jumps 331% on Elon Musk Raccoon Post",
-      "url": "https://beincrypto.com/jimothy-meme-coin-musk-raccoon-rally/",
-      "source": "BeInCrypto",
-      "published": "Sat, 08 Aug 2026 05:00:09 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "US court backs Bybit\u2019s bid to trace funds from $1.5B North Korea hack",
       "url": "https://cointelegraph.com/news/bybit-us-court-trace-funds-north-korea-hack?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
       "source": "Cointelegraph",
@@ -223,14 +351,6 @@
       "url": "https://www.coindesk.com/tech/2026/08/07/new-xrp-ledger-amendments-target-usd530-million-in-tokenized-wall-street-assets",
       "source": "CoinDesk",
       "published": "Sat, 08 Aug 2026 03:30:00 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Bitcoin holders risk losing real BTC if they sell coins from BIP-110 fork, says developer",
-      "url": "https://www.coindesk.com/tech/2026/08/08/bitcoin-holders-risk-losing-real-btc-if-they-sell-coins-from-bip-110-fork-says-developer",
-      "source": "CoinDesk",
-      "published": "Sat, 08 Aug 2026 02:30:00 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -259,43 +379,11 @@
       "crypto": true
     },
     {
-      "title": "Bitcoin\u2019s AI security sprint found 6,700 issues in 55 hours, but no one knows how many are real",
-      "url": "https://cryptoslate.com/bitcoins-ai-security-sprint-found-6700-issues-in-55-hours-but-no-one-knows-how-many-are-real/",
-      "source": "CryptoSlate",
-      "published": "Fri, 07 Aug 2026 22:55:38 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "OpenAI says it slowed Astra model development over security concerns",
       "url": "https://techcrunch.com/2026/08/07/openai-says-it-slowed-astra-model-development-over-security-concerns/",
       "source": "TechCrunch AI",
       "published": "Fri, 07 Aug 2026 22:48:24 +0000",
       "topic": "AI",
-      "crypto": true
-    },
-    {
-      "title": "Inside the uncollateralized deal that locked up 6 million SUI until 2028 while SUI Group trades at a 25% NAV discount",
-      "url": "https://cryptoslate.com/inside-the-uncollateralized-deal-that-locked-up-6-million-sui-until-2028-while-sui-group-trades-at-a-25-nav-discount/",
-      "source": "CryptoSlate",
-      "published": "Fri, 07 Aug 2026 21:55:14 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "CLARITY Act Likely To Fail in September. Will Crypto Prices React?",
-      "url": "https://beincrypto.com/clarity-act-september-vote-passage-odds/",
-      "source": "BeInCrypto",
-      "published": "Fri, 07 Aug 2026 21:42:22 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Donald Trump\u2019s media company to terminate Crypto.com deal",
-      "url": "https://cointelegraph.com/news/donald-trump-media-company-crypto-deal?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Fri, 07 Aug 2026 21:39:36 +0000",
-      "topic": "Crypto Markets",
       "crypto": true
     },
     {
@@ -315,34 +403,10 @@
       "crypto": true
     },
     {
-      "title": "Trump Media pulls back from crypto, scraps Crypto.com's CRO token treasury deal",
-      "url": "https://www.coindesk.com/business/2026/08/07/trump-media-pulls-back-from-crypto-scraps-crypto-com-cro-treasury-deal",
-      "source": "CoinDesk",
-      "published": "Fri, 07 Aug 2026 21:13:21 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Canada Economy Just Outran America: Is Its Crypto Industry Next?",
-      "url": "https://beincrypto.com/canada-jobs-us-crypto-industry/",
-      "source": "BeInCrypto",
-      "published": "Fri, 07 Aug 2026 21:07:17 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Trump Media Abandons Crypto Treasury, Prediction Market Ventures",
       "url": "https://decrypt.co/375166/trump-media-abandons-crypto-treasury-prediction-market",
       "source": "Decrypt",
       "published": "Fri, 07 Aug 2026 21:05:59 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Bitcoin\u2019s $65K recovery shows its growing immunity to bad news as ETFs and whales buy $2 billion",
-      "url": "https://cryptoslate.com/bitcoins-65k-recovery-shows-its-growing-immunity-to-bad-news-as-etfs-and-whales-buy-2-billion/",
-      "source": "CryptoSlate",
-      "published": "Fri, 07 Aug 2026 20:45:09 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -363,34 +427,10 @@
       "crypto": true
     },
     {
-      "title": "Trump-Backed American Bitcoin director Justin Mateen buys nearly $2 million of ABTC stock",
-      "url": "https://www.coindesk.com/business/2026/08/07/trump-backed-american-bitcoin-director-justin-mateen-buys-nearly-usd2-million-of-abtc-stock",
-      "source": "CoinDesk",
-      "published": "Fri, 07 Aug 2026 20:20:00 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "US Treasury\u2019s OFAC sanctions 2 Iran-linked crypto exchanges",
-      "url": "https://cointelegraph.com/news/us-treasury-sanctions-iran-crypto-exchanges?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Fri, 07 Aug 2026 20:02:20 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Bitcoin Payment Service BTCPay Warns Critical Flaw Is Under Active Attack",
       "url": "https://decrypt.co/375159/bitcoin-payment-service-btcpay-critical-flaw-active-attack",
       "source": "Decrypt",
       "published": "Fri, 07 Aug 2026 20:00:34 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Bitcoin has 185 blocks left before BIP-110 rules begin rejecting blocks",
-      "url": "https://cryptoslate.com/bitcoin-has-185-blocks-left-before-bip-110-rules-begin-rejecting-blocks/",
-      "source": "CryptoSlate",
-      "published": "Fri, 07 Aug 2026 19:40:09 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -403,14 +443,6 @@
       "crypto": true
     },
     {
-      "title": "Here\u2019s what happened in crypto today",
-      "url": "https://cointelegraph.com/news/what-happened-in-crypto-today?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Fri, 07 Aug 2026 18:36:10 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Coldcard Bitcoin Hack: Victims Report Median Loss of 1 BTC as Theft Tops $111 Million",
       "url": "https://bitcoinmagazine.com/news/coldcard-victims-report-median-loss-1btc",
       "source": "Bitcoin Magazine",
@@ -419,34 +451,10 @@
       "crypto": true
     },
     {
-      "title": "Circle expands USDC to OKX ecosystem with X Layer launch",
-      "url": "https://cointelegraph.com/news/circle-native-usdc-okx-x-layer-cctp?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-      "source": "Cointelegraph",
-      "published": "Fri, 07 Aug 2026 17:36:45 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "XRP at a Crossroads as Senate Punts on Clarity Act",
-      "url": "https://decrypt.co/375136/xrp-price-crossroads-senate-punts-clarity-act",
-      "source": "Decrypt",
-      "published": "Fri, 07 Aug 2026 17:36:41 +0000",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
       "title": "Trump Media and Crypto.com end partnerships as companies shift priorities",
       "url": "https://www.theblock.co/news/deals/2026-08-07-trump-media-crypto-com-end-partnerships-as-companies-shifts-priorities-411198?utm_source=rss&utm_medium=rss",
       "source": "The Block",
       "published": "Fri, 07 Aug 2026 17:01:36 -0400",
-      "topic": "Crypto Markets",
-      "crypto": true
-    },
-    {
-      "title": "Hackers Use BNB Chain to Spread Malware Through Fake CAPTCHAs",
-      "url": "https://decrypt.co/375133/hackers-use-bnb-chain-spread-malware-fake-captchas",
-      "source": "Decrypt",
-      "published": "Fri, 07 Aug 2026 16:36:59 +0000",
       "topic": "Crypto Markets",
       "crypto": true
     },
@@ -472,14 +480,6 @@
       "source": "BleepingComputer",
       "published": "Fri, 07 Aug 2026 16:14:46 -0400",
       "topic": "Cybersecurity",
-      "crypto": true
-    },
-    {
-      "title": "Bitcoin ETFs Add Nearly $800 Million in the Wake of Coldcard Exploit",
-      "url": "https://bitcoinmagazine.com/news/bitcoin-etfs-800-million-coldcard",
-      "source": "Bitcoin Magazine",
-      "published": "Fri, 07 Aug 2026 16:00:50 +0000",
-      "topic": "Crypto Markets",
       "crypto": true
     }
   ]
