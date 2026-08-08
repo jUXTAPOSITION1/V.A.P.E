@@ -812,3 +812,4 @@
 {"ts": "2026-08-08T11:11:46.057817Z", "target": "BNB Chain", "hired": ["chain_protocols"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-08T11:26:46.459290Z", "target": "avant-avusd", "hired": ["unlocks"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
 {"ts": "2026-08-08T11:41:57.824664Z", "target": "uniswap-v3", "hired": ["protocol_fees"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}
+{"ts": "2026-08-08T12:12:06.707114Z", "target": "none", "hired": ["bridges"], "paid": 0, "cost_usd": 0.0, "daily_target": 63}

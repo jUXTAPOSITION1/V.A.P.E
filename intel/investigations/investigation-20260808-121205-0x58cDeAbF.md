@@ -1,0 +1,138 @@
+<img src="https://raw.githubusercontent.com/jUXTAPOSITION1/V.A.P.E/main/docs/assets/vape-avatar.jpg" width="56" height="56" align="left" style="border-radius:10px;margin-right:14px" alt="VAPE" />
+
+# Investigation — SPCXB
+
+![autonomous system](https://img.shields.io/badge/VAPE-autonomous_system-8B5CF6?style=flat-square)
+
+<br clear="left"/>
+
+![REJECT](https://img.shields.io/badge/VERDICT-REJECT-FB7185?style=flat-square) ![7/100](https://img.shields.io/badge/SAFETY_SCORE-7%2F100-FB7C77?style=flat-square)
+
+- **Target:** `0x58cDeAbFC02cD19aBdecbe3993F3b91C54517777`
+- **Chain:** 56 (BNB Chain)
+- **Date:** 2026-08-08T12:12:05Z
+- **Verdict:** REJECT (7/100)
+
+---
+
+## Expert Assessment
+The evidence base for SPCXB is genuinely thin, consisting almost entirely of on-chain flags and a single DEX listing with no external corroboration. Token-safety data shows ownership renounced to the zero address, verified source code under the name FlapTaxToken, and zero mint capability, yet these are outweighed by the concrete figures of exactly two holders controlling 100 % of supply, $7,285.6 liquidity, and a trading pair only 0.3 days old.
+
+Residual risks center on extreme concentration, negligible liquidity, and complete absence of any declared website or social presence, all of which leave the token exposed to immediate manipulation or abandonment regardless of the renounced ownership.
+
+Technical-safety read carries moderate because the on-chain measurements are direct; overall investment thesis carries low because no independent signals of usage, team, or distribution exist to test longevity.
+
+Avoid entirely; exposure is not justified at any size until verifiable holder growth and sustained liquidity appear.
+
+## Gaps & Confidence
+
+- **No external web or social footprint beyond the DEX page** (confidence: 95%) — next: Run targeted search for any Telegram, Twitter, or forum mentions of the exact contract 0x58cDeAbFC02cD19aBdecbe3993F3b91C54517777
+
+## Scoring Dashboard
+**Overall: 7/100 — REJECT** ![7/100](https://img.shields.io/badge/overall-7%2F100-FB7C77?style=flat-square)
+
+| Category | Weight | Score | Rationale |
+|---|---|---|---|
+| Contract Security & Controls | 25% | ![92/100](https://img.shields.io/badge/security-92%2F100-36BA72?style=flat-square) | Upgradeable proxy (verify implementation); (+) Ownership renounced. |
+| Liquidity Health & Lock Quality | 20% | ![75/100](https://img.shields.io/badge/liquidity-75%2F100-86BC52?style=flat-square) | Very low liquidity $7,286 (rug/illiquid). |
+| Holder Distribution & Concentration | 15% | ![65/100](https://img.shields.io/badge/holders-65%2F100-B4BD40?style=flat-square) | Very few holders (2) — thin, easily manipulated distribution; Top 2 non-LP/burn holders control 100% of supply — concentrated, easily manipulated. |
+| Transparency & Provenance | 15% | ![90/100](https://img.shields.io/badge/transparency-90%2F100-3FBA6E?style=flat-square) | No known third-party audit or verifiable team identity found — treated as unaudited/anonymous by default; (+) Custom verified source (not a mass-produced factory template). |
+| Narrative Strength & Social Proof | 15% | ![25/100](https://img.shields.io/badge/narrative-25%2F100-FB9854?style=flat-square) | no coherent project narrative could be established this cycle. |
+| Longevity & Clean Track Record | 10% | ![85/100](https://img.shields.io/badge/longevity-85%2F100-56BB65?style=flat-square) | Pair only 0.3 days old (extreme fresh-launch risk). |
+
+*Weighted, multi-factor category view for where the risk actually concentrates — the Overall score above, computed by the full deterministic scoring engine, is the authoritative verdict; these categories are supporting instrumentation, not a second scoring engine.*
+
+## Project Overview & Narrative
+- Not available this cycle (web search/LLM path unavailable, or no relevant results found) — absence noted, not fabricated.
+
+## Verdict Rationale (risk factors)
+- [-8] Upgradeable proxy (verify implementation)
+- [-20] Very few holders (2) — thin, easily manipulated distribution
+- [-15] Top 2 non-LP/burn holders control 100% of supply — concentrated, easily manipulated
+- [-25] Very low liquidity $7,286 (rug/illiquid)
+- [-15] Pair only 0.3 days old (extreme fresh-launch risk)
+- [-10] No known third-party audit or verifiable team identity found — treated as unaudited/anonymous by default
+
+## Positive Signals (real legitimacy evidence found)
+- Ownership renounced
+- Custom verified source (not a mass-produced factory template)
+
+## Risk Breakdown by Category
+**Security & Contract Risk** — 1 flag(s), 1 positive signal(s)
+  - [-8] Upgradeable proxy (verify implementation)
+  - (positive) Ownership renounced
+**Tokenomics & Track Record** — 1 flag(s), 0 positive signal(s)
+  - [-15] Pair only 0.3 days old (extreme fresh-launch risk)
+**Holder Distribution & Liquidity** — 3 flag(s), 0 positive signal(s)
+  - [-20] Very few holders (2) — thin, easily manipulated distribution
+  - [-15] Top 2 non-LP/burn holders control 100% of supply — concentrated, easily manipulated
+  - [-25] Very low liquidity $7,286 (rug/illiquid)
+**Transparency & Provenance** — 1 flag(s), 1 positive signal(s)
+  - [-10] No known third-party audit or verifiable team identity found — treated as unaudited/anonymous by default
+  - (positive) Custom verified source (not a mass-produced factory template)
+
+## Market & Liquidity
+- Symbol/Name: SPCXB / SPCXB质押分红测试
+- Price: $0.000003290
+- Liquidity: $7285.6
+- 24h Volume: $0
+- 24h Change: None%
+- DEX: flapsh
+- Volume trend (m5/h1/h6/h24): `▁▁▁▁` (m5: $0, h1: $0, h6: $0, h24: $0)
+
+## Project Links
+- No official website/social links declared for this token.
+
+## Tokenomics (address-verified)
+- Not available this cycle (no tokenomics data tracked for this exact contract address, or the token isn't indexed yet) — absence noted, not penalized.
+
+## Token Security
+- buy_tax: ``
+- sell_tax: ``
+- is_mintable: `0`
+- is_proxy: `1`
+- holder_count: `2`
+- owner_address: `0x0000000000000000000000000000000000000000`
+
+## Holder Distribution & Liquidity Lock
+- Top 2 non-LP/burn holders control 100.0% of supply
+- Liquidity-lock status not available this cycle.
+
+## On-chain Presence (BNB Chain RPC)
+- Is contract: True
+- Code size: 45 bytes
+
+## Contract Verification
+- Verified: True
+- Name: FlapTaxToken · Compiler: v0.8.24+commit.e11b9ed9
+- Proxy: False · Implementation: None
+- Notable functions found in verified source (informational, not scored): _burn, _mint, _transferOwnership, renounceOwnership, sweepToken, transferOwnership
+- Verified source contains `delegatecall` (expected for proxies; worth a manual look otherwise).
+
+## Threat Correlation
+- Proxy contract (upgradeable logic) — no directly matching technique in the 25 most recent tracked incidents, but this remains a structural risk category.
+
+## Public Web Signals
+- No unambiguous scam/rug mentions found in the top web search results.
+
+## DefiLlama Cross-Source (independent oracle)
+- DefiLlama does not price this token (obscure / not yet on the oracle) — absence noted, not penalized.
+
+## Data Agent Intel (VAPE's own x402 spend)
+- DATA AGENT hired 1 of VAPE's own x402 market-data offerings against this token (real USDC on Base, 0 settled, $0.00 total):
+  - **chain_fees** (failed, cdp) — error — HTTP 500
+
+## Deployer Network (skillforge/memory/graph.py)
+- No other tokens from this deployer on record yet.
+
+## Critic Self-Audit (agents/critic.py)
+- No structural inconsistencies found — reasons, positive signals, verdict and score all agree with the raw evidence and score()'s own invariants.
+
+## Sources & Verification Links
+- Block explorer: https://bscscan.com/address/0x58cDeAbFC02cD19aBdecbe3993F3b91C54517777
+- Market pair: https://dexscreener.com/bsc/0x14f51d77fe4867c49e2f4ca01798ceeccbf56623
+- On-chain security, contract-verification, and market-data sources were queried directly for the sections above; this list only covers human-clickable pages for independent re-verification.
+
+---
+
+*V.A.P.E. — investigation conducted with keyless, real-data recon (on-chain token-safety data, market/liquidity data, contract verification, and a cross-chain hack-incident feed) plus a real web search for public reputation signals.*
