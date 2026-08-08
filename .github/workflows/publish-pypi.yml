@@ -33,7 +33,7 @@ jobs:
           python-version: '3.11'
       - run: pip install build
       - run: python -m build
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: dist
           path: dist/
@@ -48,15 +48,15 @@ jobs:
       # exists in this repo, by design.
       id-token: write
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: dist
           path: dist/
       # pypa/gh-action-pypi-publish is PyPI's own official trusted-
-      # publishing action (github.com/pypa/gh-action-pypi-publish),
-      # referenced here by its documented `release/v1` tag rather than a
-      # pinned commit SHA -- this session's GitHub access is scoped to
-      # jUXTAPOSITION1/V.A.P.E only, so a SHA for a third-party repo could
-      # not be fetched/verified here the way this repo's other pinned
-      # actions were. Pin to a real commit SHA when convenient.
-      - uses: pypa/gh-action-pypi-publish@release/v1
+      # publishing action (github.com/pypa/gh-action-pypi-publish). This
+      # session's GitHub API access is scoped to jUXTAPOSITION1/V.A.P.E
+      # only, so this SHA was resolved via `git ls-remote` against the
+      # real public remote (not the GitHub API, and not a web-scrape) --
+      # dc37677b... is the exact commit release/v1 currently points to,
+      # which is also the peeled commit for tag v1.14.2.
+      - uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # release/v1, == v1.14.2
