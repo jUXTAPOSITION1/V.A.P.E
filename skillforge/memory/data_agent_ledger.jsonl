@@ -885,3 +885,4 @@
 {"ts": "2026-08-08T12:57:21.906955Z", "target": "0x7Db2F0c15f74aB0Dc0D4f49650dD60C45FFB7777", "chain": "56", "hired": ["bridges"], "paid": 0, "cost_usd": 0.0, "daily_target": 64}
 {"ts": "2026-08-08T13:12:45.525687Z", "target": "0x1b2107667462671b00674bE7af23475FBDfd2B07", "chain": "8453", "hired": ["token_chart"], "paid": 0, "cost_usd": 0.0, "daily_target": 64}
 {"ts": "2026-08-08T13:27:58.876121Z", "target": "0x44C2e79eB64D744C13bE604672C20ee5a17dafE7", "chain": "137", "hired": ["market_intel"], "paid": 0, "cost_usd": 0.0, "daily_target": 64}
+{"ts": "2026-08-08T13:43:13.747672Z", "target": "0xC72449E066d0a853d85A8C9b2b09a1463911dF5f", "chain": "1", "hired": ["dossier_check"], "paid": 0, "cost_usd": 0.0, "daily_target": 64}
