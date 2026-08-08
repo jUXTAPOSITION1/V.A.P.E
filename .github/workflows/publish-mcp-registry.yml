@@ -1,0 +1,45 @@
+name: Publish to Official MCP Registry
+
+# Publishes server.json (this repo's root) to
+# registry.modelcontextprotocol.io using GitHub OIDC -- the registry
+# verifies the OIDC token asserts "this workflow run belongs to
+# jUXTAPOSITION1/V.A.P.E", which is exactly what authorizes publishing
+# under the io.github.jUXTAPOSITION1/vape namespace server.json declares.
+# Unlike PyPI's trusted-publishing setup, the MCP Registry needs no
+# separate one-time pending-publisher signup and no secret -- the OIDC
+# token from this repo is sufficient proof of ownership on its own.
+#
+# No terminal required to run this: GitHub's own Actions tab has a
+# "Run workflow" button for any workflow_dispatch-triggered workflow like
+# this one -- click that instead of installing/running mcp-publisher
+# locally.
+#
+# Manual trigger only, not on every push -- this repo already pushes to
+# main constantly (bot commits every few minutes); re-publishing the
+# registry listing on every one of those would be noise, not a real
+# update. Run it by hand (Actions tab -> "Publish to Official MCP
+# Registry" -> "Run workflow") whenever server.json actually changes.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write # OIDC token for the registry's github-oidc auth method
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          persist-credentials: false
+
+      - name: Install mcp-publisher
+        run: |
+          curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
+
+      - name: Authenticate to MCP Registry (GitHub OIDC)
+        run: ./mcp-publisher login github-oidc
+
+      - name: Publish server.json to the Official MCP Registry
+        run: ./mcp-publisher publish
